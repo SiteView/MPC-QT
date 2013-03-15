@@ -13,6 +13,9 @@
 *.Debug
 *.Resease
 
+debug
+release
+
 gen-ui
 gen-moc
 gen-obj
