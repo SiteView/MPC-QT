@@ -12,6 +12,7 @@
 
 *.Debug
 *.Resease
+*.app
 
 debug
 release
