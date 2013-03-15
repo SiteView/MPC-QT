@@ -10,6 +10,14 @@
 *.dll
 *.dylib
 
+*.Debug
+*.Resease
+
+gen-ui
+gen-moc
+gen-obj
+gen-rcc
+
 # Qt-es
 
 *.pro.user
