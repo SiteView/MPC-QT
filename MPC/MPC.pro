@@ -4,10 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = MPC
 TEMPLATE = app
+
+INCLUDEPATH += Core UI Utils
 
 UI_DIR  = gen-ui
 MOC_DIR = gen-moc
@@ -16,9 +18,13 @@ RCC_DIR = gen-rcc
 
 
 SOURCES += main.cpp\
-        MainWindow.cpp
+        UI/MainWindow.cpp \
+    Utils/Utils.cpp \
+    Core/DownLoad.cpp
 
-HEADERS  += MainWindow.h
+HEADERS  += UI/MainWindow.h \
+    Utils/Utils.h \
+    Core/DownLoad.h
 
 FORMS    += UI/MainWindow.ui
 
