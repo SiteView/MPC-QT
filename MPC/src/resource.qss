@@ -1,0 +1,257 @@
+/*ALL WIDGETS PROPERTY*/
+*{
+	color:rgb(50,50,50);
+	font: 75 12px "Arial";	
+}
+
+/*QFrame*/
+QFrame#frame {
+	border-image: url(:/images/bg_frame.png);
+}
+QFrame#frame_2{	
+	border-image: url(:/images/bg_plugin_page.png);
+}
+/*QScrollArea*/
+QScrollArea #scrollArea_AutoSecuritySet, #scrollArea_ManualSecuritySet {
+	background-color: transparent;
+}
+
+/*QPushButton*/
+QPushButton
+{   
+	border-style:solid;
+	border-width:1px;
+	border-radius: 4px;
+	height:28px;
+	width:93px;
+	padding-left:4px;
+	padding-right:4px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 148, 144, 221), stop:1 rgb( 116, 113, 190));
+	color:rgb(255,255,255);
+	border-color:rgb( 116, 113, 190);
+}
+QPushButton:hover
+{  
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(  240, 240,251), stop:1 rgb( 116, 113, 190));
+	color:rgb(255,255,255); 
+	border-color:rgb( 116, 113, 190);
+}
+QPushButton:disabled
+{   
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 230, 230,230), stop:1 rgb( 140, 140, 140));
+	color:rgb(140,140,140); 
+	border-color:rgb( 140, 140, 140);
+}
+QPushButton:pressed
+{   
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 116, 113, 190), stop:1 rgb( 211, 209, 240));
+	color:rgb(255,255,255); 
+	border-color:rgb( 140, 140, 140);
+}
+QPushButton:focus
+{  
+	outline:none;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 88, 80, 186), stop:1 rgb( 68, 65, 137));
+	color:rgb(255,255,255);
+	border-color:rgb( 116, 113, 190);
+}
+QPushButton:focus:hover
+{  
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 240, 240,251), stop:1 rgb( 68, 65, 137));
+}
+/*Buttons*/
+
+
+
+QPushButton#but_about,#but_close,#but_minimize
+{   
+	border-style:solid;
+	border-width:0px;
+	border-radius: 0px;
+	padding-left:4px;
+	padding-right:4px;
+	
+}
+
+
+/*HEAD BUTTONS ABOUT*/
+
+QPushButton#but_about
+{
+	font:bold;
+	border-image: url(:/images/but_about.png);
+}
+QPushButton#but_about:hover
+{
+	border-image: url(:/images/but_about_hover.png);
+}
+QPushButton#but_close
+{
+    border-image: url(:/images/but_close.png);
+}
+QPushButton#but_close:hover
+{
+    border-image: url(:/images/but_close_hover.png);
+}
+
+/*HEAD BUTTONS MINIMIZE*/
+QPushButton#but_minimize
+{
+    border-image: url(:/images/but_minimize.png);
+}
+QPushButton#but_minimize:hover
+{
+    border-image: url(:/images/but_minimize_hover.png);
+}
+/*LABELS*/
+QLabel#lab_text,#label_3,#label{font:bold;}
+QLabel#modeLabel , #lab_version
+{
+	color: rgb(217,217,217);
+	font: 75 10pt "Arial" ;
+	font-weight:bold;	
+}
+QLabel#lab_Fireware {
+	color: #4ac600;
+	font: 75 10pt "Arial" ;
+	font-weight:bold;
+}
+QLabel#label, #lab_text, #lab_text_2 , #lab_AutoSecuritySet, #lab_NetWorkSet, #label_18, #lab_text_3 {
+	font-size: 15px;
+	color: blue;
+}
+QLabel#lab_logo {
+	position: relative;
+	top: 10px;
+	left: 20px;
+}
+QLabel#label_2, #label_4, #label_5, #label_6, #lab_NetworkName, #lab_SecurityOptions, #lab_PassPhrase, #lab_PassPhrase2, #lab_EncryptionStrength, #lab_PassPhrase_Auto, #lab_EncryptionStrength_2, #lab_PassPhrase_2, #lab_SecurityEncryption, #lab_SecurityEncryption_2,#lab_SSIDNameManual, #lab_SecurityManual , #lab_SecurityEncryption_3, #lab_EncryptionStrength_3, #lab_PassPhrase_3, #label_14, #lab_PassPhrase2_2, #label_13{
+	font: bold;
+}
+/*
+QLabel#lab_WaitText, #lab_WaitText_2 {
+	color: #0071D7;
+	font-size:15px;
+}*/
+
+/*EXTENDER NAVIGATIION LABELS*/
+QLabel#lab_ExtToRouter, #lab_DeviceToExt, #lab_ApplicationSet {
+	font:bold;
+	height: 28px;
+	font-size: 14px;
+	color: gray;
+	border-image: url(:/images/step.png);
+}
+QLabel#lab_ExtToRouter_2, #lab_DeviceToExt_2, #lab_ApplicationSet_2 {
+	font:bold;
+	height: 28px;
+	font-size: 14px;
+	color: white;
+	border-image: url(:/images/step-2.png);
+}
+
+/*TableWidget for APList*/
+QTableWidget QHeaderView::section
+{
+    background-color: #767676;
+    color: white;
+	height: 25px;
+    padding-left: 4px;
+    border: 0px solid #6c6c6c
+}
+QLineEdit:hover {
+	border-color: lightblue
+}
+
+/*QTextEdit*/
+ QLineEdit
+ {
+	background-color:#ffffff;
+	border:1px solid #cccccc;
+ }
+ .QLineEdit:focus
+ {
+	background-color:#ffffff;
+	border:1px solid #9E99FD;
+ }
+ 
+  QComboBox
+ {
+	background-color:#ffffff;
+	border:1px solid #cccccc;
+ }
+ QComboBox:focus
+ {
+	background-color:#ffffff;
+	border:1px solid #9E99FD;
+ }
+ 
+  QComboBox QAbstractItemView#cmbx_Security {
+     border: 2px solid darkgray;
+     selection-color: #ffffff;
+    selection-background-color: lightblue;
+   background-color: #ffffff;	 
+ }
+
+/*COMBOBOX LANGUAGE*/
+QComboBox#com_language{
+        color: rgb(100,100,100);
+        background-color:rgb(255,255,241);
+        border:2px solid gray;
+        border-radius:5px;
+        padding-left:8px;
+        padding-right:8px;
+        margin-right:0px;
+        margin-left:0px;
+}
+QComboBox#com_language:hover{
+        border:2px solid #9E99FD;
+}
+QComboBox#com_language:checked{
+        color: rgb(100,100,100);
+}
+QComboBox#com_language::drop-down{
+        border-image: url(:/images/but_combo.png);
+        border-radius:2px;
+        subcontrol-origin: margin;
+        subcontrol-position: center right;
+        border-width:2px;
+        width: 30px;
+}
+QComboBox#com_language::indicator{
+        width: 20;
+        height: 23px;
+        color: #ff0000;
+}
+
+/*scroll bar  shude   zj*/
+
+QScrollBar:vertical {
+      border: 2px solid rgb(242,242,242);
+      background: rgb(242,242,242);
+      width: 16px;
+      margin: 16px 0 16px 0;
+  }
+  QScrollBar::handle:vertical {
+      background: rgb(217,217,217);
+      min-height: 20px;
+  }
+  QScrollBar::add-line:vertical {
+      border: 0px solid red;
+     
+      height: 16px;
+      subcontrol-position: bottom;
+      subcontrol-origin: margin;
+	  border-image:url(:/images/but_scroll_down.png);
+  }
+
+  QScrollBar::sub-line:vertical {
+      border: 0px solid red;
+      
+      height: 16px;
+      subcontrol-position: top;
+      subcontrol-origin: margin;
+	  border-image:url(:/images/but_scroll_up.png);
+  }
+
+

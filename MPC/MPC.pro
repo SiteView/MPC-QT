@@ -1,32 +1,50 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2013-03-15T09:11:51
+# Project created by QtCreator 2013-04-03T10:24:05
 #
 #-------------------------------------------------
 
 QT       += core gui network
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 TARGET = MPC
 TEMPLATE = app
-
-INCLUDEPATH += Core UI Utils
-
-UI_DIR  = gen-ui
-MOC_DIR = gen-moc
-OBJECTS_DIR = gen-obj
-RCC_DIR = gen-rcc
-
+DESTDIR = bin
+OBJECTS_DIR = build
+MOC_DIR = build
+UI_DIR = build
 
 SOURCES += main.cpp\
-        UI/MainWindow.cpp \
-    Utils/Utils.cpp \
-    Core/DownLoad.cpp
+        mainwindow.cpp \
+    initialize.cpp \
+    allapplicationdialog.cpp \
+    ftpdownload.cpp \
+    tools.cpp \
+    aes.cpp \
+    downloadthread.cpp \
+    informationanalyze.cpp \
+    httphandle.cpp \
+    httpdownload.cpp \
+    setup.cpp \
+    start.cpp
 
-HEADERS  += UI/MainWindow.h \
-    Utils/Utils.h \
-    Core/DownLoad.h
+HEADERS  += mainwindow.h \
+    allapplicationdialog.h \
+    ftpdownload.h \
+    tools.h \
+    downloadthread.h \
+    start.h \
+    httphandle.h \
+    aes.h \
+    setup.h \
+    httpdownload.h \
+    informationanalyze.h \
+    data.h \
+    initialize.h
 
-FORMS    += UI/MainWindow.ui
+FORMS    += mainwindow.ui
+RC_FILE = icon.rc
 
 RESOURCES += \
-    Resource/Resource.qrc
+    src/resource.qrc
