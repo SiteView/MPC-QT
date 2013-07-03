@@ -1,9 +1,10 @@
 #include <QtGui>
 #include <QtNetwork>
 #include <QProcess>
+#include <QMessageBox>
+
 #include "httphandle.h"
 #include "informationanalyze.h"
-//#include "ui_authenticationdialog.h"
 #define SERVERINI "config/server.ini"
 #define LOCALINI "config/local.ini"
 #define UPDATEINI "config/update.ini"
@@ -22,9 +23,7 @@ HttpHandle::HttpHandle(QUrl uUrl, QString sDirectory, bool bReplace, QObject *pa
     //urlLineEdit = new QLineEdit("http://qt.nokia.com/");
 #endif
 
-#ifndef Q_WS_MAEMO_5
     progressDialog = new QProgressDialog(NULL);
-#endif
 
 
     connect(&m_namManager, SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
@@ -59,6 +58,7 @@ void HttpHandle::vDownloadFailed()
 }
 
  //对下载文件进行处理
+
 void HttpHandle::vExecute(const QString& fileName,const QStringList& parameters)
 {
 
@@ -90,14 +90,18 @@ void HttpHandle::vExecute(const QString& fileName,const QStringList& parameters)
     }
 
     //如果是INI文件，则直接返回
-    if("initmp" == fileName.right(6))
+	
+	
+	if("initmp" == fileName.right(6))
     {
         //通知下载完成
         emit sig_vSetupfinish();
         return;
     }
     //如果是EXE文件则需要进行安装
-    QProcess *silentExecute = new QProcess();
+
+
+	QProcess *silentExecute = new QProcess();
     silentExecute->start(l_sReplace, parameters);
 
     if (!silentExecute->waitForStarted())
@@ -257,18 +261,17 @@ void HttpHandle::vExecute(const QString& fileName,const QStringList& parameters)
 
  }
 
- void HttpHandle::vHttpReadyRead()
- {
-     // this slot gets called every time the QNetworkReply has new data.
-     // We read all of its new data and write it into the file.
-     // That way we use less RAM than when reading it at the finished()
-     // signal of the QNetworkReply
-     if (m_pfFileDownloaded)
+void HttpHandle::vHttpReadyRead()
+{
+	 if (m_pfFileDownloaded)
          m_pfFileDownloaded->write(m_pnrReply->readAll());
  }
 
  //进度条
- void HttpHandle::vUpdateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
+
+
+
+void HttpHandle::vUpdateDataReadProgress(qint64 bytesRead, qint64 totalBytes)
  {
      if (m_bHttpRequestAborted)
          return;

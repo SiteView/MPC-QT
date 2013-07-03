@@ -9,12 +9,12 @@
  #endif
  #include <QNetworkAccessManager>
  #include <QUrl>
+#include <QProgressDialog>
 
  class QDialogButtonBox;
  class QFile;
  class QLabel;
  class QLineEdit;
- class QProgressDialog;
  class QPushButton;
  class QSslError;
  class QAuthenticator;
@@ -50,9 +50,9 @@
  #endif
 
  private:
- #ifndef Q_WS_MAEMO_5
+
      QProgressDialog *progressDialog;
- #endif
+
 
      QUrl m_uUrl;
      QNetworkAccessManager m_namManager;

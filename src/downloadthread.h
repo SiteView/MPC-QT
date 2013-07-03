@@ -4,11 +4,11 @@
 #include <QtNetwork>
 #include <QIcon>
 
-#include "httpdownload.h"
-#include "ftpdownload.h"
+//#include "httpdownload.h"
+//#include "ftpdownload.h"
 
-class HttpDownload;
-class FtpDownload;
+//class HttpDownload;
+//class FtpDownload;
 
 class DownloadThread : public QThread
 {
@@ -62,6 +62,7 @@ public:
     ThreadTaskInfomation threadTaskInfomation;
 
 public slots:
+
     void setThreadStopped();
 
 protected:
@@ -73,9 +74,6 @@ private slots:
     void getFileSize(int taskInfoListId, qint64 fileSize);
 
 private:
-    HttpDownload *httpDownload;
-    FtpDownload *ftpDownload;
-
 };
 
 #endif // __DOWNLOADTHREAD_H__

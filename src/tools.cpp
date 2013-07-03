@@ -1,5 +1,5 @@
 #include "tools.h"
-Tools::Tools( QObject * parent, Qt::WFlags f)
+Tools::Tools( QObject * parent)
 {
 
 }

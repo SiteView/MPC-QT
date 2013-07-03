@@ -223,6 +223,7 @@ void AES::Bm53InvCipher(char *input, char *output)
     uch_output[nBuf] = 0;//封闭字符串
     ucharToStr(uch_output,output);
     //剔除用于补充16字节的字符
+
     int nLen = strlen(output);
 
 

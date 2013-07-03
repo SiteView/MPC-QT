@@ -1,50 +1,34 @@
 #include <QApplication>
+#include <QtGlobal>
+
 #include "allapplicationdialog.h"
 #include "start.h"
+
+#include "../SytemLog.h"
+#include "../SqliteDb.h"
+
+// 全局数据库对象
+QSqlDatabase CSQLiteDb::m_db;
 
 
 int main(int argc, char ** argv)
 {
     QApplication app( argc, argv );
-    //app.setOrganizationName("MPC");
-    //app.setOrganizationDomain("MPC.googlecode.com");
-    //app.setApplicationName("MPC");
 
-    //aaron 0327
-    /*
-    QSettings settings;
-    settings.beginGroup("MainWindow");
-    QString language = settings.value("language").toString();
-    settings.endGroup();
-    QTranslator translator;
-    if (language == "")
-        translator.load(":/translations/MPC_" + QLocale::system().name());
-    else
-        translator.load(":/translations/MPC_" + language);
-    app.installTranslator(&translator);
-    QTranslator translatorQt;
-    translatorQt.load( ":/translations/Qt_"+language+".qm" );
-    if (translatorQt.isEmpty())
-        translatorQt.load( QLibraryInfo::location( QLibraryInfo::TranslationsPath) + "/qt_"+QLocale::system().name()+".qm" );
-    if (!translatorQt.isEmpty())
-        app.installTranslator( &translatorQt );
-    */
-    //start * newstart = new start();
-    //newstart->show();
+	//注册MsgHandler 可以输出标准日志文件
+	qInstallMessageHandler(customMessageHandler); 
 
-    //MainWindow win;
-    //win.show();
-    //win.threadsDetailTableWidget->hide();
-    //aaron 0327
-    //QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
-    //QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
-    //QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf8"));
-    qDebug() << "你好";
+	if (!CSQLiteDb::ConnectionDB(QString( "./localedb.db" ) ) )
+		//if (!CSQLiteDb::ConnectionDB(QString( "" ) ) )
+	{
+		QString err = QString("database open faile :%1").arg(CSQLiteDb::getDB()->lastError().text());
+		qCritical(err.toLocal8Bit().data());
+		CSQLiteDb::DisConnectionDB();
+		return 0;
+	}
 
     AllApplicationDialog *hello = new AllApplicationDialog();
     hello->show();
-
-    //app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
     return app.exec();
 }
 

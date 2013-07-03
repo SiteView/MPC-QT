@@ -15,7 +15,7 @@
 #include <QLabel>
 #include <QDir>
 #include "AllApplicationDialog.h"
-#include "httpdownload.h"
+//#include "httpdownload.h"
 #include "tools.h"
 #include "setup.h"
 #define SERVERINI "config/server.ini"
@@ -193,19 +193,13 @@ void AllApplicationDialog::setTaskInformation(QList <TaskInfomation *> &taskInfo
 
 void AllApplicationDialog::setTableInformation()
 {
-    //qDebug() <<  "set table information";
     for(int taskInfoListId = 0; taskInfoListId < m_taskInfoList.size(); taskInfoListId++)
     {
-        //qDebug() << m_taskInfoList.at(taskInfoListId)->size;
-
         int row = m_tableWidget->rowCount();
         m_tableWidget->insertRow(row);
         if (m_taskInfoList.at(taskInfoListId)->state == runningState)
             m_taskInfoList.at(taskInfoListId)->state = stopState;
-        showTaskState(taskInfoListId);
 
-        //aaron 0328
-        //aaron 0328
         QTextCodec *textcodec = QTextCodec::codecForName("GBK");
         QString l_sTemp = textcodec->toUnicode(m_taskInfoList.at(taskInfoListId)->applicationName.toLatin1().data());
         m_tableWidget->setItem(taskInfoListId, fileNameHeader, new QTableWidgetItem(l_sTemp));
@@ -226,48 +220,25 @@ void AllApplicationDialog::setTableInformation()
         m_tableWidget->setItem(taskInfoListId, elapsedTimeHeader, new QTableWidgetItem("Current version:" + m_taskInfoList.at(taskInfoListId)->currentVersion));
         m_tableWidget->setItem(taskInfoListId, timeLeftHeader, new QTableWidgetItem("Last version:" + m_taskInfoList.at(taskInfoListId)->updateVersion));
 
-
-
-        //aaron 0328 图片
         QString l_sPicture = QString("%1/%2.jpg").arg(m_taskInfoList.at(taskInfoListId)->saveTo).arg(m_taskInfoList.at(taskInfoListId)->rename);
         qDebug() <<  l_sPicture  ;
         QLabel *label = new QLabel();
         label->setPixmap(QPixmap(l_sPicture));
         m_tableWidget->setCellWidget(taskInfoListId, stateHeader, label);
-        //m_tableWidget->setItem(taskInfoListId, stateHeader, new QTableWidgetItem(QIcon(l_sPicture),""));
-
-        //aaron 0329
-
-
-        //aaron
-        if((percent > 0) && (percent < 100))
+         if((percent > 0) && (percent < 100))
         {
             QProgressBar *l_pProgress = new QProgressBar(this);
             m_tableWidget->setCellWidget(taskInfoListId, progressHeader, l_pProgress);
             l_pProgress->setRange(0,100);
             l_pProgress->setValue(percent);
         }
-        //else
-        //{
-        //    l_pProgress->hide();
-        //}
-
-        //aaron 0326 根据状态显示
-        QPushButton *l_pbDownload = new QPushButton("Update");
-        QPushButton *l_pbPause = new QPushButton("Pause");
+		QPushButton* l_pbDownload  = new QPushButton("Update");
+        QPushButton* l_pbPause  = new QPushButton("Pause");
         if("needupdate" == m_taskInfoList.at(taskInfoListId)->comment)
         {
             l_pbDownload->setText("Update");
-            //m_tableWidget->setCellWidget(taskInfoListId, DownloadHeader, l_pbDownload);
-            //connect(l_pbDownload, SIGNAL(clicked()),this,SLOT(OnBtnDownloadClicked()));
-
+  
             l_pbPause->setText("Pause");
-            //m_tableWidget->setCellWidget(taskInfoListId, PauseHeader, l_pbPause);
-            //connect(l_pbPause, SIGNAL(clicked()),this,SLOT(OnBtnPauseClicked()));
-
-            //aaron 0329
-            //l_pbPause->resize(50, 30);
-            //l_pbPause->setFont(QFont("Times", 18, QFont::Bold));
         }
         else if("new" == m_taskInfoList.at(taskInfoListId)->comment)
         {
@@ -377,10 +348,13 @@ void AllApplicationDialog::createTaskInformation()
 
 
         //aaron 0326 设置状态
-        QString commentString = l_psetUpdate.value(l_sSoftwareName+"/status").toString();
+
+
+		QString commentString = l_psetUpdate.value(l_sSoftwareName+"/status").toString();
 
         //aaron 0328 静默安装参数
-        QString l_sSilentParam = l_psetUpdate.value(l_sSoftwareName+"/silentparam").toString();
+
+		QString l_sSilentParam = l_psetUpdate.value(l_sSoftwareName+"/silentparam").toString();
 
         //aaron 0329
         QString l_sUpdateVersion = l_psetUpdate.value(l_sSoftwareName + "/Version").toString();
@@ -1500,27 +1474,32 @@ void AllApplicationDialog::changeEvent(QEvent *event)
     //    }
     //}
 }
-#ifdef WIN32
-bool AllApplicationDialog::winEvent( MSG *m, long *result )
-{
-    switch ( m->message )
-    {
-    //case WM_SYSCOMMAND:
-    //    {
-    //        if ( m->wParam == SC_MINIMIZE )
-    //        {
-                //			ShowWindow(winId(), SW_HIDE);
-    //            hide();
-    //            return true;
-     //       }
-    //    }
-    //    break;
-    default:
-        break;
-    }
-    return QWidget::winEvent(m, result);
-}
-#endif
+
+//#ifdef WIN32
+
+//bool AllApplicationDialog::winEvent( MSG *m, long *result )
+//{
+//    switch ( m->message )
+//    {
+//    //case WM_SYSCOMMAND:
+//    //    {
+//    //        if ( m->wParam == SC_MINIMIZE )
+//    //        {
+//                //			ShowWindow(winId(), SW_HIDE);
+//    //            hide();
+//    //            return true;
+//     //       }
+//    //    }
+//    //    break;
+//
+//
+//    default:
+//        break;
+//    }
+//    return QWidget::winEvent(m, result);
+//}
+//#endif
+
 void AllApplicationDialog::saveSettings()
 {
 
@@ -1720,56 +1699,7 @@ void AllApplicationDialog::showTaskState(int taskInfoListId)
         }
     }
 
-    //aaron 0326
-    //QPushButton *l_pDownloadButton = new QPushButton("Download");
-    //m_tableWidget->setCellWidget(taskInfoListId, DownloadHeader, l_pDownloadButton);
-    //connect(l_pDownloadButton, SIGNAL(clicked()),this,SLOT(OnBtnDownloadClicked()));
-
-    //QPushButton *l_pPauseButton = new QPushButton("Pause");
-    //m_tableWidget->setCellWidget(taskInfoListId, PauseHeader, l_pPauseButton);
-    //connect(l_pPauseButton, SIGNAL(clicked()),this,SLOT(OnBtnPauseClicked()));
-    //aaron 0326 根据状态显示
-    /*
-    QPushButton *l_pDownloadButton ;
-    QPushButton *l_pPauseButton;
-    if("needupdate" == m_taskInfoList.at(taskInfoListId)->comment)
-    {
-        l_pDownloadButton = new QPushButton("Update");
-        m_tableWidget->setCellWidget(taskInfoListId, DownloadHeader, l_pDownloadButton);
-        connect(l_pDownloadButton, SIGNAL(clicked()),this,SLOT(OnBtnDownloadClicked()));
-
-        l_pPauseButton = new QPushButton("Pause");
-        m_tableWidget->setCellWidget(taskInfoListId, PauseHeader, l_pPauseButton);
-        connect(l_pPauseButton, SIGNAL(clicked()),this,SLOT(OnBtnPauseClicked()));
-    }
-    else if("new" == m_taskInfoList.at(taskInfoListId)->comment)
-    {
-        l_pDownloadButton = new QPushButton("Download");
-        m_tableWidget->setCellWidget(taskInfoListId, DownloadHeader, l_pDownloadButton);
-        connect(l_pDownloadButton, SIGNAL(clicked()),this,SLOT(OnBtnDownloadClicked()));
-
-        l_pPauseButton = new QPushButton("Pause");
-        m_tableWidget->setCellWidget(taskInfoListId, PauseHeader, l_pPauseButton);
-        connect(l_pPauseButton, SIGNAL(clicked()),this,SLOT(OnBtnPauseClicked()));
-    }
-    else
-    {
-        //aaron 0327
-        //l_pDownloadButton = new QPushButton("Download");
-        l_pDownloadButton = new QPushButton("Done");
-
-        m_tableWidget->setCellWidget(taskInfoListId, DownloadHeader, l_pDownloadButton);
-        connect(l_pDownloadButton, SIGNAL(clicked()),this,SLOT(OnBtnDownloadClicked()));
-
-        l_pPauseButton = new QPushButton("Pause");
-        m_tableWidget->setCellWidget(taskInfoListId, PauseHeader, l_pPauseButton);
-        connect(l_pPauseButton, SIGNAL(clicked()),this,SLOT(OnBtnPauseClicked()));
-
-        //aaron 0327
-        m_taskInfoList.at(taskInfoListId)->state = doneState;
-        //m_taskInfoList.at(taskInfoListId)->state = finishedState;
-    }
-    */
+  
 
 
     //aaron 0328

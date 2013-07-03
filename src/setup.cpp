@@ -30,8 +30,13 @@ void Setup::vExecute()
     //{
     //    QFile::remove(l_sReplace);
     //}
+
+
     //如果是EXE文件则需要进行安装
-    QProcess *silentExecute = new QProcess();
+	
+	
+	
+	QProcess *silentExecute = new QProcess();
     QStringList l_slCmd;
     l_slCmd << m_sCmd;
     silentExecute->start(l_sReplace, QStringList(m_sCmd));

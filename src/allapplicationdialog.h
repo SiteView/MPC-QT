@@ -14,6 +14,7 @@
 #include <QScrollArea>
 #include <QCloseEvent>
 #include <QMutex>
+#include <QPushButton>
 
 class HttpHandle;
 class InformationAnalyze;
@@ -43,9 +44,11 @@ public slots:
 protected:
     void closeEvent(QCloseEvent *event);
     void changeEvent(QEvent *event);
-#ifdef WIN32
+
+
     bool winEvent( MSG *m, long *result );
-#endif
+
+
 private slots:
     void OnBtnDownloadClicked();
     void OnBtnPauseClicked();
@@ -82,6 +85,7 @@ private slots:
     void acceptClipboard();
     //void monitorClipboardTriggered();
 private:
+
     void createActions();
     void createTrayIcon();
     void createMenus();
@@ -206,7 +210,9 @@ private:
     };
     typedef struct _TaskPreferences TaskPreferences;
     TaskPreferences taskPreferences;
+
     DownloadThread *downloadThread;
+
     QList <DownloadThread *> taskThreadList;
     struct _NotDownload
     {

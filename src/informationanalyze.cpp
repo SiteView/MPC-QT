@@ -36,6 +36,9 @@ bool InformationAnalyze::bDuplicateFile(const QString &source, const QString &ta
 }
 
 //比较SERVERINI文件与LOCALINI文件，得到UPDATEINI文件，包含软件是否存在，是否需要升级，升级文件链接等
+
+
+
 void InformationAnalyze::vCompare()
 {
 
@@ -84,7 +87,9 @@ void InformationAnalyze::vCompare()
     //qDebug() << l_sTemp << "what is in updateini";
 
     //依次查找服务器上的软件是否存在于本地，如存在则需要比较版本信息
-    for (int i = 0; i < serverSoftwareList.size(); ++i)
+
+	
+	for (int i = 0; i < serverSoftwareList.size(); ++i)
     {
         //aaron 0328
         //QString l_sSoftwareName = serverSoftwareList.at(i);
@@ -109,6 +114,8 @@ void InformationAnalyze::vCompare()
         l_sStatus = l_sSoftwareNameGBK + "/status";
 
         //不存在
+
+
         if((l_slLocalSoftwareList.end() == l_iterator))
         {
             qDebug() << "software name" << l_sSoftwareName << "new";
@@ -136,6 +143,8 @@ void InformationAnalyze::vCompare()
             qDebug() << "software name" << l_sVersionLocal;
 
             //aaron 0329 当前版本信息插入
+
+
             QString l_sVersionLocalSet  = l_sSoftwareNameGBK + "/localversion";
             l_psetUpdate->setValue(l_sVersionLocalSet, l_sVersionLocal);
 
@@ -155,32 +164,6 @@ void InformationAnalyze::vCompare()
     }
 
 
-    //依次查找本地软件是否在服务器上，可做优化，暂时不需要
-    /*QString unknowSoftware;
-    for(int i = 0; i < localSoftwareList.size(); i++)
-    {
-        QString softwareName = localSoftwareList.at(i);
-        QStringList::Iterator iterator = qFind(serverSoftwareList.begin(), serverSoftwareList.end(), softwareName);
-
-
-        if(serverSoftwareList.end() == iterator)
-        {
-            unknowSoftware += softwareName;
-
-            QString url = local->value(softwareName+"/url").toString();
-            QString version = local->value(softwareName + "/version").toString();
-
-            update->setValue(softwareName+"/url", url);
-            update->setValue(softwareName + "/version", version);
-            update->setValue(softwareName + "/status", "unknow");
-
-
-            qDebug() << softwareName << endl;
-            qDebug() << version << endl;
-            //out << softwareName <<"       " << version << endl;
-        }
-    }*/
-
     l_psetUpdate->setValue("new", l_sNewSoftware);
 
     l_psetUpdate->setValue("normal", l_sNormalSoftware);
@@ -199,6 +182,8 @@ void InformationAnalyze::vCompare()
 
 
 //从注册表获取本地软件信息，按格式存放在LOCALINI中
+
+
 void InformationAnalyze::vInitLocalInfomation()
 {
     QString l_sLocalSoftware;
@@ -244,7 +229,11 @@ void InformationAnalyze::vInitLocalInfomation()
 }
 
 //用来设置SERVERINI文件，URL信息会加密保存
+
+
 //Format : serverInformation << SoftwareName << URL << Version
+
+
 void InformationAnalyze::vSetServerInformation(const QString& sFileName, const QStringList &serverInformation)
 {
     QSettings *l_sUpdate = new QSettings(sFileName, QSettings::IniFormat);
@@ -282,6 +271,7 @@ void InformationAnalyze::vSetServerInformation(const QString& sFileName, const Q
 }
 
 //将LOCALINI中的信息读取到QStringList中以供使用
+
 void InformationAnalyze::vGetUpdateInformation(QStringList &updateInformation)
 {
 
