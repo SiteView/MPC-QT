@@ -1,0 +1,16 @@
+Debug: "" URL 
+Debug: update 
+Debug: "config/server.ini" 
+Debug: "" 
+Debug: Serverini file is empty! 
+Debug: "" 
+Debug: url is empty, break 
+Debug: download finished! 
+Debug: "config/index.htmltmp" Empty file! 
+Debug: update 
+Debug: "config/server.ini" 
+Debug: "" 
+Debug: Serverini file is empty! 
+Debug: "Q" 
+Debug: "downloads/Q.jpg" 
+Debug: stopState 
