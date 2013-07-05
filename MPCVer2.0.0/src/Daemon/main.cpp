@@ -3,9 +3,11 @@
 
 #include "../Common/SqliteDb.h"
 #include "../Common/SytemLog.h"
+#include "regflashclass.h"
 
 // 全局数据库对象
 QSqlDatabase CSQLiteDb::m_db;
+
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +24,12 @@ int main(int argc, char *argv[])
 		CSQLiteDb::DisConnectionDB();
 		return 0;
 	}
+	RegFlashClass  task(0);
+	task.start();
 	int ret = a.exec();
+
 	CSQLiteDb::DisConnectionDB();
+	task.terminate();
+	
 	return ret;
 }

@@ -85,7 +85,7 @@ public:
         return &m_db;
     };
 };
-
+/*
 int  getlistA()
 {
 	int softWareCount=0;  
@@ -106,6 +106,6 @@ int  getlistA()
 	}
 	return 0;
 }
-
+*/
 #endif
 

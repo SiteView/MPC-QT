@@ -1,0 +1,9 @@
+20130705 10:44:40.489 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:44:45.743 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:44:51.005 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:45:29.199 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:45:34.442 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:45:39.705 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:45:44.905 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:45:50.156 Debug: near "from": syntax error Unable to execute statement  file regflashclass.cpp  94
+20130705 10:47:20.588 Debug:  Parameter count mismatch  file regflashclass.cpp  110
