@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{afc965fa-0104-4a99-9b13-500c5b8089cf}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{3d6dcbc4-91ae-4761-a5dd-83046dff70ba}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\softdownloadlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_mainwindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_mainwindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_softdownloadlist.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_softdownloadlist.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_resource.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\SqliteDb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\SytemLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="mainwindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\softdownloadlist.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="mainwindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="styles\Default2.qss">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\bg_frame.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\bg_plugin_page.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_about.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_about_hover.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_close.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_close_hover.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_minimize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_minimize_hover.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_scroll_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_scroll_up.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\circle.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\lightcircle.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\line.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="resource.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="images\softdownload_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softdownload_no.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softdownload_press.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softunload_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softunload_no.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softunload_press.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softupgrade_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softupgrade_no.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\softupgrade_press.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\title.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\updateinform_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\updateinform_no.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\updateinform_press.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

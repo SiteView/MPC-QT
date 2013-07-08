@@ -34,22 +34,21 @@ RegFlashClass::RegFlashClass(QObject *parent)
 }
 void RegFlashClass::run()
 {
+	QString val1;
+	QString val2;
+	QString val3;
+	QString val4;
+	QString val5;
+	QString val6;
+	QString val7;
+	QString val8;
+	QString val9;
 	forever
 	{
 		sleep( 5 );
-
 		QSqlQuery query(*m_SQLiteDb.getDB());
 		QSettings reg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",QSettings::NativeFormat);  
 		QStringList groupsList=reg.childGroups();  
-		QString val1;
-		QString val2;
-		QString val3;
-		QString val4;
-		QString val5;
-		QString val6;
-		QString val7;
-		QString val8;
-		QString val9;
 		m_SQLiteDb.getDB()->transaction();
 		query.prepare  ("delete from LocalAppInfor ;" );
 		if ( !query.exec() )
@@ -99,7 +98,7 @@ void RegFlashClass::UpdateInfo()
 	QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
 	QSqlQuery updateQuery( *m_SQLiteDb.getDB() );
 	m_SQLiteDb.getDB()->transaction();
-	if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation from LocalAppInfor ;" ) )
+	if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation,DisplayVersion from LocalAppInfor ;" ) )
 	{
 		qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
 	}
@@ -107,7 +106,9 @@ void RegFlashClass::UpdateInfo()
 	{
 		QVariant val1 = SQLiteQuery.value(0);
 		QVariant val2 = SQLiteQuery.value(1);
+		QVariant val3 = SQLiteQuery.value(2);
 		QString pahtstr = val2.toString();
+		// 修补安装信息 访问信息 
 		if(pahtstr.compare("") !=0)
 		{
 			QFileInfo pathInfo(pahtstr);
@@ -126,6 +127,25 @@ void RegFlashClass::UpdateInfo()
 			if ( !updateQuery.exec() )
 			{
 				qDebug(updateQuery.lastError().text().toLocal8Bit().data());
+			}
+		}
+		// 修补版本号
+		if(val3.toString().compare("") == 0)
+		{
+			QStringList   liststr =  val1.toString().split(" ");
+			QString lastStr = liststr.at(liststr.size()-1).toUpper();
+			lastStr = lastStr.replace("V","");
+			QRegExp reg ("^([0-9])(\\.)?");
+			if(!reg.indexIn(lastStr))
+			{
+				updateQuery.prepare  ("update LocalAppInfor set DisplayVersion = ?  where  DisplayName = ?" );
+				updateQuery.addBindValue(lastStr);
+				updateQuery.addBindValue(val1);
+				if ( !updateQuery.exec() )
+				{
+					qDebug(updateQuery.lastError().text().toLocal8Bit().data());
+				}
+				//qDebug() << val1 << lastStr;
 			}
 		}
 	}

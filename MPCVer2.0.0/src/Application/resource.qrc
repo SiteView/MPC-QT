@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/bg_frame.png</file>
+        <file>images/bg_plugin_page.png</file>
+        <file>images/but_about.png</file>
+        <file>images/but_about_hover.png</file>
+        <file>images/but_close.png</file>
+        <file>images/but_close_hover.png</file>
+        <file>images/but_minimize.png</file>
+        <file>images/but_minimize_hover.png</file>
+        <file>images/but_scroll_down.png</file>
+        <file>images/but_scroll_up.png</file>
+        <file>images/title.png</file>
+        <file>styles/Default2.qss</file>
+        <file>images/lightcircle.png</file>
+        <file>images/circle.png</file>
+        <file>images/softdownload_press.png</file>
+        <file>images/softunload_h.png</file>
+        <file>images/softunload_no.png</file>
+        <file>images/softunload_press.png</file>
+        <file>images/softupgrade_h.png</file>
+        <file>images/softupgrade_no.png</file>
+        <file>images/softupgrade_press.png</file>
+        <file>images/updateinform_h.png</file>
+        <file>images/updateinform_no.png</file>
+        <file>images/updateinform_press.png</file>
+        <file>images/softdownload_h.png</file>
+        <file>images/softdownload_no.png</file>
+        <file>images/line.png</file>
+    </qresource>
+</RCC>

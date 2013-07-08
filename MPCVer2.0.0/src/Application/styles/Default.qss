@@ -1,0 +1,175 @@
+/*ALL WIDGETS PROPERTY*/
+*{
+	color:rgb(50,50,50);
+	font: 75 12px "Arial";	
+}
+
+QWidget#centralWidget {
+	color:#888888
+	
+}
+/*QWidget*/
+QWidget#title {
+	border-image: url(:/images/title.png);
+}
+
+/*QPushButton:SoftDownload,SoftUpgrade,SoftUnload,UpdateInfrom*/
+QPushButton#SoftDownload
+{
+	border-image: url(:/images/softdownload_no.png);
+}
+QPushButton#SoftDownload:hover
+{
+	border-image: url(:/images/softdownload_h.png);
+}
+QPushButton#SoftDownload:clicked
+{
+	border-image: url(:/images/softdownload_press.png);
+}
+QPushButton#SoftUpgrade
+{
+	border-image: url(:/images/softupgrade_no.png);
+}
+QPushButton#SoftUpgrade:hover
+{
+	border-image: url(:/images/softupgrade_h.png);
+}
+QPushButton#SoftUpgrade:clicked
+{
+	border-image: url(:/images/softupgrade_press.png);
+}
+QPushButton#SoftUnload
+{
+	border-image: url(:/images/softunload_no.png);
+}
+QPushButton#SoftUnload:hover
+{
+	border-image: url(:/images/softunload_h.png);
+}
+QPushButton#SoftUnload:clicked
+{
+	border-image: url(:/images/softunload_press.png);
+}
+QPushButton#UpdateInform
+{
+	border-image: url(:/images/updateinform_no.png);
+}
+QPushButton#UpdateInform:hover
+{
+	border-image: url(:/images/updateinform_h.png);
+}
+QPushButton#UpdateInform:clicked
+{
+	border-image: url(:/images/updateinform_press.png);
+}
+
+
+
+
+QPushButton#but_about,#but_close,#but_minimize
+{   
+	border-style:solid;
+	border-width:0px;
+	border-radius: 0px;
+	padding-left:4px;
+	padding-right:4px;
+	
+}
+
+
+
+/*HEAD BUTTONS ABOUT*/
+
+QPushButton#but_about
+{
+	font:bold;
+	border-image: url(:/images/but_about.png);
+}
+QPushButton#but_about:hover
+{
+	border-image: url(:/images/but_about_hover.png);
+}
+QPushButton#but_close
+{
+    border-image: url(:/images/but_close.png);
+}
+QPushButton#but_close:hover
+{
+    border-image: url(:/images/but_close_hover.png);
+}
+
+/*HEAD BUTTONS MINIMIZE*/
+QPushButton#but_minimize
+{
+    border-image: url(:/images/but_minimize.png);
+}
+QPushButton#but_minimize:hover
+{
+    border-image: url(:/images/but_minimize_hover.png);
+}
+
+
+/*LABELS*/
+QLabel#label_SoftDownload,#label_SoftUpgrade,#label_SoftUnload,#label_UpdateInform
+{
+	color:rgb(250,250,250);
+	font: 75 12px "Arial";	
+}
+
+/*TableWidget for APList*/
+QTableWidget QHeaderView::section
+{
+    background-color: #767676;
+    color: white;
+	height: 25px;
+    padding-left: 4px;
+    border: 0px solid #6c6c6c
+}
+QLineEdit:hover {
+	border-color: lightblue
+}
+
+/*QTextEdit*/
+ QLineEdit
+ {
+	background-color:#ffffff;
+	border:1px solid #cccccc;
+ }
+ .QLineEdit:focus
+ {
+	background-color:#ffffff;
+	border:1px solid #9E99FD;
+ }
+ 
+
+/*scroll bar  shude   zj*/
+
+QScrollBar:vertical {
+      border: 2px solid rgb(242,242,242);
+      background: rgb(242,242,242);
+      width: 16px;
+      margin: 16px 0 16px 0;
+  }
+  QScrollBar::handle:vertical {
+      background: rgb(217,217,217);
+      min-height: 20px;
+  }
+  QScrollBar::add-line:vertical {
+      border: 0px solid red;
+     
+      height: 16px;
+      subcontrol-position: bottom;
+      subcontrol-origin: margin;
+	  border-image:url(:/images/but_scroll_down.png);
+  }
+
+  QScrollBar::sub-line:vertical {
+      border: 0px solid red;
+      
+      height: 16px;
+      subcontrol-position: top;
+      subcontrol-origin: margin;
+	  border-image:url(:/images/but_scroll_up.png);
+  }
+
+

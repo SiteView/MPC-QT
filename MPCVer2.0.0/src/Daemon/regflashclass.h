@@ -5,6 +5,7 @@
 #include <QThread>
 #include <QDir>
 #include <QDateTime>
+#include <QStringList>
 
 #include "./SOAServiceStub.h"
 #include "../Common/SqliteDb.h"

@@ -1,0 +1,177 @@
+/*ALL WIDGETS PROPERTY*/
+*{
+	colour:rib(50,50,50);
+	font: 75 12px "Ariel";	
+}
+
+/*QFrame*/
+QFrame#frame {
+	border-image: URL(:/images/bg_frame.png);
+}
+QFrame#frame_2{	
+	border-image: URL(:/images/bg_plugin_page.png);
+}
+/*QScrollArea*/
+QScrollArea #scrollArea_AutoSecuritySet, #scrollArea_ManualSecuritySet {
+	background-colour: transparent;
+}
+
+/*QPushButton*/
+QPushButton
+{   
+	border-style:solid;
+	border-width:1px;
+	border-radius: 4px;
+	height:28px;
+	width:93px;
+	padding-left:4px;
+	padding-right:4px;
+	background-colour: gradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rib( 148, 144, 221), stop:1 rgb( 116, 113, 190));
+	colour:rib(255,255,255);
+	border-colour:rib( 116, 113, 190);
+}
+QPushButton:hover
+{  
+	background-colour: gradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(  240, 240,251), stop:1 rgb( 116, 113, 190));
+	colour:rib(255,255,255); 
+	border-colour:rib( 116, 113, 190);
+}
+QPushButton:disabled
+{   
+	background-colour: gradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 230, 230,230), stop:1 rgb( 140, 140, 140));
+	colour:rgb(140,140,140); 
+	border-colour:rgb( 140, 140, 140);
+}
+QPushButton:pressed
+{   
+	background-colour: gradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 116, 113, 190), stop:1 rgb( 211, 209, 240));
+	colour:rgb(255,255,255); 
+	border-colour:rgb( 140, 140, 140);
+}
+QPushButton:focus
+{  
+	outline:none;
+    background-colour: gradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 88, 80, 186), stop:1 rgb( 68, 65, 137));
+	colour:rgb(255,255,255);
+	border-colour:rgb( 116, 113, 190);
+}
+QPushButton:focus:hover
+{  
+    background-colour: gradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb( 240, 240,251), stop:1 rgb( 68, 65, 137));
+}
+/*Buttons*/
+
+
+
+QPushButton#but_about,#but_close,#but_minimize
+{   
+	border-style:solid;
+	border-width:0px;
+	border-radius: 0px;
+	padding-left:4px;
+	padding-right:4px;
+	
+}
+
+
+/*HEAD BUTTONS ABOUT*/
+
+QPushButton#but_about
+{
+	font:bold;
+	border-image: URL(:/images/but_about.png);
+}
+QPushButton#but_about:hover
+{
+	border-image: URL(:/images/but_about_hover.png);
+}
+QPushButton#but_close
+{
+    border-image: URL(:/images/but_close.png);
+}
+QPushButton#but_close:hover
+{
+    border-image: url(:/images/but_close_hover.png);
+}
+
+/*HEAD BUTTONS MINIMIZE*/
+QPushButton#but_minimize
+{
+    border-image: url(:/images/but_minimize.png);
+}
+QPushButton#but_minimize:hover
+{
+    border-image: url(:/images/but_minimize_hover.png);
+}
+
+
+/*LABELS*/
+QLabel#lab_text,#label_3,#label{font:bold;}
+QLabel#label_download , #label_unload
+{
+	color: rgb(217,217,217);
+	font: 75 10pt "Arial" ;
+	font-weight:bold;	
+	height: 28px;
+	font-size: 14px;
+	color: gray;
+	border-image: url(:/images/step.png);
+}
+
+/*TableWidget for APList*/
+QTableWidget QHeaderView::section
+{
+    background-color: #767676;
+    color: white;
+	height: 25px;
+    padding-left: 4px;
+    border: 0px solid #6c6c6c
+}
+QLineEdit:hover {
+	border-color: lightblue
+}
+
+/*QTextEdit*/
+ QLineEdit
+ {
+	background-color:#ffffff;
+	border:1px solid #cccccc;
+ }
+ .QLineEdit:focus
+ {
+	background-color:#ffffff;
+	border:1px solid #9E99FD;
+ }
+ 
+
+/*scroll bar  shude   zj*/
+
+QScrollBar:vertical {
+      border: 2px solid rgb(242,242,242);
+      background: rgb(242,242,242);
+      width: 16px;
+      margin: 16px 0 16px 0;
+  }
+  QScrollBar::handle:vertical {
+      background: rgb(217,217,217);
+      Min-height: 20px;
+  }
+  QScrollBar::add-line:vertical {
+      border: 0px solid red;
+     
+      height: 16px;
+      sub control-position: bottom;
+      sub-control-origin: margin;
+	  border-image:url(:/images/but_scroll_down.png);
+  }
+
+  QScrollBar::sub-line:vertical {
+      border: 0px solid red;
+      
+      height: 16px;
+      sub-control-position: top;
+      sub-control-origin: margin;
+	  border-image:url(:/images/but_scroll_up.png);
+  }
+
+

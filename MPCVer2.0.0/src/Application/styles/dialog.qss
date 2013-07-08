@@ -1,0 +1,29 @@
+/*ALL WIDGETS PROPERTY*/
+*{
+	color:rgb(50,50,50);
+	font: 75 12px "Arial";	
+}
+
+/*QFrame*/
+QFrame#frame {
+	border-image: url(:/images/bg_frame.png);
+}
+
+
+QPushButton#but_logo
+{
+	font:bold;
+	border-image: url(:/images/but_about.png);
+}
+
+QPushButton#but_close
+{
+	font:bold;
+	border-image: url(:/images/but_about.png);
+}
+
+QPushButton#but_checkall
+{
+	font:bold;
+	border-image: url(:/images/but_about.png);
+}
