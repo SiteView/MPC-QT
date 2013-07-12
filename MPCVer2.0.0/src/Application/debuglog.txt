@@ -1,0 +1,1 @@
+20130708 15:45:35.618 Fatal: QWidget: Cannot create a QWidget without QApplication  file kernel\qwidget.cpp  1092

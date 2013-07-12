@@ -15,6 +15,7 @@ Discription:
 */
 
 #include "regflashclass.h"
+#include "tool.h"
 
 RegFlashClass::RegFlashClass(QObject *parent)
 	: QThread(parent)
@@ -43,6 +44,8 @@ void RegFlashClass::run()
 	QString val7;
 	QString val8;
 	QString val9;
+	QString val10;
+	QDateTime setupdate;
 	forever
 	{
 		sleep( 5 );
@@ -50,28 +53,53 @@ void RegFlashClass::run()
 		QSettings reg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",QSettings::NativeFormat);  
 		QStringList groupsList=reg.childGroups();  
 		m_SQLiteDb.getDB()->transaction();
-		query.prepare  ("delete from LocalAppInfor ;" );
-		if ( !query.exec() )
-		{
-			qDebug(query.lastError().text().toLocal8Bit().data());
-			continue;
-		}
+		//query.prepare  ("delete from LocalAppInfor ;" );
+		//if ( !query.exec() )
+		//{
+		//	qDebug(query.lastError().text().toLocal8Bit().data());
+		//	continue;
+		//}
 		foreach(QString group,groupsList)  
 		{  
 			reg.beginGroup(group);  
-			val1=reg.value("DisplayName").toString();  
+			val1=reg.value("DisplayName").toString();
+			val10=reg.value("SystemComponent").toString();
+			if(!val1.isEmpty()  && (val10.isEmpty() || val10.compare("0") == 0) && val1.indexOf("Security Update for Microsoft") == -1 &&  val1.indexOf("(KB") == -1 ) 
+			{
+				;// 空处理
+			}
+			else
+			{
+				 // 安全更新和系统组件不在管理范围
+				reg.endGroup();
+				continue;
+			}
+			if (checkInDb(val1,*m_SQLiteDb.getDB()))
+			{
+				reg.endGroup();
+				continue;
+			}
 			val2=reg.value("UninstallString").toString();
 			val3=reg.value("DisplayIcon").toString();  
 			val4=reg.value("DisplayVersion").toString();  
 			val5=reg.value("URLInfoAbout").toString();  
 			val6=reg.value("Publisher").toString();  
 			val7=reg.value("InstallLocation").toString();  
-			val8=reg.value("SetupTime").toString();
-			if(val8.compare("")!=0)
-				qDebug() << val8;
+			val8=reg.value("InstallDate").toString();
 			val9=reg.value("EstimatedSize").toString();  
-			if(!val1.isEmpty()  && val1.indexOf("Security Update")== -1 && val1.indexOf("(KB") == -1  && !val2.isEmpty() )  
+			if(!val8.isEmpty() || val8.compare("") != 0 )
+				setupdate =  QDateTime::fromString(val8,"yyyyMMdd");
+			QString path ;
+			bool rethav = false;
+			if(val7.isEmpty() || val7.compare("") == 0 )
+			{
+				rethav	= HavePath(val2,path); // 使用UninstallString 修补
+				if(!rethav)
+					rethav = HavePath(val3,path); // 使用DisplayIcon 修补
+			}
+			if(!val1.isEmpty()  && (val10.isEmpty() || val10.compare("0") == 0) && val1.indexOf("Security Update for Microsoft") == -1 &&  val1.indexOf("(KB") == -1 )  // 安全更新和系统组件不在管理范围
 			{  
+				
 				query.prepare("insert into LocalAppInfor (DisplayName,UninstallString,DisplayIcon,DisplayVersion,URLInfoAbout,Publisher,InstallLocation,SetupTime,EstimatedSize) values(?,?,?,?,?,?,?,?,?)");
 				query.addBindValue(val1);
 				query.addBindValue(val2);
@@ -79,8 +107,11 @@ void RegFlashClass::run()
 				query.addBindValue(val4);
 				query.addBindValue(val5);
 				query.addBindValue(val6);
-				query.addBindValue(val7);
-				query.addBindValue(val8);
+				if(rethav)
+				 query.addBindValue(path);// 修补安装路径
+				else
+				 query.addBindValue(val7);
+				query.addBindValue(setupdate);
 				query.addBindValue(val9);
 			}
 			if ( !query.exec() )
@@ -98,7 +129,7 @@ void RegFlashClass::UpdateInfo()
 	QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
 	QSqlQuery updateQuery( *m_SQLiteDb.getDB() );
 	m_SQLiteDb.getDB()->transaction();
-	if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation,DisplayVersion from LocalAppInfor ;" ) )
+	if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation,DisplayVersion, SetupTime  from LocalAppInfor ;" ) )
 	{
 		qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
 	}
@@ -107,11 +138,12 @@ void RegFlashClass::UpdateInfo()
 		QVariant val1 = SQLiteQuery.value(0);
 		QVariant val2 = SQLiteQuery.value(1);
 		QVariant val3 = SQLiteQuery.value(2);
+		QVariant val4 = SQLiteQuery.value(3);
 		QString pahtstr = val2.toString();
-		// 修补安装信息 访问信息 
-		if(pahtstr.compare("") !=0)
+		// 修补安装日期 访问信息 
+		if((val4.toString().compare("") == 0) && pahtstr.compare("") )
 		{
-			QFileInfo pathInfo(pahtstr);
+			QFileInfo pathInfo(pahtstr); 
 			QDir dir(pahtstr);
 			QFileInfoList list = dir.entryInfoList();
 			long long size = 0 ;
@@ -133,21 +165,21 @@ void RegFlashClass::UpdateInfo()
 		if(val3.toString().compare("") == 0)
 		{
 			QStringList   liststr =  val1.toString().split(" ");
-			QString lastStr = liststr.at(liststr.size()-1).toUpper();
-			lastStr = lastStr.replace("V","");
-			QRegExp reg ("^([0-9])(\\.)?");
-			if(!reg.indexIn(lastStr))
+			QString version ;
+			QString displayNane = val1.toString();
+			bool ret = TrimVersion(displayNane,version);
+			if(ret)
 			{
 				updateQuery.prepare  ("update LocalAppInfor set DisplayVersion = ?  where  DisplayName = ?" );
-				updateQuery.addBindValue(lastStr);
+				updateQuery.addBindValue(version);
 				updateQuery.addBindValue(val1);
 				if ( !updateQuery.exec() )
 				{
 					qDebug(updateQuery.lastError().text().toLocal8Bit().data());
 				}
-				//qDebug() << val1 << lastStr;
 			}
 		}
+		// 删除已经卸载 超过一天的软件
 	}
 	SQLiteQuery.finish();
 	m_SQLiteDb.getDB()->commit();

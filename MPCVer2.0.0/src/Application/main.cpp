@@ -12,7 +12,7 @@ QSqlDatabase CSQLiteDb::m_db;
 
 int main(int argc, char *argv[])
 {
-	QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
 
 	//注册MsgHandler 可以输出标准日志文件
 	qInstallMessageHandler(customMessageHandler); 
@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
     }
     qApp->setStyleSheet(qssFile.readAll());
     qssFile.close();
+
+
 	MainWindow w;
     w.show();
 

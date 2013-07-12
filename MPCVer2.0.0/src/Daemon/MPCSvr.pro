@@ -5,12 +5,14 @@
 TEMPLATE = app
 TARGET = MPCSvr
 DESTDIR = ../../bin
-CONFIG += debug console
-DEFINES += _CONSOLE QT_DLL QT_NETWORK_LIB QT_SQL_LIB QT_TESTLIB_LIB QT_TESTLIB_LIB QT_NETWORK_LIB QT_SQL_LIB QT_OPENGL_ES_2 QT_OPENGL_ES_2_ANGLE QT_TESTCASE_BUILDDIR=\"E:/MPC-QT/MPCVer2.0.0/src/Daemon\"
+QT += core sql network gui
+CONFIG += qtestlib debug console
+DEFINES += _CONSOLE _CONSOLE QT_DLL QT_NETWORK_LIB QT_SQL_LIB QT_TESTLIB_LIB QT_OPENGL_ES_2 QT_OPENGL_ES_2_ANGLE
 INCLUDEPATH += . \
     ./GeneratedFiles/Debug \
     ./GeneratedFiles/debug \
-    ./../Common
+    ./../Common \
+    ./GeneratedFiles/debug
 LIBS += -llibEGLd \
     -llibGLESv2d \
     -lgdi32 \
@@ -21,5 +23,14 @@ OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 HEADERS += ../Common/SqliteDb.h \
-    ../Common/SytemLog.h
-SOURCES += ./main.cpp
+    ../Common/SytemLog.h \
+    ./regflashclass.h \
+    ./stdsoap2.h \
+    ./SOAServiceStub.h \
+    ./SOAServiceH.h \
+	./tool.h
+SOURCES += ./main.cpp \
+    ./regflashclass.cpp \
+    ./stdsoap2.cpp \
+    ./SOAServiceC.cpp \
+    ./SOAServiceClient.cpp
