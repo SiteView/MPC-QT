@@ -330,11 +330,11 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page"/>
      <widget class="QWidget" name="page_SoftDownload">
-      <widget class="QListView" name="list_Download">
+      <widget class="QListView" name="list_Downloadleft">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -379,7 +379,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QTableView" name="table_Download">
+      <widget class="QListWidget" name="list_Download">
        <property name="geometry">
         <rect>
          <x>140</x>
@@ -391,16 +391,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_SoftUpgrade">
-      <widget class="QTableWidget" name="table_Upgrade">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>30</y>
-         <width>821</width>
-         <height>451</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
@@ -412,6 +402,16 @@
        </property>
        <property name="text">
         <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="list_Upgrade">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>30</y>
+         <width>821</width>
+         <height>451</height>
+        </rect>
        </property>
       </widget>
      </widget>
@@ -439,7 +439,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTableWidget" name="table_Unload">
+      <widget class="QListWidget" name="list_Unload">
        <property name="geometry">
         <rect>
          <x>0</x>

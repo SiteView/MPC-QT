@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/bg_frame.png</file>
         <file>images/bg_plugin_page.png</file>
         <file>images/but_about.png</file>
         <file>images/but_about_hover.png</file>
@@ -10,8 +9,6 @@
         <file>images/but_minimize_hover.png</file>
         <file>images/but_scroll_down.png</file>
         <file>images/but_scroll_up.png</file>
-        <file>images/title.png</file>
-        <file>styles/Default2.qss</file>
         <file>images/lightcircle.png</file>
         <file>images/circle.png</file>
         <file>images/softdownload_press.png</file>
@@ -27,5 +24,10 @@
         <file>images/softdownload_h.png</file>
         <file>images/softdownload_no.png</file>
         <file>images/line.png</file>
+        <file>styles/Default.qss</file>
+        <file>images/360small.png</file>
+        <file>images/caution.png</file>
+        <file>images/title.png</file>
+        <file>images/refresh.png</file>
     </qresource>
 </RCC>

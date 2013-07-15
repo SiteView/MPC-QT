@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include "QListWidget"
+#include "../Common/SqliteDb.h"
+//#include "../Common/SytemLog.h"
+#include "src/informdialog.h"
+#include <QLabel>
+
 namespace Ui {
 class MainWindow;
 }
@@ -34,8 +39,14 @@ private:
 
 public:
     void createUnloadtableMenu();
-
+    void AddSoftSortList();
     void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
+public:
+    CSQLiteDb m_SQLiteDb;
+    InformDialog *inform;
+    QLabel *ico;
+    QLabel *text;
+    QLabel *numb;
 private:
     Ui::MainWindow *ui;
 };

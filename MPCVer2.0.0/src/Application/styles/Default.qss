@@ -4,7 +4,7 @@
 	font: 75 12px "Arial";	
 }
 
-QWidget#centralWidget {
+QWidget#centralWidget,#InformDialog {
 	color:#888888
 	
 }
@@ -115,7 +115,18 @@ QLabel#label_SoftDownload,#label_SoftUpgrade,#label_SoftUnload,#label_UpdateInfo
 	color:rgb(250,250,250);
 	font: 75 12px "Arial";	
 }
-
+QLabel#lab_logo
+{
+	border-image: url(:/images/360small.png);
+}
+QLabel#lab_update
+{
+	border-image: url(:/images/refresh.png);
+}
+QLabel#lab_notice
+{
+	border-image: url(:/images/caution.png);
+}
 /*TableWidget for APList*/
 QTableWidget QHeaderView::section
 {

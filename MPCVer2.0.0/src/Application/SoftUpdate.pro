@@ -15,16 +15,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    src/softdownloadlist.cpp
+    src/softdownloadlist.cpp \
+    src/informdialog.cpp
 
 
 HEADERS  += mainwindow.h \
     src/softdownloadlist.h\
 	../Common/SqliteDb.h \
-    ../Common/SytemLog.h
+    ../Common/SytemLog.h \
+    src/informdialog.h
 
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui\
+    src/informdialog.ui
 
 RESOURCES +=resource.qrc
 
