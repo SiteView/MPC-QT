@@ -44,6 +44,8 @@ private slots:
     void myMove();
     void myStay();
     void myClose();
+public:
+    void additemlist();
 
 };
 

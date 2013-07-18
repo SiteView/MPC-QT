@@ -20,7 +20,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,7 +28,6 @@ QT_BEGIN_NAMESPACE
 class Ui_InformDialog
 {
 public:
-    QTableView *table_updateInform;
     QFrame *frame_2;
     QWidget *horizontalLayoutWidget_2;
     QHBoxLayout *horizontalLayout_3;
@@ -49,15 +48,13 @@ public:
     QLabel *lab_update;
     QLabel *lab_suggestupdate;
     QSpacerItem *horizontalSpacer_3;
+    QTableWidget *table_updateInform;
 
     void setupUi(QDialog *InformDialog)
     {
         if (InformDialog->objectName().isEmpty())
             InformDialog->setObjectName(QStringLiteral("InformDialog"));
         InformDialog->resize(400, 337);
-        table_updateInform = new QTableView(InformDialog);
-        table_updateInform->setObjectName(QStringLiteral("table_updateInform"));
-        table_updateInform->setGeometry(QRect(0, 80, 401, 201));
         frame_2 = new QFrame(InformDialog);
         frame_2->setObjectName(QStringLiteral("frame_2"));
         frame_2->setGeometry(QRect(0, 0, 401, 31));
@@ -157,6 +154,9 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
+        table_updateInform = new QTableWidget(InformDialog);
+        table_updateInform->setObjectName(QStringLiteral("table_updateInform"));
+        table_updateInform->setGeometry(QRect(0, 80, 401, 201));
 
         retranslateUi(InformDialog);
 

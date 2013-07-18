@@ -1,26 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QString>
-#include "src/softdownloadlist.h"
 #include <QMouseEvent>
-#include <QFileDialog>
-#include <QSqlTableModel>
-#include <QMessageBox>
-#include <QColor>
-#include <QIcon>
-#include <QStyle>
-#include <QPalette>
-#include <QFileIconProvider>
-#include <QFileInfo>
-#include <QStringList>
-#include <QPixmap>
-
 #include <windows.h>
 #include <Shellapi.h>
 //#include "ExtractIcon.h"
 #include <tchar.h>
-#include <QIconEngine>
+#include <QTableWidgetItem>
+#include <QtUiTools/QUiLoader>
+#include <QStringList>
 
+#include "src/SoftAllKindItem.h"
+#include "src/SoftDownloadItem.h"
+#include "src/SoftDownloadList.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
     createUnloadtableMenu();
+    AddSoftSortList();
     inform = new InformDialog;
 }
 
@@ -36,7 +28,11 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::createUpgradelist(){
 
+
+
+}
 void MainWindow::createUnloadtableMenu(){
 
 
@@ -62,7 +58,7 @@ void MainWindow::createUnloadtableMenu(){
         QString pahtstr5 = val5.toString();
         pahtstr0.replace("\\","/");
 
-        SoftDownloadList *ani=new SoftDownloadList(this);
+        SoftDownloadItem *ani=new SoftDownloadItem(this);
         ani->icon->setStyleSheet("border-image:url("+pahtstr0+")");
         ani->softname->setText(pahtstr1);
         ani->softdetail->setText(pahtstr2);
@@ -83,7 +79,7 @@ void MainWindow::createUnloadtableMenu(){
     }
     SQLiteQuery.finish();
 
-        /*ICONINFO IconInfo;
+    /*ICONINFO IconInfo;
         HICON hIconLarge = 0 , hIconSmall = 0;
         int list = ExtractIconEx(_T("C:\\Program Files\\HaoZip\\HaoZip.exe"),0,&hIconLarge,&hIconSmall,1);
 
@@ -123,10 +119,26 @@ void MainWindow::createUnloadtableMenu(){
     */
 
 }
-void MainWindow::AddSoftSortList(){
+void MainWindow::AddSoftSortList()
+{
+    QStringList name;
+    name<<"Update"<<"allkinds"<<"radio";//<<"最近更新"<<"全部软件"<<"视频软件";
+    for(int i=0;i<=name.count();i++){
+    SoftAllKindItem *kind=new SoftAllKindItem (this);
+    kind->ico->setStyleSheet("border-image:url(:/images/circle.png)");
+//    kind->text->setText(name.at(i));
+    kind->num->setNum(i);
 
 
+    QListWidgetItem *twi = new QListWidgetItem(0);
+    twi->setSizeHint(QSize(80,20));
+    ui->list_Downloadleft->addItem(twi);
+    ui->list_Downloadleft->setItemWidget(twi,kind);
+    ui->list_Inform->setAlternatingRowColors(true);
+    ui->list_Downloadleft->setFocusPolicy(Qt::NoFocus);
+    ui->list_Downloadleft->setStyleSheet("QListView::item:selected{background-color:rgb(49,106,197)}");
 
+    }
 }
 void MainWindow::on_SoftDownload_clicked()
 {

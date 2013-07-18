@@ -2,20 +2,24 @@
 #include "ui_informdialog.h"
 #include <QTimer>
 #include <QMouseEvent>
-
+#include "softdownloadlist.h"
+#include <QtUiTools/QUiLoader>
+#include <QFile>
 InformDialog::InformDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::InformDialog)
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);//隐藏菜单栏
-
     timerShow=new QTimer(this);
     connect(timerShow,SIGNAL(timeout()),this,SLOT(myMove()));
     timerStay=new QTimer(this);
     connect(timerStay,SIGNAL(timeout()),this,SLOT(myStay()));
     timerClose=new QTimer(this);
     connect(timerClose,SIGNAL(timeout()),this,SLOT(myClose()));
+
+
+
 }
 
 InformDialog::~InformDialog()
@@ -96,3 +100,11 @@ void InformDialog::mouseReleaseEvent(QMouseEvent *e)
 {
     moving = false;
 }
+
+void InformDialog::additemlist()
+{
+
+
+
+}
+

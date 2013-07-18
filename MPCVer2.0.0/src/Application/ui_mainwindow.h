@@ -17,7 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
@@ -59,13 +58,13 @@ public:
     QStackedWidget *stackedWidget;
     QWidget *page;
     QWidget *page_SoftDownload;
-    QListView *list_Downloadleft;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_download;
     QSpacerItem *horizontalSpacer_7;
     QLineEdit *lineEdit_2;
     QListWidget *list_Download;
+    QListWidget *list_Downloadleft;
     QWidget *page_SoftUpgrade;
     QLabel *label_3;
     QListWidget *list_Upgrade;
@@ -216,9 +215,6 @@ public:
         stackedWidget->addWidget(page);
         page_SoftDownload = new QWidget();
         page_SoftDownload->setObjectName(QStringLiteral("page_SoftDownload"));
-        list_Downloadleft = new QListView(page_SoftDownload);
-        list_Downloadleft->setObjectName(QStringLiteral("list_Downloadleft"));
-        list_Downloadleft->setGeometry(QRect(0, 0, 141, 481));
         widget = new QWidget(page_SoftDownload);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setGeometry(QRect(140, 0, 681, 51));
@@ -243,6 +239,9 @@ public:
         list_Download = new QListWidget(page_SoftDownload);
         list_Download->setObjectName(QStringLiteral("list_Download"));
         list_Download->setGeometry(QRect(140, 50, 681, 431));
+        list_Downloadleft = new QListWidget(page_SoftDownload);
+        list_Downloadleft->setObjectName(QStringLiteral("list_Downloadleft"));
+        list_Downloadleft->setGeometry(QRect(0, 0, 141, 481));
         stackedWidget->addWidget(page_SoftDownload);
         page_SoftUpgrade = new QWidget();
         page_SoftUpgrade->setObjectName(QStringLiteral("page_SoftUpgrade"));

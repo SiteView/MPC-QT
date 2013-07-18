@@ -29,5 +29,6 @@
         <file>images/caution.png</file>
         <file>images/title.png</file>
         <file>images/refresh.png</file>
+        <file>src/informdialog.ui</file>
     </qresource>
 </RCC>
