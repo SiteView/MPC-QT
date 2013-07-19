@@ -6,7 +6,7 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
     QWidget(parent)
 {
     DownloadList  = new QListWidget(this);
-    DownloadList->resize(805,420);
+    DownloadList->resize(680,430);
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo ;" ) )
     {
@@ -37,6 +37,7 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
         ani->setuptime->setText(pahtstr3);
         ani->progress->setText(pahtstr5);
         ani->size->setText(pahtstr4);
+        ani->download->setText("download");
         ani->program=pahtstr6;
 
         QListWidgetItem *twi = new QListWidgetItem(0);

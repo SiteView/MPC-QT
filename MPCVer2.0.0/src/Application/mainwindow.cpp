@@ -17,33 +17,37 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
     createUnloadtableMenu();
-    AddSoftSortList();
+    createUpgradeMenu();
+    createDownloadMenu();
+    AddSoftSortMenu();
     inform = new InformDialog;
-
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::createUpgradeMenu(){
-
-
-
-}
-void MainWindow::createDownloadMenu(){
+void MainWindow::createUpgradeMenu()
+{
 
 }
-
-void MainWindow::createUnloadtableMenu(){
-    list   =new SoftUnloadList();
+void MainWindow::createDownloadMenu()
+{
+    list_download   =new SoftDownloadList();
     QHBoxLayout *hor_layout=new QHBoxLayout();
-    hor_layout->addWidget(list);
+    hor_layout->addWidget(list_download);
+    ui->widget_download->setLayout(hor_layout);
+}
+
+void MainWindow::createUnloadtableMenu()
+{
+    list_unload   =new SoftUnloadList();
+    QHBoxLayout *hor_layout=new QHBoxLayout();
+    hor_layout->addWidget(list_unload);
     ui->widget_3->setLayout(hor_layout);
 
 }
-void MainWindow::AddSoftSortList()
+void MainWindow::AddSoftSortMenu()
 {
 
 }
@@ -68,8 +72,6 @@ void MainWindow::on_UpdateInform_clicked()
     ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
     inform->showAsQQ();
 }
-
-
 
 void MainWindow::on_but_close_clicked()
 {

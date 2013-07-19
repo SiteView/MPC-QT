@@ -45,15 +45,13 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     horizontalLayout->addWidget(download);
     horizontalLayout->addItem(horizontalSpacer);
     this->setLayout(horizontalLayout);
-    connect(download,SIGNAL(clicked()),this,SLOT(on_unload_clicked()));
+    connect(download,SIGNAL(clicked()),this,SLOT(on_download_clicked()));
 }
 
 
-void SoftDownloadItem::on_unload_clicked()
+void SoftDownloadItem::on_download_clicked()
 {
+  qDebug()<<program<<"cliked.....download";
 
-    QProcess *unload=new QProcess();
-    unload->start(program,QStringList());
-    qDebug()<<program<<"cliked.....download";
 
 }

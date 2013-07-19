@@ -64,8 +64,8 @@ public:
     QLabel *label_download;
     QSpacerItem *horizontalSpacer_7;
     QLineEdit *lineEdit_2;
-    QListWidget *list_Download;
     QListWidget *list_Downloadleft;
+    QWidget *widget_download;
     QWidget *page_SoftUpgrade;
     QLabel *label_3;
     QListWidget *list_Upgrade;
@@ -240,12 +240,12 @@ public:
 
         horizontalLayout_2->addWidget(lineEdit_2);
 
-        list_Download = new QListWidget(page_SoftDownload);
-        list_Download->setObjectName(QStringLiteral("list_Download"));
-        list_Download->setGeometry(QRect(140, 50, 681, 431));
         list_Downloadleft = new QListWidget(page_SoftDownload);
         list_Downloadleft->setObjectName(QStringLiteral("list_Downloadleft"));
         list_Downloadleft->setGeometry(QRect(0, 0, 141, 481));
+        widget_download = new QWidget(page_SoftDownload);
+        widget_download->setObjectName(QStringLiteral("widget_download"));
+        widget_download->setGeometry(QRect(140, 50, 680, 430));
         stackedWidget->addWidget(page_SoftDownload);
         page_SoftUpgrade = new QWidget();
         page_SoftUpgrade->setObjectName(QStringLiteral("page_SoftUpgrade"));
@@ -281,7 +281,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(3);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

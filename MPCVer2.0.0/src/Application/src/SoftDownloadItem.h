@@ -26,6 +26,6 @@ public:
 signals:
 
 public slots:
-    void on_unload_clicked();
+    void on_download_clicked();
 };
 #endif // SOFTDOWNLOADITEM_H

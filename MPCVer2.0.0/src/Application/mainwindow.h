@@ -7,6 +7,7 @@
 //#include "../Common/SytemLog.h"
 #include "src/informdialog.h"
 #include "src/SoftUnloadList.h"
+#include "src/SoftDownloadList.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,12 +42,13 @@ public:
     void createUpgradeMenu();
     void createUnloadtableMenu();
     void createDownloadMenu();
-    void AddSoftSortList();
+    void AddSoftSortMenu();
     void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
 public:
     CSQLiteDb m_SQLiteDb;
     InformDialog *inform;
-    SoftUnloadList *list;
+    SoftUnloadList *list_unload;
+    SoftDownloadList *list_download;
 
 private:
     Ui::MainWindow *ui;
