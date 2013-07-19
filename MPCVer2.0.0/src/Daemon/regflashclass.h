@@ -23,6 +23,10 @@ public:
 
 private:
 	CSQLiteDb m_SQLiteDb;
+    // add by shu-yuan
+    bool updateFieldValue(QSqlQuery sqlQuery, const QString &fieldName, const QVariant &value, const QVariant &var);
+    // add end: shu-yuan
+
 };
 
 #endif // REGFLASHCLASS_H
