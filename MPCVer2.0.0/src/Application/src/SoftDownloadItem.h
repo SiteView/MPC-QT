@@ -1,48 +1,31 @@
 #ifndef SOFTDOWNLOADITEM_H
 #define SOFTDOWNLOADITEM_H
 
+#include <QWidget>
 #include <QLabel>
-#include <QEvent>
-#include <QString>
 #include <QPushButton>
-#include "../Common/SqliteDb.h"
-//#include "../Common/SytemLog.h"
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QSpacerItem>
+#include <QString>
 class SoftDownloadItem : public QWidget
 {
     Q_OBJECT
 public:
     explicit SoftDownloadItem(QWidget *parent = 0);
 public:
-    //    QLabel *icon;
-    //    QLabel *softname;
-    //    QLabel *softdetail;
-    //    QLabel *progress;
-    //    QLabel *speed;
-    //    QLabel *comment;
-    //    QPushButton *download;
-    //    QWidget *horizontalLayoutWidget;
-    //    QHBoxLayout *horizontalLayout;
-    QLabel *icon;
-    //    QSpacerItem *horizontalSpacer_2;
-    //    QVBoxLayout *verticalLayout;
+
+    QLabel *icon;    
     QLabel *softname;
     QLabel *softdetail;
-    //    QSpacerItem *verticalSpacer;
     QLabel *size;
     QLabel *setuptime;
     QLabel *progress;
     QPushButton *download;
-    //    QSpacerItem *horizontalSpacer;
+    QString program;
 public:
     void retranslateUi();
-    CSQLiteDb m_SQLiteDb;
 
 signals:
 
 public slots:
-
+    void on_unload_clicked();
 };
 #endif // SOFTDOWNLOADITEM_H

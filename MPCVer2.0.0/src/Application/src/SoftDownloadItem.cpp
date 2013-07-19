@@ -2,8 +2,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSpacerItem>
-#include <QPixmap>
-#include "QFileDialog"
+#include <QProcess>
+#include <QDebug>
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
@@ -45,11 +45,15 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     horizontalLayout->addWidget(download);
     horizontalLayout->addItem(horizontalSpacer);
     this->setLayout(horizontalLayout);
-
-    retranslateUi();
+    connect(download,SIGNAL(clicked()),this,SLOT(on_unload_clicked()));
 }
 
-void SoftDownloadItem::retranslateUi()
+
+void SoftDownloadItem::on_unload_clicked()
 {
+
+    QProcess *unload=new QProcess();
+    unload->start(program,QStringList());
+    qDebug()<<program<<"cliked.....download";
 
 }

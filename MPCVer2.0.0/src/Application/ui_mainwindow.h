@@ -57,6 +57,7 @@ public:
     QWidget *widget_body;
     QStackedWidget *stackedWidget;
     QWidget *page;
+    QWidget *widget_2;
     QWidget *page_SoftDownload;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_2;
@@ -71,7 +72,7 @@ public:
     QWidget *page_SoftUnload;
     QLabel *label_unload;
     QLineEdit *lineEdit;
-    QListWidget *list_Unload;
+    QWidget *widget_3;
     QWidget *page_UpdateInform;
     QListWidget *list_Inform;
     QLabel *label;
@@ -212,6 +213,9 @@ public:
         stackedWidget->setGeometry(QRect(0, 0, 821, 481));
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
+        widget_2 = new QWidget(page);
+        widget_2->setObjectName(QStringLiteral("widget_2"));
+        widget_2->setGeometry(QRect(10, 40, 781, 421));
         stackedWidget->addWidget(page);
         page_SoftDownload = new QWidget();
         page_SoftDownload->setObjectName(QStringLiteral("page_SoftDownload"));
@@ -260,9 +264,9 @@ public:
         lineEdit = new QLineEdit(page_SoftUnload);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
         lineEdit->setGeometry(QRect(650, 20, 161, 21));
-        list_Unload = new QListWidget(page_SoftUnload);
-        list_Unload->setObjectName(QStringLiteral("list_Unload"));
-        list_Unload->setGeometry(QRect(0, 50, 821, 431));
+        widget_3 = new QWidget(page_SoftUnload);
+        widget_3->setObjectName(QStringLiteral("widget_3"));
+        widget_3->setGeometry(QRect(0, 50, 820, 420));
         stackedWidget->addWidget(page_SoftUnload);
         page_UpdateInform = new QWidget();
         page_UpdateInform->setObjectName(QStringLiteral("page_UpdateInform"));
@@ -277,7 +281,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

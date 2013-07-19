@@ -2,6 +2,8 @@
 #define SOFTUNLOADITEM_H
 
 #include <QWidget>
+#include <QLabel>
+#include <QPushButton>
 
 class SoftUnloadItem : public QWidget
 {
@@ -12,6 +14,22 @@ public:
 signals:
     
 public slots:
+    void on_unload_clicked();
+
+public:
+    QLabel *icon;
+    QLabel *softname;
+    QLabel *softdetail;
+    QLabel *size;
+    QLabel *setuptime;
+    QLabel *progress;
+    QPushButton *unload;
+    QString program;
+
+
+public:
+    void SeekUnloadData();
+
     
 };
 

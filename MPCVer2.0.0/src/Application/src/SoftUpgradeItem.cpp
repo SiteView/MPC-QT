@@ -11,7 +11,6 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     connect(but_cancel,SIGNAL(cliked()),this,SIGNAL(on_but_cancel_clicked()));
     connect(but_suspend,SIGNAL(cliked()),this,SIGNAL(on_but_suspend_clicked()));
     connect(but_upgrade,SIGNAL(cliked()),this,SIGNAL(on_but_upgrade_clicked()));
-
 }
 
 void SoftUpgradeItem::AddListTitleui()//创建软件升级分类标题界面

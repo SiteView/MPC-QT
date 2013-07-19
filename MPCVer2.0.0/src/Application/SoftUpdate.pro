@@ -15,15 +15,29 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    src/softdownloadlist.cpp \
-    src/informdialog.cpp
+    src/SoftDownloadList.cpp \
+    src/SoftDownloadItem.cpp \
+    src/SoftAllKindList.cpp \
+    src/SoftAllKindItem.cpp \
+    src/InformDialog.cpp \
+    src/SoftUnloadList.cpp \
+    src/SoftUnloadItem.cpp \
+    src/SoftUpgradeList.cpp \
+    src/SoftUpgradeItem.cpp
 
 
 HEADERS  += mainwindow.h \
-    src/softdownloadlist.h\
 	../Common/SqliteDb.h \
     ../Common/SytemLog.h \
-    src/informdialog.h
+    src/SoftDownloadList.h \
+    src/SoftDownloadItem.h \
+    src/SoftAllKindList.h \
+    src/SoftAllKindItem.h \
+    src/InformDialog.h \
+    src/SoftUnloadList.h \
+    src/SoftUnloadItem.h \
+    src/SoftUpgradeList.h \
+    src/SoftUpgradeItem.h
 
 
 FORMS    += mainwindow.ui\

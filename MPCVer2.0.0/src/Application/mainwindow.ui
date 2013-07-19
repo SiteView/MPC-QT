@@ -330,9 +330,20 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
-     <widget class="QWidget" name="page"/>
+     <widget class="QWidget" name="page">
+      <widget class="QWidget" name="widget_2" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>781</width>
+         <height>421</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="page_SoftDownload">
       <widget class="QWidget" name="widget" native="true">
        <property name="geometry">
@@ -439,13 +450,13 @@
         </rect>
        </property>
       </widget>
-      <widget class="QListWidget" name="list_Unload">
+      <widget class="QWidget" name="widget_3" native="true">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>50</y>
-         <width>821</width>
-         <height>431</height>
+         <width>820</width>
+         <height>420</height>
         </rect>
        </property>
       </widget>
