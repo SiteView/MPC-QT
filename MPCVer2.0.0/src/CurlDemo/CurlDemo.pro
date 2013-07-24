@@ -12,10 +12,13 @@ INCLUDEPATH += . \
                ./include\
     ./GeneratedFiles/Debug
 LIBS += -L"./lib" \
-		-llibcurl
+		-llibcurl \
+		-lws2_32
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-SOURCES += ./main.cpp
+HEADERS +=./curldownloadmanager.h
+SOURCES += ./main.cpp \
+		./curldownloadmanager.cpp
