@@ -4,8 +4,8 @@
 
 TEMPLATE = app
 TARGET = CurlDemo
-DESTDIR = ../Win32/Debug
-QT += core
+DESTDIR = ./bin
+QT += core gui  widgets
 CONFIG += qtestlib debug console
 DEFINES += QT_DLL QT_TESTLIB_LIB
 INCLUDEPATH += . \

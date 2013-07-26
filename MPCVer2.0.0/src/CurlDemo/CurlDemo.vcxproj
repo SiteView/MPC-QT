@@ -17,7 +17,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <OutputDirectory>..\Win32\Debug\</OutputDirectory>
+    <OutputDirectory>bin\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
@@ -25,7 +25,7 @@
     <PrimaryOutput>CurlDemo</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <OutputDirectory>..\Win32\Debug\</OutputDirectory>
+    <OutputDirectory>bin\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
@@ -42,11 +42,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\Win32\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CurlDemo</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\Win32\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CurlDemo</TargetName>
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;include;GeneratedFiles\Debug;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore;GeneratedFiles\debug;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"include";"GeneratedFiles\Debug";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtWidgets";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore";"GeneratedFiles\debug";..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -62,7 +62,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_WIDGETS_LIB;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -72,7 +72,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>./lib\libcurl.lib;ws2_32.lib;$(QTDIR)\lib\Qt5Testd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5WebKitd.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>./lib\libcurl.lib;ws2_32.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Testd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;./lib;D:\Qt\5.0.2\5.0.2\msvc2010\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -89,19 +89,19 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_WIDGETS_LIB;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;include;GeneratedFiles\Debug;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore;GeneratedFiles\release;..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"include";"GeneratedFiles\Debug";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtWidgets";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui";"..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore";"GeneratedFiles\release";..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_NO_DEBUG;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";NDEBUG;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -111,7 +111,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>./lib\libcurl.lib;ws2_32.lib;$(QTDIR)\lib\Qt5Test.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;libEGL.lib;libGLESv2.lib;gdi32.lib;user32.lib;Qt5Core.lib;Qt5Gui.lib;Qt5WebKit.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>./lib\libcurl.lib;ws2_32.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Test.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;libEGL.lib;libGLESv2.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;./lib;D:\Qt\5.0.2\5.0.2\msvc2010\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
@@ -129,7 +129,7 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_NO_DEBUG;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;QT_DLL;QT_TESTLIB_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_TESTLIB_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;QT_TESTCASE_BUILDDIR="D:/MPC-QT/MPCVer2.0.0/src/CurlDemo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -145,11 +145,11 @@
   <ItemGroup>
     <CustomBuild Include="curldownloadmanager.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_DLL -DQT_TESTLIB_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_TESTCASE_BUILDDIR=\"D:/MPC-QT/MPCVer2.0.0/src/CurlDemo\" "-I." "-I.\include" "-I.\GeneratedFiles\Debug" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore" "-I.\GeneratedFiles\debug" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_DLL -DQT_TESTLIB_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_TESTCASE_BUILDDIR=\"D:/MPC-QT/MPCVer2.0.0/src/CurlDemo\" "-I." "-I.\include" "-I.\GeneratedFiles\Debug" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtWidgets" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore" "-I.\GeneratedFiles\debug" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing curldownloadmanager.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp;%(Outputs)</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_DLL -DQT_TESTLIB_LIB -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_TESTCASE_BUILDDIR=\"D:/MPC-QT/MPCVer2.0.0/src/CurlDemo\" -DNDEBUG "-I." "-I.\include" "-I.\GeneratedFiles\Debug" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore" "-I.\GeneratedFiles\release" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_CONSOLE -DUNICODE -DWIN32 -DQT_DLL -DQT_TESTLIB_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DQT_TESTCASE_BUILDDIR=\"D:/MPC-QT/MPCVer2.0.0/src/CurlDemo\" -DNDEBUG "-I." "-I.\include" "-I.\GeneratedFiles\Debug" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtWidgets" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtTest" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtGui" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\include\QtCore" "-I.\GeneratedFiles\release" "-I.\..\..\..\..\Qt\5.0.2\5.0.2\msvc2010\mkspecs\win32-msvc2010"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing curldownloadmanager.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
