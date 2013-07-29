@@ -10,15 +10,15 @@ CONFIG += qtestlib debug console
 DEFINES += QT_DLL QT_TESTLIB_LIB
 INCLUDEPATH += . \
                ./include\
-    ./GeneratedFiles/Debug
+			   ./GeneratedFiles
 LIBS += -L"./lib" \
 		-llibcurl \
 		-lws2_32
 DEPENDPATH += .
-MOC_DIR += ./GeneratedFiles/debug
-OBJECTS_DIR += debug
+MOC_DIR += ./GeneratedFiles
+OBJECTS_DIR += obj
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-HEADERS +=./curldownloadmanager.h
+HEADERS += ./curldownloadmanager.h
 SOURCES += ./main.cpp \
 		./curldownloadmanager.cpp

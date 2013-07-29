@@ -1,5 +1,5 @@
 ﻿
-#include <QtCore/QCoreApplication>
+#include <QApplication>
 
 
 #include <curl/curl.h>
@@ -11,17 +11,17 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
-
+  	QApplication app(argc, argv);
+	app.setQuitOnLastWindowClosed(false);
     curl_global_init(CURL_GLOBAL_DEFAULT);
-    CURLDownloadManager downloader(&a);
+    CURLDownloadManager downloader(&app);
     downloader.start();
-    downloader.setUrl("http://dl.google.com/pinyin/v2/GooglePinyinInstaller.exe");
+	downloader.setUrl("http://m.weiguanli.cn/setup/%E5%BE%AE%E7%AE%A1%E7%90%86-setup-v1.0.exe");
     downloader.setSavefileName("GooglePinyinInstaller.exe");
     downloader.ready(true);
-	QObject::connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),&a, SLOT(quit()));
+	QObject::connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),&app, SLOT(quit()));
     int ret;
-    ret = a.exec();
+    ret = app.exec();
     curl_global_cleanup();
     return ret;
 }

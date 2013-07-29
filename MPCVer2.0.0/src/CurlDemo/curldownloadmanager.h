@@ -5,6 +5,7 @@
 #include <QUrl>
 #include <QDebug>
 #include <QProgressBar>
+#include <QFileInfo>
 
 #include <curl/curl.h>
 #include <curl/types.h>
@@ -20,20 +21,20 @@ class CURLDownloadManager : public QThread
 {
     Q_OBJECT
 signals:
-	void DownloadFinish(int finishCode);
-	void Setvalue(int value);
-	//使用以下方法关联到当前进度条 或其他进度接收方式
-	//connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),progressbar*,SLOT(setValue(int)));
+    void DownloadFinish(int finishCode);
+    void Setvalue(int value);
+    //使用以下方法关联到当前进度条 或其他进度接收方式
+    //connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),progressbar*,SLOT(setValue(int)));
 private:
-	static CURLDownloadManager *pthis;
+    static CURLDownloadManager *pthis;
 
 public:
     CURLDownloadManager(QObject *parent);
     ~CURLDownloadManager();
-static	CURLDownloadManager * getThis()
-	{
-		return pthis;
-	}
+    static	CURLDownloadManager * getThis()
+    {
+        return pthis;
+    }
     void setUrl(QString urlstr)
     {
         m_urlStr = urlstr;
@@ -71,14 +72,14 @@ static	CURLDownloadManager * getThis()
     }
 
     /* 得到本地文件大小的函数, 若不是续传则返回0, 否则返回指定路径地址的文件大小 */
-    long getLocalFileLenth(const char* localPath)
+long long  getLocalFileLenth(const char* localPath)
     {
-        return 0;
-        //QFileInfo info1(localPath);
-        //return info1.size();
+        //return 0;
+        QFileInfo info1(localPath);
+        return info1.size();
     }
     static double g_totalSize ;
-	static int progressvalue;
+    static int progressvalue;
 private:
     bool m_ready;
     QString m_urlStr;
@@ -86,16 +87,25 @@ private:
     char m_fileNameBuffer[255];
 
 };
+static int CurlDebugFunc(CURL *curl, curl_infotype type,
+	char *buffer, size_t size, void *stream)
+{
+	if(type==CURLINFO_DATA_IN || type == CURLINFO_DATA_OUT){
+		return 0;
+	}
+	qDebug("%s  Len %d",buffer,size);
+	return 0;
+}
 static int my_fwrite(void *buffer, size_t size, size_t nmemb, void *stream)
 {
     struct FtpFile *out=(struct FtpFile *)stream;
     if(out && !out->stream)
     {
         out->stream=fopen(out->filename, "wb");// 不续传
-        //		out->stream=fopen(out->filename, "ab");// 续传
+   //   out->stream=fopen(out->filename, "ab");// 续传
         if(!out->stream)
         {
-            qDebug("failure, can't open file to writ");
+            qDebug("failure, can't open file to write");
             return -1;
         }
     }
@@ -106,9 +116,9 @@ static int progress_func(void* ptr, double rDlTotal, double rDlNow, double rUplo
 {
     if(CURLDownloadManager::g_totalSize< 0.0001) // 不续传
     {
-        qDebug("%f %f %f %f %f",100.0 * (rDlNow/rDlTotal),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
- 		CURLDownloadManager::progressvalue  = rDlNow/rDlTotal;
-		emit CURLDownloadManager::getThis()->Setvalue(CURLDownloadManager::progressvalue);
+        //qDebug("%f %f %f %f %f",100.0 * (rDlNow/rDlTotal),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
+        CURLDownloadManager::progressvalue  = 100.0*rDlNow/rDlTotal;
+        emit CURLDownloadManager::getThis()->Setvalue(CURLDownloadManager::progressvalue);
         return 0;
     }
     if(!(rDlTotal < 0.0001))
