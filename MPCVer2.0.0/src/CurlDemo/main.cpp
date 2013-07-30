@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     curl_global_init(CURL_GLOBAL_DEFAULT);
     CURLDownloadManager downloader(&app);
     downloader.start();
-	downloader.setUrl("http://m.weiguanli.cn/setup/%E5%BE%AE%E7%AE%A1%E7%90%86-setup-v1.0.exe");
+	downloader.setUrl("http://dl.google.com/pinyin/v2/GooglePinyinInstaller.exe");
     downloader.setSavefileName("GooglePinyinInstaller.exe");
     downloader.ready(true);
 	QObject::connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),&app, SLOT(quit()));
