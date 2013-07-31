@@ -1,5 +1,4 @@
-
-	/*
+/*
 	stdsoap2.c[pp] 2.8.14
 
 	gSOAP runtime engine
@@ -8842,9 +8841,11 @@ soap_versioning(soap_init)(struct soap *soap, soap_mode imode, soap_mode omode)
   soap->lablen = 0;
   soap->labidx = 0;
   soap->encodingStyle = SOAP_STR_EOS;
-
+#ifndef WITH_NONAMESPACES
+  soap->namespaces = namespaces;
+#else
   soap->namespaces = NULL;
-
+#endif
   soap->local_namespaces = NULL;
   soap->nlist = NULL;
   soap->blist = NULL;

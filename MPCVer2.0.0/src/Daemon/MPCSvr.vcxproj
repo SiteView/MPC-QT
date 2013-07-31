@@ -139,15 +139,13 @@
     <ClCompile Include="GeneratedFiles\Release\moc_regflashclass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="SOAServiceC.cpp" />
-    <ClCompile Include="SOAServiceClient.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="regflashclass.cpp" />
+    <ClCompile Include="soapC.cpp" />
+    <ClCompile Include="soapClient.cpp" />
     <ClCompile Include="stdsoap2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SOAServiceH.h" />
-    <ClInclude Include="SOAServiceStub.h" />
     <ClInclude Include="..\Common\SqliteDb.h" />
     <ClInclude Include="..\Common\SytemLog.h" />
     <CustomBuild Include="regflashclass.h">
@@ -160,6 +158,8 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing regflashclass.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="soapH.h" />
+    <ClInclude Include="soapStub.h" />
     <ClInclude Include="stdsoap2.h" />
     <ClInclude Include="tool.h" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-
-	/*
+/*
 	stdsoap2.h 2.8.14
 
 	gSOAP runtime engine
@@ -51,7 +50,6 @@ compiling, linking, and/or using OpenSSL is allowed.
 A commercial use license is available from Genivia, Inc., contact@genivia.com
 --------------------------------------------------------------------------------
 */
-#include "SOAServiceStub.h"
 
 #define GSOAP_VERSION 20814
 
@@ -2190,7 +2188,9 @@ struct soap_plugin
   void (*fdelete)(struct soap *soap, struct soap_plugin *p); /* should delete fields of plugin only and not free(p) */
 };
 
-
+#ifndef WITH_NONAMESPACES
+extern SOAP_NMAC struct Namespace namespaces[];
+#endif
 
 #ifndef WITH_LEAN
 # define soap_get0(soap) (((soap)->bufidx>=(soap)->buflen && soap_recv(soap)) ? EOF : (unsigned char)(soap)->buf[(soap)->bufidx])
@@ -2707,4 +2707,3 @@ SOAP_FMAC1 int SOAP_FMAC2 soap_putcookies(struct soap *soap, const char *domain,
 #endif
 
 #endif /* STDSOAP_H */
-
