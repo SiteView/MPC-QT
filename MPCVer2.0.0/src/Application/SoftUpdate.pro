@@ -6,12 +6,16 @@
 
 QT       += core gui sql
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
 
 DESTDIR = ../../bin
-TARGET = SoftUpdate
+TARGET = ../../bin/SoftUpdate
 TEMPLATE = app
-
+INCLUDEPATH += . \
+               ./include\
+    ./GeneratedFiles
+LIBS += -L"./lib" \
+                -llibcurl 
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -23,8 +27,8 @@ SOURCES += main.cpp\
     src/SoftUnloadList.cpp \
     src/SoftUnloadItem.cpp \
     src/SoftUpgradeList.cpp \
-    src/SoftUpgradeItem.cpp
-
+    src/SoftUpgradeItem.cpp \
+    ./curldownloadmanager.cpp
 
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
@@ -37,11 +41,11 @@ HEADERS  += mainwindow.h \
     src/SoftUnloadList.h \
     src/SoftUnloadItem.h \
     src/SoftUpgradeList.h \
-    src/SoftUpgradeItem.h
+    src/SoftUpgradeItem.h \
+    ./curldownloadmanager.h
 
-
-FORMS    += mainwindow.ui\
-    src/informdialog.ui
+FORMS    += mainwindow.ui
+ #   src/informdialog.ui
 
 RESOURCES +=resource.qrc
 

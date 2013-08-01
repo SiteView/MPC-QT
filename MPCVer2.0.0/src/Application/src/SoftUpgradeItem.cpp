@@ -1,7 +1,8 @@
-#include "SoftUpgradeItem.h"
+
 #include <QSpacerItem>
 #include <QHBoxLayout>
 
+#include "SoftUpgradeItem.h"
 
 SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     QWidget(parent)
@@ -17,14 +18,24 @@ void SoftUpgradeItem::AddListTitleui()//创建软件升级分类标题界面
 {
     che_title = new QCheckBox();
     che_title->setMaximumSize(QSize(15, 15));
+    che_title->setObjectName(QString::fromUtf8("che_title"));
+
     but_num = new QPushButton();
     but_num->setMaximumSize(QSize(35, 20));
+    but_num->setObjectName(QString::fromUtf8("but_num"));
+
     lab_upgradeto = new QLabel();
     lab_upgradeto->setMaximumSize(QSize(60, 20));
+    lab_upgradeto->setObjectName(QString::fromUtf8("lab_upgradeto"));
+
     lab_version = new QLabel();
     lab_version->setMaximumSize(QSize(60, 20));
+    lab_version->setObjectName(QString::fromUtf8("lab_version"));
+
     but_downorup = new QPushButton();
     but_downorup->setMaximumSize(QSize(60, 20));
+    but_downorup->setObjectName(QString::fromUtf8("but_downorup"));
+
 
     QHBoxLayout *horizontalLayout_2 = new QHBoxLayout();
     horizontalLayout_2->setSpacing(6);

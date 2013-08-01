@@ -8,6 +8,9 @@
 #include "src/informdialog.h"
 #include "src/SoftUnloadList.h"
 #include "src/SoftDownloadList.h"
+#include "src/SoftAllKindList.h"
+#include "src/SoftAllKindItem.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -44,14 +47,21 @@ public:
     void createDownloadMenu();
     void AddSoftSortMenu();
     void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
+
 public:
     CSQLiteDb m_SQLiteDb;
     InformDialog *inform;
     SoftUnloadList *list_unload;
     SoftDownloadList *list_download;
+    SoftAllKindList *list_allkinds;
+    SoftAllKindItem *item_allkind;
+//    CURLDownloadManager *downloader;
 
 private:
     Ui::MainWindow *ui;
+public slots:
+    void changeCurrentItem();
+
 };
 
 #endif // MAINWINDOW_H

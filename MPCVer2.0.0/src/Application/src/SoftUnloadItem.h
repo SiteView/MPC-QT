@@ -24,6 +24,7 @@ public:
     QLabel *setuptime;
     QLabel *progress;
     QPushButton *unload;
+    QLabel *uninstall;
     QString program;
 
 

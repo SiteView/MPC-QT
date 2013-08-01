@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>604</height>
+    <width>920</width>
+    <height>680</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,8 +25,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>821</width>
-      <height>101</height>
+      <width>920</width>
+      <height>100</height>
      </rect>
     </property>
     <widget class="QWidget" name="layoutWidget">
@@ -274,7 +274,7 @@
     <widget class="QPushButton" name="but_close">
      <property name="geometry">
       <rect>
-       <x>795</x>
+       <x>895</x>
        <y>0</y>
        <width>25</width>
        <height>21</height>
@@ -287,20 +287,7 @@
     <widget class="QPushButton" name="but_minimize">
      <property name="geometry">
       <rect>
-       <x>775</x>
-       <y>0</y>
-       <width>21</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="but_about">
-     <property name="geometry">
-      <rect>
-       <x>755</x>
+       <x>874</x>
        <y>0</y>
        <width>21</width>
        <height>21</height>
@@ -316,8 +303,8 @@
      <rect>
       <x>0</x>
       <y>100</y>
-      <width>821</width>
-      <height>501</height>
+      <width>920</width>
+      <height>580</height>
      </rect>
     </property>
     <widget class="QStackedWidget" name="stackedWidget">
@@ -325,8 +312,8 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>821</width>
-       <height>481</height>
+       <width>920</width>
+       <height>560</height>
       </rect>
      </property>
      <property name="currentIndex">
@@ -336,10 +323,10 @@
       <widget class="QWidget" name="widget_2" native="true">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>0</x>
          <y>40</y>
-         <width>781</width>
-         <height>421</height>
+         <width>920</width>
+         <height>520</height>
         </rect>
        </property>
       </widget>
@@ -348,9 +335,9 @@
       <widget class="QWidget" name="widget" native="true">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>160</x>
          <y>0</y>
-         <width>681</width>
+         <width>761</width>
          <height>51</height>
         </rect>
        </property>
@@ -358,7 +345,7 @@
         <item>
          <widget class="QLabel" name="label_download">
           <property name="text">
-           <string>TextLabel</string>
+           <string>提示</string>
           </property>
          </widget>
         </item>
@@ -366,6 +353,9 @@
          <spacer name="horizontalSpacer_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -376,27 +366,47 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="but_search">
+          <property name="maximumSize">
+           <size>
+            <width>56</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>search</string>
+          </property>
+         </widget>
         </item>
        </layout>
-      </widget>
-      <widget class="QListWidget" name="list_Downloadleft">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>141</width>
-         <height>481</height>
-        </rect>
-       </property>
       </widget>
       <widget class="QWidget" name="widget_download" native="true">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>160</x>
          <y>50</y>
-         <width>680</width>
-         <height>430</height>
+         <width>760</width>
+         <height>510</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QWidget" name="widget_4" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>160</width>
+         <height>560</height>
         </rect>
        </property>
       </widget>
@@ -412,7 +422,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>已检测到可升级软件</string>
        </property>
       </widget>
       <widget class="QListWidget" name="list_Upgrade">
@@ -420,8 +430,8 @@
         <rect>
          <x>0</x>
          <y>30</y>
-         <width>821</width>
-         <height>451</height>
+         <width>920</width>
+         <height>530</height>
         </rect>
        </property>
       </widget>
@@ -437,13 +447,13 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>卸载</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEdit">
        <property name="geometry">
         <rect>
-         <x>650</x>
+         <x>750</x>
          <y>20</y>
          <width>161</width>
          <height>21</height>
@@ -455,8 +465,8 @@
         <rect>
          <x>0</x>
          <y>50</y>
-         <width>820</width>
-         <height>420</height>
+         <width>920</width>
+         <height>510</height>
         </rect>
        </property>
       </widget>
@@ -467,8 +477,8 @@
         <rect>
          <x>0</x>
          <y>30</y>
-         <width>821</width>
-         <height>451</height>
+         <width>920</width>
+         <height>530</height>
         </rect>
        </property>
       </widget>
@@ -477,14 +487,14 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>480</y>
+       <x>0</x>
+       <y>560</y>
        <width>191</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>软件管家目前版本：1.0.0.1</string>
+      <string>软件管家目前版本：2.0.1.7</string>
      </property>
     </widget>
    </widget>
