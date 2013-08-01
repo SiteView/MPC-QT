@@ -12,7 +12,30 @@ QWidget#title {
 QWidget#widget_body,#widget_4 ,#widget_download,#widget_3{
 	background-color:rgb(245,245,245);
 }
-	
+QWidget#widget_s
+{
+	border-image: url(:/images/search.png);
+}
+QLabel#lab_clear
+{
+	border-image: url(:/images/clear.png);
+}
+QLabel#lab_clear:hover
+{
+	border-image: url(:/images/clear_h.png);
+}
+QLabel#lab_search
+{
+	border-image: url(:/images/lab_search.png);
+}
+QLabel#lab_search:hover
+{
+	border-image: url(:/images/lab_search_h.png);
+}
+QLabel#lab_search:clicked
+{
+	border-image: url(:/images/lab_search_p.png);
+}
 
 
 /*QPushButton:SoftDownload,SoftUpgrade,SoftUnload,UpdateInfrom*/

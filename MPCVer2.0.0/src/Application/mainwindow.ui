@@ -355,7 +355,7 @@
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
+           <enum>QSizePolicy::Maximum</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -366,26 +366,55 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QWidget" name="widget_s" native="true">
           <property name="maximumSize">
            <size>
-            <width>200</width>
+            <width>295</width>
             <height>25</height>
            </size>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="but_search">
-          <property name="maximumSize">
-           <size>
-            <width>56</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>search</string>
-          </property>
+          <widget class="QLineEdit" name="lineEdit_s">
+           <property name="geometry">
+            <rect>
+             <x>1</x>
+             <y>1</y>
+             <width>218</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>218</width>
+             <height>23</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lab_search">
+           <property name="geometry">
+            <rect>
+             <x>238</x>
+             <y>0</y>
+             <width>56</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lab_clear">
+           <property name="geometry">
+            <rect>
+             <x>218</x>
+             <y>5</y>
+             <width>16</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>

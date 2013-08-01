@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     createDownloadMenu();
     AddSoftSortMenu();
     inform = new InformDialog;
-//    ui->lineEdit_2->setFrame(false);//**
+    ui->lineEdit_s->setFrame(false);//**
     connect(list_allkinds,SIGNAL(currentRowChanged()),this,SLOT(changeCurrentItem()));
 }
 
