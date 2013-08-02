@@ -1,4 +1,3 @@
-
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSpacerItem>
@@ -14,6 +13,7 @@
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
+    downloader=new CURLDownloadManager(this);
 
     QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
     horizontalLayout_3->setSpacing(6);
@@ -138,13 +138,10 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
 
 void SoftDownloadItem::on_download_clicked()
 {
-//    frame_2->setVisible(false);
-//    frame_3->setVisible(true);
-    stackedWidget->setCurrentWidget(page_2);
-    SoftDownloadList *list=new SoftDownloadList(0);
-    connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
 
-    list->DownloadThread();
+    stackedWidget->setCurrentWidget(page_2);
+    connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
+    DownloadThread();
 
 }
 void SoftDownloadItem::startProgress(int i)
@@ -179,4 +176,13 @@ void SoftDownloadItem::suspendProgress_setup()
     QString program="c:/GooglePinyinInstaller.exe";
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
+}
+
+void SoftDownloadItem::DownloadThread(){
+
+    qDebug()<<"urlprogram---"<<urlprogram;
+    downloader->start();
+    downloader->setUrl(urlprogram);
+    downloader->setSavefileName("c:/GooglePinyinInstaller.exe");
+    downloader->ready(true);
 }

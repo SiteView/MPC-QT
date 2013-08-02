@@ -8,6 +8,7 @@
 #include <QProgressBar>
 #include <QStackedWidget>
 //class  CURLDownloadManager;
+class  CURLDownloadManager;
 
 class SoftDownloadItem : public QWidget
 {
@@ -50,11 +51,12 @@ public:
 
     QString urlprogram;
 
-    //    CURLDownloadManager *downloader;
+    CURLDownloadManager *downloader;
 
 
 public:
     void retranslateUi();
+    void DownloadThread();
 
 signals:
 

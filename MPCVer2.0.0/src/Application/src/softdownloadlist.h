@@ -6,7 +6,6 @@
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
 
-class  CURLDownloadManager;
 
 class SoftDownloadList : public QWidget
 {
@@ -21,9 +20,7 @@ public slots:
 public:
     CSQLiteDb m_SQLiteDb;
     QListWidget *DownloadList;
-    void DownloadThread();
-//    SoftDownloadItem downloaditem;
-    CURLDownloadManager *downloader;
+
     SoftDownloadItem *ani;
 };
 

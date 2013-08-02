@@ -5,15 +5,12 @@
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
 
-#include "./curldownloadmanager.h"
 
 SoftDownloadList::SoftDownloadList(QWidget *parent) :
     QWidget(parent)
 {
-    //    downloader    = new  CURLDownloadManager(this);
     DownloadList  = new QListWidget(this);
 
-    downloader=new CURLDownloadManager(this);
 
     DownloadList->resize(760,510);
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
@@ -38,7 +35,7 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
         QString pahtstr5 = val5.toString();
 
 
-        ani=new SoftDownloadItem (this);
+        SoftDownloadItem *ani=new SoftDownloadItem (this);
 
         ani->but_icon->setText(pahtstr2);
         ani->but_softname->setText(pahtstr0);        
@@ -69,17 +66,6 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
 
     }
     SQLiteQuery.finish();
-    //    DownloadThread();
 }
-void SoftDownloadList::DownloadThread(){
 
-    qDebug()<<ani->urlprogram<<"+++urlprogram";
-    //    downloader=new CURLDownloadManager(this);
-    downloader->start();
-//    downloader->setUrl("http://dl.google.com/pinyin/v2/GooglePinyinInstaller.exe");
-    downloader->setUrl(ani->urlprogram);
-    downloader->setSavefileName("c:/GooglePinyinInstaller.exe");
-    downloader->ready(true);
-
-}
 
