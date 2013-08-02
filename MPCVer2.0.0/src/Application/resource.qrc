@@ -30,5 +30,11 @@
         <file>images/title.png</file>
         <file>images/refresh.png</file>
         <file>src/informdialog.ui</file>
+        <file>images/clear.png</file>
+        <file>images/clear_h.png</file>
+        <file>images/lab_search.png</file>
+        <file>images/lab_search_p.png</file>
+        <file>images/lab_search_h.png</file>
+        <file>images/search.png</file>
     </qresource>
 </RCC>

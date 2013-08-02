@@ -62,8 +62,10 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_download;
     QSpacerItem *horizontalSpacer_7;
-    QLineEdit *lineEdit_2;
-    QPushButton *but_search;
+    QWidget *widget_s;
+    QLineEdit *lineEdit_s;
+    QLabel *lab_search;
+    QLabel *lab_clear;
     QWidget *widget_download;
     QWidget *widget_4;
     QWidget *page_SoftUpgrade;
@@ -228,21 +230,25 @@ public:
 
         horizontalLayout_2->addWidget(label_download);
 
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_7);
 
-        lineEdit_2 = new QLineEdit(widget);
-        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
-        lineEdit_2->setMaximumSize(QSize(200, 25));
+        widget_s = new QWidget(widget);
+        widget_s->setObjectName(QStringLiteral("widget_s"));
+        widget_s->setMaximumSize(QSize(295, 25));
+        lineEdit_s = new QLineEdit(widget_s);
+        lineEdit_s->setObjectName(QStringLiteral("lineEdit_s"));
+        lineEdit_s->setGeometry(QRect(1, 1, 218, 23));
+        lineEdit_s->setMaximumSize(QSize(218, 23));
+        lab_search = new QLabel(widget_s);
+        lab_search->setObjectName(QStringLiteral("lab_search"));
+        lab_search->setGeometry(QRect(238, 0, 56, 25));
+        lab_clear = new QLabel(widget_s);
+        lab_clear->setObjectName(QStringLiteral("lab_clear"));
+        lab_clear->setGeometry(QRect(218, 5, 16, 16));
 
-        horizontalLayout_2->addWidget(lineEdit_2);
-
-        but_search = new QPushButton(widget);
-        but_search->setObjectName(QStringLiteral("but_search"));
-        but_search->setMaximumSize(QSize(56, 25));
-
-        horizontalLayout_2->addWidget(but_search);
+        horizontalLayout_2->addWidget(widget_s);
 
         widget_download = new QWidget(page_SoftDownload);
         widget_download->setObjectName(QStringLiteral("widget_download"));
@@ -308,7 +314,8 @@ public:
         but_close->setText(QString());
         but_minimize->setText(QString());
         label_download->setText(QApplication::translate("MainWindow", "\346\217\220\347\244\272", 0));
-        but_search->setText(QApplication::translate("MainWindow", "search", 0));
+        lab_search->setText(QString());
+        lab_clear->setText(QString());
         label_3->setText(QApplication::translate("MainWindow", "\345\267\262\346\243\200\346\265\213\345\210\260\345\217\257\345\215\207\347\272\247\350\275\257\344\273\266", 0));
         label_unload->setText(QApplication::translate("MainWindow", "\345\215\270\350\275\275", 0));
         label->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\347\256\241\345\256\266\347\233\256\345\211\215\347\211\210\346\234\254\357\274\2322.0.1.7", 0));

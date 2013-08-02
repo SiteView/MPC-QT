@@ -88,7 +88,7 @@ void MainWindow::on_SoftUnload_clicked()
 void MainWindow::on_UpdateInform_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-    inform->showAsQQ();
+//    inform->showAsQQ();
 }
 
 void MainWindow::on_but_close_clicked()

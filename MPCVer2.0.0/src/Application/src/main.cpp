@@ -4,8 +4,8 @@
 #include "allapplicationdialog.h"
 #include "start.h"
 
-#include "../SytemLog.h"
-#include "../SqliteDb.h"
+#include "../Common/SytemLog.h"
+#include "../Common/SqliteDb.h"
 
 // 全局数据库对象
 QSqlDatabase CSQLiteDb::m_db;

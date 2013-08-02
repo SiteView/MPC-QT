@@ -317,7 +317,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QWidget" name="widget_2" native="true">
@@ -345,7 +345,7 @@
         <item>
          <widget class="QLabel" name="label_download">
           <property name="text">
-           <string>提示</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -451,7 +451,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>已检测到可升级软件</string>
+        <string/>
        </property>
       </widget>
       <widget class="QListWidget" name="list_Upgrade">
@@ -476,7 +476,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>卸载</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEdit">

@@ -34,7 +34,7 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     progress->setMaximumSize(QSize(90, 16777215));
     unload->setMaximumSize(QSize(70, 25));
     uninstall->setMaximumSize(QSize(70, 25));
-    uninstall->setText("正在卸载");
+    uninstall->setText("Uninstalling...");
     uninstall->hide();
     QHBoxLayout *horizontalLayout = new QHBoxLayout();
     horizontalLayout->setSpacing(6);
