@@ -5,6 +5,7 @@
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
 
+#include<QUrl>
 
 SoftDownloadList::SoftDownloadList(QWidget *parent) :
     QWidget(parent)
@@ -56,7 +57,11 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
         ani->lab_size->setText(pahtstr4);
         ani->download->setText("download");
         ani->urlprogram=pahtstr5;
-
+        QUrl url = QUrl::fromEncoded(pahtstr5.toUtf8());
+        QString path_file = url.toString();
+        QStringList str=path_file.split("/");
+        int i=str.count();
+        ani->exename=str.at(i-1);
         QListWidgetItem *twi = new QListWidgetItem(0);
         twi->setSizeHint(QSize(400,59));
         DownloadList->addItem(twi);

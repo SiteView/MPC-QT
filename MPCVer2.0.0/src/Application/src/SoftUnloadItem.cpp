@@ -93,11 +93,38 @@ void SoftUnloadItem::on_unload_clicked()
     qDebug()<<program<<"cliked.....";
     uninstall->show();
     unload->hide();
+    connect(unloader,SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(Unloadfinish(int , QProcess::ExitStatus )));
+    connect(unloader,SIGNAL(error(QProcess::ProcessError )),this,SLOT(unloaderror(QProcess::ProcessError )));
+
 }
 
-void SoftUnloadItem::SeekUnloadData()
+void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
 {
+    qDebug()<<exitCode<<"==exitCode";
+    if (exitStatus == QProcess::NormalExit)
+    {
+        qDebug()<<exitCode<<"==exitStatus";
+        uninstall->setText("finished");
+
+    }
+    else if (exitCode != 0)
+    {
+        qDebug()<<exitCode<<"==";
+
+        unload->hide();
+        uninstall->setText("0");
+    }
+    else
+    {
+       uninstall->show();
+       uninstall->setText("...ing...");
+    }
 
 }
-
+void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )
+{
+    qDebug()<<error<<"=error=";
+    unload->show();
+    uninstall->hide();
+}
 

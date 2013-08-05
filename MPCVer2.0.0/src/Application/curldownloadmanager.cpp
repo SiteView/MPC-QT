@@ -130,7 +130,7 @@ void CURLDownloadManager::run()
 #endif
         if(ftpfile.stream)
             fclose(ftpfile.stream); /* close the local file */
-		emit DownloadFinish(res);
+        emit pthis->DownloadFinish(res);
 #if Mutimode
         curl_easy_cleanup(curl);
         curl_multi_cleanup(multi_handle);

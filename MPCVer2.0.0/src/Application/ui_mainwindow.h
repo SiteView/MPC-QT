@@ -291,7 +291,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -304,20 +304,20 @@ public:
 #ifndef QT_NO_TOOLTIP
         label_SoftDownload->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_SoftDownload->setText(QApplication::translate("MainWindow", "Download", 0));
+        label_SoftDownload->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\344\270\213\350\275\275", 0));
         SoftUpgrade->setText(QString());
-        label_SoftUpgrade->setText(QApplication::translate("MainWindow", "Upgrade", 0));
+        label_SoftUpgrade->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\345\215\207\347\272\247", 0));
         SoftUnload->setText(QString());
-        label_SoftUnload->setText(QApplication::translate("MainWindow", "Uninstall", 0));
+        label_SoftUnload->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\345\215\270\350\275\275", 0));
         UpdateInform->setText(QString());
-        label_UpdateInform->setText(QApplication::translate("MainWindow", "Update", 0));
+        label_UpdateInform->setText(QApplication::translate("MainWindow", "\346\233\264\346\226\260\351\200\232\347\237\245", 0));
         but_close->setText(QString());
         but_minimize->setText(QString());
         label_download->setText(QString());
         lab_search->setText(QString());
         lab_clear->setText(QString());
         label_3->setText(QString());
-        label_unload->setText(QApplication::translate("MainWindow", "Uninstall", 0));
+        label_unload->setText(QString());
         label->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\347\256\241\345\256\266\347\233\256\345\211\215\347\211\210\346\234\254\357\274\2322.0.1.7", 0));
     } // retranslateUi
 

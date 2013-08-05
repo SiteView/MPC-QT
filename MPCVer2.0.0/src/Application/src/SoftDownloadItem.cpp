@@ -141,6 +141,8 @@ void SoftDownloadItem::on_download_clicked()
 
     stackedWidget->setCurrentWidget(page_2);
     connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
+    connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
+
     DownloadThread();
 
 }
@@ -173,7 +175,7 @@ void SoftDownloadItem::cancelProgress_setup()
 }
 void SoftDownloadItem::suspendProgress_setup()
 {
-    QString program="c:/GooglePinyinInstaller.exe";
+    QString program="c:/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
 }
@@ -183,6 +185,14 @@ void SoftDownloadItem::DownloadThread(){
     qDebug()<<"urlprogram---"<<urlprogram;
     downloader->start();
     downloader->setUrl(urlprogram);
-    downloader->setSavefileName("c:/GooglePinyinInstaller.exe");
-    downloader->ready(true);
+    downloader->setSavefileName("c:/"+exename);
+    downloader->ready(true);    
+}
+
+void SoftDownloadItem::Downloadresult(int i){
+
+    if (i!=0)
+    {
+        stackedWidget->setCurrentWidget(page);
+    }
 }

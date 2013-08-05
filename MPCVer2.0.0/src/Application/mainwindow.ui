@@ -317,7 +317,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QWidget" name="widget_2" native="true">

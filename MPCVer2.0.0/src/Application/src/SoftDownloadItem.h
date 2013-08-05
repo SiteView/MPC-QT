@@ -50,6 +50,7 @@ public:
     QProgressBar *progressBar_2;
 
     QString urlprogram;
+    QString exename;
 
     CURLDownloadManager *downloader;
 
@@ -68,5 +69,6 @@ public slots:
     void suspendProgress_download();
     void cancelProgress_setup();
     void suspendProgress_setup();
+    void Downloadresult(int);
 };
 #endif // SOFTDOWNLOADITEM_H
