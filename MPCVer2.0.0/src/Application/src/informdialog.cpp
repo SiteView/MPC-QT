@@ -1,10 +1,14 @@
-#include "informdialog.h"
-#include "ui_informdialog.h"
+
 #include <QTimer>
 #include <QMouseEvent>
-#include "softdownloadlist.h"
+
 #include <QtUiTools/QUiLoader>
 #include <QFile>
+
+#include "informdialog.h"
+#include "ui_informdialog.h"
+#include "softdownloadlist.h"
+
 InformDialog::InformDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::InformDialog)

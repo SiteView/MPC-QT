@@ -4,14 +4,39 @@
 	font: 75 12px "Arial";	
 }
 
-QWidget#centralWidget,#InformDialog {
-	color:#888888
-	
-}
+
 /*QWidget*/
 QWidget#title {
 	border-image: url(:/images/title.png);
 }
+QWidget#widget_body,#widget_4 ,#widget_download,#widget_3{
+	background-color:rgb(245,245,245);
+}
+QWidget#widget_s
+{
+	border-image: url(:/images/search.png);
+}
+QLabel#lab_clear
+{
+	border-image: url(:/images/clear.png);
+}
+QLabel#lab_clear:hover
+{
+	border-image: url(:/images/clear_h.png);
+}
+QLabel#lab_search
+{
+	border-image: url(:/images/lab_search.png);
+}
+QLabel#lab_search:hover
+{
+	border-image: url(:/images/lab_search_h.png);
+}
+QLabel#lab_search:clicked
+{
+	border-image: url(:/images/lab_search_p.png);
+}
+
 
 /*QPushButton:SoftDownload,SoftUpgrade,SoftUnload,UpdateInfrom*/
 QPushButton#SoftDownload
@@ -63,10 +88,24 @@ QPushButton#UpdateInform:clicked
 	border-image: url(:/images/updateinform_press.png);
 }
 
+QPushButton#download,#set_up,#unload
+{
+	border: 1px solid rgb(185,185,185);
+	border-radius: 2px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255,255,255), stop:1 rgb(240,240,240));
+	
+
+}
+
+QPushButton#download:hover,#set_up:hover,#unload:hover
+{
+	border: 1px solid rgb(104,231,244);
+	border-radius: 2px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255,255,255), stop:1 rgb(202,245,254));
+}
 
 
-
-QPushButton#but_about,#but_close,#but_minimize
+QPushButton#but_close,#but_minimize
 {   
 	border-style:solid;
 	border-width:0px;
@@ -80,15 +119,7 @@ QPushButton#but_about,#but_close,#but_minimize
 
 /*HEAD BUTTONS ABOUT*/
 
-QPushButton#but_about
-{
-	font:bold;
-	border-image: url(:/images/but_about.png);
-}
-QPushButton#but_about:hover
-{
-	border-image: url(:/images/but_about_hover.png);
-}
+
 QPushButton#but_close
 {
     border-image: url(:/images/but_close.png);
@@ -105,16 +136,39 @@ QPushButton#but_minimize
 }
 QPushButton#but_minimize:hover
 {
-    border-image: url(:/images/but_minimize_hover.png);
+    border-image: url(:/images/but_minimize__hl.png);
 }
+QPushButton#but_search
+{
+border-image: url(:/images/search_nor.png);
 
+}
+QPushButton#but_search:hover
+{
+border-image: url(:/images/search_press.png);
 
+}
 /*LABELS*/
 QLabel#label_SoftDownload,#label_SoftUpgrade,#label_SoftUnload,#label_UpdateInform
 {
 	color:rgb(250,250,250);
 	font: 75 12px "Arial";	
 }
+QLabel#label,#softdetail,#progress,#size,#setuptime,#num,#lab_softdetail,#lab_upnum,#lab_size
+{
+	color:rgb(136,136,136);
+	font: 75 12px "Arial";	
+
+}
+QLabel#softname,#but_softname
+{
+
+	font: 75 12px "Arial" ;
+	font-weight:bold;
+
+}
+
+
 QLabel#lab_logo
 {
 	border-image: url(:/images/360small.png);
@@ -127,6 +181,7 @@ QLabel#lab_notice
 {
 	border-image: url(:/images/caution.png);
 }
+
 /*TableWidget for APList*/
 QTableWidget QHeaderView::section
 {
@@ -136,20 +191,12 @@ QTableWidget QHeaderView::section
     padding-left: 4px;
     border: 0px solid #6c6c6c
 }
-QLineEdit:hover {
-	border-color: lightblue
-}
+
 
 /*QTextEdit*/
  QLineEdit
  {
-	background-color:#ffffff;
-	border:1px solid #cccccc;
- }
- .QLineEdit:focus
- {
-	background-color:#ffffff;
-	border:1px solid #9E99FD;
+	background-color:rgb(245,245,245);	
  }
  
 
@@ -166,8 +213,7 @@ QScrollBar:vertical {
       min-height: 20px;
   }
   QScrollBar::add-line:vertical {
-      border: 0px solid red;
-     
+      border: 0px solid red;     
       height: 16px;
       subcontrol-position: bottom;
       subcontrol-origin: margin;
@@ -180,6 +226,8 @@ QScrollBar:vertical {
       height: 16px;
       subcontrol-position: top;
       subcontrol-origin: margin;
+	  border-image:url(:/images/but_scroll_up.png);
+	  border-image:url(:/images/but_scroll_up.png);
 	  border-image:url(:/images/but_scroll_up.png);
   }
 

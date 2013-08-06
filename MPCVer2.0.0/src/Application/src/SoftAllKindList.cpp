@@ -1,14 +1,51 @@
 #include "SoftAllKindList.h"
-
+#include "SoftAllKindItem.h"
 SoftAllKindList::SoftAllKindList(QWidget *parent) :
     QWidget(parent)
 {
     list_softallkind  = new QListWidget(this);
-//    network_list->setRootIsDecorated(false);
-    list_softallkind->setAlternatingRowColors(true);
-//    network_list->setHeaderHidden(true);
-    list_softallkind->setObjectName(QString("WlanVisibleNetworkList"));
-    list_softallkind->setFocusPolicy(Qt::NoFocus);
-    list_softallkind->setStyleSheet("QListView::item:selected{background-color:rgb(49,106,197)}");
+    list_softallkind->resize(160,560);
+    QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
+    if ( !SQLiteQuery.exec( "select TypeName,Ordernumber,Type from SoftType ;" ) )
+    {
+        qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+    }
+    while ( SQLiteQuery.next() )
+    {
+        QVariant val0 = SQLiteQuery.value(0);
+        QVariant val1 = SQLiteQuery.value(1);
+        QVariant val2 = SQLiteQuery.value(2);
+
+        QString pahtstr0 = val0.toString();
+        QString pahtstr1 = val1.toString();
+        int pahtstr2 = val2.toInt();
+        type=pahtstr2;
+//        lab_text.append(pahtstr0).append(pahtstr1);
+        SoftAllKindItem *ani=new SoftAllKindItem(this);
+        ani->ico->setStyleSheet("border-image:url(:/images/circle.png)");
+        ani->text->setText(pahtstr0);
+        ani->num->setText(pahtstr1);
+        QListWidgetItem *twi = new QListWidgetItem(0);
+        twi->setSizeHint(QSize(150,30));
+        list_softallkind->addItem(twi);
+        list_softallkind->setItemWidget(twi,ani);
+        const QString tmpStyle = (
+                    "QListView{"
+                    //            "border-style:solid;border-width:1px;border-color:rgb(97,166,66);"
+                    "background: rgb(238,238,238);"
+
+                    "}");
+        //        list_softallkind->setStyleSheet("QListView::item:selected{background-color:rgb(97,166,66)}");
+        list_softallkind->setStyleSheet(tmpStyle);
+
+    }
+    SQLiteQuery.finish();
+    connect(list_softallkind,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
+    qDebug()<<list_softallkind->currentRow()<<"(***.CURREN";
+
+}
+
+void SoftAllKindList::changeCurrentItem(){
+    qDebug()<<".CURRENTrow..text";
 
 }

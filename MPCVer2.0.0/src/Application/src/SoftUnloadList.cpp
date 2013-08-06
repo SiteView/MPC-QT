@@ -1,10 +1,13 @@
-#include "SoftUnloadList.h"
+
 #include <QListWidgetItem>
+
+#include "SoftUnloadList.h"
+
 SoftUnloadList::SoftUnloadList(QWidget *parent) :
     QWidget(parent)
 {
     UnloadList  = new QListWidget(this);
-    UnloadList->resize(805,420);
+    UnloadList->resize(920,510);
 
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor ;" ) )
@@ -35,22 +38,38 @@ SoftUnloadList::SoftUnloadList(QWidget *parent) :
         ani->icon->setStyleSheet("border-image:url("+pahtstr0+")");
         ani->softname->setText(pahtstr1);
         ani->softdetail->setText(pahtstr2);
+
+
         ani->size->setText(pahtstr3);
-        ani->setuptime->setText(pahtstr4);
-        ani->progress->setText(pahtstr5);
-        ani->unload->setText("unload");
+        QString str1;
+        for(int k=0;k<10;k++)
+        {
+            str1+=pahtstr4.at(k);
+        }
+        ani->setuptime->setText(str1);
+        QString str;
+        if(pahtstr5.count()<10)
+        {
+            ani->progress->setText(pahtstr5+"...");
+        }
+        else
+        {
+            for(int k=0;k<10;k++)
+            {
+                str+=pahtstr5.at(k);
+            }
+            ani->progress->setText(str+"...");
+        }
+        ani->progress->setToolTip(pahtstr5);
+        ani->unload->setText("Uninstall");
         ani->program=pahtstr6;
 
         QListWidgetItem *twi = new QListWidgetItem(0);
         twi->setSizeHint(QSize(400,59));
         UnloadList->addItem(twi);
         UnloadList->setItemWidget(twi,ani);
-        UnloadList->setAlternatingRowColors(true);
-
-        QFont font;
-        font.setPixelSize(14);
-        font.setBold(true);
-        ani->softname->setFont(font);
+        //        UnloadList->setAlternatingRowColors(true);
+        UnloadList->setStyleSheet("QListView::item:selected{background-color:rgb(247,247,247)}");
     }
     SQLiteQuery.finish();
 }

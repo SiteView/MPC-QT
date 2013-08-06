@@ -5,6 +5,8 @@
 #include <QListWidget>
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
+
+
 class SoftDownloadList : public QWidget
 {
     Q_OBJECT
@@ -19,6 +21,7 @@ public:
     CSQLiteDb m_SQLiteDb;
     QListWidget *DownloadList;
 
+    SoftDownloadItem *ani;
 };
 
 #endif // SOFTDOWNLOADLIST_H

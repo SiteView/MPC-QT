@@ -2,10 +2,14 @@
 #define SOFTUNLOADLIST_H
 
 #include <QWidget>
-#include "../Common/SqliteDb.h"
+
 #include <QListWidget>
-#include "SoftUnloadItem.h"
+
 #include <QDebug>
+
+#include "SoftUnloadItem.h"
+#include "../Common/SqliteDb.h"
+
 class SoftUnloadList : public QWidget
 {
     Q_OBJECT

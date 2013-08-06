@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
+#include <QProcess>
 
 class SoftUnloadItem : public QWidget
 {
@@ -15,7 +16,8 @@ signals:
     
 public slots:
     void on_unload_clicked();
-
+    void Unloadfinish(int , QProcess::ExitStatus );
+    void Unloaderror(QProcess::ProcessError );
 public:
     QLabel *icon;
     QLabel *softname;
@@ -24,6 +26,7 @@ public:
     QLabel *setuptime;
     QLabel *progress;
     QPushButton *unload;
+    QLabel *uninstall;
     QString program;
 
 
