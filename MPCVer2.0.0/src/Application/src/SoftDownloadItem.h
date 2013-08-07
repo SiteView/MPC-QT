@@ -31,7 +31,7 @@ public:
     QPushButton *but_more;
     QWidget *layoutWidget1;
     QFrame *frame_3 ;
-    QLabel *lab_prompt;
+//    QLabel *lab_prompt;
     QPushButton *but_suspend;
     QPushButton *but_cancel ;
     QFrame *frame_2;
@@ -51,7 +51,7 @@ public:
 
     QString urlprogram;
     QString exename;
-
+    QString runPath;
     CURLDownloadManager *downloader;
 
 

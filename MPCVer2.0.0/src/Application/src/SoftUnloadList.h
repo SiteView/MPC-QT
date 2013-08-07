@@ -15,7 +15,7 @@ class SoftUnloadList : public QWidget
     Q_OBJECT
 public:
     explicit SoftUnloadList(QWidget *parent = 0);
-    
+    void Select();
 signals:
     
 public slots:

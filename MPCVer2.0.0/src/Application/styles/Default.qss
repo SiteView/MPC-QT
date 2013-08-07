@@ -114,6 +114,23 @@ QPushButton#but_close,#but_minimize
 	padding-right:4px;
 	
 }
+QPushButton#but_cancel
+{
+	border-image: url(:/images/but_cancel.png);
+}
+QPushButton#but_cancel:hover
+{
+	border-image: url(:/images/but_cancel_h.png);
+}
+
+QPushButton#but_suspend
+{
+	border-image: url(:/images/but_suspend.png);
+}
+QPushButton#but_suspend:hover
+{
+	border-image: url(:/images/but_suspend_h.png);
+}
 
 
 

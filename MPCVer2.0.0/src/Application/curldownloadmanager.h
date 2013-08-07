@@ -45,7 +45,10 @@ public:
         m_fileName = fileName;
         strcpy(m_fileNameBuffer,m_fileName.toStdString().data());
     }
-
+	bool isBusy()
+	{
+		return m_busy;
+	}
     void ready( bool ready)
     {
         m_ready = ready;
@@ -82,6 +85,7 @@ long long  getLocalFileLenth(const char* localPath)
     static int progressvalue;
 private:
     bool m_ready;
+	bool m_busy;
     QString m_urlStr;
     QString m_fileName;
     char m_fileNameBuffer[255];

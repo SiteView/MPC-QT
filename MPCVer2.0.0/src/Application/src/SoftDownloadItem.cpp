@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMessageBox>
+#include <QCoreApplication>
 
 #include "SoftDownloadItem.h"
 #include "SoftDownloadList.h"
@@ -22,7 +24,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
     frame_1 = new QFrame();
     frame_1->setObjectName(QString::fromUtf8("frame_1"));
-    frame_1->setMaximumSize(QSize(340, 60));
+    frame_1->setMaximumSize(QSize(450, 60));
     frame_1->setFrameShape(QFrame::StyledPanel);
     frame_1->setFrameShadow(QFrame::Raised);
     but_icon = new QPushButton(frame_1);
@@ -31,7 +33,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     but_icon->setMaximumSize(QSize(50, 50));
     layoutWidget = new QWidget(frame_1);
     layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-    layoutWidget->setGeometry(QRect(70, 0, 251, 61));
+    layoutWidget->setGeometry(QRect(70, 0, 440, 60));
     QVBoxLayout *verticalLayout = new QVBoxLayout(layoutWidget);
     verticalLayout->setSpacing(6);
     verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -40,11 +42,11 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     verticalLayout->setContentsMargins(0, 0, 0, 0);
     but_softname = new QLabel(layoutWidget);
     but_softname->setObjectName(QString::fromUtf8("but_softname"));
-    but_softname->setMaximumSize(QSize(120, 30));
+    but_softname->setMaximumSize(QSize(180, 30));
     verticalLayout->addWidget(but_softname);
     lab_softdetail = new QLabel(layoutWidget);
     lab_softdetail->setObjectName(QString::fromUtf8("lab_softdetail"));
-    lab_softdetail->setMaximumSize(QSize(220, 20));
+    lab_softdetail->setMaximumSize(QSize(400, 20));
     verticalLayout->addWidget(lab_softdetail);
     horizontalLayout_3->addWidget(frame_1);
     widget = new QWidget();
@@ -83,16 +85,16 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     frame_3->setMaximumSize(QSize(310, 60));
     frame_3->setFrameShape(QFrame::StyledPanel);
     frame_3->setFrameShadow(QFrame::Raised);
-    lab_prompt = new QLabel(frame_3);
-    lab_prompt->setObjectName(QString::fromUtf8("lab_prompt"));
-    lab_prompt->setGeometry(QRect(170, 20, 91, 16));
-    lab_prompt->setMaximumSize(QSize(270, 60));
+//    lab_prompt = new QLabel(frame_3);
+//    lab_prompt->setObjectName(QString::fromUtf8("lab_prompt"));
+//    lab_prompt->setGeometry(QRect(170, 20, 91, 16));
+//    lab_prompt->setMaximumSize(QSize(270, 60));
     but_suspend = new QPushButton(frame_3);
     but_suspend->setObjectName(QString::fromUtf8("but_suspend"));
-    but_suspend->setGeometry(QRect(270, 20, 20, 20));
+    but_suspend->setGeometry(QRect(240, 20, 18, 14));
     but_cancel = new QPushButton(frame_3);
     but_cancel->setObjectName(QString::fromUtf8("but_cancel"));
-    but_cancel->setGeometry(QRect(290, 20, 20, 20));
+    but_cancel->setGeometry(QRect(260, 20, 18, 14));
     progressBar = new QProgressBar(frame_3);
     progressBar->setObjectName(QString::fromUtf8("but_progress"));
     progressBar->setGeometry(QRect(0, 20, 200, 15));
@@ -102,7 +104,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     page_3->setObjectName(QString::fromUtf8("page_3"));
     frame_4 = new QFrame(page_3);
     frame_4->setObjectName(QString::fromUtf8("frame_4"));
-    frame_4->setGeometry(QRect(0, 0, 310, 60));
+    frame_4->setGeometry(QRect(-10, 0, 310, 60));
     frame_4->setMaximumSize(QSize(310, 60));
     frame_4->setFrameShape(QFrame::StyledPanel);
     frame_4->setFrameShadow(QFrame::Raised);
@@ -138,12 +140,17 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
 
 void SoftDownloadItem::on_download_clicked()
 {
-
+    if(CURLDownloadManager::getThis()->isBusy())
+    {
+        QMessageBox::about(this,tr("inform"),tr("is busy"));
+    }
+    else
+    {
     stackedWidget->setCurrentWidget(page_2);
     connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
     connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
-
     DownloadThread();
+    }
 
 }
 void SoftDownloadItem::startProgress(int i)
@@ -162,6 +169,8 @@ void SoftDownloadItem::changevalued(int i)
 
 void SoftDownloadItem::cancelProgress_download()
 {
+    setup->destroyed();
+    stackedWidget->setCurrentWidget(page);
 
 }
 void SoftDownloadItem::suspendProgress_download()
@@ -175,17 +184,17 @@ void SoftDownloadItem::cancelProgress_setup()
 }
 void SoftDownloadItem::suspendProgress_setup()
 {
-    QString program="c:/"+exename;
+    QString program=runPath+"/tmp/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
 }
 
 void SoftDownloadItem::DownloadThread(){
-
-    qDebug()<<"urlprogram---"<<urlprogram;
+    runPath = QCoreApplication::applicationDirPath();
+    qDebug()<<runPath<<"---urlprogram---"<<urlprogram;
     downloader->start();
     downloader->setUrl(urlprogram);
-    downloader->setSavefileName("c:/"+exename);
+    downloader->setSavefileName(runPath+"/tmp/"+exename);
     downloader->ready(true);    
 }
 

@@ -8,7 +8,7 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
 
-DESTDIR = ../../bin
+#DESTDIR = ../../bin
 TARGET = ../../bin/SoftUpdate
 TEMPLATE = app
 INCLUDEPATH += . \

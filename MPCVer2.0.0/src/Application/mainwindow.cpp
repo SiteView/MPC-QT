@@ -24,8 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
     createDownloadMenu();
     AddSoftSortMenu();
     inform = new InformDialog;
+    item_allkind    = new SoftAllKindItem();
+
     ui->lineEdit_s->setFrame(false);//**
-    connect(list_allkinds,SIGNAL(currentRowChanged()),this,SLOT(changeCurrentItem()));
+    connect(list_allkinds->list_softallkind,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
 }
 
 MainWindow::~MainWindow()
@@ -48,25 +50,20 @@ void MainWindow::createUnloadtableMenu()
 void MainWindow::AddSoftSortMenu()
 {
     list_allkinds   = new SoftAllKindList(ui->widget_4);
-    ui->label_download->setText(list_allkinds->lab_text);
 }
 
 void MainWindow::changeCurrentItem(){
-    item_allkind    = new SoftAllKindItem();
+    ui->lineEdit_s->setText(item_allkind->text->text());
+    int current_row = list_allkinds->list_softallkind->currentRow();
+    qDebug()<<current_row<<item_allkind->text->text()<<"----current ..row..text";
+//    if(current_row=1)
+//    {
+//        list_download   = new SoftDownloadList(ui->widget_download);
+//        list_unload     = new SoftUnloadList(ui->widget_download);
 
-    qDebug()<<list_allkinds->list_softallkind->currentItem()->text()<<"----current ..row..text";
-    QHBoxLayout *hor_layout=new QHBoxLayout();
-    if(item_allkind->text->text()!="视频软件")
-    {
-        hor_layout->addWidget(list_download);
 
-    }
-    else
-    {
-        hor_layout->addWidget(list_download);
 
-    }
-    ui->widget_download->setLayout(hor_layout);
+//    }
 
 }
 void MainWindow::on_SoftDownload_clicked()
@@ -88,7 +85,7 @@ void MainWindow::on_SoftUnload_clicked()
 void MainWindow::on_UpdateInform_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-//    inform->showAsQQ();
+    //    inform->showAsQQ();
 }
 
 void MainWindow::on_but_close_clicked()

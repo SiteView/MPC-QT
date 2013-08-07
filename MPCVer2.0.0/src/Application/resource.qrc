@@ -36,5 +36,9 @@
         <file>images/lab_search_p.png</file>
         <file>images/lab_search_h.png</file>
         <file>images/search.png</file>
+        <file>images/but_suspend_h.png</file>
+        <file>images/but_cancel.png</file>
+        <file>images/but_cancel_h.png</file>
+        <file>images/but_suspend.png</file>
     </qresource>
 </RCC>
