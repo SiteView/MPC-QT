@@ -45,7 +45,10 @@ public:
         m_fileName = fileName;
         strcpy(m_fileNameBuffer,m_fileName.toStdString().data());
     }
-
+	bool isBusy()
+	{
+		return m_busy;
+	}
     void ready( bool ready)
     {
         m_ready = ready;
@@ -82,6 +85,7 @@ long long  getLocalFileLenth(const char* localPath)
     static int progressvalue;
 private:
     bool m_ready;
+	bool m_busy;
     QString m_urlStr;
     QString m_fileName;
     char m_fileNameBuffer[255];
@@ -116,7 +120,7 @@ static int progress_func(void* ptr, double rDlTotal, double rDlNow, double rUplo
 {
     if(CURLDownloadManager::g_totalSize< 0.0001) // ²»Ðø´«
     {
-        //qDebug("%f %f %f %f %f",100.0 * (rDlNow/rDlTotal),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
+        qDebug("%f %f %f %f %f",100.0 * (rDlNow/rDlTotal),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
         CURLDownloadManager::progressvalue  = 100.0*rDlNow/rDlTotal;
         emit CURLDownloadManager::getThis()->Setvalue(CURLDownloadManager::progressvalue);
         return 0;
