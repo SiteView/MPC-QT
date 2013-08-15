@@ -91,7 +91,7 @@ int _ExpandEnvironmentStrings(  wchar_t* pText )
             continue;
         }
 
-        // find %
+// find %
         p2 = _tcschr( p1 +1, _T('%') );
         if( p2 == NULL )
             return -1;
@@ -137,28 +137,12 @@ ExtractIcons::~ExtractIcons(void)
 
 #define VER30            0x00030000
 
-//int ExtractIcons::_HasExtension( LPCTSTR pPath )
-//{
-//    LPCTSTR p = _tcsrchr( pPath, _T('.') );
-//    if( p == NULL )
-//        return 0;
-//    if( lstrcmpi( p, _T(".com")) == 0 ) return COM_FILE;
-//    if( lstrcmpi( p, _T(".bat")) == 0 ) return BAT_FILE;
-//    if( lstrcmpi( p, _T(".cmd")) == 0 ) return CMD_FILE;
-//    if( lstrcmpi( p, _T(".pif")) == 0 ) return PIF_FILE;
-//    if( lstrcmpi( p, _T(".lnk")) == 0 ) return LNK_FILE;
-//    if( lstrcmpi( p, _T(".ico")) == 0 ) return ICO_FILE;
-//    if( lstrcmpi( p, _T(".exe")) == 0 ) return EXE_FILE;
-//
-//    return 0;
-//}
-
 
 void* ExtractIcons::_RelativeVirtualAddresstoPtr( IMAGE_DOS_HEADER* pDosHeader, DWORD rva )
 {
     IMAGE_NT_HEADERS32* pPE = (IMAGE_NT_HEADERS32*)((BYTE*)pDosHeader + pDosHeader->e_lfanew);
 
-    //  scan the section table looking for the RVA
+//  scan the section table looking for the RVA
     IMAGE_SECTION_HEADER* pSection = IMAGE_FIRST_SECTION( pPE );
 
     for( int i = 0; i < pPE->FileHeader.NumberOfSections; i++ )
@@ -187,8 +171,8 @@ void* ExtractIcons::_GetResourceTable( IMAGE_DOS_HEADER* pDosHeader )
     if( pPE->FileHeader.SizeOfOptionalHeader < IMAGE_SIZEOF_NT_OPTIONAL32_HEADER )
         return NULL;
 
-    // The DataDirectory is an array of 16 structures.
-    // Each array entry has a predefined meaning for what it refers to.
+// The DataDirectory is an array of 16 structures.
+// Each array entry has a predefined meaning for what it refers to.
     return _RelativeVirtualAddresstoPtr( pDosHeader,
                                          pPE->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_RESOURCE].VirtualAddress );
 }
@@ -199,7 +183,7 @@ IMAGE_RESOURCE_DIRECTORY_ENTRY* ExtractIcons::_FindResourceBase( void* prt, int 
 
     *pCount = 0;
 
-    // first find the type always a ID so ignore strings totaly
+// first find the type always a ID so ignore strings totaly
     int count  = pDir->NumberOfIdEntries + pDir->NumberOfNamedEntries;
     IMAGE_RESOURCE_DIRECTORY_ENTRY* pRes;
     pRes = (IMAGE_RESOURCE_DIRECTORY_ENTRY*)(pDir+1);
@@ -238,9 +222,9 @@ void* ExtractIcons::_FindResource( IMAGE_DOS_HEADER* pDosHeader, void* prt, int 
     pRes = _FindResourceBase( prt, resType, &count );
 
     int index = 0;
-    // find the actual resource
-    //      id (resIndex < 0)
-    //      ordinal (resIndex >= 0)
+// find the actual resource
+//      id (resIndex < 0)
+//      ordinal (resIndex >= 0)
     if( resIndex < 0 )
     {
         for( index = 0; index < count; index++ )
@@ -255,8 +239,8 @@ void* ExtractIcons::_FindResource( IMAGE_DOS_HEADER* pDosHeader, void* prt, int 
     if( index >= count )
         return NULL; // index out of range
 
-    // another Directory
-    // probably language take the first one
+// another Directory
+// probably language take the first one
     if( pRes[index].OffsetToData & IMAGE_RESOURCE_DATA_IS_DIRECTORY)
     {
         IMAGE_RESOURCE_DIRECTORY* pDir;
@@ -265,17 +249,17 @@ void* ExtractIcons::_FindResource( IMAGE_DOS_HEADER* pDosHeader, void* prt, int 
         index = 0;
     }
 
-    // Oooooooooooo no !! another Directory !!!
+// Oooooooooooo no !! another Directory !!!
     if( pRes[index].OffsetToData & IMAGE_RESOURCE_DATA_IS_DIRECTORY )
         return NULL;
 
     IMAGE_RESOURCE_DATA_ENTRY* pEntry;
     pEntry = (IMAGE_RESOURCE_DATA_ENTRY*)((LPBYTE)prt + pRes[index].OffsetToData);
 
-    // all OffsetToData fields except the final one are relative to
-    // the start of the section.  the final one is a virtual address
-    // we need to go back to the header and get the virtual address
-    // of the resource section to do this right.
+// all OffsetToData fields except the final one are relative to
+// the start of the section.  the final one is a virtual address
+// we need to go back to the header and get the virtual address
+// of the resource section to do this right.
     *pcbSize = pEntry->Size;
     return _RelativeVirtualAddresstoPtr( pDosHeader, pEntry->OffsetToData );
 }
@@ -310,7 +294,7 @@ UINT ExtractIcons::_ExtractFromExe( HANDLE hFile, int iconIndex,
 
     if( phicon == NULL )
     {
-        //  we want the count
+//  we want the count
         int count = _FindResourceCount( pRes, (int)RT_GROUP_ICON );
         return count;
     }
@@ -318,7 +302,7 @@ UINT ExtractIcons::_ExtractFromExe( HANDLE hFile, int iconIndex,
     UINT res = 0;
     while( res < maxIcons )
     {
-        //  find the icon dir for this icon.
+//  find the icon dir for this icon.
         NEWHEADER* pIconDir = (NEWHEADER*)_FindResource( pDosHeader, pRes, iconIndex, (int)RT_GROUP_ICON, &cbSize );
         if( pIconDir == NULL )
             return res;
@@ -418,7 +402,7 @@ UINT ExtractIcons::_ExtractFromICO( LPCTSTR pFileName, int iconIndex,
     if( hicon == NULL )
         return 0;
 
-    //  do we just want a count?
+//  do we just want a count?
     if( phicon == NULL )
         DestroyIcon( hicon );
     else
@@ -441,20 +425,6 @@ UINT ExtractIcons::_ExtractIcons( LPCTSTR pFileName, int iconIndex,
     TCHAR  fileName[MAX_PATH];
     lstrcpy( fileName, pFileName );
 
-    //  check for special extensions, and fail quick
-    //switch( _HasExtension( fileName ) )
-    //{
-    //    case COM_FILE:
-    //    case BAT_FILE:
-    //    case CMD_FILE:
-    //    case PIF_FILE:
-    //    case LNK_FILE:
-    //        return 0;
-
-    //    default:
-    //        break;
-    //}
-
     _ExpandEnvironmentStrings( fileName );
 
     TCHAR  expFileName[MAX_PATH];
@@ -474,7 +444,7 @@ UINT ExtractIcons::_ExtractIcons( LPCTSTR pFileName, int iconIndex,
     }
     else
     {
-        // Restore the Access Date
+// Restore the Access Date
         FILETIME ftAccess;
         if( GetFileTime( hFile, NULL, &ftAccess, NULL ) )
             SetFileTime( hFile, NULL, &ftAccess, NULL );
@@ -507,11 +477,11 @@ UINT ExtractIcons::_ExtractIcons( LPCTSTR pFileName, int iconIndex,
         break;
 
     case MAGIC_ICON:
-        //  icons and cursors format:
-        //      reserved       : always zero
-        //      resourceType   : 1 for icons 2 cor cursor.
-        //      countIcons       : images count
-        // we want countIcons >= 1
+//  icons and cursors format:
+//      reserved       : always zero
+//      resourceType   : 1 for icons 2 cor cursor.
+//      countIcons       : images count
+// we want countIcons >= 1
         if( (magic[1] == MAGIC_ICON || magic[1] == MAGIC_CUR ) &&
                 magic[2] >= 1 )
         {
