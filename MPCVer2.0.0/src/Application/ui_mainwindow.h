@@ -75,6 +75,21 @@ public:
     QLabel *label_unload;
     QLineEdit *lineEdit;
     QWidget *widget_3;
+    QStackedWidget *stackedWidget_2;
+    QWidget *page_up;
+    QWidget *page_down;
+    QWidget *page_2;
+    QWidget *page_3;
+    QWidget *page_4;
+    QWidget *page_5;
+    QWidget *page_6;
+    QWidget *page_7;
+    QWidget *widget_5;
+    QPushButton *but_sel_size;
+    QPushButton *but_sel_time;
+    QPushButton *but_sel_path;
+    QPushButton *but_sel_operate;
+    QPushButton *but_sel_name;
     QWidget *page_UpdateInform;
     QListWidget *list_Inform;
     QLabel *label;
@@ -276,7 +291,58 @@ public:
         lineEdit->setGeometry(QRect(750, 20, 161, 21));
         widget_3 = new QWidget(page_SoftUnload);
         widget_3->setObjectName(QStringLiteral("widget_3"));
-        widget_3->setGeometry(QRect(0, 50, 920, 510));
+        widget_3->setGeometry(QRect(0, 120, 920, 440));
+        stackedWidget_2 = new QStackedWidget(widget_3);
+        stackedWidget_2->setObjectName(QStringLiteral("stackedWidget_2"));
+        stackedWidget_2->setGeometry(QRect(0, 0, 920, 440));
+        page_up = new QWidget();
+        page_up->setObjectName(QStringLiteral("page_up"));
+        stackedWidget_2->addWidget(page_up);
+        page_down = new QWidget();
+        page_down->setObjectName(QStringLiteral("page_down"));
+        stackedWidget_2->addWidget(page_down);
+        page_2 = new QWidget();
+        page_2->setObjectName(QStringLiteral("page_2"));
+        stackedWidget_2->addWidget(page_2);
+        page_3 = new QWidget();
+        page_3->setObjectName(QStringLiteral("page_3"));
+        stackedWidget_2->addWidget(page_3);
+        page_4 = new QWidget();
+        page_4->setObjectName(QStringLiteral("page_4"));
+        stackedWidget_2->addWidget(page_4);
+        page_5 = new QWidget();
+        page_5->setObjectName(QStringLiteral("page_5"));
+        stackedWidget_2->addWidget(page_5);
+        page_6 = new QWidget();
+        page_6->setObjectName(QStringLiteral("page_6"));
+        stackedWidget_2->addWidget(page_6);
+        page_7 = new QWidget();
+        page_7->setObjectName(QStringLiteral("page_7"));
+        stackedWidget_2->addWidget(page_7);
+        widget_5 = new QWidget(page_SoftUnload);
+        widget_5->setObjectName(QStringLiteral("widget_5"));
+        widget_5->setGeometry(QRect(0, 100, 920, 20));
+        but_sel_size = new QPushButton(widget_5);
+        but_sel_size->setObjectName(QStringLiteral("but_sel_size"));
+        but_sel_size->setGeometry(QRect(398, 0, 110, 20));
+        but_sel_time = new QPushButton(widget_5);
+        but_sel_time->setObjectName(QStringLiteral("but_sel_time"));
+        but_sel_time->setGeometry(QRect(505, 0, 130, 20));
+        but_sel_path = new QPushButton(widget_5);
+        but_sel_path->setObjectName(QStringLiteral("but_sel_path"));
+        but_sel_path->setGeometry(QRect(633, 0, 120, 20));
+        but_sel_operate = new QPushButton(widget_5);
+        but_sel_operate->setObjectName(QStringLiteral("but_sel_operate"));
+        but_sel_operate->setGeometry(QRect(750, 0, 172, 20));
+        but_sel_name = new QPushButton(widget_5);
+        but_sel_name->setObjectName(QStringLiteral("but_sel_name"));
+        but_sel_name->setGeometry(QRect(0, 0, 400, 20));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(but_sel_name->sizePolicy().hasHeightForWidth());
+        but_sel_name->setSizePolicy(sizePolicy);
+        but_sel_name->setLayoutDirection(Qt::LeftToRight);
         stackedWidget->addWidget(page_SoftUnload);
         page_UpdateInform = new QWidget();
         page_UpdateInform->setObjectName(QStringLiteral("page_UpdateInform"));
@@ -291,7 +357,8 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(3);
+        stackedWidget_2->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -304,13 +371,13 @@ public:
 #ifndef QT_NO_TOOLTIP
         label_SoftDownload->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
-        label_SoftDownload->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\344\270\213\350\275\275", 0));
+        label_SoftDownload->setText(QApplication::translate("MainWindow", "Download", 0));
         SoftUpgrade->setText(QString());
-        label_SoftUpgrade->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\345\215\207\347\272\247", 0));
+        label_SoftUpgrade->setText(QApplication::translate("MainWindow", "Upgrade", 0));
         SoftUnload->setText(QString());
-        label_SoftUnload->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\345\215\270\350\275\275", 0));
+        label_SoftUnload->setText(QApplication::translate("MainWindow", "Uninstall", 0));
         UpdateInform->setText(QString());
-        label_UpdateInform->setText(QApplication::translate("MainWindow", "\346\233\264\346\226\260\351\200\232\347\237\245", 0));
+        label_UpdateInform->setText(QApplication::translate("MainWindow", "Update", 0));
         but_close->setText(QString());
         but_minimize->setText(QString());
         label_download->setText(QString());
@@ -318,6 +385,11 @@ public:
         lab_clear->setText(QString());
         label_3->setText(QString());
         label_unload->setText(QString());
+        but_sel_size->setText(QString());
+        but_sel_time->setText(QString());
+        but_sel_path->setText(QString());
+        but_sel_operate->setText(QString());
+        but_sel_name->setText(QString());
         label->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\347\256\241\345\256\266\347\233\256\345\211\215\347\211\210\346\234\254\357\274\2322.0.1.7", 0));
     } // retranslateUi
 

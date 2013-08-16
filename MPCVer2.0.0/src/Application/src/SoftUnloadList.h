@@ -15,7 +15,8 @@ class SoftUnloadList : public QWidget
     Q_OBJECT
 public:
     explicit SoftUnloadList(QWidget *parent = 0);
-    
+    void DiffSelect(int);
+
 signals:
     
 public slots:
@@ -23,6 +24,8 @@ public slots:
 public:
     CSQLiteDb m_SQLiteDb;
     QListWidget *UnloadList;
+    QListWidget *UnloadList2;
+
 //    SoftUnloadItem *ani;
 
 };

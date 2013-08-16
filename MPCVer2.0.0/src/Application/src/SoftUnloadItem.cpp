@@ -3,12 +3,15 @@
 #include <QHBoxLayout>
 #include <QProcess>
 #include <QDebug>
-
+#include <QTime>
+#include <QDateTime>
+#include <QDate>
 #include "SoftUnloadItem.h"
 
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
+
     icon       =new QLabel(this);
     softname   =new QLabel(this);
     softdetail =new QLabel(this);
@@ -116,9 +119,22 @@ void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
     }
     else
     {
-       uninstall->show();
-       uninstall->setText("...ing...");
+        uninstall->show();
+        uninstall->setText("...ing...");
     }
+
+    QSqlQuery sqlQuery( *m_SQLiteDb.getDB());
+    m_SQLiteDb.getDB()->transaction();
+    sqlQuery.prepare(QString("update LocalAppInfor set UninstallTime = ? where  DisplayName = ?"));
+    sqlQuery.addBindValue(QDateTime::currentDateTime());
+    sqlQuery.addBindValue(softname->text());
+    if (!sqlQuery.exec()) {
+        qDebug(sqlQuery.lastError().text().toLocal8Bit().data());
+        qDebug() << softname->text();
+        //        return false;
+    }
+    m_SQLiteDb.getDB()->commit();
+
 
 }
 void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )

@@ -19,6 +19,9 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 	//注册MsgHandler 可以输出标准日志文件
+
+    qInstallMessageHandler(customMessageHandler);
+
     curl_global_init(CURL_GLOBAL_DEFAULT);
 
 //    SoftDownloadItem item;

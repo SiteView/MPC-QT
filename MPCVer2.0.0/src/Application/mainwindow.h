@@ -15,7 +15,18 @@
 namespace Ui {
 class MainWindow;
 }
+enum SIGN
+{
+    SELECT_NAME_UP
+    ,SELECT_NAME_DOWN
+    ,SELECT_SIZE_UP
+    ,SELECT_SIZE_DOWN
+    ,SELECT_TIME_UP
+    ,SELECT_TIME_DOWN
+    ,SELECT_PATH_UP
+    ,SELECT_PATH_DOWN
 
+};
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -34,6 +45,16 @@ private slots:
     void on_but_close_clicked();
 
     void on_but_minimize_clicked();
+    void on_but_sel_name_clicked();
+
+    void on_but_sel_size_clicked();
+
+    void on_but_sel_time_clicked();
+
+    void on_but_sel_path_clicked();
+
+    void on_but_sel_operate_clicked();
+
 private:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -52,11 +73,19 @@ public:
     CSQLiteDb m_SQLiteDb;
     InformDialog *inform;
     SoftUnloadList *list_unload;
+    SoftUnloadList *list_unload2;
+    SoftUnloadList *list_unload3;
+    SoftUnloadList *list_unload4;
+    SoftUnloadList *list_unload5;
+    SoftUnloadList *list_unload6;
+    SoftUnloadList *list_unload7;
+    SoftUnloadList *list_unload8;
+
     SoftDownloadList *list_download;
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 //    CURLDownloadManager *downloader;
-
+    bool flag;
 private:
     Ui::MainWindow *ui;
 public slots:

@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QProcess>
+#include "../Common/SqliteDb.h"
 
 class SoftUnloadItem : public QWidget
 {
@@ -33,7 +34,8 @@ public:
 public:
     void SeekUnloadData();
 
-    
+    CSQLiteDb m_SQLiteDb;
+
 };
 
 #endif // SOFTUNLOADITEM_H

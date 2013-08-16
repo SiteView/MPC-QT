@@ -2,17 +2,71 @@
 #include <QListWidgetItem>
 
 #include "SoftUnloadList.h"
+#include "mainwindow.h"
 
 SoftUnloadList::SoftUnloadList(QWidget *parent) :
     QWidget(parent)
 {
+
+}
+
+void SoftUnloadList::DiffSelect(int cmd){
     UnloadList  = new QListWidget(this);
-    UnloadList->resize(920,510);
+    UnloadList->resize(920,440);
+    UnloadList->setFocusPolicy(Qt::NoFocus);
 
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
-    if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor ;" ) )
+    switch(cmd)
     {
-        qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+    case SELECT_NAME_UP:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by DisplayName desc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_NAME_DOWN:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by DisplayName asc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_SIZE_UP:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by EstimatedSize desc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_SIZE_DOWN:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by EstimatedSize asc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_TIME_UP:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by SetupTime desc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_TIME_DOWN:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by SetupTime asc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_PATH_UP:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by InstallLocation desc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SELECT_PATH_DOWN:
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor order by InstallLocation asc limit 10 ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+
     }
     while ( SQLiteQuery.next() )
     {
@@ -33,8 +87,8 @@ SoftUnloadList::SoftUnloadList(QWidget *parent) :
         QString pahtstr6 = val6.toString();
 
         pahtstr0.replace("\\","/");
-        qDebug()<<pahtstr0<<pahtstr1<<pahtstr2<<pahtstr3<<pahtstr4<<pahtstr5<<pahtstr6<<"*****123456+++++";
-        SoftUnloadItem *ani=new SoftUnloadItem(this);
+        //        qDebug()<<pahtstr0<<pahtstr1<<pahtstr2<<pahtstr3<<pahtstr4<<pahtstr5<<pahtstr6<<"*****123456+++++";
+        SoftUnloadItem *ani=new SoftUnloadItem(UnloadList);
         ani->icon->setStyleSheet("border-image:url("+pahtstr0+")");
         ani->softname->setText(pahtstr1);
         ani->softdetail->setText(pahtstr2);
@@ -47,19 +101,21 @@ SoftUnloadList::SoftUnloadList(QWidget *parent) :
             str1+=pahtstr4.at(k);
         }
         ani->setuptime->setText(str1);
-        QString str;
-        if(pahtstr5.count()<10)
-        {
-            ani->progress->setText(pahtstr5+"...");
-        }
-        else
-        {
-            for(int k=0;k<10;k++)
-            {
-                str+=pahtstr5.at(k);
-            }
-            ani->progress->setText(str+"...");
-        }
+        //        QString str;
+        //        if(pahtstr5.count()<10)
+        //        {
+        //            ani->progress->setText(pahtstr5+"...");
+        //        }
+        //        else
+        //        {
+        //            for(int k=0;k<10;k++)
+        //            {
+        //                str+=pahtstr5.at(k);
+        //            }
+        //            ani->progress->setText(str+"...");
+        //        }
+        ani->progress->setText(pahtstr5+"...");
+
         ani->progress->setToolTip(pahtstr5);
         ani->unload->setText("Uninstall");
         ani->program=pahtstr6;
@@ -68,8 +124,10 @@ SoftUnloadList::SoftUnloadList(QWidget *parent) :
         twi->setSizeHint(QSize(400,59));
         UnloadList->addItem(twi);
         UnloadList->setItemWidget(twi,ani);
-        //        UnloadList->setAlternatingRowColors(true);
         UnloadList->setStyleSheet("QListView::item:selected{background-color:rgb(247,247,247)}");
     }
+    //    SQLiteQuery.exec("insert ");
+
     SQLiteQuery.finish();
 }
+

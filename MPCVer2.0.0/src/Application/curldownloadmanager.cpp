@@ -10,6 +10,7 @@ CURLDownloadManager::CURLDownloadManager(QObject *parent)
     : QThread(parent)
 {
     m_ready = false;
+    m_busy = 0;
 	if(pthis)
 	{
 		qCritical("Singleton object create error");
@@ -33,6 +34,7 @@ void CURLDownloadManager::run()
             continue;
         }
         m_ready =!m_ready;
+		m_busy = true;
         //getDownloadFileLenth(m_urlStr.toStdString().data());
         CURL *curl;
         CURLcode res;
@@ -116,7 +118,7 @@ void CURLDownloadManager::run()
 			if (-1 == return_code)
 			{
 				qDebug("select error.");
-				emit DownloadFinish(-1);
+				emit pthis->DownloadFinish(-1);
 				break;
 			}
 			else
@@ -130,7 +132,8 @@ void CURLDownloadManager::run()
 #endif
         if(ftpfile.stream)
             fclose(ftpfile.stream); /* close the local file */
-        emit pthis->DownloadFinish(res);
+		emit pthis->DownloadFinish(res);
+		m_busy = false;
 #if Mutimode
         curl_easy_cleanup(curl);
         curl_multi_cleanup(multi_handle);

@@ -5,6 +5,9 @@ SoftAllKindList::SoftAllKindList(QWidget *parent) :
 {
     list_softallkind  = new QListWidget(this);
     list_softallkind->resize(160,560);
+    list_softallkind->setFocusPolicy(Qt::NoFocus);
+    list_softallkind->setStyleSheet("QListView::item:selected{background-color:rgb(101,205,113)}");
+
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     if ( !SQLiteQuery.exec( "select TypeName,Ordernumber,Type from SoftType ;" ) )
     {
@@ -20,7 +23,6 @@ SoftAllKindList::SoftAllKindList(QWidget *parent) :
         QString pahtstr1 = val1.toString();
         int pahtstr2 = val2.toInt();
         type=pahtstr2;
-//        lab_text.append(pahtstr0).append(pahtstr1);
         SoftAllKindItem *ani=new SoftAllKindItem(this);
         ani->ico->setStyleSheet("border-image:url(:/images/circle.png)");
         ani->text->setText(pahtstr0);

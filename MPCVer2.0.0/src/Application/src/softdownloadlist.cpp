@@ -12,8 +12,10 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
 {
     DownloadList  = new QListWidget(this);
 
-
+    DownloadList->setFocusPolicy(Qt::NoFocus);
     DownloadList->resize(760,510);
+    DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
+
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo ;" ) )
     {
@@ -36,27 +38,33 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
         QString pahtstr5 = val5.toString();
 
 
-        SoftDownloadItem *ani=new SoftDownloadItem (this);
+        SoftDownloadItem *ani=new SoftDownloadItem (DownloadList);
 
-        ani->but_icon->setText(pahtstr2);
+//        ani->but_icon->setText(pahtstr2);
         ani->but_softname->setText(pahtstr0);        
-        QString lab_softdetail2;
-        if(pahtstr1.count()<15)
-        {
-            ani->lab_softdetail->setText(pahtstr1+"...");
-        }
-        else
-        {
-            for(int k=0;k<15;k++)
-            {
-                lab_softdetail2+=pahtstr1.at(k);
-            }
-            ani->lab_softdetail->setText(lab_softdetail2+"...");
-        }
+//        QString lab_softdetail2;
+//        if(pahtstr1.count()<35)
+//        {
+//            ani->lab_softdetail->setText(pahtstr1+"...");
+//        }
+//        else
+//        {
+//            for(int k=0;k<35;k++)
+//            {
+//                lab_softdetail2+=pahtstr1.at(k);
+//            }
+//            ani->lab_softdetail->setText(lab_softdetail2+"...");
+//        }
+        ani->lab_softdetail->setText(pahtstr1+"...");
+
         ani->lab_softdetail->setToolTip(pahtstr1);
+        ani->lab_upnum->setText(pahtstr3);
+        ani->lab_upnum_2->setText(pahtstr3);
         ani->lab_size->setText(pahtstr4);
+        ani->lab_size_2->setText(pahtstr4);
         ani->download->setText("download");
         ani->urlprogram=pahtstr5;
+//        ani->lab_prompt->setText(pahtstr2);
         QUrl url = QUrl::fromEncoded(pahtstr5.toUtf8());
         QString path_file = url.toString();
         QStringList str=path_file.split("/");
@@ -66,8 +74,6 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
         twi->setSizeHint(QSize(400,59));
         DownloadList->addItem(twi);
         DownloadList->setItemWidget(twi,ani);
-
-
 
     }
     SQLiteQuery.finish();
