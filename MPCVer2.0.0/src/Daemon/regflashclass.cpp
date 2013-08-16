@@ -126,7 +126,7 @@ void RegFlashClass::UpdateInfo()
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     QSqlQuery updateQuery( *m_SQLiteDb.getDB() );
     m_SQLiteDb.getDB()->transaction();
-    if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation,DisplayVersion, SetupTime, DisplayIcon, UninstallString, UninstallTime, IsUnloaded from LocalAppInfor ;" ) )
+    if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation,DisplayVersion, SetupTime, DisplayIcon, UninstallString, UninstallTime from LocalAppInfor ;" ) )
     {
         qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
     }

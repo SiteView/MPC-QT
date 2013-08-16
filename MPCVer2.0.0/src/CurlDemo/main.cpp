@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     curl_global_init(CURL_GLOBAL_DEFAULT);
     CURLDownloadManager downloader(&app);
     downloader.start();
-	downloader.setUrl("http://dl.google.com/pinyin/v2/GooglePinyinInstaller.exe");
+	downloader.setUrl("http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/22.0/win32/en-US/Firefox%20Setup%2022.0.exe");
     downloader.setSavefileName("GooglePinyinInstaller.exe");
     downloader.ready(true);
 	QObject::connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),&app, SLOT(quit()));
