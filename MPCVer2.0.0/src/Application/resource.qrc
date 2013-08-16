@@ -40,5 +40,7 @@
         <file>images/but_cancel.png</file>
         <file>images/but_cancel_h.png</file>
         <file>images/but_suspend.png</file>
+        <file>images/up.png</file>
+        <file>images/down.png</file>
     </qresource>
 </RCC>

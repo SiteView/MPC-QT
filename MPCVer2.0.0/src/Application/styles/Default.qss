@@ -12,6 +12,7 @@ QWidget#title {
 QWidget#widget_body,#widget_4 ,#widget_download,#widget_3{
 	background-color:rgb(245,245,245);
 }
+
 QWidget#widget_s
 {
 	border-image: url(:/images/search.png);
@@ -135,8 +136,6 @@ QPushButton#but_suspend:hover
 
 
 /*HEAD BUTTONS ABOUT*/
-
-
 QPushButton#but_close
 {
     border-image: url(:/images/but_close.png);
@@ -155,6 +154,7 @@ QPushButton#but_minimize:hover
 {
     border-image: url(:/images/but_minimize__hl.png);
 }
+/*HEAD BUTTONS SEARCH*/
 QPushButton#but_search
 {
 border-image: url(:/images/search_nor.png);
@@ -165,6 +165,18 @@ QPushButton#but_search:hover
 border-image: url(:/images/search_press.png);
 
 }
+
+QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_time
+{
+	background:rgb(225,236,255);
+	border-style:solid;
+	border-width:0px;
+	border-radius: 0px;
+	
+
+}
+
+
 /*LABELS*/
 QLabel#label_SoftDownload,#label_SoftUpgrade,#label_SoftUnload,#label_UpdateInform
 {
