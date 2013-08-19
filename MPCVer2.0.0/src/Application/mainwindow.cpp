@@ -49,17 +49,17 @@ void MainWindow::createUpgradeMenu()
 }
 void MainWindow::createDownloadMenu()
 {
-    list_download   = new SoftDownloadList(ui->widget_download);
+    list_download   = new SoftDownloadList(ui->page_all);
+    list_download->selectDifType(ALL);
+    ui->stack_download->setCurrentWidget(ui->page_all);
 }
 
 void MainWindow::createUnloadtableMenu()
 {
-//    list_unload->DiffSelect();
-//    list_unload     = new SoftUnloadList(ui->page_up);
+    list_unload     = new SoftUnloadList(ui->page_selall);
+    list_unload->DiffSelect(SELECT_ALL);
+    ui->stackedWidget_2->setCurrentWidget(ui->page_selall);
 
-
-//    list_unload2->DiffSelect2();
-//    list_unload2     = new SoftUnloadList(ui->page_down);
 
 }
 void MainWindow::AddSoftSortMenu()
@@ -70,17 +70,32 @@ void MainWindow::AddSoftSortMenu()
 void MainWindow::changeCurrentItem(){
     ui->lineEdit_s->setText(item_allkind->text->text());
     int current_row = list_allkinds->list_softallkind->currentRow();
-    qDebug()<<current_row<<item_allkind->text->text()<<"----current ..row..text";
-//    if(current_row=1)
-//    {
-//        list_download   = new SoftDownloadList(ui->widget_download);
-//        list_unload     = new SoftUnloadList(ui->widget_download);
+//    qDebug()<<current_row<<item_allkind->text->text()<<"----current ..row..text";
+    if(current_row==0)
+    {
+        ui->stack_download->setCurrentWidget(ui->page_all);
+    }
+    if(current_row==1)
+    {
+        list_download1     = new SoftDownloadList(ui->page_type2);
+        list_download1->selectDifType(TWO);
+        ui->stack_download->setCurrentWidget(ui->page_type2);
 
-
-
-//    }
-
+    }
+    if(current_row==2)
+    {
+        list_download2     = new SoftDownloadList(ui->page_type3);
+        list_download2->selectDifType(THREE);
+        ui->stack_download->setCurrentWidget(ui->page_type3);
+    }
+    if(current_row==3)
+    {
+        list_download3     = new SoftDownloadList(ui->page_type8);
+        list_download3->selectDifType(EIGHT);
+        ui->stack_download->setCurrentWidget(ui->page_type8);
+    }
 }
+
 void MainWindow::on_SoftDownload_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftDownload);
@@ -136,11 +151,10 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 
 void MainWindow::on_but_sel_name_clicked()
 {
-
     if(flag)
     {
-        list_unload     = new SoftUnloadList(ui->page_up);
-        list_unload->DiffSelect(SELECT_NAME_UP);
+        list_unload1     = new SoftUnloadList(ui->page_up);
+        list_unload1->DiffSelect(SELECT_NAME_UP);
         ui->stackedWidget_2->setCurrentWidget(ui->page_up);
         ui->but_sel_name->setIcon(QIcon(":/images/down.png"));
         flag=false;

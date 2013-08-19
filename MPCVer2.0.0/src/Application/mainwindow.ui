@@ -419,16 +419,6 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="widget_download" native="true">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>50</y>
-         <width>760</width>
-         <height>510</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QWidget" name="widget_4" native="true">
        <property name="geometry">
         <rect>
@@ -438,6 +428,30 @@
          <height>560</height>
         </rect>
        </property>
+      </widget>
+      <widget class="QStackedWidget" name="stack_download">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>50</y>
+         <width>760</width>
+         <height>510</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>3</number>
+       </property>
+       <widget class="QWidget" name="page_all"/>
+       <widget class="QWidget" name="page_type1"/>
+       <widget class="QWidget" name="page_type9"/>
+       <widget class="QWidget" name="page_type10"/>
+       <widget class="QWidget" name="page_type4"/>
+       <widget class="QWidget" name="page_type5"/>
+       <widget class="QWidget" name="page_type7"/>
+       <widget class="QWidget" name="page_type6"/>
+       <widget class="QWidget" name="page_type3"/>
+       <widget class="QWidget" name="page_type8"/>
+       <widget class="QWidget" name="page_type2"/>
       </widget>
      </widget>
      <widget class="QWidget" name="page_SoftUpgrade">
@@ -514,6 +528,7 @@
         <widget class="QWidget" name="page_down"/>
         <widget class="QWidget" name="page_2"/>
         <widget class="QWidget" name="page_3"/>
+        <widget class="QWidget" name="page_selall"/>
         <widget class="QWidget" name="page_4"/>
         <widget class="QWidget" name="page_5"/>
         <widget class="QWidget" name="page_6"/>

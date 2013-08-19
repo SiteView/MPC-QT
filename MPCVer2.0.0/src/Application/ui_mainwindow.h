@@ -66,8 +66,19 @@ public:
     QLineEdit *lineEdit_s;
     QLabel *lab_search;
     QLabel *lab_clear;
-    QWidget *widget_download;
     QWidget *widget_4;
+    QStackedWidget *stack_download;
+    QWidget *page_all;
+    QWidget *page_type1;
+    QWidget *page_type9;
+    QWidget *page_type10;
+    QWidget *page_type4;
+    QWidget *page_type5;
+    QWidget *page_type7;
+    QWidget *page_type6;
+    QWidget *page_type3;
+    QWidget *page_type8;
+    QWidget *page_type2;
     QWidget *page_SoftUpgrade;
     QLabel *label_3;
     QListWidget *list_Upgrade;
@@ -80,6 +91,7 @@ public:
     QWidget *page_down;
     QWidget *page_2;
     QWidget *page_3;
+    QWidget *page_selall;
     QWidget *page_4;
     QWidget *page_5;
     QWidget *page_6;
@@ -265,12 +277,45 @@ public:
 
         horizontalLayout_2->addWidget(widget_s);
 
-        widget_download = new QWidget(page_SoftDownload);
-        widget_download->setObjectName(QStringLiteral("widget_download"));
-        widget_download->setGeometry(QRect(160, 50, 760, 510));
         widget_4 = new QWidget(page_SoftDownload);
         widget_4->setObjectName(QStringLiteral("widget_4"));
         widget_4->setGeometry(QRect(0, 0, 160, 560));
+        stack_download = new QStackedWidget(page_SoftDownload);
+        stack_download->setObjectName(QStringLiteral("stack_download"));
+        stack_download->setGeometry(QRect(160, 50, 760, 510));
+        page_all = new QWidget();
+        page_all->setObjectName(QStringLiteral("page_all"));
+        stack_download->addWidget(page_all);
+        page_type1 = new QWidget();
+        page_type1->setObjectName(QStringLiteral("page_type1"));
+        stack_download->addWidget(page_type1);
+        page_type9 = new QWidget();
+        page_type9->setObjectName(QStringLiteral("page_type9"));
+        stack_download->addWidget(page_type9);
+        page_type10 = new QWidget();
+        page_type10->setObjectName(QStringLiteral("page_type10"));
+        stack_download->addWidget(page_type10);
+        page_type4 = new QWidget();
+        page_type4->setObjectName(QStringLiteral("page_type4"));
+        stack_download->addWidget(page_type4);
+        page_type5 = new QWidget();
+        page_type5->setObjectName(QStringLiteral("page_type5"));
+        stack_download->addWidget(page_type5);
+        page_type7 = new QWidget();
+        page_type7->setObjectName(QStringLiteral("page_type7"));
+        stack_download->addWidget(page_type7);
+        page_type6 = new QWidget();
+        page_type6->setObjectName(QStringLiteral("page_type6"));
+        stack_download->addWidget(page_type6);
+        page_type3 = new QWidget();
+        page_type3->setObjectName(QStringLiteral("page_type3"));
+        stack_download->addWidget(page_type3);
+        page_type8 = new QWidget();
+        page_type8->setObjectName(QStringLiteral("page_type8"));
+        stack_download->addWidget(page_type8);
+        page_type2 = new QWidget();
+        page_type2->setObjectName(QStringLiteral("page_type2"));
+        stack_download->addWidget(page_type2);
         stackedWidget->addWidget(page_SoftDownload);
         page_SoftUpgrade = new QWidget();
         page_SoftUpgrade->setObjectName(QStringLiteral("page_SoftUpgrade"));
@@ -307,6 +352,9 @@ public:
         page_3 = new QWidget();
         page_3->setObjectName(QStringLiteral("page_3"));
         stackedWidget_2->addWidget(page_3);
+        page_selall = new QWidget();
+        page_selall->setObjectName(QStringLiteral("page_selall"));
+        stackedWidget_2->addWidget(page_selall);
         page_4 = new QWidget();
         page_4->setObjectName(QStringLiteral("page_4"));
         stackedWidget_2->addWidget(page_4);
@@ -358,6 +406,7 @@ public:
         retranslateUi(MainWindow);
 
         stackedWidget->setCurrentIndex(3);
+        stack_download->setCurrentIndex(3);
         stackedWidget_2->setCurrentIndex(4);
 
 
