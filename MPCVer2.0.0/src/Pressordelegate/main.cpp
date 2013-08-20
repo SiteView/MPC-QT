@@ -96,6 +96,7 @@ int main(int argc, char *argv[])
 //	tableView.setItemDelegateForColumn(0,;
     tableView.horizontalHeader()->setStretchLastSection(true);
 
+	QObject::connect(&downloader,SIGNAL(sendValue(double)),model,SLOT(setValue(double)));
 
 
     tableView.setWindowTitle(QObject::tr("Delegate"));

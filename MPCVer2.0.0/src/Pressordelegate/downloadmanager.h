@@ -11,7 +11,7 @@ public:
     explicit downloadmanager(QObject *parent = 0);
        virtual void run() ;
 signals:
-	  void sendValue(int value);
+	  void sendValue(double value);
     
 public slots:
 

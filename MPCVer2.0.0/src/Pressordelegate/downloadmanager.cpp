@@ -8,14 +8,14 @@ downloadmanager::downloadmanager(QObject *parent) :
 }
 void  downloadmanager::run()
 {
-    int value = 0;
+    double value = 0;
 	forever
     {
-        msleep(200);
+        msleep(30);
 		if(value >100)
 			value = 0;
 		else
-			value++;
+			value  = value + qrand()%100*0.001;
 		emit sendValue(value);
     }
 }

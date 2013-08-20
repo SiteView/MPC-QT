@@ -92,9 +92,12 @@ bool TestModelDelegate::event(QEvent * e)
 {
 	return QObject::event(e);
 }
+
+
 DatabaseModel::DatabaseModel(QObject *parent):QAbstractTableModel(parent)
 {
 	query = new QSqlQuery(*m_SQLiteDb.getDB());
+	m_crow = 0;
 }
 
 void DatabaseModel::setQuery(const QString& sql)
@@ -123,8 +126,10 @@ int DatabaseModel::columnCount(const QModelIndex & parent) const
 {
 	return record.count()+2;
 }
+
 bool DatabaseModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
+	m_crow = index.row();
 	if (index.column() == 5)
 	{
 		pressList.replace(index.row(),value.toDouble());

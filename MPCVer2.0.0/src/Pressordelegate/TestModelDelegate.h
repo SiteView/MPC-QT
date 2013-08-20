@@ -79,6 +79,7 @@ public:
 
 class DatabaseModel:public QAbstractTableModel
 {
+	Q_OBJECT;
 public:
 	DatabaseModel(QObject *parent=0);
 	void setQuery(const QString& sql);
@@ -87,12 +88,20 @@ public:
 	virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
 	QVariant headerData(int section,Qt::Orientation orientation,int role) const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::DisplayRole);
+
+public slots:
+	void setValue(double val)
+	{
+		QModelIndex ind = this->index(m_crow,5,QModelIndex());
+		setData(ind,val);
+	}
+
 private:
 	QSqlQuery *query;
 	QSqlRecord record;
 	CSQLiteDb m_SQLiteDb;
+	int m_crow;
 	int size ;
-	//QStandardItemModel* m_porssedata;
 	QList<double> pressList;
 
 };
