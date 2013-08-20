@@ -132,8 +132,6 @@ void SoftUnloadList::DiffSelect(int cmd){
         UnloadList->setItemWidget(twi,ani);
         UnloadList->setStyleSheet("QListView::item:selected{background-color:rgb(247,247,247)}");
     }
-    //    SQLiteQuery.exec("insert ");
-
     SQLiteQuery.finish();
 }
 

@@ -13,27 +13,28 @@ QWidget#widget_body,#widget_4 ,#widget_download,#widget_3{
 	background-color:rgb(245,245,245);
 }
 
-QWidget#widget_s
+QWidget#widget_s_4,#widget_s_2,#widget_s_3
 {
 	border-image: url(:/images/search.png);
 }
-QLabel#lab_clear
+QPushButton#but_clear_4,#but_clear_2,#but_clear_3
 {
 	border-image: url(:/images/clear.png);
 }
-QLabel#lab_clear:hover
+QPushButton#but_clear_4:hover,#but_clear_2:hover,#but_clear_3:hover
 {
 	border-image: url(:/images/clear_h.png);
 }
-QLabel#lab_search
+
+QPushButton#but_search_4,#but_search_2,#but_search_3
 {
 	border-image: url(:/images/lab_search.png);
 }
-QLabel#lab_search:hover
+QPushButton#but_search_4:hover,#but_search_2:hover,#but_search_3:hover
 {
 	border-image: url(:/images/lab_search_h.png);
 }
-QLabel#lab_search:clicked
+QPushButton#but_search_4:clicked,#but_search_2:clicked,#but_search_3:clicked
 {
 	border-image: url(:/images/lab_search_p.png);
 }
@@ -173,7 +174,6 @@ QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_t
 	border-width:0px;
 	border-radius: 0px;
 	
-
 }
 
 

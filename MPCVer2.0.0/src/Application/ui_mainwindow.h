@@ -62,10 +62,10 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_download;
     QSpacerItem *horizontalSpacer_7;
-    QWidget *widget_s;
-    QLineEdit *lineEdit_s;
-    QLabel *lab_search;
-    QLabel *lab_clear;
+    QWidget *widget_s_4;
+    QLineEdit *lineEdit_s_4;
+    QPushButton *but_clear_4;
+    QPushButton *but_search_4;
     QWidget *widget_4;
     QStackedWidget *stack_download;
     QWidget *page_all;
@@ -81,10 +81,12 @@ public:
     QWidget *page_type2;
     QWidget *page_SoftUpgrade;
     QLabel *label_3;
-    QListWidget *list_Upgrade;
+    QWidget *widget_s_3;
+    QLineEdit *lineEdit_s_3;
+    QPushButton *but_clear_3;
+    QPushButton *but_search_3;
     QWidget *page_SoftUnload;
     QLabel *label_unload;
-    QLineEdit *lineEdit;
     QWidget *widget_3;
     QStackedWidget *stackedWidget_2;
     QWidget *page_up;
@@ -102,6 +104,10 @@ public:
     QPushButton *but_sel_path;
     QPushButton *but_sel_operate;
     QPushButton *but_sel_name;
+    QWidget *widget_s_2;
+    QLineEdit *lineEdit_s_2;
+    QPushButton *but_clear_2;
+    QPushButton *but_search_2;
     QWidget *page_UpdateInform;
     QListWidget *list_Inform;
     QLabel *label;
@@ -247,7 +253,7 @@ public:
         page_SoftDownload->setObjectName(QStringLiteral("page_SoftDownload"));
         widget = new QWidget(page_SoftDownload);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(160, 0, 761, 51));
+        widget->setGeometry(QRect(160, 0, 760, 51));
         horizontalLayout_2 = new QHBoxLayout(widget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -261,21 +267,21 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_7);
 
-        widget_s = new QWidget(widget);
-        widget_s->setObjectName(QStringLiteral("widget_s"));
-        widget_s->setMaximumSize(QSize(295, 25));
-        lineEdit_s = new QLineEdit(widget_s);
-        lineEdit_s->setObjectName(QStringLiteral("lineEdit_s"));
-        lineEdit_s->setGeometry(QRect(1, 1, 218, 23));
-        lineEdit_s->setMaximumSize(QSize(218, 23));
-        lab_search = new QLabel(widget_s);
-        lab_search->setObjectName(QStringLiteral("lab_search"));
-        lab_search->setGeometry(QRect(238, 0, 56, 25));
-        lab_clear = new QLabel(widget_s);
-        lab_clear->setObjectName(QStringLiteral("lab_clear"));
-        lab_clear->setGeometry(QRect(218, 5, 16, 16));
+        widget_s_4 = new QWidget(widget);
+        widget_s_4->setObjectName(QStringLiteral("widget_s_4"));
+        widget_s_4->setMaximumSize(QSize(295, 25));
+        lineEdit_s_4 = new QLineEdit(widget_s_4);
+        lineEdit_s_4->setObjectName(QStringLiteral("lineEdit_s_4"));
+        lineEdit_s_4->setGeometry(QRect(1, 1, 218, 23));
+        lineEdit_s_4->setMaximumSize(QSize(218, 23));
+        but_clear_4 = new QPushButton(widget_s_4);
+        but_clear_4->setObjectName(QStringLiteral("but_clear_4"));
+        but_clear_4->setGeometry(QRect(218, 5, 16, 16));
+        but_search_4 = new QPushButton(widget_s_4);
+        but_search_4->setObjectName(QStringLiteral("but_search_4"));
+        but_search_4->setGeometry(QRect(238, 0, 56, 25));
 
-        horizontalLayout_2->addWidget(widget_s);
+        horizontalLayout_2->addWidget(widget_s_4);
 
         widget_4 = new QWidget(page_SoftDownload);
         widget_4->setObjectName(QStringLiteral("widget_4"));
@@ -321,19 +327,27 @@ public:
         page_SoftUpgrade->setObjectName(QStringLiteral("page_SoftUpgrade"));
         label_3 = new QLabel(page_SoftUpgrade);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(0, 0, 821, 31));
-        list_Upgrade = new QListWidget(page_SoftUpgrade);
-        list_Upgrade->setObjectName(QStringLiteral("list_Upgrade"));
-        list_Upgrade->setGeometry(QRect(0, 30, 920, 530));
+        label_3->setGeometry(QRect(0, 0, 551, 31));
+        widget_s_3 = new QWidget(page_SoftUpgrade);
+        widget_s_3->setObjectName(QStringLiteral("widget_s_3"));
+        widget_s_3->setGeometry(QRect(620, 5, 295, 25));
+        widget_s_3->setMaximumSize(QSize(295, 25));
+        lineEdit_s_3 = new QLineEdit(widget_s_3);
+        lineEdit_s_3->setObjectName(QStringLiteral("lineEdit_s_3"));
+        lineEdit_s_3->setGeometry(QRect(1, 1, 218, 23));
+        lineEdit_s_3->setMaximumSize(QSize(218, 23));
+        but_clear_3 = new QPushButton(widget_s_3);
+        but_clear_3->setObjectName(QStringLiteral("but_clear_3"));
+        but_clear_3->setGeometry(QRect(218, 5, 16, 16));
+        but_search_3 = new QPushButton(widget_s_3);
+        but_search_3->setObjectName(QStringLiteral("but_search_3"));
+        but_search_3->setGeometry(QRect(238, 0, 56, 25));
         stackedWidget->addWidget(page_SoftUpgrade);
         page_SoftUnload = new QWidget();
         page_SoftUnload->setObjectName(QStringLiteral("page_SoftUnload"));
         label_unload = new QLabel(page_SoftUnload);
         label_unload->setObjectName(QStringLiteral("label_unload"));
         label_unload->setGeometry(QRect(0, 10, 171, 31));
-        lineEdit = new QLineEdit(page_SoftUnload);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(750, 20, 161, 21));
         widget_3 = new QWidget(page_SoftUnload);
         widget_3->setObjectName(QStringLiteral("widget_3"));
         widget_3->setGeometry(QRect(0, 120, 920, 440));
@@ -391,6 +405,20 @@ public:
         sizePolicy.setHeightForWidth(but_sel_name->sizePolicy().hasHeightForWidth());
         but_sel_name->setSizePolicy(sizePolicy);
         but_sel_name->setLayoutDirection(Qt::LeftToRight);
+        widget_s_2 = new QWidget(page_SoftUnload);
+        widget_s_2->setObjectName(QStringLiteral("widget_s_2"));
+        widget_s_2->setGeometry(QRect(620, 5, 295, 25));
+        widget_s_2->setMaximumSize(QSize(295, 25));
+        lineEdit_s_2 = new QLineEdit(widget_s_2);
+        lineEdit_s_2->setObjectName(QStringLiteral("lineEdit_s_2"));
+        lineEdit_s_2->setGeometry(QRect(1, 1, 218, 23));
+        lineEdit_s_2->setMaximumSize(QSize(218, 23));
+        but_clear_2 = new QPushButton(widget_s_2);
+        but_clear_2->setObjectName(QStringLiteral("but_clear_2"));
+        but_clear_2->setGeometry(QRect(218, 5, 16, 16));
+        but_search_2 = new QPushButton(widget_s_2);
+        but_search_2->setObjectName(QStringLiteral("but_search_2"));
+        but_search_2->setGeometry(QRect(238, 0, 56, 25));
         stackedWidget->addWidget(page_SoftUnload);
         page_UpdateInform = new QWidget();
         page_UpdateInform->setObjectName(QStringLiteral("page_UpdateInform"));
@@ -406,7 +434,7 @@ public:
         retranslateUi(MainWindow);
 
         stackedWidget->setCurrentIndex(3);
-        stack_download->setCurrentIndex(3);
+        stack_download->setCurrentIndex(0);
         stackedWidget_2->setCurrentIndex(4);
 
 
@@ -430,15 +458,20 @@ public:
         but_close->setText(QString());
         but_minimize->setText(QString());
         label_download->setText(QString());
-        lab_search->setText(QString());
-        lab_clear->setText(QString());
+        but_clear_4->setText(QString());
+        but_search_4->setText(QString());
         label_3->setText(QString());
+        but_clear_3->setText(QString());
+        but_search_3->setText(QString());
         label_unload->setText(QString());
         but_sel_size->setText(QString());
         but_sel_time->setText(QString());
         but_sel_path->setText(QString());
         but_sel_operate->setText(QString());
         but_sel_name->setText(QString());
+        lineEdit_s_2->setText(QString());
+        but_clear_2->setText(QString());
+        but_search_2->setText(QString());
         label->setText(QApplication::translate("MainWindow", "\350\275\257\344\273\266\347\256\241\345\256\266\347\233\256\345\211\215\347\211\210\346\234\254\357\274\2322.0.1.7", 0));
     } // retranslateUi
 

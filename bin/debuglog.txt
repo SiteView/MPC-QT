@@ -6046,3 +6046,338 @@
 20130819 14:27:29.968 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
 20130819 14:27:29.968 Critical: Singleton object create error  file curldownloadmanager.cpp  16
 20130819 14:27:30.656 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:11.437 Debug: qss is ok    file main.cpp  46
+20130819 14:43:11.562 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:11.578 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:11.578 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:11.640 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 14:43:21.031 Debug: qss is ok    file main.cpp  46
+20130819 14:43:21.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:21.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:21.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:21.234 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 14:43:23.703 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:23.703 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:24.421 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:24.421 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:24.421 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:25.109 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:25.812 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:25.812 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:26.875 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:26.875 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:26.875 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:27.484 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:27.500 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:28.531 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:28.531 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:28.531 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:29.109 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:29.109 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:29.546 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:29.546 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:29.546 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:29.984 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:29.984 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:30.578 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:43.593 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:43.593 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:44.796 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:44.796 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:44.796 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:45.640 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:45.640 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:46.109 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:46.109 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:46.109 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:47.031 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:47.031 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:47.500 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:47.500 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:47.515 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:48.093 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:48.093 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:49.609 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:50.343 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:50.343 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:51.062 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:51.062 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:51.062 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:51.656 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:43:51.656 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:43:52.718 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 14:52:15.140 Debug: qss is ok    file main.cpp  46
+20130819 14:52:15.281 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:52:15.281 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:52:15.281 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:52:15.343 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 14:59:23.375 Debug: qss is ok    file main.cpp  46
+20130819 14:59:23.515 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:59:23.515 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:59:23.531 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 14:59:23.593 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:00:11.078 Debug: qss is ok    file main.cpp  46
+20130819 15:00:11.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:00:11.234 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:00:11.234 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:00:11.296 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:01:52.109 Debug: qss is ok    file main.cpp  46
+20130819 15:01:52.250 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:01:52.265 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:01:52.265 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:01:52.328 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:02:50.234 Debug: qss is ok    file main.cpp  46
+20130819 15:02:50.390 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:02:50.390 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:02:50.390 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:02:50.453 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:03:01.625 Debug: qss is ok    file main.cpp  46
+20130819 15:03:01.765 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:03:01.781 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:03:01.781 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:03:01.843 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:04:16.046 Debug: qss is ok    file main.cpp  46
+20130819 15:04:16.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:04:16.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:04:16.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:04:16.281 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:07:18.406 Debug: qss is ok    file main.cpp  46
+20130819 15:07:18.546 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:07:18.546 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:07:18.546 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:07:18.609 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:08:53.453 Debug: qss is ok    file main.cpp  46
+20130819 15:08:53.593 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:08:53.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:08:53.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:08:53.671 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:10:37.984 Debug: qss is ok    file main.cpp  46
+20130819 15:10:38.125 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:10:38.125 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:10:38.125 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:10:38.187 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:11:32.875 Debug: qss is ok    file main.cpp  46
+20130819 15:11:33.078 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:11:33.078 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:11:33.078 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:11:33.140 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:13:30.093 Debug: qss is ok    file main.cpp  46
+20130819 15:13:30.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:13:30.234 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:13:30.234 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:13:30.296 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:16:25.078 Debug: qss is ok    file main.cpp  46
+20130819 15:16:25.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:16:25.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:16:25.218 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:16:25.281 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:17:24.000 Debug: qss is ok    file main.cpp  46
+20130819 15:17:24.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:17:24.156 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:17:24.156 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:17:24.218 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:18:23.156 Debug: qss is ok    file main.cpp  46
+20130819 15:18:23.296 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:18:23.296 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:18:23.312 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:18:23.375 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:21:12.703 Debug: qss is ok    file main.cpp  46
+20130819 15:21:12.937 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:21:12.937 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:21:12.953 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:21:13.031 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:21:51.500 Debug: qss is ok    file main.cpp  46
+20130819 15:21:51.640 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:21:51.640 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:21:51.640 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:21:51.703 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:22:18.328 Debug: qss is ok    file main.cpp  46
+20130819 15:22:18.468 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:22:18.484 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:22:18.484 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:22:18.546 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:24:04.031 Debug: qss is ok    file main.cpp  46
+20130819 15:24:04.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:24:04.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:24:04.187 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:24:04.250 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:27:41.750 Debug: qss is ok    file main.cpp  46
+20130819 15:27:41.890 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:27:41.890 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:27:41.906 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:27:41.968 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:29:29.468 Debug: qss is ok    file main.cpp  46
+20130819 15:29:29.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:29:29.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:29:29.625 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:29:29.687 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:33:52.343 Debug: qss is ok    file main.cpp  46
+20130819 15:33:52.484 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:33:52.484 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:33:52.484 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:33:52.578 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:37:12.000 Debug: qss is ok    file main.cpp  46
+20130819 15:37:12.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:37:12.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:37:12.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:37:12.203 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:39:36.578 Debug: qss is ok    file main.cpp  46
+20130819 15:39:36.718 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:39:36.718 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:39:36.734 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:39:36.781 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 15:40:18.328 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:18.328 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:19.781 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:20.375 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:20.375 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:21.593 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:21.593 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:21.593 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:22.265 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:22.265 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:22.781 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:22.781 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:22.781 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:23.171 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 15:40:23.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 15:40:23.671 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:29:12.453 Debug: qss is ok    file main.cpp  46
+20130819 16:29:12.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:29:12.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:29:12.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:29:12.671 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 16:29:47.218 Debug: qss is ok    file main.cpp  46
+20130819 16:29:47.359 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:29:47.359 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:29:47.359 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:29:47.437 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 16:30:19.593 Debug: qss is ok    file main.cpp  46
+20130819 16:30:19.750 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:30:19.750 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:30:19.750 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:30:19.812 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 16:30:50.171 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:30:50.171 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:30:50.937 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:30:51.359 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:30:51.359 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:30:51.734 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:30:51.750 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:30:51.750 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:43:23.812 Debug: qss is ok    file main.cpp  46
+20130819 16:43:23.937 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:43:23.953 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:43:23.953 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:43:24.015 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 16:45:25.250 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:25.250 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:25.609 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:25.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:25.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:26.062 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:26.421 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:26.421 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:26.828 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:26.828 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:26.828 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:27.187 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:27.187 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:27.625 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:28.140 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:28.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:28.500 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:56.671 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:56.687 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:57.343 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 16:45:57.343 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:57.343 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 16:45:57.671 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 17:01:07.500 Debug: qss is ok    file main.cpp  46
+20130819 17:01:07.625 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:07.640 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:07.640 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:07.703 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 17:01:28.375 Debug: qss is ok    file main.cpp  46
+20130819 17:01:28.515 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:28.515 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:28.531 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:28.593 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130819 17:01:37.437 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 17:01:37.437 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:37.437 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:37.843 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 17:01:37.843 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130819 17:01:38.218 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130819 17:01:39.765 Debug: "E:/8.2MPC/MPC-QT/bin" ---urlprogram--- "http://dl.google.com/pinyin/v2/GooglePinyinInstaller.exe"   file src\SoftDownloadItem.cpp  194
+20130819 17:01:39.921 Debug: 0.000000 15075864.000000 0.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:39.937 Debug: failure, can't open file to write  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  112
+20130819 17:01:39.937 Debug: 0.009684 15075864.000000 1460.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:39.937 Debug: curl download error 23  file curldownloadmanager.cpp  78
+20130819 17:01:40.062 Debug: 0.000000 15075864.000000 0.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:40.078 Debug: failure, can't open file to write  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  112
+20130819 17:01:40.078 Debug: 0.009684 15075864.000000 1460.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:40.078 Debug: curl download error 23  file curldownloadmanager.cpp  78
+20130819 17:01:40.187 Debug: 0.000000 15075864.000000 0.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:40.203 Debug: failure, can't open file to write  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  112
+20130819 17:01:40.203 Debug: 0.009432 15075864.000000 1422.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:40.203 Debug: curl download error 23  file curldownloadmanager.cpp  78
+20130819 17:01:40.312 Debug: 0.000000 15075864.000000 0.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:40.312 Debug: failure, can't open file to write  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  112
+20130819 17:01:40.312 Debug: 0.009684 15075864.000000 1460.000000 0.000000 0.000000  file e:\8.2mpc\mpc-qt\mpcver2.0.0\src\application\curldownloadmanager.h  123
+20130819 17:01:40.312 Debug: curl download error 23  file curldownloadmanager.cpp  78
+20130819 17:28:44.671 Warning: QThread: Destroyed while thread is still running  file thread\qthread.cpp  421
+20130820 15:57:39.171 Debug: qss is ok    file main.cpp  46
+20130820 15:57:40.203 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:40.203 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:40.203 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:40.296 Debug: -1 (***.CURREN   file src\SoftAllKindList.cpp  46
+20130820 15:57:44.140 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:44.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:44.140 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:44.625 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:44.625 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:44.984 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:45.406 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:45.406 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:45.406 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:45.765 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:45.765 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:46.093 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:46.859 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:46.859 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:47.234 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:47.234 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:47.234 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:47.718 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:48.109 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:48.109 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:48.109 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:48.859 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:48.859 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:49.375 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:49.375 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:49.375 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:50.406 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:50.406 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:50.953 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:50.953 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:50.953 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:51.546 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:51.546 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:52.015 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:52.609 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:52.609 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:53.187 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:53.187 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:53.187 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:53.781 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:53.781 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:54.484 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:54.937 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:54.937 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:55.625 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:55.625 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:55.625 Critical: Singleton object create error  file curldownloadmanager.cpp  16
+20130820 15:57:56.125 Debug: .CURRENTrow..text   file src\SoftAllKindList.cpp  51
+20130820 15:57:56.125 Critical: Singleton object create error  file curldownloadmanager.cpp  16

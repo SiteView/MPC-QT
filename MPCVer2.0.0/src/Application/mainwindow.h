@@ -11,6 +11,8 @@
 #include "src/SoftAllKindList.h"
 #include "src/SoftAllKindItem.h"
 
+//#include "../src/new/skin_widget.h"
+//class SkinWidget;
 
 namespace Ui {
 class MainWindow;
@@ -69,6 +71,18 @@ private slots:
 
     void on_but_sel_operate_clicked();
 
+    void on_but_clear_4_clicked();
+
+    void on_but_search_4_clicked();
+
+    void on_but_clear_3_clicked();
+
+    void on_but_search_3_clicked();
+
+    void on_but_clear_2_clicked();
+
+    void on_but_search_2_clicked();
+
 private:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -104,6 +118,8 @@ public:
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 //    CURLDownloadManager *downloader;
+//    SkinWidget *skin_widget; //显示皮肤界面
+
     bool flag;
 private:
     Ui::MainWindow *ui;
