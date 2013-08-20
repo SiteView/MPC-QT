@@ -4,12 +4,17 @@
 #include "softdownloadlist.h"
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
-
+#include "mainwindow.h"
 #include<QUrl>
 
 SoftDownloadList::SoftDownloadList(QWidget *parent) :
     QWidget(parent)
 {
+
+}
+
+
+void SoftDownloadList::selectDifType(int cmd){
     DownloadList  = new QListWidget(this);
 
     DownloadList->setFocusPolicy(Qt::NoFocus);
@@ -17,9 +22,75 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
     DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
 
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
-    if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo ;" ) )
+    switch(cmd)
     {
-        qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+    case ALL:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case ONE:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=1;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case TWO:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=2;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case THREE:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=3;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case FOUR:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=4;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case FIVE:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=5;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SIX:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=6;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case SEVEN:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=7;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case EIGHT:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=8;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case NINE:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=9;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+    case TEN:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=10;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
+
     }
     while ( SQLiteQuery.next() )
     {
@@ -40,21 +111,21 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
 
         SoftDownloadItem *ani=new SoftDownloadItem (DownloadList);
 
-//        ani->but_icon->setText(pahtstr2);
-        ani->but_softname->setText(pahtstr0);        
-//        QString lab_softdetail2;
-//        if(pahtstr1.count()<35)
-//        {
-//            ani->lab_softdetail->setText(pahtstr1+"...");
-//        }
-//        else
-//        {
-//            for(int k=0;k<35;k++)
-//            {
-//                lab_softdetail2+=pahtstr1.at(k);
-//            }
-//            ani->lab_softdetail->setText(lab_softdetail2+"...");
-//        }
+        //        ani->but_icon->setText(pahtstr2);
+        ani->but_softname->setText(pahtstr0);
+        //        QString lab_softdetail2;
+        //        if(pahtstr1.count()<35)
+        //        {
+        //            ani->lab_softdetail->setText(pahtstr1+"...");
+        //        }
+        //        else
+        //        {
+        //            for(int k=0;k<35;k++)
+        //            {
+        //                lab_softdetail2+=pahtstr1.at(k);
+        //            }
+        //            ani->lab_softdetail->setText(lab_softdetail2+"...");
+        //        }
         ani->lab_softdetail->setText(pahtstr1+"...");
 
         ani->lab_softdetail->setToolTip(pahtstr1);
@@ -64,7 +135,7 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
         ani->lab_size_2->setText(pahtstr4);
         ani->download->setText("download");
         ani->urlprogram=pahtstr5;
-//        ani->lab_prompt->setText(pahtstr2);
+        //        ani->lab_prompt->setText(pahtstr2);
         QUrl url = QUrl::fromEncoded(pahtstr5.toUtf8());
         QString path_file = url.toString();
         QStringList str=path_file.split("/");
@@ -77,6 +148,5 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
 
     }
     SQLiteQuery.finish();
+
 }
-
-

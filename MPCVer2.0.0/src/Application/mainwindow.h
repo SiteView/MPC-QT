@@ -17,7 +17,8 @@ class MainWindow;
 }
 enum SIGN
 {
-    SELECT_NAME_UP
+    SELECT_ALL
+    ,SELECT_NAME_UP
     ,SELECT_NAME_DOWN
     ,SELECT_SIZE_UP
     ,SELECT_SIZE_DOWN
@@ -26,6 +27,19 @@ enum SIGN
     ,SELECT_PATH_UP
     ,SELECT_PATH_DOWN
 
+};
+enum TYPE_FLAG{
+    ALL
+    ,ONE
+    ,TWO
+    ,THREE
+    ,FOUR
+    ,FIVE
+    ,SIX
+    ,SEVEN
+    ,EIGHT
+    ,NINE
+    ,TEN
 };
 class MainWindow : public QMainWindow
 {
@@ -73,6 +87,7 @@ public:
     CSQLiteDb m_SQLiteDb;
     InformDialog *inform;
     SoftUnloadList *list_unload;
+    SoftUnloadList *list_unload1;
     SoftUnloadList *list_unload2;
     SoftUnloadList *list_unload3;
     SoftUnloadList *list_unload4;
@@ -82,6 +97,10 @@ public:
     SoftUnloadList *list_unload8;
 
     SoftDownloadList *list_download;
+    SoftDownloadList *list_download1;
+    SoftDownloadList *list_download2;
+    SoftDownloadList *list_download3;
+
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 //    CURLDownloadManager *downloader;

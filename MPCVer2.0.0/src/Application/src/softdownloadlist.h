@@ -12,7 +12,7 @@ class SoftDownloadList : public QWidget
     Q_OBJECT
 public:
     explicit SoftDownloadList(QWidget *parent = 0);
-
+    void selectDifType(int);
 signals:
 
 public slots:
