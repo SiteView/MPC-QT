@@ -51,9 +51,15 @@
 #include <QHeaderView>
 #include <QStandardItemModel>
 #include <QTableView>
+#include <QTableWidget>
 
 #include"downloadmanager.h"
 #include "TestModelDelegate.h"
+
+#include "../Common/SqliteDb.h"
+
+// 全局数据库对象
+QSqlDatabase CSQLiteDb::m_db;
 
 extern  downloadmanager* g_objec; 
 //! [0]
@@ -65,14 +71,24 @@ int main(int argc, char *argv[])
 	g_objec = &downloader;
 	downloader.start();
 
+	if (!CSQLiteDb::ConnectionDB(QString( "./localedb.db" ) ) )
+		//if (!CSQLiteDb::ConnectionDB(QString( "" ) ) )
+	{
+		QString err = QString("database open faile :%1").arg(CSQLiteDb::getDB()->lastError().text());
+		qCritical(err.toLocal8Bit().data());
+		CSQLiteDb::DisConnectionDB();
+		return 0;
+	}	
 
-    QStandardItemModel model(4, 4);
-    QTableView tableView;
-    tableView.setModel(&model);
 
-    ProgressbarDelegate delegate;
+	DatabaseModel *model=new DatabaseModel();
+	model->setQuery("select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime from LocalAppInfor");
+
+    TestTableView tableView;
+    tableView.setModel(model);
+
 	TestModelDelegate pushbuttondelegate;
-
+	pushbuttondelegate.setModel((QStandardItemModel *)model);
 //    tableView.setItemDelegateForColumn(1,&delegate);
 //	tableView.setItemDelegateForColumn(0,&pushbuttondelegate);
 
@@ -80,13 +96,9 @@ int main(int argc, char *argv[])
 //	tableView.setItemDelegateForColumn(0,;
     tableView.horizontalHeader()->setStretchLastSection(true);
 
-    for (int row = 0; row < 4; ++row) {
-        for (int column = 0; column < 4; ++column) {
-            QModelIndex index = model.index(row, column, QModelIndex());
-            model.setData(index, QVariant((row + 1) * (column + 1)));
-        }
-    }
-    tableView.setWindowTitle(QObject::tr("Spin Box Delegate"));
+
+
+    tableView.setWindowTitle(QObject::tr("Delegate"));
     tableView.show();
     return app.exec();
 }

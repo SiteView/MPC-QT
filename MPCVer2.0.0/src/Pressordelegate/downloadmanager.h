@@ -10,7 +10,6 @@ class downloadmanager : public QThread
 public:
     explicit downloadmanager(QObject *parent = 0);
        virtual void run() ;
-
 signals:
 	  void sendValue(int value);
     
