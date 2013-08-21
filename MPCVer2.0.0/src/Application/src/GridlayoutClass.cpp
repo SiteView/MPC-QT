@@ -1,5 +1,6 @@
 #include <QVBoxLayout>
 #include <QSignalMapper>
+#include <QPainter>
 #include "GridlayoutClass.h"
 
 GridlayoutClass::GridlayoutClass(QWidget *parent) :
@@ -43,6 +44,7 @@ void GridlayoutClass::initTitle()
     title_icon_label->setFixedSize(16, 16);
     title_icon_label->setScaledContents(true);
     title_label->setFixedHeight(30);
+//    close_button->setStyleSheet("border-image: url(:/images/but_close_hover.png)");
 
     title_layout = new QHBoxLayout();
     title_layout->addWidget(title_icon_label, 0, Qt::AlignVCenter);
@@ -61,6 +63,12 @@ void GridlayoutClass::initCenter()
     skin_list<<"1"<<"2"<<"3"<<"4"<<"5"<<"6"<<"7"<<"8"<<"9"<<"10"<<"11"
             <<"12"<<"13"<<"14"<<"15"<<"16"<<"17"<<"18"<<"19"<<"20"<<"21"
            <<"22"<<"23"<<"24"<<"25";
+
+    tip_list<<tr("profound life")<<tr("blue sea")<<tr("red heart")<<tr("lovely baby")<<tr("transparent water")<<
+        tr("flower")<<tr("great sunshine")<<tr("shadow amazement")<<tr("360 pet")<<tr("beautiful stone")<<
+        tr("yellow energy")<<tr("magic world")<<tr("intense emotion")<<tr("dream sky")<<tr("angry bird")<<
+        tr("graceful jazz")<<tr("card")<<tr("summer cool")<<tr("blue world")<<tr("woodwind")<<
+        tr("pink mood")<<tr("across time")<<tr("six year");
 
     center_layout = new QGridLayout();
     center_layout->setSpacing(5);
@@ -214,6 +222,56 @@ void GridlayoutClass::showCell(QString current_skin)
     if(previous_total_page > 0)
     {
         tip_index = previous_total_page - 1;
+    }    
+}
+
+
+void GridlayoutClass::paintEvent(QPaintEvent *)
+{
+
+    QPainter painter(this);
+    painter.drawPixmap(rect(), QPixmap(skin_name));
+
+    QPainter painter2(this);
+    QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+    linear2.setColorAt(0, Qt::white);
+    linear2.setColorAt(0.5, Qt::white);
+    linear2.setColorAt(1, Qt::white);
+    painter2.setPen(Qt::white); //设定画笔颜色，到时侯就是边框颜色
+    painter2.setBrush(linear2);
+    painter2.drawRect(QRect(0, 30, this->width(), this->height()-30));
+
+    QPainter painter3(this);
+    painter3.setPen(Qt::gray);
+    static const QPointF points[4] = {QPointF(0, 30), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 30)};
+    painter3.drawPolyline(points, 4);
+}
+
+
+void GridlayoutClass::mousePressEvent( QMouseEvent * event )
+{
+    //只能是鼠标左键移动和改变大小
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+
+    //窗口移动距离
+    move_point = event->globalPos() - pos();
+}
+
+void GridlayoutClass::mouseReleaseEvent(QMouseEvent *)
+{
+    mouse_press = false;
+}
+
+void GridlayoutClass::mouseMoveEvent(QMouseEvent *event)
+{
+    //移动窗口
+    if(mouse_press)
+    {
+        QPoint move_pos = event->globalPos();
+        move(move_pos - move_point);
     }
 }
 

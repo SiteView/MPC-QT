@@ -7,12 +7,20 @@
 #include <QLabel>
 #include <QPushButton>
 //#include <QPoint>
+#include <QMouseEvent>
 #include "CellClass.h"
 class GridlayoutClass : public QWidget
 {
     Q_OBJECT
 public:
     explicit GridlayoutClass(QWidget *parent = 0);
+
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 signals:
     
@@ -26,13 +34,13 @@ private:
     QString skin_name; //背景图片
     bool is_change; //是否改变背景
     QStringList skin_list;
-//    QStringList tip_list;
+    QStringList tip_list;
 
     QHBoxLayout *title_layout;
     QGridLayout *center_layout;
     QHBoxLayout *bottom_layout;
 
-//    QPoint move_point; //移动的距离
+    QPoint move_point; //移动的距离
     bool mouse_press; //按下鼠标左键
     QLabel *title_label; //标题
     QLabel *title_icon_label; //标题图标
