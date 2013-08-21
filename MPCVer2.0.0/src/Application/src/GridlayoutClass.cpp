@@ -1,4 +1,5 @@
 #include <QVBoxLayout>
+#include <QSignalMapper>
 #include "GridlayoutClass.h"
 
 GridlayoutClass::GridlayoutClass(QWidget *parent) :
@@ -6,11 +7,15 @@ GridlayoutClass::GridlayoutClass(QWidget *parent) :
 {
 
     this->resize(620, 445);
+    mouse_press = false;
+    skin_name = QString("");
+    is_change = false;
+    current_page = 1;
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 
-    this->initTitle();
-    this->initCenter();
-    this->initBottom();
+    initTitle();
+    initCenter();
+    initBottom();
 
     QVBoxLayout *main_layout = new QVBoxLayout();
     main_layout->addLayout(title_layout);
@@ -19,8 +24,8 @@ GridlayoutClass::GridlayoutClass(QWidget *parent) :
     main_layout->addStretch();
     main_layout->setSpacing(0);
     main_layout->setContentsMargins(0, 0, 0, 0);
-
     this->setLayout(main_layout);
+    this->showCell(QString::number(current_page, 10));
 
 }
 
@@ -28,14 +33,15 @@ void GridlayoutClass::initTitle()
 {
     title_label = new QLabel();
     title_icon_label = new QLabel();
-    close_button = new PushButton();
+    close_button = new QPushButton();
+    title_label->setObjectName(QString::fromUtf8("title_label"));
+    title_icon_label->setObjectName(QString::fromUtf8("title_icon_label"));
+    close_button->setObjectName(QString::fromUtf8("close_button"));
 
     QPixmap title_pixmap(":/images/360small.png");
     title_icon_label->setPixmap(title_pixmap);
     title_icon_label->setFixedSize(16, 16);
     title_icon_label->setScaledContents(true);
-
-    close_button->loadPixmap(":/images/but_close_hover.png");
     title_label->setFixedHeight(30);
 
     title_layout = new QHBoxLayout();
@@ -47,16 +53,26 @@ void GridlayoutClass::initTitle()
     title_layout->setContentsMargins(10, 0, 5, 0);
 
     title_label->setStyleSheet("color:white;");
-    connect(close_button, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(close_button, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 void GridlayoutClass::initCenter()
 {
-    skin_list;
+    skin_list<<"1"<<"2"<<"3"<<"4"<<"5"<<"6"<<"7"<<"8"<<"9"<<"10"<<"11"
+            <<"12"<<"13"<<"14"<<"15"<<"16"<<"17"<<"18"<<"19"<<"20"<<"21"
+           <<"22"<<"23"<<"24"<<"25";
 
     center_layout = new QGridLayout();
     center_layout->setSpacing(5);
     center_layout->setContentsMargins(5, 35, 5, 0);
+    cell_1=new CellClass();
+    cell_2=new CellClass();
+    cell_3=new CellClass();
+    cell_4=new CellClass();
+    cell_5=new CellClass();
+    cell_6=new CellClass();
+    cell_7=new CellClass();
+    cell_8=new CellClass();
 
     center_layout->addWidget(cell_1, 0, 0);
     center_layout->addWidget(cell_2, 0, 1);
@@ -109,10 +125,10 @@ void GridlayoutClass::initBottom()
     next_page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
     last_page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
 
-    first_page_button->setText(tr("first page"));
-    previous_page_button->setText(tr("previous page"));
-    next_page_button->setText(tr("next page"));
-    last_page_button->setText(tr("last page"));
+    first_page_button->setText(tr("first"));
+    previous_page_button->setText(tr("previous"));
+    next_page_button->setText(tr("next"));
+    last_page_button->setText(tr("last"));
 
     connect(first_page_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
     connect(previous_page_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
@@ -122,7 +138,7 @@ void GridlayoutClass::initBottom()
     signal_mapper->setMapping(previous_page_button, "previous");
     signal_mapper->setMapping(next_page_button, "next");
     signal_mapper->setMapping(last_page_button, "last");
-    connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(showSkin(QString)));
+    connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(showCell(QString)));
 
     bottom_layout = new QHBoxLayout();
     bottom_layout->addStretch();

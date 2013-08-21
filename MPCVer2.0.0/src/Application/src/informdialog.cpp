@@ -21,9 +21,6 @@ InformDialog::InformDialog(QWidget *parent) :
     connect(timerStay,SIGNAL(timeout()),this,SLOT(myStay()));
     timerClose=new QTimer(this);
     connect(timerClose,SIGNAL(timeout()),this,SLOT(myClose()));
-
-
-
 }
 
 InformDialog::~InformDialog()

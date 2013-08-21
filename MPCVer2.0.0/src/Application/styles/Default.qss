@@ -137,11 +137,11 @@ QPushButton#but_suspend:hover
 
 
 /*HEAD BUTTONS ABOUT*/
-QPushButton#but_close
+QPushButton#but_close,#close_button
 {
     border-image: url(:/images/but_close.png);
 }
-QPushButton#but_close:hover
+QPushButton#but_close:hover,#close_button:hover
 {
     border-image: url(:/images/but_close_hover.png);
 }

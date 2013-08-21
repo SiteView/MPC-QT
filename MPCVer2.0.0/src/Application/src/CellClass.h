@@ -13,6 +13,15 @@ public:
 signals:
     
 public slots:
+    void changeText(QString pixmap_name, QString skin_name, QString download_count);
+
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
 

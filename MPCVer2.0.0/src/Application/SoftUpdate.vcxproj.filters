@@ -46,17 +46,23 @@
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{cb53b936-a016-4877-8b22-1b775f0a2956}</UniqueIdentifier>
+      <UniqueIdentifier>{2d65886c-7195-4464-8424-0e4b21436b16}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
     <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{f4968565-8523-4dba-ad8e-1365bb53360a}</UniqueIdentifier>
+      <UniqueIdentifier>{7118508b-75ae-42e1-8e7f-d88e2fef4450}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CellClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GridlayoutClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\InformDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,6 +98,18 @@
     </ClCompile>
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CellClass.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CellClass.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_GridlayoutClass.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_GridlayoutClass.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_InformDialog.cpp">
       <Filter>Generated Files\Release</Filter>
@@ -164,6 +182,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="src\CellClass.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\GridlayoutClass.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="src\InformDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -225,6 +249,12 @@
     <None Include="images\but_about_hover.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="images\but_cancel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_cancel_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="images\but_close.png">
       <Filter>Resource Files</Filter>
     </None>
@@ -243,13 +273,37 @@
     <None Include="images\but_scroll_up.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="images\but_suspend.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\but_suspend_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="images\caution.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="images\circle.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="images\clear.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\clear_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\down.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="src\informdialog.ui">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\lab_search.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\lab_search_h.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\lab_search_p.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="images\lightcircle.png">
@@ -264,6 +318,9 @@
     <CustomBuild Include="resource.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
+    <None Include="images\search.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="images\softdownload_h.png">
       <Filter>Resource Files</Filter>
     </None>
@@ -292,6 +349,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="images\title.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="images\up.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="images\updateinform_h.png">

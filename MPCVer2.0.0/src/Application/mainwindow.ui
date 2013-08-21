@@ -317,7 +317,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QWidget" name="widget_2" native="true">
@@ -525,6 +525,16 @@
          <string/>
         </property>
        </widget>
+      </widget>
+      <widget class="QWidget" name="widget_6" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>40</y>
+         <width>920</width>
+         <height>520</height>
+        </rect>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="page_SoftUnload">

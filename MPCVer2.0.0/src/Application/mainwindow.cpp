@@ -25,9 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->createUpgradeMenu();
     this->createDownloadMenu();
     this->AddSoftSortMenu();
-    inform = new InformDialog;
-    item_allkind    = new SoftAllKindItem();
-
+    inform        = new InformDialog;
+    item_allkind  = new SoftAllKindItem();
 
     ui->lineEdit_s_4->setFrame(false);//**
     ui->lineEdit_s_2->setFrame(false);
@@ -120,8 +119,10 @@ void MainWindow::on_UpdateInform_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
     //    inform->showAsQQ();
-//    skin_widget = new SkinWidget(this);//
-//    skin_widget->show();
+//        layout_widget=new GridlayoutClass(ui->widget_6);
+
+    layout_widget=new GridlayoutClass(this);
+    layout_widget->show();
 
 }
 

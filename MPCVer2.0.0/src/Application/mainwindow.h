@@ -10,10 +10,8 @@
 #include "src/SoftDownloadList.h"
 #include "src/SoftAllKindList.h"
 #include "src/SoftAllKindItem.h"
-
-//#include "../src/new/skin_widget.h"
-//class SkinWidget;
-
+#include "src/GridlayoutClass.h"
+#include "src/CellClass.h"
 namespace Ui {
 class MainWindow;
 }
@@ -95,7 +93,7 @@ public:
     void createUnloadtableMenu();
     void createDownloadMenu();
     void AddSoftSortMenu();
-    void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
+//    void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
 
 public:
     CSQLiteDb m_SQLiteDb;
@@ -118,7 +116,7 @@ public:
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 //    CURLDownloadManager *downloader;
-//    SkinWidget *skin_widget; //显示皮肤界面
+    GridlayoutClass *layout_widget; //显示皮肤界面
 
     bool flag;
 private:

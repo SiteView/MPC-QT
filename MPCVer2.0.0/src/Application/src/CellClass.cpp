@@ -1,4 +1,7 @@
 #include <QVBoxLayout>
+#include <QPainter>
+#include <QPen>
+#include <QMoveEvent>
 #include "CellClass.h"
 
 CellClass::CellClass(QWidget *parent) :
@@ -29,4 +32,47 @@ CellClass::CellClass(QWidget *parent) :
     background_layout->setContentsMargins(0, 10, 0, 10);
 
     this->setLayout(background_layout);
+}
+
+
+void CellClass::changeText(QString pixmap_name, QString skin_name, QString download_count)
+{
+
+}
+void CellClass::paintEvent(QPaintEvent *event)
+{
+    if(mouse_enter)
+    {
+        //绘制边框
+        QPainter painter(this);
+        QPen pen(QColor(210, 225, 230));
+        painter.setPen(pen);
+        painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 5, 5);
+    }
+}
+
+void CellClass::mousePressEvent(QMouseEvent * event)
+{
+    //只能是鼠标左键移动和改变大小
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+}
+
+void CellClass::mouseReleaseEvent(QMouseEvent *event)
+{
+    mouse_press = false;
+}
+
+void CellClass::enterEvent(QEvent *event)
+{
+    mouse_enter = true;
+    update();
+}
+
+void CellClass::leaveEvent(QEvent *event)
+{
+    mouse_enter = false;
+    update();
 }

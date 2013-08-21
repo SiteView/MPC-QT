@@ -85,6 +85,7 @@ public:
     QLineEdit *lineEdit_s_3;
     QPushButton *but_clear_3;
     QPushButton *but_search_3;
+    QWidget *widget_6;
     QWidget *page_SoftUnload;
     QLabel *label_unload;
     QWidget *widget_3;
@@ -342,6 +343,9 @@ public:
         but_search_3 = new QPushButton(widget_s_3);
         but_search_3->setObjectName(QStringLiteral("but_search_3"));
         but_search_3->setGeometry(QRect(238, 0, 56, 25));
+        widget_6 = new QWidget(page_SoftUpgrade);
+        widget_6->setObjectName(QStringLiteral("widget_6"));
+        widget_6->setGeometry(QRect(0, 40, 920, 520));
         stackedWidget->addWidget(page_SoftUpgrade);
         page_SoftUnload = new QWidget();
         page_SoftUnload->setObjectName(QStringLiteral("page_SoftUnload"));
@@ -433,7 +437,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(3);
+        stackedWidget->setCurrentIndex(2);
         stack_download->setCurrentIndex(0);
         stackedWidget_2->setCurrentIndex(4);
 
