@@ -44,7 +44,7 @@ void GridlayoutClass::initTitle()
     title_icon_label->setFixedSize(16, 16);
     title_icon_label->setScaledContents(true);
     title_label->setFixedHeight(30);
-//    close_button->setStyleSheet("border-image: url(:/images/but_close_hover.png)");
+    //    close_button->setStyleSheet("border-image: url(:/images/but_close_hover.png)");
 
     title_layout = new QHBoxLayout();
     title_layout->addWidget(title_icon_label, 0, Qt::AlignVCenter);
@@ -65,10 +65,10 @@ void GridlayoutClass::initCenter()
            <<"22"<<"23"<<"24"<<"25";
 
     tip_list<<tr("profound life")<<tr("blue sea")<<tr("red heart")<<tr("lovely baby")<<tr("transparent water")<<
-        tr("flower")<<tr("great sunshine")<<tr("shadow amazement")<<tr("360 pet")<<tr("beautiful stone")<<
-        tr("yellow energy")<<tr("magic world")<<tr("intense emotion")<<tr("dream sky")<<tr("angry bird")<<
-        tr("graceful jazz")<<tr("card")<<tr("summer cool")<<tr("blue world")<<tr("woodwind")<<
-        tr("pink mood")<<tr("across time")<<tr("six year");
+              tr("flower")<<tr("great sunshine")<<tr("shadow amazement")<<tr("360 pet")<<tr("beautiful stone")<<
+              tr("yellow energy")<<tr("magic world")<<tr("intense emotion")<<tr("dream sky")<<tr("angry bird")<<
+              tr("graceful jazz")<<tr("card")<<tr("summer cool")<<tr("blue world")<<tr("woodwind")<<
+              tr("pink mood")<<tr("across time")<<tr("six year");
 
     center_layout = new QGridLayout();
     center_layout->setSpacing(5);
@@ -128,10 +128,10 @@ void GridlayoutClass::initBottom()
     previous_page_button->setCursor(Qt::PointingHandCursor);
     next_page_button->setCursor(Qt::PointingHandCursor);
     last_page_button->setCursor(Qt::PointingHandCursor);
-    first_page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
+    first_page_button->setStyleSheet("color:rgb(0, 120, 230); background:lightblue;");
     previous_page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
     next_page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
-    last_page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
+    last_page_button->setStyleSheet("color:rgb(0, 120, 230); background:lightblue;");
 
     first_page_button->setText(tr("first"));
     previous_page_button->setText(tr("previous"));
@@ -222,7 +222,7 @@ void GridlayoutClass::showCell(QString current_skin)
     if(previous_total_page > 0)
     {
         tip_index = previous_total_page - 1;
-    }    
+    }
 }
 
 

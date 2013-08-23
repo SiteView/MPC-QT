@@ -19,7 +19,7 @@ void SoftUnloadList::DiffSelect(int cmd){
     switch(cmd)
     {
     case SELECT_ALL:
-        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor limit 10 ;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor limit 5 ;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }

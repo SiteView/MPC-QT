@@ -12,6 +12,8 @@
 #include "src/SoftAllKindItem.h"
 #include "src/GridlayoutClass.h"
 #include "src/CellClass.h"
+
+#include "src/testunloadlist.h"
 namespace Ui {
 class MainWindow;
 }
@@ -116,7 +118,8 @@ public:
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 //    CURLDownloadManager *downloader;
-    GridlayoutClass *layout_widget; //显示皮肤界面
+    TestUnloadItem *layout_widget; //显示皮肤界面
+    TestUnloadList *testclass;
 
     bool flag;
 private:

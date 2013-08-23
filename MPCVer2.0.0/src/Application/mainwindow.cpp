@@ -12,9 +12,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//#include "../src/new/skin_widget.h"
 
-//class SkinWidget;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),flag(true)
@@ -51,7 +49,8 @@ MainWindow::~MainWindow()
 }
 void MainWindow::createUpgradeMenu()
 {
-
+    testclass=new TestUnloadList (ui->widget_6);
+    testclass->show();
 }
 void MainWindow::createDownloadMenu()
 {
@@ -65,11 +64,11 @@ void MainWindow::createUnloadtableMenu()
     list_unload     = new SoftUnloadList(ui->page_selall);
     list_unload->DiffSelect(SELECT_ALL);
     ui->stackedWidget_2->setCurrentWidget(ui->page_selall);
-
 }
 void MainWindow::AddSoftSortMenu()
 {
     list_allkinds   = new SoftAllKindList(ui->widget_4);
+
 }
 
 void MainWindow::changeCurrentItem(){
@@ -77,6 +76,7 @@ void MainWindow::changeCurrentItem(){
     if(current_row==0)
     {
         ui->stack_download->setCurrentWidget(ui->page_all);
+
     }
     if(current_row==1)
     {
@@ -112,18 +112,11 @@ void MainWindow::on_SoftUpgrade_clicked()
 void MainWindow::on_SoftUnload_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
-
 }
 
 void MainWindow::on_UpdateInform_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-    //    inform->showAsQQ();
-//        layout_widget=new GridlayoutClass(ui->widget_6);
-
-    layout_widget=new GridlayoutClass(this);
-    layout_widget->show();
-
 }
 
 void MainWindow::on_but_close_clicked()

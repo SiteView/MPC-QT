@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     src/SoftUpgradeItem.cpp \
     ./curldownloadmanager.cpp \
     src/GridlayoutClass.cpp \
-    src/CellClass.cpp
+    src/CellClass.cpp \
+    src/testunloaditem.cpp \
+    src/testunloadlist.cpp
 
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
@@ -46,7 +48,9 @@ HEADERS  += mainwindow.h \
     src/SoftUpgradeItem.h \
     ./curldownloadmanager.h \
     src/GridlayoutClass.h \
-    src/CellClass.h
+    src/CellClass.h \
+    src/testunloaditem.h \
+    src/testunloadlist.h
 
 FORMS    += mainwindow.ui
  #   src/informdialog.ui
