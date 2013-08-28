@@ -13,15 +13,13 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
 
 }
 
-
 void SoftDownloadList::selectDifType(int cmd){
     DownloadList  = new QListWidget(this);
-
     DownloadList->setFocusPolicy(Qt::NoFocus);
     DownloadList->resize(760,510);
     DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
 
-    QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
+    QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB());
     switch(cmd)
     {
     case ALL:

@@ -134,9 +134,8 @@ void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
         //        return false;
     }
     m_SQLiteDb.getDB()->commit();
-
-
 }
+
 void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )
 {
     qDebug()<<error<<"=error=";

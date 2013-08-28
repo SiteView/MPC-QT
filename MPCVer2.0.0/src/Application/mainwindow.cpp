@@ -16,18 +16,23 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),flag(true)
-
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
-    createUnloadtableMenu();
-    createUpgradeMenu();
-    createDownloadMenu();
-    AddSoftSortMenu();
-    inform = new InformDialog;
-    item_allkind    = new SoftAllKindItem();
+    this->createUnloadtableMenu();
+    this->createUpgradeMenu();
+    this->createDownloadMenu();
+    this->AddSoftSortMenu();
+    inform        = new InformDialog;
+    item_allkind  = new SoftAllKindItem();
 
-    ui->lineEdit_s->setFrame(false);//**
+    ui->lineEdit_s_4->setFrame(false);//**
+    ui->lineEdit_s_2->setFrame(false);
+    ui->lineEdit_s_3->setFrame(false);
+    ui->lineEdit_s_2->setMaxLength(50);
+    ui->lineEdit_s_3->setMaxLength(50);
+    ui->lineEdit_s_4->setMaxLength(50);
+
     connect(list_allkinds->list_softallkind,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
 
     ui->but_sel_name->setStyleSheet("QPushButton{text-align:left;}");
@@ -36,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_path->setText("setpath");
     ui->but_sel_size->setText("softsize");
     ui->but_sel_operate->setText("operate");
-
 }
 
 MainWindow::~MainWindow()
@@ -45,7 +49,8 @@ MainWindow::~MainWindow()
 }
 void MainWindow::createUpgradeMenu()
 {
-
+    testclass=new TestUnloadList (ui->widget_6);
+    testclass->show();
 }
 void MainWindow::createDownloadMenu()
 {
@@ -59,21 +64,19 @@ void MainWindow::createUnloadtableMenu()
     list_unload     = new SoftUnloadList(ui->page_selall);
     list_unload->DiffSelect(SELECT_ALL);
     ui->stackedWidget_2->setCurrentWidget(ui->page_selall);
-
-
 }
 void MainWindow::AddSoftSortMenu()
 {
     list_allkinds   = new SoftAllKindList(ui->widget_4);
+
 }
 
 void MainWindow::changeCurrentItem(){
-    ui->lineEdit_s->setText(item_allkind->text->text());
     int current_row = list_allkinds->list_softallkind->currentRow();
-//    qDebug()<<current_row<<item_allkind->text->text()<<"----current ..row..text";
     if(current_row==0)
     {
         ui->stack_download->setCurrentWidget(ui->page_all);
+
     }
     if(current_row==1)
     {
@@ -109,13 +112,11 @@ void MainWindow::on_SoftUpgrade_clicked()
 void MainWindow::on_SoftUnload_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
-
 }
 
 void MainWindow::on_UpdateInform_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-    //    inform->showAsQQ();
 }
 
 void MainWindow::on_but_close_clicked()
@@ -236,7 +237,6 @@ void MainWindow::on_but_sel_operate_clicked()
 {
     if(flag)
     {
-
         ui->but_sel_operate->setIcon(QIcon(":/images/down.png"));
         flag=false;
     }
@@ -245,4 +245,35 @@ void MainWindow::on_but_sel_operate_clicked()
         ui->but_sel_operate->setIcon(QIcon(":/images/up.png"));
         flag=true;
     }
+}
+
+void MainWindow::on_but_clear_4_clicked()
+{
+    ui->lineEdit_s_4->clear();
+
+}
+
+void MainWindow::on_but_search_4_clicked()
+{
+
+}
+
+void MainWindow::on_but_clear_3_clicked()
+{
+    ui->lineEdit_s_3->clear();
+}
+
+void MainWindow::on_but_search_3_clicked()
+{
+
+}
+
+void MainWindow::on_but_clear_2_clicked()
+{
+    ui->lineEdit_s_2->clear();
+}
+
+void MainWindow::on_but_search_2_clicked()
+{
+
 }
