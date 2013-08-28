@@ -229,21 +229,18 @@ void GridlayoutClass::showCell(QString current_skin)
 void GridlayoutClass::paintEvent(QPaintEvent *)
 {
 
-    QPainter painter(this);
-    painter.drawPixmap(rect(), QPixmap(skin_name));
-
     QPainter painter2(this);
     QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
     linear2.setColorAt(0, Qt::white);
-    linear2.setColorAt(0.5, Qt::white);
+    linear2.setColorAt(0.5, Qt::red);
     linear2.setColorAt(1, Qt::white);
     painter2.setPen(Qt::white); //设定画笔颜色，到时侯就是边框颜色
     painter2.setBrush(linear2);
-    painter2.drawRect(QRect(0, 30, this->width(), this->height()-30));
+    painter2.drawRect(QRect(0, 30, this->width(), this->height()));
 
     QPainter painter3(this);
     painter3.setPen(Qt::gray);
-    static const QPointF points[4] = {QPointF(0, 30), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 30)};
+    static const QPointF points[4] = {QPointF(0, 0), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, this->height()-1)};
     painter3.drawPolyline(points, 4);
 }
 
@@ -268,10 +265,10 @@ void GridlayoutClass::mouseReleaseEvent(QMouseEvent *)
 void GridlayoutClass::mouseMoveEvent(QMouseEvent *event)
 {
     //移动窗口
-    if(mouse_press)
-    {
-        QPoint move_pos = event->globalPos();
-        move(move_pos - move_point);
-    }
+//    if(mouse_press)
+//    {
+//        QPoint move_pos = event->globalPos();
+//        move(move_pos - move_point);
+//    }
 }
 

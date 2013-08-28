@@ -120,7 +120,7 @@ public:
 //    CURLDownloadManager *downloader;
     TestUnloadItem *layout_widget; //显示皮肤界面
     TestUnloadList *testclass;
-
+    GridlayoutClass *grid;
     bool flag;
 private:
     Ui::MainWindow *ui;

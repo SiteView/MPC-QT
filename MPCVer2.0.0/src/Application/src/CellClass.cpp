@@ -41,13 +41,24 @@ void CellClass::changeText(QString pixmap_name, QString skin_name, QString downl
 }
 void CellClass::paintEvent(QPaintEvent *event)
 {
+    QPainter painter(this);
+    QPen pen(QColor(210, 225, 230));
+    painter.setPen(pen);
+    painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 0, 0);
     if(mouse_enter)
     {
         //绘制边框
-        QPainter painter(this);
-        QPen pen(QColor(210, 225, 230));
-        painter.setPen(pen);
-        painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 5, 5);
+
+//        painter.setBackground(pen);
+        QPainter painter2(this);
+        QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+        linear2.setColorAt(0, Qt::white);
+        linear2.setColorAt(0.5, Qt::gray);
+        linear2.setColorAt(1, Qt::white);
+        painter2.setPen(Qt::white); //设定画笔颜色，到时侯就是边框颜色
+        painter2.setBrush(linear2);
+        painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+
     }
 }
 

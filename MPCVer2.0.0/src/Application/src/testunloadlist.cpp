@@ -1,13 +1,16 @@
 #include <QVBoxLayout>
 #include <QSignalMapper>
+#include <QPainter>
 #include "testunloadlist.h"
 
 TestUnloadList::TestUnloadList(QWidget *parent) :
     QWidget(parent)
 {
     current_page = 1;
+    mouse_press = false;
     WidgetContents=new QWidget();
     WidgetContents->setObjectName(QStringLiteral("WidgetContents"));
+    WidgetContents->setStyleSheet("background:rgb(255,255,255);");
     initCenter();
     initBottom();
     area=new QScrollArea(this);
@@ -24,6 +27,8 @@ TestUnloadList::TestUnloadList(QWidget *parent) :
     WidgetContents->setLayout(main_layout);
     area->setWidget(WidgetContents);
     this->showPage(QString::number(current_page, 10));
+
+
 
 }
 void TestUnloadList::initCenter()
@@ -53,27 +58,13 @@ void TestUnloadList::initCenter()
 
     center_layout = new QVBoxLayout();
 
-    item1=new TestUnloadItem(WidgetContents);
-    item2=new TestUnloadItem(WidgetContents);
-    item3=new TestUnloadItem(WidgetContents);
-    item4=new TestUnloadItem(WidgetContents);
-    item5=new TestUnloadItem(WidgetContents);
-    item6=new TestUnloadItem(WidgetContents);
-    item7=new TestUnloadItem(WidgetContents);
-    item8=new TestUnloadItem(WidgetContents);
-    item9=new TestUnloadItem(WidgetContents);
-    item0=new TestUnloadItem(WidgetContents);
-
-    center_layout->addWidget(item1);
-    center_layout->addWidget(item2);
-    center_layout->addWidget(item3);
-    center_layout->addWidget(item4);
-    center_layout->addWidget(item5);
-    center_layout->addWidget(item6);
-    center_layout->addWidget(item7);
-    center_layout->addWidget(item8);
-    center_layout->addWidget(item9);
-    center_layout->addWidget(item0);
+    item_list =new QList<TestUnloadItem *>();
+    for(int i=0; i<10; i++)
+    {
+        TestUnloadItem *item = new TestUnloadItem(WidgetContents);
+        center_layout->addWidget(item);
+        item_list->push_back(item);
+    }
 
     int skin_list_count = name_list.size();
     page_count = skin_list_count / 10;
@@ -81,6 +72,7 @@ void TestUnloadList::initCenter()
     if(page_count_point > 0)
     {
         page_count = page_count + 1;
+        qDebug()<<"page_count_point=="<<page_count_point;
     }
 
 }
@@ -161,6 +153,10 @@ void TestUnloadList::showPage(QString current_skin)
         {
             current_page = current_page - 1;
         }
+        else
+        {
+            current_page=1;
+        }
     }
     else if(current_skin == "next")
     {
@@ -201,22 +197,57 @@ void TestUnloadList::showPage(QString current_skin)
         last_page_button->hide();
     }
 
-    //第一页为0-7 显示至previous_total_page个
-    int previous_total_page = (current_page - 1)*10;
-    int tip_index = previous_total_page;
-    if(previous_total_page > 0)
-    {
-        tip_index = previous_total_page - 1;
-    }
-    item1->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item2->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item3->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item4->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item5->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item6->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item7->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item8->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item9->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
-    item0->takeText(name_list.at(tip_index++), time_list.at(tip_index++),size_list.at(tip_index++) ,detail_list.at(tip_index++));
 
+    //第一页为0-7 显示至previous_total_page个
+    int tip_index = (current_page - 1)*10;
+    if(current_page<page_count)
+    {
+        for(int i=0;i<10;i++)
+        {
+            item_list->at(i)->takeText(name_list.at(tip_index++), time_list.at(tip_index-1),size_list.at(tip_index-1) ,detail_list.at(tip_index-1));
+        }
+    }
+    else
+    {
+        for(int i=0;i<page_count_point;i++)
+        {
+            item_list->at(i)->takeText(name_list.at(tip_index++), time_list.at(tip_index-1),size_list.at(tip_index-1) ,detail_list.at(tip_index-1));
+        }
+    }
 }
+
+void TestUnloadList::paintEvent(QPaintEvent *)
+{
+    QPainter painter2(WidgetContents);
+    QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+    linear2.setColorAt(0, Qt::white);
+    linear2.setColorAt(0.5, Qt::red);
+    linear2.setColorAt(1, Qt::white);
+    painter2.setPen(Qt::white); //设定画笔颜色，到时侯就是边框颜色
+    painter2.setBrush(linear2);
+    painter2.drawRect(QRect(0, 30, this->width(), this->height()));
+
+    QPainter painter3(WidgetContents);
+    painter3.setPen(Qt::gray);
+    static const QPointF points[4] = {QPointF(0, 0), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, this->height()-1)};
+    painter3.drawPolyline(points, 4);
+}
+
+
+void TestUnloadList::mousePressEvent( QMouseEvent * event )
+{
+    //只能是鼠标左键移动和改变大小
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+
+    //窗口移动距离
+    move_point = event->globalPos() - pos();
+}
+
+void TestUnloadList::mouseReleaseEvent(QMouseEvent *)
+{
+    mouse_press = false;
+}
+

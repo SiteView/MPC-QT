@@ -6,9 +6,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <QTDIR>D:\QT5.0\5.0.2\msvc2010</QTDIR>
-    <LocalDebuggerCommand>E:\8.2MPC\MPC-QT\MPCVer2.0.0\bin\SoftUpdate.exe</LocalDebuggerCommand>
-    <LocalDebuggerWorkingDirectory>..\..\..\bin</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerCommand>E:\8.2MPC\MPC-QT\MPCVer2.0.0\src\bin\SoftUpdate.exe</LocalDebuggerCommand>
+    <LocalDebuggerWorkingDirectory>..\..\bin</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <ShowAllFiles>false</ShowAllFiles>
     <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
 </Project>

@@ -107,6 +107,8 @@ void MainWindow::on_SoftDownload_clicked()
 void MainWindow::on_SoftUpgrade_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
+    grid=new GridlayoutClass();
+    grid->show();
 }
 
 void MainWindow::on_SoftUnload_clicked()

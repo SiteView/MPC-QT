@@ -5,7 +5,8 @@
 #include <QScrollArea>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-
+#include <QMouseEvent>
+#include <QList>
 
 #include "testunloaditem.h"
 #include "../Common/SqliteDb.h"
@@ -18,20 +19,23 @@ public:
     void initCenter();
     void initBottom();
 
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void paintEvent(QPaintEvent *event);
+
+private:
+    QPoint move_point; //移动的距离
+    bool mouse_press; //按下鼠标左键
+
 public:
     QVBoxLayout *center_layout;
     QHBoxLayout *bottom_layout;
 
-    TestUnloadItem *item1;
-    TestUnloadItem *item2;
-    TestUnloadItem *item3;
-    TestUnloadItem *item4;
-    TestUnloadItem *item5;
-    TestUnloadItem *item6;
-    TestUnloadItem *item7;
-    TestUnloadItem *item8;
-    TestUnloadItem *item9;
-    TestUnloadItem *item0;
+    QList<TestUnloadItem *> *item_list ;
+    QList<TestUnloadItem *> *item_list2 ;
+
+//    TestUnloadItem *item;
 
     QPushButton *first_page_button;
     QPushButton *previous_page_button;
