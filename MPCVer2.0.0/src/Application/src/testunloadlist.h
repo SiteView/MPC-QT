@@ -10,6 +10,7 @@
 
 #include "testunloaditem.h"
 #include "../Common/SqliteDb.h"
+#include "SoftUnloadItem.h"
 
 class TestUnloadList : public QWidget
 {
@@ -32,20 +33,22 @@ public:
     QVBoxLayout *center_layout;
     QHBoxLayout *bottom_layout;
 
-    QList<TestUnloadItem *> *item_list ;
-    QList<TestUnloadItem *> *item_list2 ;
+    QList<SoftUnloadItem *> *item_list ;
 
-//    TestUnloadItem *item;
+    //    TestUnloadItem *item;
 
     QPushButton *first_page_button;
     QPushButton *previous_page_button;
     QPushButton *next_page_button;
     QPushButton *last_page_button;
 
-    QStringList name_list;
-    QStringList time_list;
+    QStringList icon_list;
+    QStringList softname_list;
+    QStringList softdetail_list;
     QStringList size_list;
-    QStringList detail_list;
+    QStringList setuptime_list;
+    QStringList progress_list;
+    QStringList uninstallString_list;
     int page_count; //总页数
     int page_count_point; //最后一页的显示个数
     int current_page; //当前为第几页

@@ -12,9 +12,21 @@ class SoftUnloadItem : public QWidget
     Q_OBJECT
 public:
     explicit SoftUnloadItem(QWidget *parent = 0);
-    
+    void takeText(QString Qicon,QString Qsoftname,QString Qsoftdetail,QString Qprogress,
+                                  QString Qsize,QString Qsetuptime,QString QuninstallString);
+
 signals:
-    
+
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *event);
+private:
+    bool mouse_press;
+    bool mouse_enter;
 public slots:
     void on_unload_clicked();
     void Unloadfinish(int , QProcess::ExitStatus );

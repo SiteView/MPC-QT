@@ -6,11 +6,18 @@
 #include <QTime>
 #include <QDateTime>
 #include <QDate>
+#include <QPainter>
+#include <QMouseEvent>
+
 #include "SoftUnloadItem.h"
 
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
+    this->resize(920,70);
+
+    mouse_press = false;
+    mouse_enter = false;
 
     icon       =new QLabel(this);
     softname   =new QLabel(this);
@@ -20,6 +27,16 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     setuptime  =new QLabel(this);
     unload     =new QPushButton(this);
     uninstall  =new QLabel(this);
+
+    icon->setStyleSheet("background:transparent;");
+    softname->setStyleSheet("background:transparent;");
+    softdetail->setStyleSheet("background:transparent;");
+    progress->setStyleSheet("background:transparent;");
+    size->setStyleSheet("background:transparent;");
+    setuptime->setStyleSheet("background:transparent;");
+    unload->setStyleSheet("background:transparent;");
+    uninstall->setStyleSheet("background:transparent;");
+
     icon->setObjectName(QString::fromUtf8("icon"));
     softname->setObjectName(QString::fromUtf8("softname"));
     softdetail->setObjectName(QString::fromUtf8("softdetail"));
@@ -28,15 +45,15 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     setuptime->setObjectName(QString::fromUtf8("setuptime"));
     unload->setObjectName(QString::fromUtf8("unload"));
     uninstall->setObjectName(QString::fromUtf8("uninstall"));
-
-    softname->setMaximumSize(QSize(300, 45));
-    icon->setMaximumSize(QSize(45, 65));
-    softdetail->setMaximumSize(QSize(300, 30));
-    setuptime->setMaximumSize(QSize(90, 16777215));
-    size->setMaximumSize(QSize(90, 16777215));
-    progress->setMaximumSize(QSize(90, 16777215));
-    unload->setMaximumSize(QSize(70, 25));
-    uninstall->setMaximumSize(QSize(70, 25));
+    softname->setCursor(Qt::PointingHandCursor);
+    icon->setFixedSize(QSize(45, 45));
+    softname->setFixedSize(QSize(300, 30));
+    softdetail->setFixedSize(QSize(300, 20));
+    setuptime->setFixedSize(QSize(90, 20));
+    size->setFixedSize(QSize(90, 20));
+    progress->setFixedSize(QSize(90, 20));
+    unload->setFixedSize(QSize(70, 25));
+    uninstall->setFixedSize(QSize(70, 25));
     uninstall->setText("Uninstalling...");
     uninstall->hide();
     QHBoxLayout *horizontalLayout = new QHBoxLayout();
@@ -44,7 +61,7 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     horizontalLayout->setContentsMargins(11, 11, 11, 11);
     horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
     horizontalLayout->setContentsMargins(0, 0, 0, 0);
-    QSpacerItem *horizontalSpacer_2 = new QSpacerItem(5, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+    QSpacerItem *horizontalSpacer_2 = new QSpacerItem(5, 5, QSizePolicy::Maximum, QSizePolicy::Minimum);
     QVBoxLayout *verticalLayout = new QVBoxLayout();
     verticalLayout->setSpacing(6);
     verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -65,29 +82,22 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     horizontalLayout->addItem(horizontalSpacer);
 
 
-
-    QVBoxLayout *verticalLayout_2 = new QVBoxLayout();
-    verticalLayout_2->setSpacing(6);
-    verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-    verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-    verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-    QSpacerItem *verticalSpacer_2 = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Maximum);
-    verticalLayout_2->addItem(verticalSpacer_2);
-    verticalLayout_2->addLayout(horizontalLayout);
-
-    QFrame *line = new QFrame();
-    line->setObjectName(QString::fromUtf8("line"));
-    line->setMaximumSize(QSize(16777215, 1));
-    line->setFrameShape(QFrame::HLine);
-    line->setFrameShadow(QFrame::Sunken);
-    line->setStyleSheet("background: rgb(185,186,187);");
-    verticalLayout_2->addWidget(line);
-
-    this->setLayout(verticalLayout_2);
+    this->setLayout(horizontalLayout);
     connect(unload,SIGNAL(clicked()),this,SLOT(on_unload_clicked()));
 
 }
+void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,QString Qsoftdetail,QString Qsize,
+                              QString Qsetuptime,QString Qprogress,QString QuninstallString)
+{
+    icon->setStyleSheet("border-image:url("+Qicon+")");
+    softname->setText(Qsoftname);
+    softdetail->setText(Qsoftdetail);
+    size->setText(Qsize);
+    setuptime->setText(Qsetuptime);
+    progress->setText(Qprogress);
+    program=QuninstallString;
 
+}
 void SoftUnloadItem::on_unload_clicked()
 {
 
@@ -141,5 +151,57 @@ void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )
     qDebug()<<error<<"=error=";
     unload->show();
     uninstall->hide();
+}
+void SoftUnloadItem::paintEvent(QPaintEvent *event)
+{
+
+    //绘制边框
+    QPainter painter2(this);
+    QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+    linear2.setColorAt(0, Qt::white);
+    linear2.setColorAt(0.5, Qt::white);
+    linear2.setColorAt(1,  Qt::white);
+    painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
+    painter2.setBrush(linear2);
+    painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+    if(mouse_enter)
+    {
+        //绘制边框
+        QPainter painter2(this);
+        QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+        linear2.setColorAt(0, QColor(247,247,247));
+        linear2.setColorAt(0.5, QColor(247,247,247));
+        linear2.setColorAt(1,  QColor(247,247,247));
+        painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
+        painter2.setBrush(linear2);
+        painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+
+    }
+}
+
+void SoftUnloadItem::mousePressEvent(QMouseEvent * event)
+{
+    //只能是鼠标左键移动和改变大小
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+}
+
+void SoftUnloadItem::mouseReleaseEvent(QMouseEvent *event)
+{
+    mouse_press = false;
+}
+
+void SoftUnloadItem::enterEvent(QEvent *event)
+{
+    mouse_enter = true;
+    update();
+}
+
+void SoftUnloadItem::leaveEvent(QEvent *event)
+{
+    mouse_enter = false;
+    update();
 }
 

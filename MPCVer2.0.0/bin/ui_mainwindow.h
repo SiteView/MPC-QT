@@ -351,13 +351,13 @@ public:
         page_SoftUnload->setObjectName(QStringLiteral("page_SoftUnload"));
         label_unload = new QLabel(page_SoftUnload);
         label_unload->setObjectName(QStringLiteral("label_unload"));
-        label_unload->setGeometry(QRect(0, 10, 171, 31));
+        label_unload->setGeometry(QRect(0, 10, 200, 20));
         widget_3 = new QWidget(page_SoftUnload);
         widget_3->setObjectName(QStringLiteral("widget_3"));
-        widget_3->setGeometry(QRect(0, 120, 920, 440));
+        widget_3->setGeometry(QRect(0, 55, 920, 500));
         stackedWidget_2 = new QStackedWidget(widget_3);
         stackedWidget_2->setObjectName(QStringLiteral("stackedWidget_2"));
-        stackedWidget_2->setGeometry(QRect(0, 0, 920, 440));
+        stackedWidget_2->setGeometry(QRect(0, 0, 920, 500));
         page_up = new QWidget();
         page_up->setObjectName(QStringLiteral("page_up"));
         stackedWidget_2->addWidget(page_up);
@@ -387,7 +387,7 @@ public:
         stackedWidget_2->addWidget(page_7);
         widget_5 = new QWidget(page_SoftUnload);
         widget_5->setObjectName(QStringLiteral("widget_5"));
-        widget_5->setGeometry(QRect(0, 100, 920, 20));
+        widget_5->setGeometry(QRect(0, 35, 920, 20));
         but_sel_size = new QPushButton(widget_5);
         but_sel_size->setObjectName(QStringLiteral("but_sel_size"));
         but_sel_size->setGeometry(QRect(398, 0, 110, 20));
@@ -437,9 +437,9 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
-        stack_download->setCurrentIndex(0);
-        stackedWidget_2->setCurrentIndex(4);
+        stackedWidget->setCurrentIndex(3);
+        stack_download->setCurrentIndex(2);
+        stackedWidget_2->setCurrentIndex(8);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

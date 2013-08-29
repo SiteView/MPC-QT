@@ -12,14 +12,14 @@ SoftUnloadList::SoftUnloadList(QWidget *parent) :
 
 void SoftUnloadList::DiffSelect(int cmd){
     UnloadList  = new QListWidget(this);
-    UnloadList->resize(920,440);
+    UnloadList->resize(920,500);
     UnloadList->setFocusPolicy(Qt::NoFocus);
 
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     switch(cmd)
     {
     case SELECT_ALL:
-        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor limit 5 ;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor limit 10 ;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
@@ -93,7 +93,6 @@ void SoftUnloadList::DiffSelect(int cmd){
         QString pahtstr6 = val6.toString();
 
         pahtstr0.replace("\\","/");
-        //        qDebug()<<pahtstr0<<pahtstr1<<pahtstr2<<pahtstr3<<pahtstr4<<pahtstr5<<pahtstr6<<"*****123456+++++";
         SoftUnloadItem *ani=new SoftUnloadItem(UnloadList);
         ani->icon->setStyleSheet("border-image:url("+pahtstr0+")");
         ani->softname->setText(pahtstr1);

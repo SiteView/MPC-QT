@@ -9,7 +9,6 @@ TestUnloadItem::TestUnloadItem(QWidget *parent) :
     this->resize(920,70);
     mouse_press = false;
     mouse_enter = false;
-    this->setCursor(Qt::PointingHandCursor);
 
     softname   =new QLabel(this);
     softdetail =new QLabel(this);
@@ -26,21 +25,25 @@ TestUnloadItem::TestUnloadItem(QWidget *parent) :
     softsize->setStyleSheet("background:transparent;");
     setuptime->setStyleSheet("background:transparent;");
     unload->setStyleSheet("background:lightblue;");
-
     softname->setObjectName(QString::fromUtf8("softname"));
     softdetail->setObjectName(QString::fromUtf8("softdetail"));
     softsize->setObjectName(QString::fromUtf8("softsize"));
     setuptime->setObjectName(QString::fromUtf8("setuptime"));
     unload->setObjectName(QString::fromUtf8("unload"));
+    softname->setCursor(Qt::PointingHandCursor);
     QHBoxLayout *horizon=new QHBoxLayout();
     horizon->addWidget(softname, 0, Qt::AlignHCenter);
     horizon->addWidget(softdetail, 0, Qt::AlignHCenter);
     horizon->addWidget(softsize, 0, Qt::AlignHCenter);
     horizon->addWidget(setuptime, 0, Qt::AlignHCenter);
     horizon->addWidget(unload, 0, Qt::AlignHCenter);
+
+
+
     this->setLayout(horizon);
 }
 void TestUnloadItem::takeText(QString name,QString datail,QString size,QString time){
+
     softname->setText(name);
     softdetail->setText(datail);
     softsize->setText(size);

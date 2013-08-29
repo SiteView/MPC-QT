@@ -317,7 +317,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QWidget" name="widget_2" native="true">
@@ -439,7 +439,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="page_all"/>
        <widget class="QWidget" name="page_type1"/>
@@ -543,8 +543,8 @@
         <rect>
          <x>0</x>
          <y>10</y>
-         <width>171</width>
-         <height>31</height>
+         <width>200</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="text">
@@ -555,9 +555,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>120</y>
+         <y>55</y>
          <width>920</width>
-         <height>440</height>
+         <height>500</height>
         </rect>
        </property>
        <widget class="QStackedWidget" name="stackedWidget_2">
@@ -566,11 +566,11 @@
           <x>0</x>
           <y>0</y>
           <width>920</width>
-          <height>440</height>
+          <height>500</height>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>4</number>
+         <number>8</number>
         </property>
         <widget class="QWidget" name="page_up"/>
         <widget class="QWidget" name="page_down"/>
@@ -587,7 +587,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>100</y>
+         <y>35</y>
          <width>920</width>
          <height>20</height>
         </rect>

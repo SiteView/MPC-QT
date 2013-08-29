@@ -34,39 +34,49 @@ TestUnloadList::TestUnloadList(QWidget *parent) :
 void TestUnloadList::initCenter()
 {
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
-    if ( !SQLiteQuery.exec( "select DisplayName,DisplayVersion,EstimatedSize,SetupTime from LocalAppInfor ;" ) )
+    if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor;" ) )
     {
         qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
     }
     while ( SQLiteQuery.next() ){
-
         QVariant val0 = SQLiteQuery.value(0);
         QVariant val1 = SQLiteQuery.value(1);
         QVariant val2 = SQLiteQuery.value(2);
         QVariant val3 = SQLiteQuery.value(3);
+        QVariant val4 = SQLiteQuery.value(4);
+        QVariant val5 = SQLiteQuery.value(5);
+        QVariant val6 = SQLiteQuery.value(6);
 
         QString pahtstr0 = val0.toString();
         QString pahtstr1 = val1.toString();
         QString pahtstr2 = val2.toString();
         QString pahtstr3 = val3.toString();
-        name_list<<pahtstr0;
-        time_list<<pahtstr1;
-        size_list<<pahtstr2;
-        detail_list<<pahtstr3;
+        QString pahtstr4 = val4.toString();
+        QString pahtstr5 = val5.toString();
+        QString pahtstr6 = val6.toString();
+
+        pahtstr0.replace("\\","/");
+        icon_list<<pahtstr0;
+        softname_list<<pahtstr1;
+        softdetail_list<<pahtstr2;
+        size_list<<pahtstr3;
+        setuptime_list<<pahtstr4;
+        progress_list<<pahtstr5;
+        uninstallString_list<<pahtstr6;
     }
     SQLiteQuery.finish();
 
     center_layout = new QVBoxLayout();
 
-    item_list =new QList<TestUnloadItem *>();
+    item_list =new QList<SoftUnloadItem *>();
     for(int i=0; i<10; i++)
     {
-        TestUnloadItem *item = new TestUnloadItem(WidgetContents);
+        SoftUnloadItem *item = new SoftUnloadItem(WidgetContents);
         center_layout->addWidget(item);
         item_list->push_back(item);
     }
 
-    int skin_list_count = name_list.size();
+    int skin_list_count = icon_list.size();
     page_count = skin_list_count / 10;
     page_count_point = skin_list_count % 10;
     if(page_count_point > 0)
@@ -204,14 +214,26 @@ void TestUnloadList::showPage(QString current_skin)
     {
         for(int i=0;i<10;i++)
         {
-            item_list->at(i)->takeText(name_list.at(tip_index++), time_list.at(tip_index-1),size_list.at(tip_index-1) ,detail_list.at(tip_index-1));
+            item_list->at(i)->takeText(icon_list.at(tip_index++),
+                                       softname_list.at(tip_index-1),
+                                       softdetail_list.at(tip_index-1) ,
+                                       size_list.at(tip_index-1),
+                                       setuptime_list.at(tip_index-1),
+                                       progress_list.at(tip_index-1),
+                                       uninstallString_list.at(tip_index-1));
         }
     }
     else
     {
         for(int i=0;i<page_count_point;i++)
         {
-            item_list->at(i)->takeText(name_list.at(tip_index++), time_list.at(tip_index-1),size_list.at(tip_index-1) ,detail_list.at(tip_index-1));
+            item_list->at(i)->takeText(icon_list.at(tip_index++),
+                                       softname_list.at(tip_index-1),
+                                       softdetail_list.at(tip_index-1) ,
+                                       size_list.at(tip_index-1),
+                                       setuptime_list.at(tip_index-1),
+                                       progress_list.at(tip_index-1),
+                                       uninstallString_list.at(tip_index-1));
         }
     }
 }
