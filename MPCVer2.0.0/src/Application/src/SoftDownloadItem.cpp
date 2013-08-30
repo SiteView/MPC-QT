@@ -31,6 +31,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     but_icon->setObjectName(QString::fromUtf8("but_icon"));
     but_icon->setGeometry(QRect(10, 10, 50, 50));
     but_icon->setMaximumSize(QSize(50, 50));
+
     layoutWidget = new QWidget(frame_1);
     layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
     layoutWidget->setGeometry(QRect(70, 0, 440, 60));
@@ -144,6 +145,7 @@ void SoftDownloadItem::on_download_clicked()
     {
         QMessageBox::about(this,tr("inform"),tr("is busy"));
     }
+
     else
     {
     stackedWidget->setCurrentWidget(page_2);
@@ -203,5 +205,6 @@ void SoftDownloadItem::Downloadresult(int i){
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
+        QMessageBox::about(this,tr("inform"),tr("download fail  "));
     }
 }

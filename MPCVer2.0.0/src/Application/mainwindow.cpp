@@ -7,7 +7,7 @@
 #include <QTableWidgetItem>
 #include <QtUiTools/QUiLoader>
 #include <QStringList>
-
+#include <QPainter>
 #include <QListWidget>
 
 #include "mainwindow.h"
@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
+
+
     this->createUnloadtableMenu();
     this->createUpgradeMenu();
     this->createDownloadMenu();
@@ -47,10 +49,25 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    // draw main border
+    QPainter painter(this);
+    painter.setPen(Qt::gray);
+    int titleWidgetHeight = 90;
+    static const QPointF points[4] = {
+        QPointF(0, titleWidgetHeight), QPointF(0, this->height()-1),
+        QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, titleWidgetHeight)
+    };
+    painter.drawPolyline(points, 4);
+
+
+}
 void MainWindow::createUpgradeMenu()
 {
-    testclass=new TestUnloadList (ui->widget_6);
-    testclass->show();
+//    testclass=new TestUnloadList (ui->widget_6);
+//    testclass->show();
 }
 void MainWindow::createDownloadMenu()
 {
@@ -116,10 +133,10 @@ void MainWindow::on_SoftUnload_clicked()
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
 }
 
-void MainWindow::on_UpdateInform_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-}
+//void MainWindow::on_UpdateInform_clicked()
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
+//}
 
 void MainWindow::on_but_close_clicked()
 {
@@ -237,16 +254,16 @@ void MainWindow::on_but_sel_path_clicked()
 
 void MainWindow::on_but_sel_operate_clicked()
 {
-    if(flag)
-    {
-        ui->but_sel_operate->setIcon(QIcon(":/images/down.png"));
-        flag=false;
-    }
-    else
-    {
-        ui->but_sel_operate->setIcon(QIcon(":/images/up.png"));
-        flag=true;
-    }
+//    if(flag)
+//    {
+//        ui->but_sel_operate->setIcon(QIcon(":/images/down.png"));
+//        flag=false;
+//    }
+//    else
+//    {
+//        ui->but_sel_operate->setIcon(QIcon(":/images/up.png"));
+//        flag=true;
+//    }
 }
 
 void MainWindow::on_but_clear_4_clicked()

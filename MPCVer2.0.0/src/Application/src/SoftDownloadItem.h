@@ -54,7 +54,6 @@ public:
     QString runPath;
     CURLDownloadManager *downloader;
 
-
 public:
     void retranslateUi();
     void DownloadThread();

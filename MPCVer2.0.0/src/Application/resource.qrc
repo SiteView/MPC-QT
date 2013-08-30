@@ -5,8 +5,6 @@
         <file>images/but_about_hover.png</file>
         <file>images/but_close.png</file>
         <file>images/but_close_hover.png</file>
-        <file>images/but_minimize.png</file>
-        <file>images/but_minimize_hover.png</file>
         <file>images/but_scroll_down.png</file>
         <file>images/but_scroll_up.png</file>
         <file>images/lightcircle.png</file>
@@ -42,5 +40,11 @@
         <file>images/but_suspend.png</file>
         <file>images/up.png</file>
         <file>images/down.png</file>
+        <file>images/but_minimize.png</file>
+        <file>images/but_minimize_hl.png</file>
+        <file>images/95.png</file>
+        <file>images/75.png</file>
+        <file>images/85.png</file>
+        <file>images/88.png</file>
     </qresource>
 </RCC>

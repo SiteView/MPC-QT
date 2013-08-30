@@ -28,8 +28,6 @@ TestUnloadList::TestUnloadList(QWidget *parent) :
     area->setWidget(WidgetContents);
     this->showPage(QString::number(current_page, 10));
 
-
-
 }
 void TestUnloadList::initCenter()
 {
@@ -82,7 +80,6 @@ void TestUnloadList::initCenter()
     if(page_count_point > 0)
     {
         page_count = page_count + 1;
-        qDebug()<<"page_count_point=="<<page_count_point;
     }
 
 }
@@ -95,7 +92,7 @@ void TestUnloadList::initBottom()
         QPushButton *page_button = new QPushButton(WidgetContents);
         page_button->setFixedWidth(20);
         page_button->setText(QString::number(i+1, 10));
-        page_button->setStyleSheet("color:rgb(0, 120, 230); background:transparent;");
+        page_button->setStyleSheet("font:bold;color:rgb(0, 78, 152); background:transparent;");
         page_button->setCursor(Qt::PointingHandCursor);
         connect(page_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
         signal_mapper->setMapping(page_button, page_button->text());

@@ -35,8 +35,6 @@ public:
 
     QList<SoftUnloadItem *> *item_list ;
 
-    //    TestUnloadItem *item;
-
     QPushButton *first_page_button;
     QPushButton *previous_page_button;
     QPushButton *next_page_button;

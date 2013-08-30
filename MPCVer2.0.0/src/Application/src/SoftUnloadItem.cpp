@@ -18,7 +18,7 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
 
     mouse_press = false;
     mouse_enter = false;
-
+    uninstall_visible=false;
     icon       =new QLabel(this);
     softname   =new QLabel(this);
     softdetail =new QLabel(this);
@@ -45,6 +45,7 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     setuptime->setObjectName(QString::fromUtf8("setuptime"));
     unload->setObjectName(QString::fromUtf8("unload"));
     uninstall->setObjectName(QString::fromUtf8("uninstall"));
+    icon->setCursor(Qt::PointingHandCursor);
     softname->setCursor(Qt::PointingHandCursor);
     icon->setFixedSize(QSize(45, 45));
     softname->setFixedSize(QSize(300, 30));
@@ -56,6 +57,7 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     uninstall->setFixedSize(QSize(70, 25));
     uninstall->setText("Uninstalling...");
     uninstall->hide();
+    unload->setText("Uninstall");
     QHBoxLayout *horizontalLayout = new QHBoxLayout();
     horizontalLayout->setSpacing(6);
     horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -148,7 +150,6 @@ void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
 
 void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )
 {
-    qDebug()<<error<<"=error=";
     unload->show();
     uninstall->hide();
 }

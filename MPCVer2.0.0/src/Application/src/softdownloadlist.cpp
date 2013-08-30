@@ -23,25 +23,25 @@ void SoftDownloadList::selectDifType(int cmd){
     switch(cmd)
     {
     case ALL:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo ;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo ;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case ONE:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=1;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=1;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case TWO:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=2;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=2;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case THREE:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=3;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=3;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
@@ -53,37 +53,37 @@ void SoftDownloadList::selectDifType(int cmd){
         }
         break;
     case FIVE:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=5;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=5;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case SIX:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=6;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=6;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case SEVEN:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=7;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=7;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case EIGHT:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=8;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=8;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case NINE:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=9;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=9;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
     case TEN:
-        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl from ServerAppInfo where type=10;" ) )
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=10;" ) )
         {
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
@@ -98,6 +98,7 @@ void SoftDownloadList::selectDifType(int cmd){
         QVariant val3 = SQLiteQuery.value(3);
         QVariant val4 = SQLiteQuery.value(4);
         QVariant val5 = SQLiteQuery.value(5);
+        QVariant val6 = SQLiteQuery.value(6);
 
         QString pahtstr0 = val0.toString();
         QString pahtstr1 = val1.toString();
@@ -106,10 +107,12 @@ void SoftDownloadList::selectDifType(int cmd){
         QString pahtstr4 = val4.toString();
         QString pahtstr5 = val5.toString();
 
+        QString pahtstr6 = val6.toString();
 
         SoftDownloadItem *ani=new SoftDownloadItem (DownloadList);
 
         //        ani->but_icon->setText(pahtstr2);
+        ani->but_icon->setStyleSheet("border-image:url(:/images/"+pahtstr6+".png); background:transparent;");
         ani->but_softname->setText(pahtstr0);
         //        QString lab_softdetail2;
         //        if(pahtstr1.count()<35)

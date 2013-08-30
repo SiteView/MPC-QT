@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
 #include "QListWidget"
 #include "../Common/SqliteDb.h"
 //#include "../Common/SytemLog.h"
@@ -57,7 +58,7 @@ private slots:
 
     void on_SoftUnload_clicked();
 
-    void on_UpdateInform_clicked();
+//    void on_UpdateInform_clicked();
     void on_but_close_clicked();
 
     void on_but_minimize_clicked();
@@ -87,6 +88,8 @@ private:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
+    void paintEvent(QPaintEvent *event);
+
     bool moving;
     QPoint last;
 

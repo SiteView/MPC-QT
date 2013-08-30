@@ -33,7 +33,6 @@ SOURCES += main.cpp\
     src/CellClass.cpp \
     src/testunloaditem.cpp \
     src/testunloadlist.cpp
-
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
     ../Common/SytemLog.h \

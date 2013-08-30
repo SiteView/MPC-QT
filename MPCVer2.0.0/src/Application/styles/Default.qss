@@ -137,11 +137,11 @@ QPushButton#but_suspend:hover
 
 
 /*HEAD BUTTONS ABOUT*/
-QPushButton#but_close,#close_button
+QPushButton#but_close,#close_button,#but_minimize
 {
     border-image: url(:/images/but_close.png);
 }
-QPushButton#but_close:hover,#close_button:hover
+QPushButton#but_close:hover,#close_button:hover,#but_minimize:hover
 {
     border-image: url(:/images/but_close_hover.png);
 }
@@ -153,7 +153,7 @@ QPushButton#but_minimize
 }
 QPushButton#but_minimize:hover
 {
-    border-image: url(:/images/but_minimize__hl.png);
+    border-image: url(:/images/but_minimize_hl.png);
 }
 /*HEAD BUTTONS SEARCH*/
 QPushButton#but_search
