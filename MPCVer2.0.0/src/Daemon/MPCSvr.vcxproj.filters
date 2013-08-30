@@ -25,61 +25,103 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{f7b34882-c257-4cbc-9c4a-dd9caf16cab6}</UniqueIdentifier>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{140a638f-2e11-4cb0-86f6-4e42176673ab}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{e1d49e68-6b97-4fae-a5b7-8ef3cbf892ec}</UniqueIdentifier>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{353a5eb1-175d-44c0-8cc4-f9cc0b4108da}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="winservice\MPCDaemonService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="winservice\SampleService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="winservice\ServiceBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="winservice\ServiceInstaller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="regflashclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdsoap2.cpp">
+    <ClCompile Include="gsoap\soapC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_regflashclass.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="gsoap\soapClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gsoap\stdsoap2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="synserverthread.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_regflashclass.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="soapC.cpp">
-      <Filter>Generated Files</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_regflashclass.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="soapClient.cpp">
-      <Filter>Generated Files</Filter>
+    <ClCompile Include="GeneratedFiles\Release\moc_synserverthread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_synserverthread.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MPCDaemon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gsoap\PMPC.nsmap">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winservice\SampleService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winservice\ServiceBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winservice\ServiceInstaller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\Common\SqliteDb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\SytemLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="winservice\ThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <CustomBuild Include="regflashclass.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="stdsoap2.h">
+    <ClInclude Include="gsoap\soapH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tool.h">
+    <ClInclude Include="gsoap\soapStub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="soapH.h">
-      <Filter>Generated Files</Filter>
+    <ClInclude Include="gsoap\stdsoap2.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="soapStub.h">
-      <Filter>Generated Files</Filter>
+    <CustomBuild Include="synserverthread.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="utils\tool.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

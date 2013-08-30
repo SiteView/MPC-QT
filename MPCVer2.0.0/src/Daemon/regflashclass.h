@@ -7,16 +7,14 @@
 #include <QDateTime>
 #include <QStringList>
 
-
 #include "../Common/SqliteDb.h"
-
 
 class RegFlashClass : public QThread
 {
 	Q_OBJECT
 
 public:
-	RegFlashClass(QObject *parent);
+    RegFlashClass(/*QObject *parent*/);
     virtual void run();
 	void UpdateInfo();
 	~RegFlashClass();

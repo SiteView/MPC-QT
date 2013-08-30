@@ -5,32 +5,56 @@
 TEMPLATE = app
 TARGET = MPCSvr
 DESTDIR = ../../bin
-QT += core sql network gui
-CONFIG += qtestlib debug console
-DEFINES += _CONSOLE _CONSOLE QT_DLL QT_NETWORK_LIB QT_SQL_LIB QT_TESTLIB_LIB QT_OPENGL_ES_2 QT_OPENGL_ES_2_ANGLE
+QT += core sql network gui widgets
+CONFIG += testlib console
+
+EFINES += _CONSOLE _CONSOLE QT_DLL QT_NETWORK_LIB QT_SQL_LIB QT_TESTLIB_LIB QT_OPENGL_ES_2 QT_OPENGL_ES_2_ANGLE
 INCLUDEPATH += . \
     ./GeneratedFiles/Debug \
     ./GeneratedFiles/debug \
     ./../Common \
     ./GeneratedFiles/debug
+
 LIBS += -llibEGLd \
     -llibGLESv2d \
     -lgdi32 \
-    -luser32
+    -luser32 \
+    -lws2_32 \
+    -lqtmaind \
+    -ladvapi32
+
 DEPENDPATH += .
+
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
+
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
+
 HEADERS += ../Common/SqliteDb.h \
     ../Common/SytemLog.h \
-    ./regflashclass.h \
-    ./stdsoap2.h \
-    ./SOAServiceStub.h \
-    ./SOAServiceH.h \
-	./tool.h
-SOURCES += ./main.cpp \
-    ./regflashclass.cpp \
-    ./stdsoap2.cpp \
-    ./SOAServiceC.cpp \
-    ./SOAServiceClient.cpp
+    utils/tool.h \
+    synserverthread.h \
+    regflashclass.h \
+    MPCDaemon.h \
+    winservice/ThreadPool.h \
+    winservice/ServiceInstaller.h \
+    winservice/ServiceBase.h \
+    winservice/SampleService.h \
+    gsoap/stdsoap2.h \
+    gsoap/soapStub.h \
+    gsoap/soapH.h \
+    gsoap/PMPC.nsmap
+
+SOURCES += \
+    synserverthread.cpp \
+    regflashclass.cpp \
+    winservice/ServiceInstaller.cpp \
+    winservice/ServiceBase.cpp \
+    winservice/SampleService.cpp \
+    winservice/MPCDaemonService.cpp \
+    gsoap/soapClient.cpp \
+    gsoap/soapC.cpp \
+    main.cpp \
+    gsoap/stdsoap2.cpp
+

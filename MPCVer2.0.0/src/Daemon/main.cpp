@@ -1,25 +1,22 @@
-
-#include <QtCore/QCoreApplication>
+#include <QApplication>
 #include <QIcon>
 
 #include "../Common/SqliteDb.h"
 #include "../Common/SytemLog.h"
 #include "regflashclass.h"
+#include "synserverthread.h"
 
 // 全局数据库对象
 QSqlDatabase CSQLiteDb::m_db;
 
-#include "./PMPC.nsmap"
-
-
+#include "gsoap/PMPC.nsmap"  // important, only once
 
 int main(int argc, char *argv[])
 {
-	QCoreApplication a(argc, argv);
-
+    QApplication a(argc, argv);
 
 	//注册MsgHandler 可以输出标准日志文件
-	qInstallMessageHandler(customMessageHandler); 
+    qInstallMessageHandler(customMessageHandler);
 
 	if (!CSQLiteDb::ConnectionDB(QString( "./localedb.db" ) ) )
 		//if (!CSQLiteDb::ConnectionDB(QString( "" ) ) )
@@ -31,9 +28,15 @@ int main(int argc, char *argv[])
 	}
 
 
-	RegFlashClass  task(0);
+    //
+    RegFlashClass  task;
 	task.start();
-	int ret = 0;
+
+    // sync tables from server database, also local database itself
+    SynServerThread  synServer;
+    synServer.start();
+
+    int ret = 0;
 	//struct soap add_soap;
 	//add_soap.connect_timeout = 5; //单位是秒
 	//add_soap.send_timeout = 5;
@@ -60,3 +63,4 @@ int main(int argc, char *argv[])
 	
 	return ret;
 }
+

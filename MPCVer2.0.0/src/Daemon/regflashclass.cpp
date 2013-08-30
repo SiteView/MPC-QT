@@ -13,20 +13,13 @@ Version:        1.0.1
 Discription:    add a function updateFieldValue, repair EstimatedSize¡¢ DisplayIcon, formate path, delete unloaded software
 ********************************************************************************************
 */
-
 #include "regflashclass.h"
-#include "tool.h"
+#include "utils/tool.h"
+#include <QFile>
 
-#define UNLOADEDTIMEOUT 172800  // timeout for unloaded (msec)
-
-
-#include "./soapStub.h"
-
-RegFlashClass::RegFlashClass(QObject *parent)
-    : QThread(parent)
+RegFlashClass::RegFlashClass(/*QObject *parent*/)
+    : QThread(/*parent*/)
 {
-    
-
 }
 void RegFlashClass::run()
 {
@@ -117,6 +110,7 @@ void RegFlashClass::run()
             }
             reg.endGroup();
         }
+        query.finish();
         m_SQLiteDb.getDB()->commit();
         UpdateInfo();
     }
@@ -126,7 +120,7 @@ void RegFlashClass::UpdateInfo()
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     QSqlQuery updateQuery( *m_SQLiteDb.getDB() );
     m_SQLiteDb.getDB()->transaction();
-    if ( !SQLiteQuery.exec( "select DisplayName,InstallLocation,DisplayVersion, SetupTime, DisplayIcon, UninstallString, UninstallTime from LocalAppInfor ;" ) )
+    if ( !SQLiteQuery.exec( "select DisplayName, InstallLocation, DisplayVersion, SetupTime, DisplayIcon, UninstallString from LocalAppInfor ;" ) )
     {
         qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
     }
@@ -172,42 +166,35 @@ void RegFlashClass::UpdateInfo()
             updateFieldValue(updateQuery, "EstimatedSize", size, val1);
         }
 
-        // repair the icon path
-        QFileInfo iconInfo(iconStr);
-        bool bIconExist = iconInfo.exists();
 
-        while (!bIconExist) {
+		// repair the icon path
+//		QFileInfo iconInfo(iconStr);
+//		bool bIconExist = iconInfo.exists();
+//		bool bIsPngFile = (iconInfo.suffix() == "png") ? true : false;
 
-            // repair from install location
-            if (installPathStr.compare("")) {
-                QFileInfo fileInfo(installPathStr);
-                QString fileName = fileInfo.fileName();
-                iconStr = installPathStr + "\\" + fileName + ".exe";
+//		if (bIconExist && !bIsPngFile) {
+//			// get icon path
+//			iconStr = ::getIcon(iconStr);
+//		}
+//		if (!bIconExist) {
+//			// repair from install location
+//			if (installPathStr.compare("")) {
+//				QFileInfo fileInfo(installPathStr);
+//				QString fileBaseName = fileInfo.baseName();
+//				iconStr = installPathStr + "\\" + fileBaseName + ".exe";
+//			}
+//		}
+//		QFileInfo fileInfoIcon(iconStr);
+//		if (fileInfoIcon.exists()) {
+//			updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
+//		}
 
-                QFileInfo fileInfoIcon(iconStr);
-                if (fileInfoIcon.exists()) {
-                    updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
-                    break;
-                }
-            }
-            // repair form "App Paths"
-            // TODO: this method is not nice
-            break;
-        }
 
         // delete the unloaded software over 2 days
-        QDateTime installTime = SQLiteQuery.value(3).toDateTime();
-        QDateTime uninstallTime = SQLiteQuery.value(6).toDateTime();
-
-        bool bLoaded;
-        int unloadedTimeout;
-        bLoaded = SQLiteQuery.value(7).toBool();
-        unloadedTimeout = installTime.secsTo(uninstallTime);
-        if (bLoaded && unloadedTimeout > UNLOADEDTIMEOUT) {
-            if (updateQuery.exec("delete from LocalAppInfor where UninstallTime = uninstallTime")) {
-                qDebug(updateQuery.lastError().text().toLocal8Bit().data());
-            }
+        if (!updateQuery.exec("delete from LocalAppInfor where UninstallTime is not null and UninstallTime < datetime('now','localtime','-2 days')")) {
+            qDebug(updateQuery.lastError().text().toLocal8Bit().data());
         }
+
 
         // formate install path ,uninstall path and displayicon path
         if (installPathStr.compare("")) {
