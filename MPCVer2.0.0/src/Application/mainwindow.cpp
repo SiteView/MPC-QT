@@ -52,22 +52,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
-    // draw main border
-    QPainter painter(this);
-    painter.setPen(Qt::gray);
-    int titleWidgetHeight = 90;
-    static const QPointF points[4] = {
-        QPointF(0, titleWidgetHeight), QPointF(0, this->height()-1),
-        QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, titleWidgetHeight)
-    };
-    painter.drawPolyline(points, 4);
-
+    QPainter painter2(this);
+    painter2.setPen(Qt::gray);
+    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
+    painter2.drawPolyline(points, 4);
 
 }
 void MainWindow::createUpgradeMenu()
 {
-//    testclass=new TestUnloadList (ui->widget_6);
-//    testclass->show();
+    //    testclass=new TestUnloadList (ui->widget_6);
+    //    testclass->show();
 }
 void MainWindow::createDownloadMenu()
 {
@@ -124,8 +118,8 @@ void MainWindow::on_SoftDownload_clicked()
 void MainWindow::on_SoftUpgrade_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
-//    grid=new GridlayoutClass();
-//    grid->show();
+    //    grid=new GridlayoutClass();
+    //    grid->show();
 }
 
 void MainWindow::on_SoftUnload_clicked()
@@ -254,16 +248,16 @@ void MainWindow::on_but_sel_path_clicked()
 
 void MainWindow::on_but_sel_operate_clicked()
 {
-//    if(flag)
-//    {
-//        ui->but_sel_operate->setIcon(QIcon(":/images/down.png"));
-//        flag=false;
-//    }
-//    else
-//    {
-//        ui->but_sel_operate->setIcon(QIcon(":/images/up.png"));
-//        flag=true;
-//    }
+    //    if(flag)
+    //    {
+    //        ui->but_sel_operate->setIcon(QIcon(":/images/down.png"));
+    //        flag=false;
+    //    }
+    //    else
+    //    {
+    //        ui->but_sel_operate->setIcon(QIcon(":/images/up.png"));
+    //        flag=true;
+    //    }
 }
 
 void MainWindow::on_but_clear_4_clicked()
