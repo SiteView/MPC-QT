@@ -46,5 +46,6 @@
         <file>images/lab_search_p.png</file>
         <file>images/lab_search.png</file>
         <file>images/lab_search_h.png</file>
+        <file>images/default.png</file>
     </qresource>
 </RCC>

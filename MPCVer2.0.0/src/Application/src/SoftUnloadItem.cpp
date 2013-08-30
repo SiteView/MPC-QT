@@ -8,7 +8,7 @@
 #include <QDate>
 #include <QPainter>
 #include <QMouseEvent>
-
+#include <QFileInfo>
 #include "SoftUnloadItem.h"
 
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
@@ -91,7 +91,16 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
 void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,QString Qsoftdetail,QString Qsize,
                               QString Qsetuptime,QString Qprogress,QString QuninstallString)
 {
-    icon->setStyleSheet("border-image:url("+Qicon+")");
+    QStringList str=Qicon.split(".");
+    if(Qicon==""||str.at(1)!="ico")
+    {
+        icon->setStyleSheet("border-image:url(:/images/default.png)");
+
+    }
+    else
+    {
+        icon->setStyleSheet("border-image:url("+Qicon+")");
+    }
     softname->setText(Qsoftname);
     softdetail->setText(Qsoftdetail);
     size->setText(Qsize);
