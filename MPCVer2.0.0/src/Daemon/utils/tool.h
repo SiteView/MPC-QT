@@ -23,6 +23,7 @@ Discription:    add function getFolderSize and unifyPathFormat
 #include <QPixmap>
 #include <QIcon>
 #include <QDebug>
+#include <QVector>
 
 
 #include "SqliteDb.h"
@@ -148,63 +149,73 @@ QString getIcon(QString &filePath, QString &fileName)
         cIcons = (int)ExtractIcons::Get( lstrFilePath, 0, 128, 128, pIcons, NULL, 100, LR_COLOR );
     }
 
+    if (!QDir("./icons").exists()) {
+        QDir dIcon;
+        if (dIcon.mkdir("./icons")) {
+            qDebug() << "Creat the icons directory OK.";
+        }
+    }
     QString savePath = "./icons/" + fileName + ".ico";
 
     LPCWSTR lstrSavePath = LPCWSTR(savePath.utf16());
 
-    qDebug() << SaveIcon(pIcons[0], lstrSavePath,32);
+    SaveIcon(pIcons[0], lstrSavePath,32);
 
     GlobalFree(pIcons);
 
     return QString::fromStdWString(lstrSavePath);
-
-
-//    filePath.replace(" ", "\040");
-//    QFileInfo fileInfo(filePath);
-//    QFileIconProvider seekIcon;
-//    QIcon icon = seekIcon.icon(fileInfo);
-//    QPixmap pixmap = icon.pixmap(QSize(45, 45));
-
-//    QDir *dir = new QDir();
-//    if (!dir->exists("icons")) {
-//        int b = dir->mkdir("icons");
-//        qDebug() << b << "make a directory for icons successfully";
-//    }
-//    QString iconPath = QString("./icons/%1.png").arg(fileName);  // icon path
-//   // QString iconPath = filePath.replace(fileInfo.completeSuffix(), "png");  // some path only read, so is not nice.
-//    if(!pixmap.save(iconPath, "png"))
-//    {
-//        //qDebug() << "GetIcon" << "Save Icon Fail";
-//    }
-
-//    return iconPath;
 }
 
 // Helper functions
-void versionStrToNumber(QString &versionStr, int *versionInt)
+int versionCompareStd(QString &verFirst, QString &verSecond)
 {
-    QStringList strList;
-    strList = versionStr.split(".");
-    int i = 0;
-    foreach(QString str, strList) {
-        versionInt[i] = str.toInt();
-        i++;
+    //qDebug() << verFirst << "," << verSecond;
+    QVector<int> intVectorFisrt, intVectorSecond;
+    QStringList strListFisrt, strListSecond;
+
+    strListFisrt = verFirst.split(".");
+    strListSecond = verSecond.split(".");
+
+    foreach (QString str, strListFisrt) {
+        intVectorFisrt.push_back(str.toInt());
     }
+    foreach (QString str, strListSecond) {
+        intVectorSecond.push_back(str.toInt());
+    }
+
+    int countFirst = intVectorFisrt.count();
+    int countSecond = intVectorSecond.count();
+
+   // qDebug() << countFirst << countSecond;
+    int iCount = countFirst < countSecond ? countFirst : countSecond;
+
+    if (countFirst == countSecond) {
+        for (int i = 0; i < iCount; ++i) {
+            if (intVectorFisrt.at(i) < intVectorSecond.at(i)) {
+                return 1;
+            }
+        }
+    } else {
+        return 0;
+    }
+
+    return 0;
 }
 
-int versionCompare(QString &versionStr1, QString &versionStr2)
+int versionCompareLet(QString &locVer, QString &serVer) {
+    return QString::compare(locVer, serVer);
+}
+
+bool bHasLetter(QString &str)
 {
-    int versionInt1[5] = {0};
-    int versionInt2[5] = {0};
-
-    versionStrToNumber(versionStr1, versionInt1);
-    versionStrToNumber(versionStr2, versionInt2);
-
-    for (int i = 0; i < 4; i++) {
-        if (versionInt1[i] < versionInt2[i])
-            return 1;
+    int i = 0;
+    foreach (str[i], str) {
+        if (str[i].isLetter())
+            return true;
+        i++;
     }
-    return 0;
+
+    return false;
 }
 // --end add: shu-yuan
 

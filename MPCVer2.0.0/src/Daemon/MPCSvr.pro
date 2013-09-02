@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 TEMPLATE = app
-TARGET = MPCSvr
+TARGET = MarketPlaceDaemon
 DESTDIR = ../../bin
 QT += core sql network gui widgets
 CONFIG += testlib console

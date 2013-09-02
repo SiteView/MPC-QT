@@ -82,7 +82,7 @@ void RegFlashClass::run()
                 if(!rethav)
                     rethav = HavePath(val3,path); // 使用DisplayIcon 修补
             }
-            if(!val1.isEmpty()  && (val10.isEmpty() || val10.compare("0") == 0) && val1.indexOf("Security Update for Microsoft") == -1 &&  val1.indexOf("(KB") == -1 )  // 锟斤拷全锟斤拷锟铰猴拷系统锟斤拷锟斤拷锟斤拷锟节癸拷锟斤拷围
+            if(!val1.isEmpty()  && (val10.isEmpty() || val10.compare("0") == 0) && val1.indexOf("Security Update for Microsoft") == -1 &&  val1.indexOf("(KB") == -1 )  // fliter the security components
             {
 
                 query.prepare("insert into LocalAppInfor (DisplayName,UninstallString,DisplayIcon,DisplayVersion,URLInfoAbout,Publisher,InstallLocation,SetupTime,EstimatedSize) values(?,?,?,?,?,?,?,?,?)");
@@ -117,7 +117,8 @@ void RegFlashClass::UpdateInfo()
     QSqlQuery serverQuery( *m_SQLiteDb.getDB() );
     m_SQLiteDb.getDB()->transaction();
 
-    if ( !SQLiteQuery.exec( "select DisplayName, InstallLocation, DisplayVersion, SetupTime, DisplayIcon, UninstallString from LocalAppInfor ;" ) )
+    SQLiteQuery.prepare("SELECT DisplayName, InstallLocation, DisplayVersion, SetupTime, DisplayIcon, UninstallString FROM LocalAppInfor");
+    if (!SQLiteQuery.exec())
     {
         qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
     }
@@ -175,7 +176,9 @@ void RegFlashClass::UpdateInfo()
             if (!fileInfo.exists()) {
                 // file is icon
                 if (iconStr.contains(".ico")) {
-                    QFile::copy(iconStr, newIconPath);
+                    if (!QFile::copy(iconStr, newIconPath)) {
+                        qDebug() << "--copyIcon error";
+                    }
                 } else {
                     // get icon path
                     getIcon(iconStr, val1.toString());
@@ -189,12 +192,14 @@ void RegFlashClass::UpdateInfo()
                 QString fileBaseName = fileInfo.baseName();
                 iconStr = installPathStr + "\\" + fileBaseName + ".exe";
             }
+
+            QFileInfo fileInfoIcon(iconStr);
+            if (fileInfoIcon.exists()) {
+                qDebug() << iconStr;
+                updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
+            }
         } // flase
 
-        QFileInfo fileInfoIcon(iconStr);
-        if (fileInfoIcon.exists()) {
-            updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
-        }
 
 
         // delete the unloaded software over 2 days
@@ -205,7 +210,7 @@ void RegFlashClass::UpdateInfo()
 
         // check new version
         QString serverVersion;
-        serverQuery.prepare("SELECT ServerVersion FROM ServerAppInfo WHERE DisplayName = ?");
+        serverQuery.prepare("SELECT ResetServerVersion FROM ServerAppInfo WHERE DisplayName = ?");
         serverQuery.addBindValue(val1);
         if (!serverQuery.exec()) {
             qDebug(serverQuery.lastError().text().toLocal8Bit().data());
@@ -213,7 +218,15 @@ void RegFlashClass::UpdateInfo()
         while (serverQuery.next()) {
             serverVersion = serverQuery.value(0).toString();
             QString localVersion = val3.toString();
-            bool bHaveNewVersion = versionCompare(localVersion, serverVersion);
+
+            //qDebug() << localVersion << serverVersion;
+            bool bHasLetter = ::bHasLetter(localVersion) || ::bHasLetter(serverVersion);
+
+            bool bHaveNewVersion;
+            if (bHasLetter) {
+                bHaveNewVersion = versionCompareLet(localVersion, serverVersion);
+            } else
+                bHaveNewVersion = versionCompareStd(localVersion, serverVersion);
 
             if (bHaveNewVersion) {
                 updateQuery.prepare("UPDATE LocalAppInfor SET HaveNew = ? WHERE DisplayName = ?");
@@ -243,6 +256,7 @@ void RegFlashClass::UpdateInfo()
         // --add end: shu-yuan
 
     }
+
     SQLiteQuery.finish();
     updateQuery.finish();
     serverQuery.finish();
