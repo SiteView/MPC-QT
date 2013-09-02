@@ -70,7 +70,7 @@ private:
 // I don't need this double '*' but just to remenber it's changing the string
 int _ExpandEnvironmentStrings(  wchar_t* pText )
 {
-    wchar_t* p1 = _tcschr( pText, _T('%') );
+    wchar_t* p1 = _tcschr( pText, _T('%') );  // TODO: have modify by shu-yuan _tcschr to
     if( p1 == NULL )
         return -1;
 

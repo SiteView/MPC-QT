@@ -19,15 +19,6 @@ protected:
 
 private:
     int updateLocRecord(_MPC__npRequestResponse responseData);
-    int syncDisplayName(); // return 0 stands for the displayName has sync, other is not.
-
-
-    // Helper functions
-    void versionStrToNumber(QString &versionStr, int *versionInt);
-    int versionCompare(QString &locVersion, QString &serVersion);
-
-    std::string convertToStdstring(QVariant variantdata);
-
 
 private:
     CSQLiteDb m_SQLiteDb;

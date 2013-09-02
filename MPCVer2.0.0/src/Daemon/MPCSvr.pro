@@ -23,6 +23,8 @@ LIBS += -llibEGLd \
     -lqtmaind \
     -ladvapi32
 
+DEFINES += _UNICODE
+
 DEPENDPATH += .
 
 MOC_DIR += ./GeneratedFiles/debug
@@ -33,6 +35,7 @@ RCC_DIR += ./GeneratedFiles
 
 HEADERS += ../Common/SqliteDb.h \
     ../Common/SytemLog.h \
+    ../Common/ExtractIcon.h \
     utils/tool.h \
     synserverthread.h \
     regflashclass.h \
@@ -56,5 +59,6 @@ SOURCES += \
     gsoap/soapClient.cpp \
     gsoap/soapC.cpp \
     main.cpp \
-    gsoap/stdsoap2.cpp
+    gsoap/stdsoap2.cpp \
+    ../Common/ExtractIcon.cpp
 

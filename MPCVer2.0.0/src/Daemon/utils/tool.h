@@ -1,8 +1,8 @@
 /*
 ********************************************************************************************
-Discription: ¹«¹²¹¤¾ßº¯Êý.
+Discription: å…¬å…±å·¥å…·å‡½æ•°.
 
-Written By:		ÖÜÖ¾¹â
+Written By:		å‘¨å¿—å…‰
 Date:			2013-07-10
 Version:		1.0
 Mail:			zhouklansman@gmail.com
@@ -26,8 +26,9 @@ Discription:    add function getFolderSize and unifyPathFormat
 
 
 #include "SqliteDb.h"
+#include "../Common/ExtractIcon.h"
 
-// È¥µô»òÈ¡µÃÈí¼þÃ÷Î²²¿µÄ°æ±¾ºÅ¡£
+// åŽ»æŽ‰æˆ–å–å¾—è½¯ä»¶æ˜Žå°¾éƒ¨çš„ç‰ˆæœ¬å·ã€‚
 bool TrimVersion( QString &DisplayName ,QString & version)
 {
     QStringList   liststr =  DisplayName.split(" ");
@@ -137,29 +138,74 @@ QString unifyPathFormat(QString &pathStr)
 }
 
 // get icon from app's path
-QString getIcon(QString &filePath)
+QString getIcon(QString &filePath, QString &fileName)
 {
-    filePath.replace(" ", "\040");
-    QFileInfo fileInfo(filePath);
-    QFileIconProvider seekIcon;
-    QIcon icon = seekIcon.icon(fileInfo);
-    QPixmap pixmap = icon.pixmap(QSize(45, 45));
+    LPCWSTR lstrFilePath = LPCWSTR(filePath.utf16());
+    HICON* pIcons = (HICON*)LocalAlloc( LPTR, 100*sizeof(HICON) );
 
-    QDir *dir = new QDir();
-    if (!dir->exists("icons")) {
-        int b = dir->mkdir("icons");
-        qDebug() << b << "make a directory for icons successfully";
-    }
-    QString iconPath = QString("./icons/%1.png").arg(fileInfo.baseName());  // icon path
-   // QString iconPath = filePath.replace(fileInfo.completeSuffix(), "png");  // some path only read, so is not nice.
-    if(!pixmap.save(iconPath, "png"))
-    {
-        //qDebug() << "GetIcon" << "Save Icon Fail";
+    int cIcons;
+    if( pIcons != NULL ) {
+        cIcons = (int)ExtractIcons::Get( lstrFilePath, 0, 128, 128, pIcons, NULL, 100, LR_COLOR );
     }
 
-    return iconPath;
+    QString savePath = "./icons/" + fileName + ".ico";
+
+    LPCWSTR lstrSavePath = LPCWSTR(savePath.utf16());
+
+    qDebug() << SaveIcon(pIcons[0], lstrSavePath,32);
+
+    GlobalFree(pIcons);
+
+    return QString::fromStdWString(lstrSavePath);
+
+
+//    filePath.replace(" ", "\040");
+//    QFileInfo fileInfo(filePath);
+//    QFileIconProvider seekIcon;
+//    QIcon icon = seekIcon.icon(fileInfo);
+//    QPixmap pixmap = icon.pixmap(QSize(45, 45));
+
+//    QDir *dir = new QDir();
+//    if (!dir->exists("icons")) {
+//        int b = dir->mkdir("icons");
+//        qDebug() << b << "make a directory for icons successfully";
+//    }
+//    QString iconPath = QString("./icons/%1.png").arg(fileName);  // icon path
+//   // QString iconPath = filePath.replace(fileInfo.completeSuffix(), "png");  // some path only read, so is not nice.
+//    if(!pixmap.save(iconPath, "png"))
+//    {
+//        //qDebug() << "GetIcon" << "Save Icon Fail";
+//    }
+
+//    return iconPath;
 }
 
+// Helper functions
+void versionStrToNumber(QString &versionStr, int *versionInt)
+{
+    QStringList strList;
+    strList = versionStr.split(".");
+    int i = 0;
+    foreach(QString str, strList) {
+        versionInt[i] = str.toInt();
+        i++;
+    }
+}
+
+int versionCompare(QString &versionStr1, QString &versionStr2)
+{
+    int versionInt1[5] = {0};
+    int versionInt2[5] = {0};
+
+    versionStrToNumber(versionStr1, versionInt1);
+    versionStrToNumber(versionStr2, versionInt2);
+
+    for (int i = 0; i < 4; i++) {
+        if (versionInt1[i] < versionInt2[i])
+            return 1;
+    }
+    return 0;
+}
 // --end add: shu-yuan
 
 

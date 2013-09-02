@@ -1,4 +1,4 @@
-#include <QApplication>
+ï»¿#include <QApplication>
 #include <QIcon>
 
 #include "../Common/SqliteDb.h"
@@ -6,7 +6,9 @@
 #include "regflashclass.h"
 #include "synserverthread.h"
 
-// È«¾ÖÊı¾İ¿â¶ÔÏó
+
+
+// å…¨å±€æ•°æ®åº“å¯¹è±¡
 QSqlDatabase CSQLiteDb::m_db;
 
 #include "gsoap/PMPC.nsmap"  // important, only once
@@ -15,7 +17,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-	//×¢²áMsgHandler ¿ÉÒÔÊä³ö±ê×¼ÈÕÖ¾ÎÄ¼ş
+	//æ³¨å†ŒMsgHandler å¯ä»¥è¾“å‡ºæ ‡å‡†æ—¥å¿—æ–‡ä»¶
     qInstallMessageHandler(customMessageHandler);
 
 	if (!CSQLiteDb::ConnectionDB(QString( "./localedb.db" ) ) )
@@ -38,7 +40,7 @@ int main(int argc, char *argv[])
 
     int ret = 0;
 	//struct soap add_soap;
-	//add_soap.connect_timeout = 5; //µ¥Î»ÊÇÃë
+	//add_soap.connect_timeout = 5; //å•ä½æ˜¯ç§’
 	//add_soap.send_timeout = 5;
 	//add_soap.recv_timeout = 5;
 	//soap_init(&add_soap);

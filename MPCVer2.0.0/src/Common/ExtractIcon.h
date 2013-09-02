@@ -13,8 +13,8 @@ Version:
 Discription:
 ********************************************************************************************
 */
-
 #pragma once
+#include "Windows.h"
 
 BOOL  SaveIcon(HICON Icon, LPCWSTR FileName, int nBit);
 
