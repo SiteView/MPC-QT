@@ -50,7 +50,7 @@ void SynServerThread::run()
         m_SQLiteDb.getDB()->commit();
 	
 
-        int ret = soap_call_MPC__npRequest(&mpcsoap,"220.168.30.10:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089*/
+        int ret = soap_call_MPC__npRequest(&mpcsoap,"192.168.9.2:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089*/
 
         if (ret == SOAP_OK) {
             updateLocRecord(outdata);

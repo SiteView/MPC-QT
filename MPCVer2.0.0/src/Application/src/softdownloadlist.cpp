@@ -142,6 +142,7 @@ void SoftDownloadList::selectDifType(int cmd){
         QStringList str=path_file.split("/");
         int i=str.count();
         ani->exename=str.at(i-1);
+
         QListWidgetItem *twi = new QListWidgetItem(0);
         twi->setSizeHint(QSize(400,59));
         DownloadList->addItem(twi);

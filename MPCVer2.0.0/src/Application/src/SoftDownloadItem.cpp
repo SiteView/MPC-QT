@@ -139,13 +139,12 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
 }
 
 
-void SoftDownloadItem::on_download_clicked()
+void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
     if(CURLDownloadManager::getThis()->isBusy())
     {
         QMessageBox::about(this,tr("inform"),tr("is busy"));
     }
-
     else
     {
     stackedWidget->setCurrentWidget(page_2);
@@ -155,13 +154,13 @@ void SoftDownloadItem::on_download_clicked()
     }
 
 }
-void SoftDownloadItem::startProgress(int i)
+void SoftDownloadItem::startProgress(int i)//给进度条传值
 {
 
     progressBar->setValue(i);
 
 }
-void SoftDownloadItem::changevalued(int i)
+void SoftDownloadItem::changevalued(int i)//判断下载是否完成
 {
     if(i==100)
     {
@@ -169,29 +168,30 @@ void SoftDownloadItem::changevalued(int i)
     }
 }
 
-void SoftDownloadItem::cancelProgress_download()
+void SoftDownloadItem::cancelProgress_download()//取消下载
 {
     setup->destroyed();
     stackedWidget->setCurrentWidget(page);
 
 }
-void SoftDownloadItem::suspendProgress_download()
+void SoftDownloadItem::suspendProgress_download()//暂停下载
 {
 
 }
-void SoftDownloadItem::cancelProgress_setup()
+void SoftDownloadItem::cancelProgress_setup()//取消安装
 {
     stackedWidget->setCurrentWidget(page);
 
 }
-void SoftDownloadItem::suspendProgress_setup()
+void SoftDownloadItem::suspendProgress_setup()//暂停安装
 {
     QString program=runPath+"/tmp/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
 }
 
-void SoftDownloadItem::DownloadThread(){
+void SoftDownloadItem::DownloadThread()//下载进程
+{
     runPath = QCoreApplication::applicationDirPath();
     qDebug()<<runPath<<"---urlprogram---"<<urlprogram;
     downloader->start();
@@ -200,7 +200,8 @@ void SoftDownloadItem::DownloadThread(){
     downloader->ready(true);    
 }
 
-void SoftDownloadItem::Downloadresult(int i){
+void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
+{
 
     if (i!=0)
     {

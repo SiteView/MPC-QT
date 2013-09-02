@@ -14,7 +14,7 @@
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    this->resize(920,70);
+//    this->resize(920,75);
 
     mouse_press = false;
     mouse_enter = false;

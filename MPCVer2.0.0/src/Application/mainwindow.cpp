@@ -19,8 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
-
-
     this->createUnloadtableMenu();
     this->createUpgradeMenu();
     this->createDownloadMenu();
@@ -60,8 +58,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 }
 void MainWindow::createUpgradeMenu()
 {
-    //    testclass=new TestUnloadList (ui->widget_6);
-    //    testclass->show();
+    list_upgrade = new SoftUpgradeList(ui->widget_6);
 }
 void MainWindow::createDownloadMenu()
 {
@@ -118,8 +115,7 @@ void MainWindow::on_SoftDownload_clicked()
 void MainWindow::on_SoftUpgrade_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
-    //    grid=new GridlayoutClass();
-    //    grid->show();
+
 }
 
 void MainWindow::on_SoftUnload_clicked()
@@ -127,10 +123,7 @@ void MainWindow::on_SoftUnload_clicked()
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
 }
 
-//void MainWindow::on_UpdateInform_clicked()
-//{
-//    ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-//}
+
 
 void MainWindow::on_but_close_clicked()
 {

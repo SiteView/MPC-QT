@@ -91,7 +91,7 @@ QPushButton#UpdateInform:clicked
 	border-image: url(:/images/updateinform_press.png);
 }
 
-QPushButton#download,#set_up,#unload
+QPushButton#download,#set_up,#unload,#but_upgrade
 {
 	border: 1px solid rgb(185,185,185);
 	border-radius: 2px;
@@ -100,7 +100,7 @@ QPushButton#download,#set_up,#unload
 
 }
 
-QPushButton#download:hover,#set_up:hover,#unload:hover
+QPushButton#download:hover,#set_up:hover,#unload:hover,#but_upgrade:hover
 {
 	border: 1px solid rgb(104,231,244);
 	border-radius: 2px;
