@@ -14,7 +14,7 @@
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
-//    this->resize(920,75);
+    //    this->resize(920,75);
 
     mouse_press = false;
     mouse_enter = false;
@@ -93,15 +93,9 @@ void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
                               QString Qsetuptime,QString Qprogress,
                               QString QuninstallString)
 {
-    QStringList str=Qicon.split(".");
-    if(Qicon==""||str.at(1)!="ico")
-    {
-        icon->setStyleSheet("border-image:url(:/images/default.png)");
-    }
-    else
-    {
-        icon->setStyleSheet("border-image:url("+Qicon+")");
-    }
+
+    icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
+
     softname->setText(Qsoftname);
     softdetail->setText(Qsoftdetail);
     size->setText(get_size(Qsize));

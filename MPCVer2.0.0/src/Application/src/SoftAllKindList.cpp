@@ -43,7 +43,7 @@ SoftAllKindList::SoftAllKindList(QWidget *parent) :
     }
     SQLiteQuery.finish();
     connect(list_softallkind,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
-    qDebug()<<list_softallkind->currentRow()<<"(***.CURREN";
+    qDebug()<<list_softallkind->currentRow()<<"==list_softallkind->currentRow()";
 
 }
 

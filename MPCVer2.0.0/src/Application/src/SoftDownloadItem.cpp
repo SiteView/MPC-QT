@@ -16,7 +16,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
     downloader=new CURLDownloadManager(this);
-
+    qDebug()<<"==downloader=="<<downloader;
     QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
     horizontalLayout_3->setSpacing(6);
     horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -123,12 +123,35 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     connect(but_cancel,SIGNAL(clicked()),this,SLOT(cancelProgress_download()));
     connect(but_suspend,SIGNAL(clicked()),this,SLOT(suspendProgress_download()));
     connect(progressBar,SIGNAL(valueChanged(int)),this,SLOT(changevalued(int)));
-
     connect(setup,SIGNAL(clicked()),this,SLOT(suspendProgress_setup()));
 
 }
+void SoftDownloadItem::takeText(QString Qsoftname,
+                              QString Qsoftdetail,QString Qsize,
+                              QString Qupnum,QString Qurl )
+{
+
+    but_icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
+    but_softname->setText(Qsoftname);
+
+    lab_softdetail->setText(Qsoftdetail+"...");
+
+    lab_softdetail->setToolTip(Qsoftdetail);
+    lab_upnum->setText(Qupnum);
+    lab_upnum_2->setText(Qupnum);
+    lab_size->setText(Qsize);
+    lab_size_2->setText(Qsize);
+    download->setText("download");
+    urlprogram=Qurl;
+    //        ani->lab_prompt->setText(pahtstr2);
+    QUrl url = QUrl::fromEncoded(Qurl.toUtf8());
+    QString path_file = url.toString();
+    QStringList str=path_file.split("/");
+    int i=str.count();
+    exename=str.at(i-1);
 
 
+}
 void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
     if(CURLDownloadManager::getThis()->isBusy())
@@ -146,9 +169,7 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
 }
 void SoftDownloadItem::startProgress(int i)//给进度条传值
 {
-
     progressBar->setValue(i);
-
 }
 void SoftDownloadItem::changevalued(int i)//判断下载是否完成
 {
@@ -162,7 +183,6 @@ void SoftDownloadItem::cancelProgress_download()//取消下载
 {
     setup->destroyed();
     stackedWidget->setCurrentWidget(page);
-
 }
 void SoftDownloadItem::suspendProgress_download()//暂停下载
 {
@@ -195,6 +215,6 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        QMessageBox::about(this,tr("inform"),tr("download fail  "));
+        qDebug()<<"Downloadresult->===i==="<<i;
     }
 }

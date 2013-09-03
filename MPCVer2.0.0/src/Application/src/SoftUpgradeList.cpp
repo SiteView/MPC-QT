@@ -35,7 +35,7 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
         QString pahtstr6 = val6.toString();
 
         SoftUpgradeItem *ani=new SoftUpgradeItem(list_softupgrade);
-        ani->icon->setStyleSheet("border-image:url("+pahtstr1+"); background:transparent;");
+        ani->icon->setStyleSheet("border-image:url(./icons/"+pahtstr1+".ico);");
         ani->softname->setText(pahtstr1);
         ani->softdetaile->setText(pahtstr2);
         ani->but_more->setText("more");
@@ -44,15 +44,20 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
         ani->new_versions->setText(pahtstr4);
         ani->lab_size->setText(pahtstr5);
         ani->but_upgrade->setText("upgrade");
+        qDebug()<<"pahtstr6----------6666------"<<pahtstr6;
+        ani->urlprogram=pahtstr6;
+
         QUrl url = QUrl::fromEncoded(pahtstr6.toUtf8());
         QString path_file = url.toString();
         QStringList str=path_file.split("/");
         int i=str.count();
         ani->exename=str.at(i-1);
+
         QListWidgetItem *twi = new QListWidgetItem(0);
         twi->setSizeHint(QSize(400,60));
         list_softupgrade->addItem(twi);
         list_softupgrade->setItemWidget(twi,ani);
+
     }
     SQLiteQuery.finish();
 

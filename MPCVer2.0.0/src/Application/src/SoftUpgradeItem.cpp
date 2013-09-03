@@ -107,13 +107,13 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
 
     but_suspend = new QPushButton(frame_3);
     but_suspend->setObjectName(QString::fromUtf8("but_suspend"));
-    but_suspend->setGeometry(QRect(240, 20, 18, 14));
+    but_suspend->setGeometry(QRect(280, 20, 18, 14));
     but_cancel = new QPushButton(frame_3);
     but_cancel->setObjectName(QString::fromUtf8("but_cancel"));
-    but_cancel->setGeometry(QRect(260, 20, 18, 14));
+    but_cancel->setGeometry(QRect(300, 20, 18, 14));
     progressBar = new QProgressBar(frame_3);
     progressBar->setObjectName(QString::fromUtf8("but_progress"));
-    progressBar->setGeometry(QRect(0, 20, 200, 15));
+    progressBar->setGeometry(QRect(20, 20, 200, 15));
 
     stackedWidget->addWidget(page_2);
     page_3 = new QWidget();
@@ -126,15 +126,15 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     frame_4->setFrameShadow(QFrame::Raised);
     lab_upnum_2 = new QLabel(frame_4);
     lab_upnum_2->setObjectName(QString::fromUtf8("lab_upnum"));
-    lab_upnum_2->setGeometry(QRect(110, 20, 101, 20));
+    lab_upnum_2->setGeometry(QRect(150, 20, 101, 20));
     lab_upnum_2->setFixedSize(QSize(120, 20));
     lab_size_2 = new QLabel(frame_4);
     lab_size_2->setObjectName(QString::fromUtf8("lab_size"));
-    lab_size_2->setGeometry(QRect(10, 20, 50, 20));
+    lab_size_2->setGeometry(QRect(20, 20, 50, 20));
     lab_size_2->setFixedSize(QSize(50, 20));
     setup = new QPushButton(frame_4);
     setup->setObjectName(QString::fromUtf8("set_up"));
-    setup->setGeometry(QRect(220, 20, 80, 25));
+    setup->setGeometry(QRect(280, 20, 80, 25));
     setup->setFixedSize(QSize(80, 25));
     setup->setText("setup");
     stackedWidget->addWidget(page_3);
@@ -162,7 +162,6 @@ void SoftUpgradeItem::on_but_upgrade_clicked()
         connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
         DownloadThread();
     }
-
 }
 
 void SoftUpgradeItem::DownloadThread()

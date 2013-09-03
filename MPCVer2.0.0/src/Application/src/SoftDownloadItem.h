@@ -14,6 +14,10 @@ class SoftDownloadItem : public QWidget
     Q_OBJECT
 public:
     explicit SoftDownloadItem(QWidget *parent = 0);
+    void DownloadThread();
+    void takeText(QString Qsoftname,
+                   QString Qsoftdetail,QString Qsize,
+                   QString Qupnum,QString Qurl);
 public:
 
     QFrame *frame_1 ;
@@ -46,9 +50,6 @@ public:
     QString exename;
     QString runPath;
     CURLDownloadManager *downloader;
-
-public:
-    void DownloadThread();
 
 signals:
 
