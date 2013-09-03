@@ -16,11 +16,18 @@ Discription:    add a function updateFieldValue, repair EstimatedSize、 Display
 #include "regflashclass.h"
 #include "utils/tool.h"
 #include <QFile>
+#include <QPixmap>
 
 RegFlashClass::RegFlashClass(/*QObject *parent*/)
     : QThread(/*parent*/)
 {
 }
+
+RegFlashClass::~RegFlashClass()
+{
+
+}
+
 void RegFlashClass::run()
 {
     QString val1;
@@ -39,9 +46,18 @@ void RegFlashClass::run()
     {
         sleep( 5 );
         QSqlQuery query(*m_SQLiteDb.getDB());
-        QSettings reg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",QSettings::NativeFormat);
-        QStringList groupsList=reg.childGroups();
         m_SQLiteDb.getDB()->transaction();
+
+        static bool flagReg = true;
+        QString regStr;
+        if(flagReg)
+            regStr = QString("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
+        else
+            regStr = QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
+        flagReg =! flagReg;
+
+        QSettings reg(regStr,QSettings::NativeFormat);
+        QStringList groupsList = reg.childGroups();
 
         foreach(QString group,groupsList)
         {
@@ -134,6 +150,20 @@ void RegFlashClass::UpdateInfo()
         QString iconStr = val5.toString();
         QString uninstallPathStr = val6.toString();
 
+        // formate install path ,uninstall path and displayicon path
+        if (installPathStr.compare("")) {
+            unifyPathFormat(installPathStr);
+            updateFieldValue(updateQuery, "InstallLocation", installPathStr, val1);
+        }
+        if (uninstallPathStr.compare("")) {
+            unifyPathFormat(uninstallPathStr);
+            updateFieldValue(updateQuery, "UninstallString", uninstallPathStr, val1);
+        }
+        if (iconStr.compare("")) {
+            unifyPathFormat(iconStr);
+            updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
+        }
+
         // 修补安装日期 访问信息
         if(/*(val4.toString().compare("") == 0) &&*/ installPathStr.compare("") )
         {
@@ -146,8 +176,8 @@ void RegFlashClass::UpdateInfo()
         {
             QStringList liststr =  val1.toString().split(" ");
             QString version ;
-            QString displayNane = val1.toString();
-            bool ret = TrimVersion(displayNane,version);
+            QString displayName = val1.toString();
+            bool ret = TrimVersion(displayName,version);
             if(ret)
             {
                 updateFieldValue(updateQuery, "DisplayVersion", version, val1);
@@ -161,29 +191,43 @@ void RegFlashClass::UpdateInfo()
         if (installPathStr.compare("")) {
             long long size = 0;
             size = getFolderSize(installPathStr);
+
             updateFieldValue(updateQuery, "EstimatedSize", size, val1);
         }
 
 
         // repair the icon path
+        int iconIndx = 0;
+        if (iconStr.contains(",")) {
+            int indexFirst = iconStr.lastIndexOf(",");
+            int indexEnd = iconStr.length() - 1;
+
+            iconIndx = iconStr.mid(indexFirst + 1, indexEnd - indexFirst).toInt();
+            iconStr.replace(QString(",%1").arg(QString::number(iconIndx)), "");
+
+            //iconStr.replace(",", "");
+        }
+
         QFileInfo iconInfo(iconStr);
         bool bIconExist = iconInfo.exists();
 
-        if (bIconExist) {
-            QString newIconPath = "./icons/" + val1.toString() + ".ico";
-            QFileInfo fileInfo(newIconPath);
+        QString newIconPath = "./icons/" + val1.toString() + ".ico";
+        QFileInfo fileInfo(newIconPath);
 
+		if (fileInfo.exists()) {
+			// TEMP
+			updateFieldValue(updateQuery, "DisplayIcon", "have", val1);
+		}
+        if (bIconExist) {
             if (!fileInfo.exists()) {
                 // file is icon
                 if (iconStr.contains(".ico")) {
-                    if (!QFile::copy(iconStr, newIconPath)) {
-                        qDebug() << "--copyIcon error";
-                    }
+                    QFile::copy(iconStr, newIconPath);
                 } else {
                     // get icon path
-                    getIcon(iconStr, val1.toString());
+                    getIcon(iconStr, val1.toString(), iconIndx);
                 }
-            }
+            } 
         } // true
         else {
             // repair from install location
@@ -196,10 +240,17 @@ void RegFlashClass::UpdateInfo()
             QFileInfo fileInfoIcon(iconStr);
             if (fileInfoIcon.exists()) {
                 qDebug() << iconStr;
-                updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
+                if (getIcon(iconStr, val1.toString(), iconIndx)) {
+                    updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
+                }
+            } else {
+                // Microsoft WindowsInstaller install
+                if (uninstallPathStr.contains("MsiExec.exe")) {
+                    QString msIconStr = ":/res/defaulticons/MsiExec.ico";
+                    qDebug() << newIconPath << QFile::copy(msIconStr, newIconPath);
+                }
             }
-        } // flase
-
+        } // false
 
 
         // delete the unloaded software over 2 days
@@ -210,7 +261,7 @@ void RegFlashClass::UpdateInfo()
 
         // check new version
         QString serverVersion;
-        serverQuery.prepare("SELECT ResetServerVersion FROM ServerAppInfo WHERE DisplayName = ?");
+        serverQuery.prepare("SELECT ServerVersion FROM ServerAppInfo WHERE DisplayName = ?");
         serverQuery.addBindValue(val1);
         if (!serverQuery.exec()) {
             qDebug(serverQuery.lastError().text().toLocal8Bit().data());
@@ -239,19 +290,7 @@ void RegFlashClass::UpdateInfo()
         }
 
 
-        // formate install path ,uninstall path and displayicon path
-        if (installPathStr.compare("")) {
-            unifyPathFormat(installPathStr);
-            updateFieldValue(updateQuery, "InstallLocation", installPathStr, val1);
-        }
-        if (uninstallPathStr.compare("")) {
-            unifyPathFormat(uninstallPathStr);
-            updateFieldValue(updateQuery, "UninstallString", uninstallPathStr, val1);
-        }
-        if (iconStr.compare("")) {
-            unifyPathFormat(iconStr);
-            updateFieldValue(updateQuery, "DisplayIcon", iconStr, val1);
-        }
+
 
         // --add end: shu-yuan
 
@@ -277,9 +316,5 @@ bool RegFlashClass::updateFieldValue(QSqlQuery sqlQuery, const QString &fieldNam
     return true;
 }
 
-RegFlashClass::~RegFlashClass()
-{
-
-}
 
 
