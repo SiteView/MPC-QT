@@ -9,7 +9,7 @@ QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
 
 #DESTDIR = ../../bin
-TARGET = ../../bin/SoftUpdate
+TARGET = ../../bin/MarketPlaceClient
 TEMPLATE = app
 INCLUDEPATH += . \
                ./include\
