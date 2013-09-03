@@ -15,7 +15,7 @@
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    downloader=new CURLDownloadManager(this);
+    downloader= new CURLDownloadManager(this);
     qDebug()<<"==downloader=="<<downloader;
     QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
     horizontalLayout_3->setSpacing(6);
@@ -204,10 +204,10 @@ void SoftDownloadItem::DownloadThread()//下载进程
 {
     runPath = QCoreApplication::applicationDirPath();
     qDebug()<<runPath<<"---urlprogram---"<<urlprogram;
-    downloader->start();
-    downloader->setUrl(urlprogram);
-    downloader->setSavefileName(runPath+"/tmp/"+exename);
-    downloader->ready(true);    
+    CURLDownloadManager::getThis()->start();
+    CURLDownloadManager::getThis()->setUrl(urlprogram);
+    CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
+    CURLDownloadManager::getThis()->ready(true);
 }
 
 void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
