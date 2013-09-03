@@ -24,7 +24,7 @@ SoftAllKindList::SoftAllKindList(QWidget *parent) :
         int pahtstr2 = val2.toInt();
         type=pahtstr2;
         SoftAllKindItem *ani=new SoftAllKindItem(this);
-        ani->ico->setStyleSheet("border-image:url(:/images/circle.png)");
+        ani->ico->setStyleSheet("border-image:url(:/images/litter/"+pahtstr0+".png)");
         ani->text->setText(pahtstr0);
         ani->num->setText(pahtstr1);
         QListWidgetItem *twi = new QListWidgetItem(0);

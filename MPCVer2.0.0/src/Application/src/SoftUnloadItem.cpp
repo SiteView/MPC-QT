@@ -88,14 +88,15 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     connect(unload,SIGNAL(clicked()),this,SLOT(on_unload_clicked()));
 
 }
-void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,QString Qsoftdetail,QString Qsize,
-                              QString Qsetuptime,QString Qprogress,QString QuninstallString)
+void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
+                              QString Qsoftdetail,qint64 Qsize,
+                              QString Qsetuptime,QString Qprogress,
+                              QString QuninstallString)
 {
     QStringList str=Qicon.split(".");
     if(Qicon==""||str.at(1)!="ico")
     {
         icon->setStyleSheet("border-image:url(:/images/default.png)");
-
     }
     else
     {
@@ -103,15 +104,28 @@ void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,QString Qsoftdetai
     }
     softname->setText(Qsoftname);
     softdetail->setText(Qsoftdetail);
-    size->setText(Qsize);
+    size->setText(get_size(Qsize));
     setuptime->setText(Qsetuptime);
     progress->setText(Qprogress);
     program=QuninstallString;
 
 }
+QString SoftUnloadItem::get_size( qint64 byte )
+{
+    double kb=0,mb=0,gb=0;
+    QString size;
+    if ( byte > 1024 ) kb= byte/1024;
+    if ( kb > 1024 ) mb=kb/1024;
+    if ( mb > 1024 ) gb=mb/1024;
+    size=tr("%1B").arg(byte);
+    if ( kb != 0 ) size=tr("%1KB").arg(kb,0,'f',2);
+    if ( mb != 0 ) size=tr("%1MB").arg(mb,0,'f',2);
+    if ( gb != 0 ) size=tr("%1GB").arg(gb,0,'f',2);
+
+    return size;
+}
 void SoftUnloadItem::on_unload_clicked()
 {
-
     QProcess *unloader=new QProcess();
     unloader->start(program,QStringList());
     qDebug()<<program<<"cliked.....";

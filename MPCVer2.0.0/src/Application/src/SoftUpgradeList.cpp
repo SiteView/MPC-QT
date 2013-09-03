@@ -1,4 +1,5 @@
 #include <QListWidgetItem>
+#include <QUrl>
 #include "../Common/SqliteDb.h"
 
 #include "SoftUpgradeList.h"
@@ -41,15 +42,19 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
         ani->but_more->setStyleSheet("color:lightblue;background:transparent;");
         ani->old_versions->setText(pahtstr3);
         ani->new_versions->setText(pahtstr4);
-        ani->size->setText(pahtstr5);
+        ani->lab_size->setText(pahtstr5);
         ani->but_upgrade->setText("upgrade");
+        QUrl url = QUrl::fromEncoded(pahtstr6.toUtf8());
+        QString path_file = url.toString();
+        QStringList str=path_file.split("/");
+        int i=str.count();
+        ani->exename=str.at(i-1);
         QListWidgetItem *twi = new QListWidgetItem(0);
         twi->setSizeHint(QSize(400,60));
         list_softupgrade->addItem(twi);
         list_softupgrade->setItemWidget(twi,ani);
     }
     SQLiteQuery.finish();
-
 
 }
 

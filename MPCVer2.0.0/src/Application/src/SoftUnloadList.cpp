@@ -90,7 +90,7 @@ void SoftUnloadList::DiffSelect(int cmd){
         QString pahtstr0 = val0.toString();
         QString pahtstr1 = val1.toString();
         QString pahtstr2 = val2.toString();
-        QString pahtstr3 = val3.toString();
+        qint64 pahtstr3 = val3.toLongLong();
         QString pahtstr4 = val4.toString();
         QString pahtstr5 = val5.toString();
         QString pahtstr6 = val6.toString();

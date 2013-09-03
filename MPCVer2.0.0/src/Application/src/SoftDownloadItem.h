@@ -7,7 +7,6 @@
 #include <QString>
 #include <QProgressBar>
 #include <QStackedWidget>
-//class  CURLDownloadManager;
 class  CURLDownloadManager;
 
 class SoftDownloadItem : public QWidget
@@ -28,10 +27,7 @@ public:
     QWidget *page_2;
     QWidget *page_3;
 
-    QPushButton *but_more;
-    QWidget *layoutWidget1;
     QFrame *frame_3 ;
-//    QLabel *lab_prompt;
     QPushButton *but_suspend;
     QPushButton *but_cancel ;
     QFrame *frame_2;
@@ -39,13 +35,10 @@ public:
     QLabel *lab_size;
     QPushButton *download;
     QFrame *frame_4;
-//    QLabel *lab_prompt_2;
-//    QPushButton *but_suspend_2;
-//    QPushButton *but_cancel_2 ;
+
     QLabel *lab_upnum_2;
     QLabel *lab_size_2;
     QPushButton *setup;
-
     QProgressBar *progressBar;
     QProgressBar *progressBar_2;
 
@@ -55,7 +48,6 @@ public:
     CURLDownloadManager *downloader;
 
 public:
-    void retranslateUi();
     void DownloadThread();
 
 signals:

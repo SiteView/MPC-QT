@@ -31,7 +31,7 @@ public:
     QStringList list_0;
     QStringList list_1;
     QStringList list_2;
-    QStringList list_3;
+    QList<qint64 > list_3;
     QStringList list_4;
     QStringList list_5;
     QStringList list_6;

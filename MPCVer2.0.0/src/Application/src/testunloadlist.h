@@ -43,7 +43,7 @@ public:
     QStringList icon_list;
     QStringList softname_list;
     QStringList softdetail_list;
-    QStringList size_list;
+    QList<qint64> size_list;
     QStringList setuptime_list;
     QStringList progress_list;
     QStringList uninstallString_list;
