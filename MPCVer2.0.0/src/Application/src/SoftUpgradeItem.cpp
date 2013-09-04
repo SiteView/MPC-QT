@@ -212,9 +212,19 @@ bool SoftUpgradeItem::suspendProgress_setup()//暂停安装
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
     if (!setup->waitForStarted()) // 检查是否可执行
-           return false;
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
     if (!setup->waitForFinished()) // 检查是否可结束
-           return false;
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
 }
 
 void SoftUpgradeItem::Downloadresult(int i)//获得下载返回值

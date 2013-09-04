@@ -12,11 +12,11 @@
 #include "SoftDownloadList.h"
 #include "curldownloadmanager.h"
 #include "CellClass.h"
-extern CURLDownloadManager downloader;
+//extern CURLDownloadManager downloader;
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    //  downloader= new CURLDownloadManager(this);
+    CURLDownloadManager  *downloader= new CURLDownloadManager(this);
     //  qDebug()<<"==downloader=="<<downloader;
     QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
     horizontalLayout_3->setSpacing(6);
@@ -156,7 +156,7 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
     if(CURLDownloadManager::getThis()->isBusy())
     {
-//        QMessageBox::about(this,tr("inform"),tr("is busy"));
+        //        QMessageBox::about(this,tr("inform"),tr("is busy"));
         CellClass *cell=new CellClass();
         cell->changeText("Download","is busy","close");
         cell->show();
@@ -202,9 +202,19 @@ bool SoftDownloadItem::suspendProgress_setup()//暂停安装
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
     if (!setup->waitForStarted()) // 检查是否可执行
-           return false;
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
     if (!setup->waitForFinished()) // 检查是否可结束
-           return false;
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
 }
 
 void SoftDownloadItem::DownloadThread()//下载进程
@@ -215,10 +225,10 @@ void SoftDownloadItem::DownloadThread()//下载进程
     CURLDownloadManager::getThis()->setUrl(urlprogram);
     CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
     CURLDownloadManager::getThis()->ready(true);
-//    downloader.start();
-//    downloader.setUrl(urlprogram);
-//    downloader.setSavefileName(runPath+"/tmp/"+exename);
-//    downloader.ready(true);
+    //    downloader.start();
+    //    downloader.setUrl(urlprogram);
+    //    downloader.setSavefileName(runPath+"/tmp/"+exename);
+    //    downloader.ready(true);
 
 }
 

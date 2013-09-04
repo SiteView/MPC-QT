@@ -196,6 +196,16 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QWidget" name="title_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>0</y>
+       <width>551</width>
+       <height>101</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="widget_body" native="true">
     <property name="geometry">
@@ -216,20 +226,9 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
-     <widget class="QWidget" name="page">
-      <widget class="QWidget" name="widget_2" native="true">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>40</y>
-         <width>920</width>
-         <height>520</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
+     <widget class="QWidget" name="page"/>
      <widget class="QWidget" name="page_SoftDownload">
       <widget class="QWidget" name="widget" native="true">
        <property name="geometry">

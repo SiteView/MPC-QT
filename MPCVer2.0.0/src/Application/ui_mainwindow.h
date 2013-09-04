@@ -39,10 +39,10 @@ public:
     QLabel *label_SoftDownload;
     QLabel *label_SoftUpgrade;
     QLabel *label_SoftUnload;
+    QWidget *title_2;
     QWidget *widget_body;
     QStackedWidget *stackedWidget;
     QWidget *page;
-    QWidget *widget_2;
     QWidget *page_SoftDownload;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_2;
@@ -147,6 +147,9 @@ public:
         label_SoftUnload->setGeometry(QRect(190, 80, 80, 15));
         label_SoftUnload->setMaximumSize(QSize(80, 15));
         label_SoftUnload->setAlignment(Qt::AlignCenter);
+        title_2 = new QWidget(title);
+        title_2->setObjectName(QStringLiteral("title_2"));
+        title_2->setGeometry(QRect(280, 0, 551, 101));
         widget_body = new QWidget(centralWidget);
         widget_body->setObjectName(QStringLiteral("widget_body"));
         widget_body->setGeometry(QRect(0, 100, 920, 580));
@@ -155,9 +158,6 @@ public:
         stackedWidget->setGeometry(QRect(0, 0, 920, 560));
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
-        widget_2 = new QWidget(page);
-        widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setGeometry(QRect(0, 40, 920, 520));
         stackedWidget->addWidget(page);
         page_SoftDownload = new QWidget();
         page_SoftDownload->setObjectName(QStringLiteral("page_SoftDownload"));
@@ -346,7 +346,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
         stack_download->setCurrentIndex(2);
         stackedWidget_2->setCurrentIndex(8);
 

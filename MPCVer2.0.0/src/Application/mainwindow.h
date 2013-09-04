@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QSignalMapper>
 #include "QListWidget"
 #include "../Common/SqliteDb.h"
 //#include "../Common/SytemLog.h"
@@ -13,8 +13,10 @@
 #include "src/SoftAllKindItem.h"
 #include "src/GridlayoutClass.h"
 #include "src/CellClass.h"
-
+#include "src/SoftUpgradeList.h"
 #include "src/testunloadlist.h"
+#include "src/ToolButton.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -51,6 +53,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void TitlePage();
+
 private slots:
     void on_SoftDownload_clicked();
 
@@ -83,6 +87,8 @@ private slots:
     void on_but_clear_2_clicked();
 
     void on_but_search_2_clicked();
+public slots:
+    void turnPage(QString current_page);
 
 protected:
     void mousePressEvent(QMouseEvent *e);
@@ -120,11 +126,15 @@ public:
 
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
+
+    SoftUpgradeList *list_upgrade;
 //    CURLDownloadManager *downloader;
     TestUnloadItem *layout_widget; //显示皮肤界面
     TestUnloadList *testclass;
     GridlayoutClass *grid;
     bool flag;
+    QList<ToolButton *> button_list;
+
 private:
     Ui::MainWindow *ui;
 public slots:

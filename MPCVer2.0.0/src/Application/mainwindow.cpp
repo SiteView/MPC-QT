@@ -12,7 +12,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "src/ToolButton.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),flag(true)
@@ -41,13 +41,62 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_path->setText("setpath");
     ui->but_sel_size->setText("softsize");
     ui->but_sel_operate->setText("operate");
+//    TitlePage();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+void MainWindow::TitlePage()
+{
 
+    QStringList string_list;
+    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/updateinform_no.png";
+
+    QHBoxLayout *button_layout = new QHBoxLayout();
+
+    QSignalMapper *signal_mapper = new QSignalMapper(this);
+
+    for(int i=0; i<string_list.size(); i++)
+    {
+        ToolButton *tool_button = new ToolButton(this);
+        tool_button->setImage(string_list.at(i));
+        button_list.append(tool_button);
+        connect(tool_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
+        signal_mapper->setMapping(tool_button, QString::number(i, 10));
+
+        button_layout->addWidget(tool_button, 0, Qt::AlignBottom);
+    }
+    connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(turnPage(QString)));
+
+    QVBoxLayout *main_layout = new QVBoxLayout(ui->title_2);
+    main_layout->addLayout(button_layout);
+    main_layout->setSpacing(0);
+    main_layout->setContentsMargins(0, 0, 0, 0);
+    button_list.at(0)->setText(tr("power"));
+    button_list.at(1)->setText(tr("mummy"));
+    button_list.at(2)->setText(tr("hole"));
+}
+
+void MainWindow::turnPage(QString current_page)
+{
+    bool ok;
+    int current_index = current_page.toInt(&ok, 10);
+
+    for(int i=0; i<button_list.count(); i++)
+    {
+        ToolButton *tool_button = button_list.at(i);
+        if(current_index == i)
+        {
+            tool_button->setMousePress(true);
+        }
+        else
+        {
+            tool_button->setMousePress(false);
+        }
+    }
+}
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 {
 //    QPainter painter2(this);

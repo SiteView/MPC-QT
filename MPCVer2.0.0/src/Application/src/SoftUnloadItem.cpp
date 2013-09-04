@@ -10,7 +10,7 @@
 #include <QMouseEvent>
 #include <QFileInfo>
 #include "SoftUnloadItem.h"
-
+#include "CellClass.h"
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
@@ -55,7 +55,7 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     progress->setFixedSize(QSize(90, 20));
     unload->setFixedSize(QSize(70, 25));
     uninstall->setFixedSize(QSize(70, 25));
-    uninstall->setText("Uninstalling...");
+    uninstall->setText("finish");
     uninstall->hide();
     unload->setText("Uninstall");
     QHBoxLayout *horizontalLayout = new QHBoxLayout();
@@ -128,32 +128,41 @@ bool SoftUnloadItem::on_unload_clicked()
     connect(unloader,SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(Unloadfinish(int , QProcess::ExitStatus )));
     connect(unloader,SIGNAL(error(QProcess::ProcessError )),this,SLOT(unloaderror(QProcess::ProcessError )));
     if (!unloader->waitForStarted()) // 检查是否可执行
-           return false;
-    if (!unloader->waitForFinished()) // 检查是否可结束
-           return false;
+    {
+        unload->hide();
+        uninstall->setText("failed");
 
+//        CellClass *cell=new CellClass();
+//        cell->changeText("Uninstall","is fail","close");
+//        cell->show();
+        return false;
+    }
+    if (!unloader->waitForFinished()) // 检查是否可结束
+    {
+        uninstall->show();
+//        CellClass *cell=new CellClass();
+//        cell->changeText("Uninstall","finish fail","close");
+//        cell->show();
+        return false;
+    }
 }
 
 void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    qDebug()<<exitCode<<"==exitCode";
     if (exitStatus == QProcess::NormalExit)
     {
-        qDebug()<<exitCode<<"==exitStatus";
-        uninstall->setText("finished");
+        uninstall->show();
 
     }
     else if (exitCode != 0)
     {
-        qDebug()<<exitCode<<"==";
-
         unload->hide();
-        uninstall->setText("0");
+        uninstall->setText("error");
     }
     else
     {
-        uninstall->show();
-        uninstall->setText("...ing...");
+        unload->show();
+        uninstall->hide();
     }
 
     QSqlQuery sqlQuery( *m_SQLiteDb.getDB());
