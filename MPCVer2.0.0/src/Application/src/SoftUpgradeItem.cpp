@@ -12,6 +12,7 @@
 
 #include "SoftUpgradeItem.h"
 #include "curldownloadmanager.h"
+#include "CellClass.h"
 
 SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     QWidget(parent)
@@ -153,7 +154,9 @@ void SoftUpgradeItem::on_but_upgrade_clicked()
 {
     if(CURLDownloadManager::getThis()->isBusy())
     {
-        QMessageBox::about(this,tr("inform"),tr("is busy"));
+        CellClass *cell=new CellClass();
+        cell->changeText("Upgrade","is busy","close");
+        cell->show();
     }
     else
     {
@@ -167,10 +170,10 @@ void SoftUpgradeItem::on_but_upgrade_clicked()
 void SoftUpgradeItem::DownloadThread()
 {
     runPath = QCoreApplication::applicationDirPath();
-    downloader->start();
-    downloader->setUrl(urlprogram);
-    downloader->setSavefileName(runPath+"/tmp/"+exename);
-    downloader->ready(true);
+    CURLDownloadManager::getThis()->start();
+    CURLDownloadManager::getThis()->setUrl(urlprogram);
+    CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
+    CURLDownloadManager::getThis()->ready(true);
 
 }
 
@@ -203,11 +206,15 @@ void SoftUpgradeItem::cancelProgress_setup()//取消安装
     stackedWidget->setCurrentWidget(page);
 
 }
-void SoftUpgradeItem::suspendProgress_setup()//暂停安装
+bool SoftUpgradeItem::suspendProgress_setup()//暂停安装
 {
     QString program=runPath+"/tmp/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
+    if (!setup->waitForStarted()) // 检查是否可执行
+           return false;
+    if (!setup->waitForFinished()) // 检查是否可结束
+           return false;
 }
 
 void SoftUpgradeItem::Downloadresult(int i)//获得下载返回值
@@ -215,7 +222,7 @@ void SoftUpgradeItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        QMessageBox::about(this,tr("inform"),tr("download fail  "));
+
     }
 }
 

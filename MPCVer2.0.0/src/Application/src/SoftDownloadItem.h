@@ -49,7 +49,7 @@ public:
     QString urlprogram;
     QString exename;
     QString runPath;
-    CURLDownloadManager *downloader;
+//    CURLDownloadManager *downloader;
 
 signals:
 
@@ -60,7 +60,7 @@ public slots:
     void cancelProgress_download();
     void suspendProgress_download();
     void cancelProgress_setup();
-    void suspendProgress_setup();
+    bool suspendProgress_setup();
     void Downloadresult(int);
 };
 #endif // SOFTDOWNLOADITEM_H

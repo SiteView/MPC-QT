@@ -26,7 +26,7 @@ public slots:
    void cancelProgress_download();
    void suspendProgress_download();
    void cancelProgress_setup();
-   void suspendProgress_setup();
+   bool suspendProgress_setup();
    void Downloadresult(int);
 public:
 

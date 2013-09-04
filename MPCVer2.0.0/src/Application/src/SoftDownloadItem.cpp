@@ -11,12 +11,13 @@
 #include "SoftDownloadItem.h"
 #include "SoftDownloadList.h"
 #include "curldownloadmanager.h"
-
+#include "CellClass.h"
+extern CURLDownloadManager downloader;
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    downloader= new CURLDownloadManager(this);
-    qDebug()<<"==downloader=="<<downloader;
+    //  downloader= new CURLDownloadManager(this);
+    //  qDebug()<<"==downloader=="<<downloader;
     QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
     horizontalLayout_3->setSpacing(6);
     horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -127,8 +128,8 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
 
 }
 void SoftDownloadItem::takeText(QString Qsoftname,
-                              QString Qsoftdetail,QString Qsize,
-                              QString Qupnum,QString Qurl )
+                                QString Qsoftdetail,QString Qsize,
+                                QString Qupnum,QString Qurl )
 {
 
     but_icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
@@ -149,21 +150,23 @@ void SoftDownloadItem::takeText(QString Qsoftname,
     QStringList str=path_file.split("/");
     int i=str.count();
     exename=str.at(i-1);
-
-
 }
+
 void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
     if(CURLDownloadManager::getThis()->isBusy())
     {
-        QMessageBox::about(this,tr("inform"),tr("is busy"));
+//        QMessageBox::about(this,tr("inform"),tr("is busy"));
+        CellClass *cell=new CellClass();
+        cell->changeText("Download","is busy","close");
+        cell->show();
     }
     else
     {
-    stackedWidget->setCurrentWidget(page_2);
-    connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
-    connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
-    DownloadThread();
+        stackedWidget->setCurrentWidget(page_2);
+        connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
+        connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
+        DownloadThread();
     }
 
 }
@@ -193,11 +196,15 @@ void SoftDownloadItem::cancelProgress_setup()//取消安装
     stackedWidget->setCurrentWidget(page);
 
 }
-void SoftDownloadItem::suspendProgress_setup()//暂停安装
+bool SoftDownloadItem::suspendProgress_setup()//暂停安装
 {
     QString program=runPath+"/tmp/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
+    if (!setup->waitForStarted()) // 检查是否可执行
+           return false;
+    if (!setup->waitForFinished()) // 检查是否可结束
+           return false;
 }
 
 void SoftDownloadItem::DownloadThread()//下载进程
@@ -208,6 +215,11 @@ void SoftDownloadItem::DownloadThread()//下载进程
     CURLDownloadManager::getThis()->setUrl(urlprogram);
     CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
     CURLDownloadManager::getThis()->ready(true);
+//    downloader.start();
+//    downloader.setUrl(urlprogram);
+//    downloader.setSavefileName(runPath+"/tmp/"+exename);
+//    downloader.ready(true);
+
 }
 
 void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
@@ -215,6 +227,8 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        qDebug()<<"Downloadresult->===i==="<<i;
+        CellClass *cell=new CellClass();
+        cell->changeText("Download","is fail","close");
+        cell->show();
     }
 }

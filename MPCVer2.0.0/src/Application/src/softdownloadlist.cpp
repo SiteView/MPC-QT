@@ -117,33 +117,6 @@ void SoftDownloadList::selectDifType(int cmd){
         list_5<<pahtstr5;
         list_6<<pahtstr6;
 
-//        SoftDownloadItem *ani=new SoftDownloadItem (DownloadList);
-
-//        ani->but_icon->setStyleSheet("border-image:url(./icons/"+pahtstr0+".ico)");
-//        ani->but_softname->setText(pahtstr0);
-
-//        ani->lab_softdetail->setText(pahtstr1+"...");
-
-//        ani->lab_softdetail->setToolTip(pahtstr1);
-//        ani->lab_upnum->setText(pahtstr3);
-//        ani->lab_upnum_2->setText(pahtstr3);
-//        ani->lab_size->setText(pahtstr4);
-//        ani->lab_size_2->setText(pahtstr4);
-//        ani->download->setText("download");
-//        ani->urlprogram=pahtstr5;
-//        //        ani->lab_prompt->setText(pahtstr2);
-//        QUrl url = QUrl::fromEncoded(pahtstr5.toUtf8());
-//        QString path_file = url.toString();
-//        QStringList str=path_file.split("/");
-//        int i=str.count();
-//        ani->exename=str.at(i-1);
-
-//        QListWidgetItem *twi = new QListWidgetItem(0);
-//        twi->setSizeHint(QSize(400,59));
-//        DownloadList->addItem(twi);
-//        DownloadList->setItemWidget(twi,ani);
-//        qDebug()<<"pahtstr2=="<<pahtstr2;
-//        select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where type=10;
     }
     SQLiteQuery.finish();
 

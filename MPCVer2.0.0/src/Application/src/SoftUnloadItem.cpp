@@ -118,7 +118,7 @@ QString SoftUnloadItem::get_size( qint64 byte )
 
     return size;
 }
-void SoftUnloadItem::on_unload_clicked()
+bool SoftUnloadItem::on_unload_clicked()
 {
     QProcess *unloader=new QProcess();
     unloader->start(program,QStringList());
@@ -127,6 +127,10 @@ void SoftUnloadItem::on_unload_clicked()
     unload->hide();
     connect(unloader,SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(Unloadfinish(int , QProcess::ExitStatus )));
     connect(unloader,SIGNAL(error(QProcess::ProcessError )),this,SLOT(unloaderror(QProcess::ProcessError )));
+    if (!unloader->waitForStarted()) // 检查是否可执行
+           return false;
+    if (!unloader->waitForFinished()) // 检查是否可结束
+           return false;
 
 }
 
