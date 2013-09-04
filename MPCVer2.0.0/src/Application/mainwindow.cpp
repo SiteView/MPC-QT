@@ -48,38 +48,44 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::paintEvent(QPaintEvent *)
+void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 {
-    QPainter painter2(this);
-    painter2.setPen(Qt::gray);
-    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
-    painter2.drawPolyline(points, 4);
+//    QPainter painter2(this);
+//    painter2.setPen(Qt::gray);
+//    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
+//    painter2.drawPolyline(points, 4);
+    QPainter painter(this);
+    QPen pen(Qt::gray);
+    painter.setPen(pen);
+    painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 0, 0);
+
 
 }
-void MainWindow::createUpgradeMenu()
+void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
     list_upgrade = new SoftUpgradeList(ui->widget_6);
 }
-void MainWindow::createDownloadMenu()
+void MainWindow::createDownloadMenu()//创建软件下载部分
 {
     list_download   = new SoftDownloadList(ui->page_all);
     list_download->selectDifType(ALL);
     ui->stack_download->setCurrentWidget(ui->page_all);
 }
 
-void MainWindow::createUnloadtableMenu()
+void MainWindow::createUnloadtableMenu()//创建软件卸载部分
 {
     list_unload     = new SoftUnloadList(ui->page_selall);
     list_unload->DiffSelect(SELECT_ALL);
     ui->stackedWidget_2->setCurrentWidget(ui->page_selall);
 }
-void MainWindow::AddSoftSortMenu()
+void MainWindow::AddSoftSortMenu()//增加软件分类菜单
 {
     list_allkinds   = new SoftAllKindList(ui->widget_4);
 
 }
 
-void MainWindow::changeCurrentItem(){
+void MainWindow::changeCurrentItem()//显示不同分类的软件
+{
     int current_row = list_allkinds->list_softallkind->currentRow();
     if(current_row==0)
     {
@@ -107,40 +113,40 @@ void MainWindow::changeCurrentItem(){
     }
 }
 
-void MainWindow::on_SoftDownload_clicked()
+void MainWindow::on_SoftDownload_clicked()//显示软件下载页
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftDownload);
 }
 
-void MainWindow::on_SoftUpgrade_clicked()
+void MainWindow::on_SoftUpgrade_clicked()//显示软件更新页
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
 
 }
 
-void MainWindow::on_SoftUnload_clicked()
+void MainWindow::on_SoftUnload_clicked()//显示软件卸载页
 {
     ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
 }
 
 
 
-void MainWindow::on_but_close_clicked()
+void MainWindow::on_but_close_clicked()//关闭窗口
 {
     this->close();
 }
 
-void MainWindow::on_but_minimize_clicked()
+void MainWindow::on_but_minimize_clicked()//缩小窗口
 {
     this->showMinimized();
 }
-void MainWindow::mousePressEvent(QMouseEvent *e)
+void MainWindow::mousePressEvent(QMouseEvent *e)//点击窗口
 {
     moving = true;
     last = e->globalPos();
 }
 
-void MainWindow::mouseMoveEvent(QMouseEvent *e)
+void MainWindow::mouseMoveEvent(QMouseEvent *e)//移动窗口
 {
     int dx = e->globalX() - last.x();
     int dy = e->globalY() - last.y();
@@ -150,13 +156,13 @@ void MainWindow::mouseMoveEvent(QMouseEvent *e)
         move(x()+dx, y()+dy);
 }
 
-void MainWindow::mouseReleaseEvent(QMouseEvent *e)
+void MainWindow::mouseReleaseEvent(QMouseEvent *e)//释放窗口
 {
     moving = false;
 }
 
 
-void MainWindow::on_but_sel_name_clicked()
+void MainWindow::on_but_sel_name_clicked()//卸载页以软件名称排序
 {
     if(flag)
     {
@@ -178,7 +184,7 @@ void MainWindow::on_but_sel_name_clicked()
     }
 }
 
-void MainWindow::on_but_sel_size_clicked()
+void MainWindow::on_but_sel_size_clicked()//卸载页以软件大小排序
 {
     if(flag)
     {
@@ -198,7 +204,7 @@ void MainWindow::on_but_sel_size_clicked()
     }
 }
 
-void MainWindow::on_but_sel_time_clicked()
+void MainWindow::on_but_sel_time_clicked()//卸载页以软件安装时间排序
 {
     if(flag)
     {
@@ -219,7 +225,7 @@ void MainWindow::on_but_sel_time_clicked()
 
 }
 
-void MainWindow::on_but_sel_path_clicked()
+void MainWindow::on_but_sel_path_clicked()//卸载页以软件安装路径排序
 {
     if(flag)
     {
@@ -259,7 +265,7 @@ void MainWindow::on_but_clear_4_clicked()
 
 }
 
-void MainWindow::on_but_search_4_clicked()
+void MainWindow::on_but_search_4_clicked()//搜索软件
 {
 
 }
