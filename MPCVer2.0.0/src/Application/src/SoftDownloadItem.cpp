@@ -128,7 +128,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
 
 }
 void SoftDownloadItem::takeText(QString Qsoftname,
-                                QString Qsoftdetail,QString Qsize,
+                                QString Qsoftdetail,qint64 Qsize,
                                 QString Qupnum,QString Qurl )
 {
 
@@ -140,8 +140,8 @@ void SoftDownloadItem::takeText(QString Qsoftname,
     lab_softdetail->setToolTip(Qsoftdetail);
     lab_upnum->setText(Qupnum);
     lab_upnum_2->setText(Qupnum);
-    lab_size->setText(Qsize);
-    lab_size_2->setText(Qsize);
+    lab_size->setText(get_size( Qsize ));
+    lab_size_2->setText(get_size( Qsize ));
     download->setText("download");
     urlprogram=Qurl;
     //        ani->lab_prompt->setText(pahtstr2);
@@ -241,4 +241,19 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
         cell->changeText("Download","is fail","close");
         cell->show();
     }
+}
+
+QString SoftDownloadItem::get_size( qint64 byte )
+{
+    double kb=0,mb=0,gb=0;
+    QString size;
+    if ( byte > 1024 ) kb= byte/1024;
+    if ( kb > 1024 ) mb=kb/1024;
+    if ( mb > 1024 ) gb=mb/1024;
+    size=tr("%1B").arg(byte);
+    if ( kb != 0 ) size=tr("%1KB").arg(kb,0,'f',2);
+    if ( mb != 0 ) size=tr("%1MB").arg(mb,0,'f',2);
+    if ( gb != 0 ) size=tr("%1GB").arg(gb,0,'f',2);
+
+    return size;
 }

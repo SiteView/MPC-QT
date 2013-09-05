@@ -31,7 +31,7 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
         QString pahtstr2 = val2.toString();
         QString pahtstr3 = val3.toString();
         QString pahtstr4 = val4.toString();
-        QString pahtstr5 = val5.toString();
+        qint64 pahtstr5 = val5.toLongLong();
         QString pahtstr6 = val6.toString();
 
         SoftUpgradeItem *ani=new SoftUpgradeItem(list_softupgrade);
@@ -42,7 +42,7 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
         ani->but_more->setStyleSheet("color:lightblue;background:transparent;");
         ani->old_versions->setText(pahtstr3);
         ani->new_versions->setText(pahtstr4);
-        ani->lab_size->setText(pahtstr5);
+        ani->lab_size->setText(get_size(pahtstr5));
         ani->but_upgrade->setText("upgrade");
         qDebug()<<"pahtstr6----------6666------"<<pahtstr6;
         ani->urlprogram=pahtstr6;
@@ -63,3 +63,17 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
 
 }
 
+QString SoftUpgradeList::get_size( qint64 byte )
+{
+    double kb=0,mb=0,gb=0;
+    QString size;
+    if ( byte > 1024 ) kb= byte/1024;
+    if ( kb > 1024 ) mb=kb/1024;
+    if ( mb > 1024 ) gb=mb/1024;
+    size=tr("%1B").arg(byte);
+    if ( kb != 0 ) size=tr("%1KB").arg(kb,0,'f',2);
+    if ( mb != 0 ) size=tr("%1MB").arg(mb,0,'f',2);
+    if ( gb != 0 ) size=tr("%1GB").arg(gb,0,'f',2);
+
+    return size;
+}

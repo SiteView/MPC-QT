@@ -18,13 +18,11 @@ class SoftUnloadList : public QWidget
     Q_OBJECT
 public:
     explicit SoftUnloadList(QWidget *parent = 0);
-    void initBottom();
     void DiffSelect(int);
 
 signals:
     
 public slots:
-    void showPage(QString page_count);
 
 public:
 
@@ -55,6 +53,8 @@ public:
     QPushButton *previous_page_button;
     QPushButton *next_page_button;
     QPushButton *last_page_button;
+    QString search_text;
+    bool empty;
 
 };
 

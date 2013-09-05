@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QFileInfo>
+#include <QCoreApplication>
 #include "SoftUnloadItem.h"
 #include "CellClass.h"
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
@@ -94,7 +95,7 @@ void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
                               QString QuninstallString)
 {
 
-    icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
+    //    icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
 
     softname->setText(Qsoftname);
     softdetail->setText(Qsoftdetail);
@@ -103,6 +104,34 @@ void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
     progress->setText(Qprogress);
     program=QuninstallString;
 
+    QString filename = QCoreApplication::applicationDirPath()+QString("/icons/")+Qsoftname.trimmed()+QString(".ico");
+    QFileInfo iconfile(filename);
+    bool bloaded = false;
+    if(iconfile.exists())
+    {
+
+        icon->setStyleSheet("border-image:url("+filename+")");
+        bloaded = true;
+    }
+    else
+    {
+        qDebug() <<Qicon  << Qsoftname.toLocal8Bit().data();
+
+    }
+    if(!bloaded)
+    {
+        QStringList str=Qicon.split(".");
+        if(Qicon==""||str.at(1)!="ico")
+        {
+            icon->setStyleSheet("border-image:url(:/images/default.png)");
+
+        }
+        else
+        {
+            icon->setStyleSheet("border-image:url("+Qicon+")");
+
+        }
+    }
 }
 QString SoftUnloadItem::get_size( qint64 byte )
 {
@@ -132,17 +161,17 @@ bool SoftUnloadItem::on_unload_clicked()
         unload->hide();
         uninstall->setText("failed");
 
-//        CellClass *cell=new CellClass();
-//        cell->changeText("Uninstall","is fail","close");
-//        cell->show();
+        //        CellClass *cell=new CellClass();
+        //        cell->changeText("Uninstall","is fail","close");
+        //        cell->show();
         return false;
     }
     if (!unloader->waitForFinished()) // 检查是否可结束
     {
         uninstall->show();
-//        CellClass *cell=new CellClass();
-//        cell->changeText("Uninstall","finish fail","close");
-//        cell->show();
+        //        CellClass *cell=new CellClass();
+        //        cell->changeText("Uninstall","finish fail","close");
+        //        cell->show();
         return false;
     }
 }

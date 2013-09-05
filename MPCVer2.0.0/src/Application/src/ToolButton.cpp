@@ -27,7 +27,7 @@ void ToolButton::setImage(QString pic_name)
     setIcon(pixmap);
     setIconSize(pixmap.size());
     //设置大小
-    setFixedSize(pixmap.width()+5, pixmap.height()+17);
+    setFixedSize(100, pixmap.height()+17);
     setAutoRaise(true);
 
     setStyleSheet("background:transparent;");

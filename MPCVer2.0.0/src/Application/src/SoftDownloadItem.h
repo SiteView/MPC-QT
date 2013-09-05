@@ -16,8 +16,10 @@ public:
     explicit SoftDownloadItem(QWidget *parent = 0);
     void DownloadThread();
     void takeText(QString Qsoftname,
-                   QString Qsoftdetail,QString Qsize,
+                   QString Qsoftdetail,qint64 Qsize,
                    QString Qupnum,QString Qurl);
+    QString get_size( qint64 byte );
+
 public:
 
     QFrame *frame_1 ;

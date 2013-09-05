@@ -8,7 +8,7 @@
 CellClass::CellClass(QWidget *parent) :
     QWidget(parent)
 {
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
+    this->setWindowFlags(Qt::FramelessWindowHint );
     this->setFixedSize(140, 160);
     mouse_press = false;
     mouse_enter = false;

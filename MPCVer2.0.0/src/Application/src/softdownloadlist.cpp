@@ -10,11 +10,11 @@
 SoftDownloadList::SoftDownloadList(QWidget *parent) :
     QWidget(parent)
 {
+    empty=true;
     DownloadList  = new QListWidget(this);
     DownloadList->setFocusPolicy(Qt::NoFocus);
     DownloadList->resize(760,510);
     DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
-
 }
 
 void SoftDownloadList::selectDifType(int cmd){
@@ -88,10 +88,17 @@ void SoftDownloadList::selectDifType(int cmd){
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
-
+    case SEARCH:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where DisplayName like '%"+search_text+"%' ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
     }
     while ( SQLiteQuery.next() )
     {
+        empty=false;
+        qDebug("----------%d",empty);
         QVariant val0 = SQLiteQuery.value(0);
         QVariant val1 = SQLiteQuery.value(1);
         QVariant val2 = SQLiteQuery.value(2);
@@ -104,7 +111,7 @@ void SoftDownloadList::selectDifType(int cmd){
         QString pahtstr1 = val1.toString();
         QString pahtstr2 = val2.toString();
         QString pahtstr3 = val3.toString();
-        QString pahtstr4 = val4.toString();
+        qint64 pahtstr4 = val4.toLongLong();
         QString pahtstr5 = val5.toString();
 
         QString pahtstr6 = val6.toString();

@@ -28,12 +28,16 @@ public:
     QStringList list_1;
     QStringList list_2;
     QStringList list_3;
-    QStringList list_4;
+    QList<qint64> list_4;
     QStringList list_5;
     QStringList list_6;
 
     QList<SoftDownloadItem *> *item_list ;
     QList<QListWidgetItem*> *twi_list;
+
+    QString search_text;
+    bool empty;
+
 
 };
 

@@ -196,16 +196,6 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QWidget" name="title_2" native="true">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>0</y>
-       <width>551</width>
-       <height>101</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="widget_body" native="true">
     <property name="geometry">
@@ -226,43 +216,26 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page"/>
      <widget class="QWidget" name="page_SoftDownload">
       <widget class="QWidget" name="widget" native="true">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>600</x>
          <y>0</y>
-         <width>760</width>
-         <height>51</height>
+         <width>315</width>
+         <height>50</height>
         </rect>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>315</width>
+         <height>50</height>
+        </size>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_download">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Maximum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item>
          <widget class="QWidget" name="widget_s_4" native="true">
           <property name="maximumSize">
@@ -309,6 +282,12 @@
              <height>25</height>
             </rect>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>56</width>
+             <height>25</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -337,11 +316,39 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="page_all"/>
        <widget class="QWidget" name="page_type1"/>
        <widget class="QWidget" name="page_type9"/>
+       <widget class="QWidget" name="page_null_default">
+        <widget class="QLabel" name="lab_null_caution">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>180</y>
+           <width>24</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lab_null_text">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>180</y>
+           <width>450</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </widget>
        <widget class="QWidget" name="page_type10"/>
        <widget class="QWidget" name="page_type4"/>
        <widget class="QWidget" name="page_type5"/>
@@ -350,6 +357,88 @@
        <widget class="QWidget" name="page_type3"/>
        <widget class="QWidget" name="page_type8"/>
        <widget class="QWidget" name="page_type2"/>
+       <widget class="QWidget" name="page_search"/>
+      </widget>
+      <widget class="QWidget" name="widget_2" native="true">
+       <property name="geometry">
+        <rect>
+         <x>175</x>
+         <y>8</y>
+         <width>150</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>50</height>
+        </size>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetFixedSize</enum>
+         </property>
+         <item>
+          <widget class="QPushButton" name="but_return">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>79</width>
+             <height>29</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>79</width>
+             <height>29</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string>return</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lab_softnum">
+           <property name="maximumSize">
+            <size>
+             <width>130</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="contextMenuPolicy">
+            <enum>Qt::DefaultContextMenu</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="page_SoftUpgrade">
@@ -436,19 +525,6 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_SoftUnload">
-      <widget class="QLabel" name="label_unload">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>10</y>
-         <width>200</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
       <widget class="QWidget" name="widget_3" native="true">
        <property name="geometry">
         <rect>
@@ -468,12 +544,41 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>8</number>
+         <number>5</number>
         </property>
+        <widget class="QWidget" name="page_search_2"/>
         <widget class="QWidget" name="page_up"/>
         <widget class="QWidget" name="page_down"/>
         <widget class="QWidget" name="page_2"/>
         <widget class="QWidget" name="page_3"/>
+        <widget class="QWidget" name="page_null_unload">
+         <widget class="QLabel" name="lab_caution_unload">
+          <property name="geometry">
+           <rect>
+            <x>260</x>
+            <y>230</y>
+            <width>24</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lab_text_unload">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>230</y>
+            <width>520</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </widget>
         <widget class="QWidget" name="page_selall"/>
         <widget class="QWidget" name="page_4"/>
         <widget class="QWidget" name="page_5"/>
@@ -625,6 +730,37 @@
          <string/>
         </property>
        </widget>
+      </widget>
+      <widget class="QPushButton" name="but_return_2">
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>5</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>return</string>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="page_UpdateInform">

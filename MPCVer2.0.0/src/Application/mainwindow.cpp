@@ -1,4 +1,3 @@
-
 #include <QMouseEvent>
 #include <windows.h>
 #include <Shellapi.h>
@@ -41,7 +40,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_path->setText("setpath");
     ui->but_sel_size->setText("softsize");
     ui->but_sel_operate->setText("operate");
-//    TitlePage();
+    ui->but_return->hide();
+    ui->but_return_2->hide();
+    ui->lab_softnum->hide();
+
+    //    TitlePage();
 }
 
 MainWindow::~MainWindow()
@@ -70,7 +73,7 @@ void MainWindow::TitlePage()
     }
     connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(turnPage(QString)));
 
-    QVBoxLayout *main_layout = new QVBoxLayout(ui->title_2);
+    QVBoxLayout *main_layout = new QVBoxLayout(ui->title);
     main_layout->addLayout(button_layout);
     main_layout->setSpacing(0);
     main_layout->setContentsMargins(0, 0, 0, 0);
@@ -99,10 +102,10 @@ void MainWindow::turnPage(QString current_page)
 }
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 {
-//    QPainter painter2(this);
-//    painter2.setPen(Qt::gray);
-//    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
-//    painter2.drawPolyline(points, 4);
+    //    QPainter painter2(this);
+    //    painter2.setPen(Qt::gray);
+    //    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
+    //    painter2.drawPolyline(points, 4);
     QPainter painter(this);
     QPen pen(Qt::gray);
     painter.setPen(pen);
@@ -308,33 +311,81 @@ void MainWindow::on_but_sel_operate_clicked()
     //    }
 }
 
-void MainWindow::on_but_clear_4_clicked()
+void MainWindow::on_but_clear_4_clicked()//软件下载页清除按钮
 {
     ui->lineEdit_s_4->clear();
-
 }
 
-void MainWindow::on_but_search_4_clicked()//搜索软件
+void MainWindow::on_but_search_4_clicked()//软件下载页搜索按钮
 {
+    search_download=new SoftDownloadList(ui->page_search);
+    search_download->search_text=ui->lineEdit_s_4->text();
+    search_download->selectDifType(SEARCH);
+    if(search_download->empty)
+    {
+        QString str="Didn't find related software ,Please adjust the keywords to search again!";
+        ui->lab_null_caution->setStyleSheet("border-image:url(:/images/caution.png)");
+        ui->lab_null_text->setText(str);
+        ui->stack_download->setCurrentWidget(ui->page_null_default);
+
+    }
+    else
+    {
+        ui->stack_download->setCurrentWidget(ui->page_search);
+    }
+    ui->but_return->show();
+
 
 }
 
-void MainWindow::on_but_clear_3_clicked()
+void MainWindow::on_but_clear_3_clicked()//软件更新页清除按钮
 {
     ui->lineEdit_s_3->clear();
 }
 
-void MainWindow::on_but_search_3_clicked()
+void MainWindow::on_but_search_3_clicked()//软件更新页搜索按钮
 {
 
 }
 
-void MainWindow::on_but_clear_2_clicked()
+void MainWindow::on_but_clear_2_clicked()//软件卸载页清除按钮
 {
     ui->lineEdit_s_2->clear();
 }
 
-void MainWindow::on_but_search_2_clicked()
+void MainWindow::on_but_search_2_clicked()//软件卸载页搜索按钮
+{
+    SoftUnloadList *search_unload  = new SoftUnloadList(ui->page_search_2);
+    search_unload->search_text=ui->lineEdit_s_2->text();
+    search_unload->DiffSelect(SELECT_SEARCH);
+    if(search_unload->empty)
+    {
+        QString str="Didn't find related software ,Please adjust the keywords to search again!";
+        ui->lab_caution_unload->setStyleSheet("border-image:url(:/images/caution.png)");
+        ui->lab_text_unload->setText(str);
+        ui->stackedWidget_2->setCurrentWidget(ui->page_null_unload);
+        ui->widget_5->hide();
+
+    }
+    else
+    {
+        ui->stackedWidget_2->setCurrentWidget(ui->page_search_2);
+    }
+    ui->but_return_2->show();
+
+}
+
+void MainWindow::on_but_return_2_clicked()//软件卸载页返回
 {
 
+    ui->but_return_2->hide();
+    ui->stackedWidget_2->setCurrentWidget(ui->page_selall);
+    ui->widget_5->show();
+
+}
+
+void MainWindow::on_but_return_clicked()//软件下载页返回
+{
+    ui->but_return->hide();
+    ui->stack_download->setCurrentWidget(ui->page_all);
 }

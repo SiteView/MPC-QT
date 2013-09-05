@@ -5,7 +5,6 @@
 #include <QSignalMapper>
 #include "QListWidget"
 #include "../Common/SqliteDb.h"
-//#include "../Common/SytemLog.h"
 #include "src/informdialog.h"
 #include "src/SoftUnloadList.h"
 #include "src/SoftDownloadList.h"
@@ -31,6 +30,7 @@ enum SIGN
     ,SELECT_TIME_DOWN
     ,SELECT_PATH_UP
     ,SELECT_PATH_DOWN
+    ,SELECT_SEARCH
 
 };
 enum TYPE_FLAG{
@@ -45,6 +45,7 @@ enum TYPE_FLAG{
     ,EIGHT
     ,NINE
     ,TEN
+    ,SEARCH
 };
 class MainWindow : public QMainWindow
 {
@@ -87,6 +88,10 @@ private slots:
     void on_but_clear_2_clicked();
 
     void on_but_search_2_clicked();
+    void on_but_return_2_clicked();
+
+    void on_but_return_clicked();
+
 public slots:
     void turnPage(QString current_page);
 
@@ -107,6 +112,7 @@ public:
 //    void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
 
 public:
+
     CSQLiteDb m_SQLiteDb;
     InformDialog *inform;
     SoftUnloadList *list_unload;
@@ -118,11 +124,14 @@ public:
     SoftUnloadList *list_unload6;
     SoftUnloadList *list_unload7;
     SoftUnloadList *list_unload8;
+    SoftUnloadList *search_unload;
+
 
     SoftDownloadList *list_download;
     SoftDownloadList *list_download1;
     SoftDownloadList *list_download2;
     SoftDownloadList *list_download3;
+    SoftDownloadList *search_download;
 
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
