@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::FramelessWindowHint);
+    this->setWindowTitle("MarketPlace");
     this->createUnloadtableMenu();
     this->createUpgradeMenu();
     this->createDownloadMenu();
@@ -44,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_return_2->hide();
     ui->lab_softnum->hide();
 
-    //    TitlePage();
+//        TitlePage();
 }
 
 MainWindow::~MainWindow()
@@ -67,7 +68,9 @@ void MainWindow::TitlePage()
         tool_button->setImage(string_list.at(i));
         button_list.append(tool_button);
         connect(tool_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
+//        connect(too)
         signal_mapper->setMapping(tool_button, QString::number(i, 10));
+        connect(signal_mapper,SIGNAL(mapped(int)),this,SLOT(changePage(int)));
 
         button_layout->addWidget(tool_button, 0, Qt::AlignBottom);
     }
@@ -100,6 +103,10 @@ void MainWindow::turnPage(QString current_page)
         }
     }
 }
+void MainWindow::changePage(int i)
+{
+    qDebug()<<"===i==="<<i;
+}
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 {
     //    QPainter painter2(this);
@@ -110,7 +117,6 @@ void MainWindow::paintEvent(QPaintEvent *)//画界面边框
     QPen pen(Qt::gray);
     painter.setPen(pen);
     painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 0, 0);
-
 
 }
 void MainWindow::createUpgradeMenu()//创建软件更新部分

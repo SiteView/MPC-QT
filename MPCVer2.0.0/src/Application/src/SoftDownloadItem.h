@@ -22,7 +22,6 @@ public:
 
 public:
 
-    QFrame *frame_1 ;
     QPushButton *but_icon ;
     QWidget *layoutWidget;
     QLabel *but_softname;
@@ -64,5 +63,19 @@ public slots:
     void cancelProgress_setup();
     bool suspendProgress_setup();
     void Downloadresult(int);
+
+protected:
+//    bool event(QEvent *event);
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *event);
+private:
+    bool mouse_press;
+    bool mouse_enter;
+
 };
 #endif // SOFTDOWNLOADITEM_H

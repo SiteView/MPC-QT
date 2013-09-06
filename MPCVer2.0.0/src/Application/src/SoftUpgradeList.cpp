@@ -1,5 +1,7 @@
 #include <QListWidgetItem>
 #include <QUrl>
+#include <QFileInfo>
+#include <QCoreApplication>
 #include "../Common/SqliteDb.h"
 
 #include "SoftUpgradeList.h"
@@ -35,7 +37,18 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
         QString pahtstr6 = val6.toString();
 
         SoftUpgradeItem *ani=new SoftUpgradeItem(list_softupgrade);
-        ani->icon->setStyleSheet("border-image:url(./icons/"+pahtstr1+".ico);");
+//        ani->icon->setStyleSheet("border-image:url(./icons/"+pahtstr1+".ico);");
+        QString filename = QCoreApplication::applicationDirPath()+QString("/icons/")+pahtstr1+QString(".ico");
+        QFileInfo iconfile(filename);
+        if(iconfile.exists())
+        {
+
+           ani->icon->setStyleSheet("border-image:url("+filename+")");
+        }
+        else
+        {
+            ani->icon->setStyleSheet("border-image:url(:/images/default.png)");
+        }
         ani->softname->setText(pahtstr1);
         ani->softdetaile->setText(pahtstr2);
         ani->but_more->setText("more");

@@ -19,7 +19,6 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
 
     mouse_press = false;
     mouse_enter = false;
-    uninstall_visible=false;
     icon       =new QLabel(this);
     softname   =new QLabel(this);
     softdetail =new QLabel(this);
@@ -28,15 +27,6 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     setuptime  =new QLabel(this);
     unload     =new QPushButton(this);
     uninstall  =new QLabel(this);
-
-    icon->setStyleSheet("background:transparent;");
-    softname->setStyleSheet("background:transparent;");
-    softdetail->setStyleSheet("background:transparent;");
-    progress->setStyleSheet("background:transparent;");
-    size->setStyleSheet("background:transparent;");
-    setuptime->setStyleSheet("background:transparent;");
-    unload->setStyleSheet("background:transparent;");
-    uninstall->setStyleSheet("background:transparent;");
 
     icon->setObjectName(QString::fromUtf8("icon"));
     softname->setObjectName(QString::fromUtf8("softname"));
@@ -92,13 +82,15 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
 void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
                               QString Qsoftdetail,qint64 Qsize,
                               QString Qsetuptime,QString Qprogress,
-                              QString QuninstallString)
+                              QString QuninstallString)//加载文字
 {
 
     //    icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
 
     softname->setText(Qsoftname);
+    softname->setToolTip(Qsoftname);
     softdetail->setText(Qsoftdetail);
+    softdetail->setToolTip(Qsoftdetail);
     size->setText(get_size(Qsize));
     setuptime->setText(Qsetuptime);
     progress->setText(Qprogress);
@@ -147,7 +139,7 @@ QString SoftUnloadItem::get_size( qint64 byte )
 
     return size;
 }
-bool SoftUnloadItem::on_unload_clicked()
+bool SoftUnloadItem::on_unload_clicked()//触发卸载事件
 {
     QProcess *unloader=new QProcess();
     unloader->start(program,QStringList());
@@ -176,7 +168,7 @@ bool SoftUnloadItem::on_unload_clicked()
     }
 }
 
-void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
+void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)//卸载完成
 {
     if (exitStatus == QProcess::NormalExit)
     {
@@ -207,14 +199,14 @@ void SoftUnloadItem::Unloadfinish(int exitCode, QProcess::ExitStatus exitStatus)
     m_SQLiteDb.getDB()->commit();
 }
 
-void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )
+void SoftUnloadItem::Unloaderror(QProcess::ProcessError error )//卸载出错
 {
     unload->show();
     uninstall->hide();
 }
-void SoftUnloadItem::paintEvent(QPaintEvent *event)
+void SoftUnloadItem::paintEvent(QPaintEvent *event)//绘制卸载界面
 {
-
+///*
     //绘制边框
     QPainter painter2(this);
     QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
@@ -237,6 +229,7 @@ void SoftUnloadItem::paintEvent(QPaintEvent *event)
         painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
 
     }
+//    */
 }
 
 void SoftUnloadItem::mousePressEvent(QMouseEvent * event)

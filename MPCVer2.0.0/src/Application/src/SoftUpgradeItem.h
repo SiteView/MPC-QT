@@ -31,7 +31,7 @@ public slots:
 public:
 
 
-   QFrame *frame_1 ;
+//   QFrame *frame_1 ;
    QPushButton *icon ;
    QLabel *softname;
    QLabel *softdetaile;
@@ -66,6 +66,18 @@ public:
    CURLDownloadManager *downloader;
 public:
     void DownloadThread();
+
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *event);
+private:
+    bool mouse_press;
+    bool mouse_enter;
+
 };
 
 #endif // SOFTALLKINDITEM_H

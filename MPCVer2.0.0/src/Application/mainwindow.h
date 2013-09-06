@@ -94,6 +94,7 @@ private slots:
 
 public slots:
     void turnPage(QString current_page);
+    void changePage(int);
 
 protected:
     void mousePressEvent(QMouseEvent *e);

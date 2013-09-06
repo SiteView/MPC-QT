@@ -80,7 +80,7 @@ void ToolButton::paintEvent(QPaintEvent *event)
 
     QToolButton::paintEvent(event);
 }
-void ToolButton::painterInfo(int top_color, int middle_color, int bottom_color)
+void ToolButton::painterInfo(int top_color, int middle_color, int bottom_color)//参数决定透明度
 {
     QPainter painter(this);
     QPen pen(Qt::NoBrush, 1);

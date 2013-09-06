@@ -98,7 +98,6 @@ void SoftDownloadList::selectDifType(int cmd){
     while ( SQLiteQuery.next() )
     {
         empty=false;
-        qDebug("----------%d",empty);
         QVariant val0 = SQLiteQuery.value(0);
         QVariant val1 = SQLiteQuery.value(1);
         QVariant val2 = SQLiteQuery.value(2);

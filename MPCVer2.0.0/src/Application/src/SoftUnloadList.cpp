@@ -105,12 +105,12 @@ void SoftUnloadList::DiffSelect(int cmd){
         QString pahtstr5 = val5.toString();
         QString pahtstr6 = val6.toString();
         pahtstr0.replace("\\","/");
-
+        QStringList str=pahtstr4.split("T");
         list_0<<pahtstr0;
         list_1<<pahtstr1;
         list_2<<pahtstr2;
         list_3<<pahtstr3;
-        list_4<<pahtstr4;
+        list_4<<str.at(0);
         list_5<<pahtstr5;
         list_6<<pahtstr6;
     }
