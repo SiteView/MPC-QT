@@ -38,7 +38,6 @@ void SynServerThread::run()
         if (!query.exec("SELECT DisplayName, DisplayVersion, URLInfoAbout, Publisher FROM LocalAppInfor ORDER BY RANDOM() LIMIT 1")) {
             qDebug(query.lastError().text().toLocal8Bit().data());
         }
-
         while (query.next()) {
             inputdata.DisplayName = query.value(0).toString().toStdString();
             inputdata.ResetServerVersion = query.value(1).toString().toStdString();
@@ -50,7 +49,7 @@ void SynServerThread::run()
         m_SQLiteDb.getDB()->commit();
 
 
-        int ret = soap_call_MPC__npRequest(&mpcsoap,"220.168.30.10:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089*/
+        int ret = soap_call_MPC__npRequest(&mpcsoap,"192.168.9.2:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089  192.168.9.2:8089*/
 
         if (ret == SOAP_OK) {
             updateLocRecord(outdata);
@@ -70,9 +69,6 @@ void SynServerThread::run()
 
         msleep(10000);
     }
-
-    // disconnect the database
-    CSQLiteDb::DisConnectionDB();
 }
 
 int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)

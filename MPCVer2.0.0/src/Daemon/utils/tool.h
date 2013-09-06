@@ -67,10 +67,10 @@ bool HavePath (QString InputStr,QString &path )
 
 bool checkInDb (QString InputStr ,QSqlDatabase db)
 {
-    QSqlQuery SQLiteQuery( db );
+	QSqlQuery SQLiteQuery( db );
     bool ret = false;
     db.transaction();
-    SQLiteQuery.prepare("select DisplayName from LocalAppInfor where DisplayName = ? ;");
+    SQLiteQuery.prepare("select DisplayName from LocalAppInfor where DisplayName = ?");
     SQLiteQuery.addBindValue(InputStr);
     if ( !SQLiteQuery.exec() )
     {
@@ -80,6 +80,7 @@ bool checkInDb (QString InputStr ,QSqlDatabase db)
     {
         ret = true;
     }
+	SQLiteQuery.finish();
     return ret;
 }
 

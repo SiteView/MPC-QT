@@ -4,7 +4,6 @@
 #include <QFileInfo>
 #include <QThread>
 #include <QDir>
-#include <QDateTime>
 #include <QStringList>
 
 #include "../Common/SqliteDb.h"
