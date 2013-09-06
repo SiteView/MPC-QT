@@ -7,7 +7,6 @@
 #include <QString>
 #include <QProgressBar>
 #include <QStackedWidget>
-//class  CURLDownloadManager;
 class  CURLDownloadManager;
 
 class SoftDownloadItem : public QWidget
@@ -15,9 +14,14 @@ class SoftDownloadItem : public QWidget
     Q_OBJECT
 public:
     explicit SoftDownloadItem(QWidget *parent = 0);
+    void DownloadThread();
+    void takeText(QString Qsoftname,
+                   QString Qsoftdetail,qint64 Qsize,
+                   QString Qupnum,QString Qurl);
+    QString get_size( qint64 byte );
+
 public:
 
-    QFrame *frame_1 ;
     QPushButton *but_icon ;
     QWidget *layoutWidget;
     QLabel *but_softname;
@@ -28,10 +32,7 @@ public:
     QWidget *page_2;
     QWidget *page_3;
 
-    QPushButton *but_more;
-    QWidget *layoutWidget1;
     QFrame *frame_3 ;
-//    QLabel *lab_prompt;
     QPushButton *but_suspend;
     QPushButton *but_cancel ;
     QFrame *frame_2;
@@ -39,24 +40,17 @@ public:
     QLabel *lab_size;
     QPushButton *download;
     QFrame *frame_4;
-//    QLabel *lab_prompt_2;
-//    QPushButton *but_suspend_2;
-//    QPushButton *but_cancel_2 ;
+
     QLabel *lab_upnum_2;
     QLabel *lab_size_2;
     QPushButton *setup;
-
     QProgressBar *progressBar;
     QProgressBar *progressBar_2;
 
     QString urlprogram;
     QString exename;
     QString runPath;
-    CURLDownloadManager *downloader;
-
-public:
-    void retranslateUi();
-    void DownloadThread();
+//    CURLDownloadManager *downloader;
 
 signals:
 
@@ -67,7 +61,21 @@ public slots:
     void cancelProgress_download();
     void suspendProgress_download();
     void cancelProgress_setup();
-    void suspendProgress_setup();
+    bool suspendProgress_setup();
     void Downloadresult(int);
+
+protected:
+//    bool event(QEvent *event);
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *event);
+private:
+    bool mouse_press;
+    bool mouse_enter;
+
 };
 #endif // SOFTDOWNLOADITEM_H

@@ -91,7 +91,7 @@ QPushButton#UpdateInform:clicked
 	border-image: url(:/images/updateinform_press.png);
 }
 
-QPushButton#download,#set_up,#unload,#but_upgrade
+QPushButton#download,#set_up,#unload,#but_upgrade,#use_skin_button,#but_return_2,#but_return
 {
 	border: 1px solid rgb(185,185,185);
 	border-radius: 2px;
@@ -100,7 +100,7 @@ QPushButton#download,#set_up,#unload,#but_upgrade
 
 }
 
-QPushButton#download:hover,#set_up:hover,#unload:hover,#but_upgrade:hover
+QPushButton#download:hover,#set_up:hover,#unload:hover,#but_upgrade:hover,#use_skin_button:hover,#but_return_2:hover,#but_return:hover
 {
 	border: 1px solid rgb(104,231,244);
 	border-radius: 2px;
@@ -182,15 +182,15 @@ QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_t
 QLabel#label_SoftDownload,#label_SoftUpgrade,#label_SoftUnload,#label_UpdateInform
 {
 	color:rgb(250,250,250);
-	font: 75 12px "Arial";	
+	font: 75 12px "Arial" bold;	
 }
-QLabel#label,#softdetail,#progress,#size,#setuptime,#num,#lab_softdetail,#lab_upnum,#lab_size
+QLabel#label,#softdetail,#progress,#size,#setuptime,#num,#lab_softdetail,#lab_upnum,#lab_size,#softdetaile,#old_versions,#new_versions
 {
 	color:rgb(136,136,136);
 	font: 75 12px "Arial";	
 
 }
-QLabel#softname,#but_softname
+QLabel#softname,#but_softname,#skin_label,#lab_null_text,#lab_text_unload
 {
 
 	font: 75 12px "Arial" ;

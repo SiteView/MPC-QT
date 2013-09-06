@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QListWidget>
-
+#include <QStringList>
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
 
@@ -23,6 +23,21 @@ public:
     QListWidget *DownloadList;
 
     SoftDownloadItem *ani;
+
+    QStringList list_0;
+    QStringList list_1;
+    QStringList list_2;
+    QStringList list_3;
+    QList<qint64> list_4;
+    QStringList list_5;
+    QStringList list_6;
+
+    QList<SoftDownloadItem *> *item_list ;
+    QList<QListWidgetItem*> *twi_list;
+
+    QString search_text;
+    bool empty;
+
 
 };
 

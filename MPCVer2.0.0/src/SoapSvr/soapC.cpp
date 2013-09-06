@@ -1902,4 +1902,1247 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_MPC__npRequest(struct soap *soap, const char 
 	return soap_element_end_out(soap, tag);
 }
 
-SOAP_FMAC3 struct MPC__npRequest * SOAP_FMAC4 soap_in_MPC__npRequest(struct soap *soap, const char *ta
+SOAP_FMAC3 struct MPC__npRequest * SOAP_FMAC4 soap_in_MPC__npRequest(struct soap *soap, const char *tag, struct MPC__npRequest *a, const char *type)
+{
+	size_t soap_flag_r_input = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct MPC__npRequest *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_MPC__npRequest, sizeof(struct MPC__npRequest), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_MPC__npRequest(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_r_input && soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_MPC__npRequestRequest(soap, "r-input", &a->r_input, "MPC:npRequestRequest"))
+				{	soap_flag_r_input--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct MPC__npRequest *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_MPC__npRequest, 0, sizeof(struct MPC__npRequest), 0, soap_copy_MPC__npRequest);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_r_input > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_MPC__npRequest(struct soap *soap, const struct MPC__npRequest *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_MPC__npRequest);
+	if (soap_out_MPC__npRequest(soap, tag?tag:"MPC:npRequest", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct MPC__npRequest * SOAP_FMAC4 soap_get_MPC__npRequest(struct soap *soap, struct MPC__npRequest *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_MPC__npRequest(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct MPC__npRequest * SOAP_FMAC2 soap_instantiate_MPC__npRequest(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_MPC__npRequest(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_MPC__npRequest, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct MPC__npRequest);
+		if (size)
+			*size = sizeof(struct MPC__npRequest);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW_ARRAY(struct MPC__npRequest, n);
+		if (size)
+			*size = n * sizeof(struct MPC__npRequest);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	if (!cp->ptr)
+		soap->error = SOAP_EOM;
+	return (struct MPC__npRequest*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_MPC__npRequest(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct MPC__npRequest %p -> %p\n", q, p));
+	*(struct MPC__npRequest*)p = *(struct MPC__npRequest*)q;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_MPC__npRequestResponse(struct soap *soap, const struct _MPC__npRequestResponse *a)
+{
+#ifndef WITH_NOIDREF
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_xsd__string(soap, &a->AppID);
+	soap_serialize_xsd__string(soap, &a->AppName);
+	soap_serialize_xsd__string(soap, &a->DisplayName);
+	soap_serialize_xsd__string(soap, &a->Detailtext);
+	soap_serialize_xsd__string(soap, &a->Mark);
+	soap_serialize_xsd__string(soap, &a->Type);
+	soap_serialize_xsd__string(soap, &a->ServerVersion);
+	soap_serialize_xsd__string(soap, &a->ResetServerVersion);
+	soap_serialize_xsd__string(soap, &a->Size);
+	soap_serialize_xsd__string(soap, &a->OrderNumber);
+	soap_serialize_xsd__string(soap, &a->AllDownload);
+	soap_serialize_xsd__string(soap, &a->FewDownload);
+	soap_serialize_xsd__string(soap, &a->DownloadURL);
+	soap_serialize_xsd__string(soap, &a->OS);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_MPC__npRequestResponse(struct soap *soap, const char *tag, int id, const struct _MPC__npRequestResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_MPC__npRequestResponse), type))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AppID", -1, &a->AppID, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AppName", -1, &a->AppName, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "DisplayName", -1, &a->DisplayName, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Detailtext", -1, &a->Detailtext, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Mark", -1, &a->Mark, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Type", -1, &a->Type, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "ServerVersion", -1, &a->ServerVersion, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "ResetServerVersion", -1, &a->ResetServerVersion, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Size", -1, &a->Size, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "OrderNumber", -1, &a->OrderNumber, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AllDownload", -1, &a->AllDownload, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "FewDownload", -1, &a->FewDownload, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "DownloadURL", -1, &a->DownloadURL, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "OS", -1, &a->OS, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse * SOAP_FMAC4 soap_in_MPC__npRequestResponse(struct soap *soap, const char *tag, struct _MPC__npRequestResponse *a, const char *type)
+{
+	size_t soap_flag_AppID = 1;
+	size_t soap_flag_AppName = 1;
+	size_t soap_flag_DisplayName = 1;
+	size_t soap_flag_Detailtext = 1;
+	size_t soap_flag_Mark = 1;
+	size_t soap_flag_Type = 1;
+	size_t soap_flag_ServerVersion = 1;
+	size_t soap_flag_ResetServerVersion = 1;
+	size_t soap_flag_Size = 1;
+	size_t soap_flag_OrderNumber = 1;
+	size_t soap_flag_AllDownload = 1;
+	size_t soap_flag_FewDownload = 1;
+	size_t soap_flag_DownloadURL = 1;
+	size_t soap_flag_OS = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _MPC__npRequestResponse *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_MPC__npRequestResponse, sizeof(struct _MPC__npRequestResponse), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_MPC__npRequestResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_AppID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AppID", &a->AppID, "xsd:string"))
+				{	soap_flag_AppID--;
+					continue;
+				}
+			if (soap_flag_AppName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AppName", &a->AppName, "xsd:string"))
+				{	soap_flag_AppName--;
+					continue;
+				}
+			if (soap_flag_DisplayName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "DisplayName", &a->DisplayName, "xsd:string"))
+				{	soap_flag_DisplayName--;
+					continue;
+				}
+			if (soap_flag_Detailtext && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Detailtext", &a->Detailtext, "xsd:string"))
+				{	soap_flag_Detailtext--;
+					continue;
+				}
+			if (soap_flag_Mark && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Mark", &a->Mark, "xsd:string"))
+				{	soap_flag_Mark--;
+					continue;
+				}
+			if (soap_flag_Type && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Type", &a->Type, "xsd:string"))
+				{	soap_flag_Type--;
+					continue;
+				}
+			if (soap_flag_ServerVersion && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "ServerVersion", &a->ServerVersion, "xsd:string"))
+				{	soap_flag_ServerVersion--;
+					continue;
+				}
+			if (soap_flag_ResetServerVersion && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "ResetServerVersion", &a->ResetServerVersion, "xsd:string"))
+				{	soap_flag_ResetServerVersion--;
+					continue;
+				}
+			if (soap_flag_Size && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Size", &a->Size, "xsd:string"))
+				{	soap_flag_Size--;
+					continue;
+				}
+			if (soap_flag_OrderNumber && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "OrderNumber", &a->OrderNumber, "xsd:string"))
+				{	soap_flag_OrderNumber--;
+					continue;
+				}
+			if (soap_flag_AllDownload && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AllDownload", &a->AllDownload, "xsd:string"))
+				{	soap_flag_AllDownload--;
+					continue;
+				}
+			if (soap_flag_FewDownload && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "FewDownload", &a->FewDownload, "xsd:string"))
+				{	soap_flag_FewDownload--;
+					continue;
+				}
+			if (soap_flag_DownloadURL && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "DownloadURL", &a->DownloadURL, "xsd:string"))
+				{	soap_flag_DownloadURL--;
+					continue;
+				}
+			if (soap_flag_OS && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "OS", &a->OS, "xsd:string"))
+				{	soap_flag_OS--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_MPC__npRequestResponse, 0, sizeof(struct _MPC__npRequestResponse), 0, soap_copy_MPC__npRequestResponse);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_AppID > 0 || soap_flag_AppName > 0 || soap_flag_DisplayName > 0 || soap_flag_Detailtext > 0 || soap_flag_Mark > 0 || soap_flag_Type > 0 || soap_flag_ServerVersion > 0 || soap_flag_ResetServerVersion > 0 || soap_flag_Size > 0 || soap_flag_OrderNumber > 0 || soap_flag_AllDownload > 0 || soap_flag_FewDownload > 0 || soap_flag_DownloadURL > 0 || soap_flag_OS > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_MPC__npRequestResponse(struct soap *soap, const struct _MPC__npRequestResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_MPC__npRequestResponse);
+	if (soap_out_MPC__npRequestResponse(soap, tag?tag:"MPC:npRequestResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse * SOAP_FMAC4 soap_get_MPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_MPC__npRequestResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__MPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_xsd__string(soap, &a->AppID);
+	soap_default_xsd__string(soap, &a->AppName);
+	soap_default_xsd__string(soap, &a->DisplayName);
+	soap_default_xsd__string(soap, &a->Detailtext);
+	soap_default_xsd__string(soap, &a->Mark);
+	soap_default_xsd__string(soap, &a->Type);
+	soap_default_xsd__string(soap, &a->ServerVersion);
+	soap_default_xsd__string(soap, &a->ResetServerVersion);
+	soap_default_xsd__string(soap, &a->Size);
+	soap_default_xsd__string(soap, &a->OrderNumber);
+	soap_default_xsd__string(soap, &a->AllDownload);
+	soap_default_xsd__string(soap, &a->FewDownload);
+	soap_default_xsd__string(soap, &a->DownloadURL);
+	soap_default_xsd__string(soap, &a->OS);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__MPC__npRequestResponse(struct soap *soap, const struct _MPC__npRequestResponse *a)
+{
+#ifndef WITH_NOIDREF
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_xsd__string(soap, &a->AppID);
+	soap_serialize_xsd__string(soap, &a->AppName);
+	soap_serialize_xsd__string(soap, &a->DisplayName);
+	soap_serialize_xsd__string(soap, &a->Detailtext);
+	soap_serialize_xsd__string(soap, &a->Mark);
+	soap_serialize_xsd__string(soap, &a->Type);
+	soap_serialize_xsd__string(soap, &a->ServerVersion);
+	soap_serialize_xsd__string(soap, &a->ResetServerVersion);
+	soap_serialize_xsd__string(soap, &a->Size);
+	soap_serialize_xsd__string(soap, &a->OrderNumber);
+	soap_serialize_xsd__string(soap, &a->AllDownload);
+	soap_serialize_xsd__string(soap, &a->FewDownload);
+	soap_serialize_xsd__string(soap, &a->DownloadURL);
+	soap_serialize_xsd__string(soap, &a->OS);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__MPC__npRequestResponse(struct soap *soap, const char *tag, int id, const struct _MPC__npRequestResponse *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__MPC__npRequestResponse), type))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AppID", -1, &a->AppID, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AppName", -1, &a->AppName, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "DisplayName", -1, &a->DisplayName, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Detailtext", -1, &a->Detailtext, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Mark", -1, &a->Mark, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Type", -1, &a->Type, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "ServerVersion", -1, &a->ServerVersion, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "ResetServerVersion", -1, &a->ResetServerVersion, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Size", -1, &a->Size, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "OrderNumber", -1, &a->OrderNumber, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AllDownload", -1, &a->AllDownload, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "FewDownload", -1, &a->FewDownload, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "DownloadURL", -1, &a->DownloadURL, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "OS", -1, &a->OS, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse * SOAP_FMAC4 soap_in__MPC__npRequestResponse(struct soap *soap, const char *tag, struct _MPC__npRequestResponse *a, const char *type)
+{
+	size_t soap_flag_AppID = 1;
+	size_t soap_flag_AppName = 1;
+	size_t soap_flag_DisplayName = 1;
+	size_t soap_flag_Detailtext = 1;
+	size_t soap_flag_Mark = 1;
+	size_t soap_flag_Type = 1;
+	size_t soap_flag_ServerVersion = 1;
+	size_t soap_flag_ResetServerVersion = 1;
+	size_t soap_flag_Size = 1;
+	size_t soap_flag_OrderNumber = 1;
+	size_t soap_flag_AllDownload = 1;
+	size_t soap_flag_FewDownload = 1;
+	size_t soap_flag_DownloadURL = 1;
+	size_t soap_flag_OS = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _MPC__npRequestResponse *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE__MPC__npRequestResponse, sizeof(struct _MPC__npRequestResponse), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default__MPC__npRequestResponse(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_AppID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AppID", &a->AppID, "xsd:string"))
+				{	soap_flag_AppID--;
+					continue;
+				}
+			if (soap_flag_AppName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AppName", &a->AppName, "xsd:string"))
+				{	soap_flag_AppName--;
+					continue;
+				}
+			if (soap_flag_DisplayName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "DisplayName", &a->DisplayName, "xsd:string"))
+				{	soap_flag_DisplayName--;
+					continue;
+				}
+			if (soap_flag_Detailtext && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Detailtext", &a->Detailtext, "xsd:string"))
+				{	soap_flag_Detailtext--;
+					continue;
+				}
+			if (soap_flag_Mark && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Mark", &a->Mark, "xsd:string"))
+				{	soap_flag_Mark--;
+					continue;
+				}
+			if (soap_flag_Type && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Type", &a->Type, "xsd:string"))
+				{	soap_flag_Type--;
+					continue;
+				}
+			if (soap_flag_ServerVersion && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "ServerVersion", &a->ServerVersion, "xsd:string"))
+				{	soap_flag_ServerVersion--;
+					continue;
+				}
+			if (soap_flag_ResetServerVersion && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "ResetServerVersion", &a->ResetServerVersion, "xsd:string"))
+				{	soap_flag_ResetServerVersion--;
+					continue;
+				}
+			if (soap_flag_Size && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Size", &a->Size, "xsd:string"))
+				{	soap_flag_Size--;
+					continue;
+				}
+			if (soap_flag_OrderNumber && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "OrderNumber", &a->OrderNumber, "xsd:string"))
+				{	soap_flag_OrderNumber--;
+					continue;
+				}
+			if (soap_flag_AllDownload && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AllDownload", &a->AllDownload, "xsd:string"))
+				{	soap_flag_AllDownload--;
+					continue;
+				}
+			if (soap_flag_FewDownload && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "FewDownload", &a->FewDownload, "xsd:string"))
+				{	soap_flag_FewDownload--;
+					continue;
+				}
+			if (soap_flag_DownloadURL && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "DownloadURL", &a->DownloadURL, "xsd:string"))
+				{	soap_flag_DownloadURL--;
+					continue;
+				}
+			if (soap_flag_OS && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "OS", &a->OS, "xsd:string"))
+				{	soap_flag_OS--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__MPC__npRequestResponse, 0, sizeof(struct _MPC__npRequestResponse), 0, soap_copy__MPC__npRequestResponse);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_AppID > 0 || soap_flag_AppName > 0 || soap_flag_DisplayName > 0 || soap_flag_Detailtext > 0 || soap_flag_Mark > 0 || soap_flag_Type > 0 || soap_flag_ServerVersion > 0 || soap_flag_ResetServerVersion > 0 || soap_flag_Size > 0 || soap_flag_OrderNumber > 0 || soap_flag_AllDownload > 0 || soap_flag_FewDownload > 0 || soap_flag_DownloadURL > 0 || soap_flag_OS > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__MPC__npRequestResponse(struct soap *soap, const struct _MPC__npRequestResponse *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__MPC__npRequestResponse);
+	if (soap_out__MPC__npRequestResponse(soap, tag?tag:"MPC:npRequestResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse * SOAP_FMAC4 soap_get__MPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__MPC__npRequestResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct _MPC__npRequestResponse * SOAP_FMAC2 soap_instantiate__MPC__npRequestResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate__MPC__npRequestResponse(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE__MPC__npRequestResponse, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct _MPC__npRequestResponse);
+		if (size)
+			*size = sizeof(struct _MPC__npRequestResponse);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW_ARRAY(struct _MPC__npRequestResponse, n);
+		if (size)
+			*size = n * sizeof(struct _MPC__npRequestResponse);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	if (!cp->ptr)
+		soap->error = SOAP_EOM;
+	return (struct _MPC__npRequestResponse*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy__MPC__npRequestResponse(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct _MPC__npRequestResponse %p -> %p\n", q, p));
+	*(struct _MPC__npRequestResponse*)p = *(struct _MPC__npRequestResponse*)q;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_MPC__npRequestRequest(struct soap *soap, const struct _MPC__npRequestRequest *a)
+{
+#ifndef WITH_NOIDREF
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_xsd__string(soap, &a->AppID);
+	soap_serialize_xsd__string(soap, &a->DisplayName);
+	soap_serialize_xsd__string(soap, &a->ResetServerVersion);
+	soap_serialize_xsd__string(soap, &a->URLInfoAbout);
+	soap_serialize_xsd__string(soap, &a->Publisher);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_MPC__npRequestRequest(struct soap *soap, const char *tag, int id, const struct _MPC__npRequestRequest *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_MPC__npRequestRequest), type))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AppID", -1, &a->AppID, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "DisplayName", -1, &a->DisplayName, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "ResetServerVersion", -1, &a->ResetServerVersion, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "URLInfoAbout", -1, &a->URLInfoAbout, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Publisher", -1, &a->Publisher, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest * SOAP_FMAC4 soap_in_MPC__npRequestRequest(struct soap *soap, const char *tag, struct _MPC__npRequestRequest *a, const char *type)
+{
+	size_t soap_flag_AppID = 1;
+	size_t soap_flag_DisplayName = 1;
+	size_t soap_flag_ResetServerVersion = 1;
+	size_t soap_flag_URLInfoAbout = 1;
+	size_t soap_flag_Publisher = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _MPC__npRequestRequest *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_MPC__npRequestRequest, sizeof(struct _MPC__npRequestRequest), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default_MPC__npRequestRequest(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_AppID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AppID", &a->AppID, "xsd:string"))
+				{	soap_flag_AppID--;
+					continue;
+				}
+			if (soap_flag_DisplayName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "DisplayName", &a->DisplayName, "xsd:string"))
+				{	soap_flag_DisplayName--;
+					continue;
+				}
+			if (soap_flag_ResetServerVersion && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "ResetServerVersion", &a->ResetServerVersion, "xsd:string"))
+				{	soap_flag_ResetServerVersion--;
+					continue;
+				}
+			if (soap_flag_URLInfoAbout && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "URLInfoAbout", &a->URLInfoAbout, "xsd:string"))
+				{	soap_flag_URLInfoAbout--;
+					continue;
+				}
+			if (soap_flag_Publisher && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Publisher", &a->Publisher, "xsd:string"))
+				{	soap_flag_Publisher--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestRequest *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_MPC__npRequestRequest, 0, sizeof(struct _MPC__npRequestRequest), 0, soap_copy_MPC__npRequestRequest);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_AppID > 0 || soap_flag_DisplayName > 0 || soap_flag_ResetServerVersion > 0 || soap_flag_URLInfoAbout > 0 || soap_flag_Publisher > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_MPC__npRequestRequest(struct soap *soap, const struct _MPC__npRequestRequest *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_MPC__npRequestRequest);
+	if (soap_out_MPC__npRequestRequest(soap, tag?tag:"MPC:npRequestRequest", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest * SOAP_FMAC4 soap_get_MPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_MPC__npRequestRequest(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default__MPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_default_xsd__string(soap, &a->AppID);
+	soap_default_xsd__string(soap, &a->DisplayName);
+	soap_default_xsd__string(soap, &a->ResetServerVersion);
+	soap_default_xsd__string(soap, &a->URLInfoAbout);
+	soap_default_xsd__string(soap, &a->Publisher);
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__MPC__npRequestRequest(struct soap *soap, const struct _MPC__npRequestRequest *a)
+{
+#ifndef WITH_NOIDREF
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	soap_serialize_xsd__string(soap, &a->AppID);
+	soap_serialize_xsd__string(soap, &a->DisplayName);
+	soap_serialize_xsd__string(soap, &a->ResetServerVersion);
+	soap_serialize_xsd__string(soap, &a->URLInfoAbout);
+	soap_serialize_xsd__string(soap, &a->Publisher);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__MPC__npRequestRequest(struct soap *soap, const char *tag, int id, const struct _MPC__npRequestRequest *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)type;
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE__MPC__npRequestRequest), type))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "AppID", -1, &a->AppID, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "DisplayName", -1, &a->DisplayName, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "ResetServerVersion", -1, &a->ResetServerVersion, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "URLInfoAbout", -1, &a->URLInfoAbout, ""))
+		return soap->error;
+	if (soap_out_xsd__string(soap, "Publisher", -1, &a->Publisher, ""))
+		return soap->error;
+	return soap_element_end_out(soap, tag);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest * SOAP_FMAC4 soap_in__MPC__npRequestRequest(struct soap *soap, const char *tag, struct _MPC__npRequestRequest *a, const char *type)
+{
+	size_t soap_flag_AppID = 1;
+	size_t soap_flag_DisplayName = 1;
+	size_t soap_flag_ResetServerVersion = 1;
+	size_t soap_flag_URLInfoAbout = 1;
+	size_t soap_flag_Publisher = 1;
+	if (soap_element_begin_in(soap, tag, 0, type))
+		return NULL;
+	a = (struct _MPC__npRequestRequest *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE__MPC__npRequestRequest, sizeof(struct _MPC__npRequestRequest), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	soap_default__MPC__npRequestRequest(soap, a);
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_AppID && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "AppID", &a->AppID, "xsd:string"))
+				{	soap_flag_AppID--;
+					continue;
+				}
+			if (soap_flag_DisplayName && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "DisplayName", &a->DisplayName, "xsd:string"))
+				{	soap_flag_DisplayName--;
+					continue;
+				}
+			if (soap_flag_ResetServerVersion && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "ResetServerVersion", &a->ResetServerVersion, "xsd:string"))
+				{	soap_flag_ResetServerVersion--;
+					continue;
+				}
+			if (soap_flag_URLInfoAbout && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "URLInfoAbout", &a->URLInfoAbout, "xsd:string"))
+				{	soap_flag_URLInfoAbout--;
+					continue;
+				}
+			if (soap_flag_Publisher && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+				if (soap_in_xsd__string(soap, "Publisher", &a->Publisher, "xsd:string"))
+				{	soap_flag_Publisher--;
+					continue;
+				}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestRequest *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE__MPC__npRequestRequest, 0, sizeof(struct _MPC__npRequestRequest), 0, soap_copy__MPC__npRequestRequest);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_AppID > 0 || soap_flag_DisplayName > 0 || soap_flag_ResetServerVersion > 0 || soap_flag_URLInfoAbout > 0 || soap_flag_Publisher > 0))
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__MPC__npRequestRequest(struct soap *soap, const struct _MPC__npRequestRequest *a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__MPC__npRequestRequest);
+	if (soap_out__MPC__npRequestRequest(soap, tag?tag:"MPC:npRequestRequest", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest * SOAP_FMAC4 soap_get__MPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *p, const char *tag, const char *type)
+{
+	if ((p = soap_in__MPC__npRequestRequest(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 struct _MPC__npRequestRequest * SOAP_FMAC2 soap_instantiate__MPC__npRequestRequest(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate__MPC__npRequestRequest(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE__MPC__npRequestRequest, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(struct _MPC__npRequestRequest);
+		if (size)
+			*size = sizeof(struct _MPC__npRequestRequest);
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW_ARRAY(struct _MPC__npRequestRequest, n);
+		if (size)
+			*size = n * sizeof(struct _MPC__npRequestRequest);
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	if (!cp->ptr)
+		soap->error = SOAP_EOM;
+	return (struct _MPC__npRequestRequest*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy__MPC__npRequestRequest(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying struct _MPC__npRequestRequest %p -> %p\n", q, p));
+	*(struct _MPC__npRequestRequest*)p = *(struct _MPC__npRequestRequest*)q;
+}
+
+#ifndef WITH_NOGLOBAL
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Reason(struct soap *soap, struct SOAP_ENV__Reason *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE_SOAP_ENV__Reason))
+		soap_serialize_SOAP_ENV__Reason(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Reason(struct soap *soap, const char *tag, int id, struct SOAP_ENV__Reason *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_SOAP_ENV__Reason);
+	if (id < 0)
+		return soap->error;
+	return soap_out_SOAP_ENV__Reason(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct SOAP_ENV__Reason ** SOAP_FMAC4 soap_in_PointerToSOAP_ENV__Reason(struct soap *soap, const char *tag, struct SOAP_ENV__Reason **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct SOAP_ENV__Reason **)soap_malloc(soap, sizeof(struct SOAP_ENV__Reason *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_SOAP_ENV__Reason(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct SOAP_ENV__Reason **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_SOAP_ENV__Reason, sizeof(struct SOAP_ENV__Reason), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToSOAP_ENV__Reason(struct soap *soap, struct SOAP_ENV__Reason *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToSOAP_ENV__Reason);
+	if (soap_out_PointerToSOAP_ENV__Reason(soap, tag?tag:"SOAP-ENV:Reason", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct SOAP_ENV__Reason ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Reason(struct soap *soap, struct SOAP_ENV__Reason **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToSOAP_ENV__Reason(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+#endif
+
+#ifndef WITH_NOGLOBAL
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Detail(struct soap *soap, struct SOAP_ENV__Detail *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE_SOAP_ENV__Detail))
+		soap_serialize_SOAP_ENV__Detail(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Detail(struct soap *soap, const char *tag, int id, struct SOAP_ENV__Detail *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_SOAP_ENV__Detail);
+	if (id < 0)
+		return soap->error;
+	return soap_out_SOAP_ENV__Detail(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct SOAP_ENV__Detail ** SOAP_FMAC4 soap_in_PointerToSOAP_ENV__Detail(struct soap *soap, const char *tag, struct SOAP_ENV__Detail **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct SOAP_ENV__Detail **)soap_malloc(soap, sizeof(struct SOAP_ENV__Detail *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_SOAP_ENV__Detail(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct SOAP_ENV__Detail **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_SOAP_ENV__Detail, sizeof(struct SOAP_ENV__Detail), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToSOAP_ENV__Detail(struct soap *soap, struct SOAP_ENV__Detail *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToSOAP_ENV__Detail);
+	if (soap_out_PointerToSOAP_ENV__Detail(soap, tag?tag:"SOAP-ENV:Detail", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct SOAP_ENV__Detail ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Detail(struct soap *soap, struct SOAP_ENV__Detail **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToSOAP_ENV__Detail(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+#endif
+
+#ifndef WITH_NOGLOBAL
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerToSOAP_ENV__Code(struct soap *soap, struct SOAP_ENV__Code *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE_SOAP_ENV__Code))
+		soap_serialize_SOAP_ENV__Code(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerToSOAP_ENV__Code(struct soap *soap, const char *tag, int id, struct SOAP_ENV__Code *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_SOAP_ENV__Code);
+	if (id < 0)
+		return soap->error;
+	return soap_out_SOAP_ENV__Code(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_in_PointerToSOAP_ENV__Code(struct soap *soap, const char *tag, struct SOAP_ENV__Code **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct SOAP_ENV__Code **)soap_malloc(soap, sizeof(struct SOAP_ENV__Code *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in_SOAP_ENV__Code(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct SOAP_ENV__Code **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_SOAP_ENV__Code, sizeof(struct SOAP_ENV__Code), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerToSOAP_ENV__Code(struct soap *soap, struct SOAP_ENV__Code *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerToSOAP_ENV__Code);
+	if (soap_out_PointerToSOAP_ENV__Code(soap, tag?tag:"SOAP-ENV:Code", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(struct soap *soap, struct SOAP_ENV__Code **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerToSOAP_ENV__Code(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+#endif
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PMPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE__MPC__npRequestResponse))
+		soap_serialize__MPC__npRequestResponse(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PMPC__npRequestResponse(struct soap *soap, const char *tag, int id, struct _MPC__npRequestResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__MPC__npRequestResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__MPC__npRequestResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse ** SOAP_FMAC4 soap_in_PMPC__npRequestResponse(struct soap *soap, const char *tag, struct _MPC__npRequestResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _MPC__npRequestResponse **)soap_malloc(soap, sizeof(struct _MPC__npRequestResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__MPC__npRequestResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__MPC__npRequestResponse, sizeof(struct _MPC__npRequestResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PMPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PMPC__npRequestResponse);
+	if (soap_out_PMPC__npRequestResponse(soap, tag?tag:"MPC:npRequestResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse ** SOAP_FMAC4 soap_get_PMPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PMPC__npRequestResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_MPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE__MPC__npRequestResponse))
+		soap_serialize__MPC__npRequestResponse(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_MPC__npRequestResponse(struct soap *soap, const char *tag, int id, struct _MPC__npRequestResponse *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__MPC__npRequestResponse);
+	if (id < 0)
+		return soap->error;
+	return soap_out__MPC__npRequestResponse(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse ** SOAP_FMAC4 soap_in_PointerTo_MPC__npRequestResponse(struct soap *soap, const char *tag, struct _MPC__npRequestResponse **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _MPC__npRequestResponse **)soap_malloc(soap, sizeof(struct _MPC__npRequestResponse *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__MPC__npRequestResponse(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestResponse **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__MPC__npRequestResponse, sizeof(struct _MPC__npRequestResponse), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_MPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_MPC__npRequestResponse);
+	if (soap_out_PointerTo_MPC__npRequestResponse(soap, tag?tag:"MPC:npRequestResponse", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestResponse ** SOAP_FMAC4 soap_get_PointerTo_MPC__npRequestResponse(struct soap *soap, struct _MPC__npRequestResponse **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_MPC__npRequestResponse(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PMPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE__MPC__npRequestRequest))
+		soap_serialize__MPC__npRequestRequest(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PMPC__npRequestRequest(struct soap *soap, const char *tag, int id, struct _MPC__npRequestRequest *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__MPC__npRequestRequest);
+	if (id < 0)
+		return soap->error;
+	return soap_out__MPC__npRequestRequest(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest ** SOAP_FMAC4 soap_in_PMPC__npRequestRequest(struct soap *soap, const char *tag, struct _MPC__npRequestRequest **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _MPC__npRequestRequest **)soap_malloc(soap, sizeof(struct _MPC__npRequestRequest *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__MPC__npRequestRequest(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestRequest **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__MPC__npRequestRequest, sizeof(struct _MPC__npRequestRequest), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PMPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PMPC__npRequestRequest);
+	if (soap_out_PMPC__npRequestRequest(soap, tag?tag:"MPC:npRequestRequest", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest ** SOAP_FMAC4 soap_get_PMPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PMPC__npRequestRequest(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTo_MPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *const*a)
+{
+#ifndef WITH_NOIDREF
+	if (!soap_reference(soap, *a, SOAP_TYPE__MPC__npRequestRequest))
+		soap_serialize__MPC__npRequestRequest(soap, *a);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTo_MPC__npRequestRequest(struct soap *soap, const char *tag, int id, struct _MPC__npRequestRequest *const*a, const char *type)
+{
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE__MPC__npRequestRequest);
+	if (id < 0)
+		return soap->error;
+	return soap_out__MPC__npRequestRequest(soap, tag, id, *a, type);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest ** SOAP_FMAC4 soap_in_PointerTo_MPC__npRequestRequest(struct soap *soap, const char *tag, struct _MPC__npRequestRequest **a, const char *type)
+{
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!a)
+		if (!(a = (struct _MPC__npRequestRequest **)soap_malloc(soap, sizeof(struct _MPC__npRequestRequest *))))
+			return NULL;
+	*a = NULL;
+	if (!soap->null && *soap->href != '#')
+	{	soap_revert(soap);
+		if (!(*a = soap_in__MPC__npRequestRequest(soap, tag, *a, type)))
+			return NULL;
+	}
+	else
+	{	a = (struct _MPC__npRequestRequest **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE__MPC__npRequestRequest, sizeof(struct _MPC__npRequestRequest), 0);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTo_MPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_PointerTo_MPC__npRequestRequest);
+	if (soap_out_PointerTo_MPC__npRequestRequest(soap, tag?tag:"MPC:npRequestRequest", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 struct _MPC__npRequestRequest ** SOAP_FMAC4 soap_get_PointerTo_MPC__npRequestRequest(struct soap *soap, struct _MPC__npRequestRequest **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_PointerTo_MPC__npRequestRequest(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize__QName(struct soap *soap, char *const*a)
+{
+#ifndef WITH_NOIDREF
+	soap_reference(soap, *a, SOAP_TYPE__QName);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out__QName(struct soap *soap, const char *tag, int id, char *const*a, const char *type)
+{
+	return soap_outstring(soap, tag, id, a, type, SOAP_TYPE__QName);
+}
+
+SOAP_FMAC3 char * * SOAP_FMAC4 soap_in__QName(struct soap *soap, const char *tag, char **a, const char *type)
+{	char **p;
+	p = soap_instring(soap, tag, a, type, SOAP_TYPE__QName, 2, 0, -1);
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put__QName(struct soap *soap, char *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE__QName);
+	if (soap_out__QName(soap, tag?tag:"byte", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 char ** SOAP_FMAC4 soap_get__QName(struct soap *soap, char **p, const char *tag, const char *type)
+{
+	if ((p = soap_in__QName(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_default_string(struct soap *soap, char **a)
+{
+	(void)soap; /* appease -Wall -Werror */
+#ifdef SOAP_DEFAULT_string
+	*a = SOAP_DEFAULT_string;
+#else
+	*a = (char *)0;
+#endif
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_string(struct soap *soap, char *const*a)
+{
+#ifndef WITH_NOIDREF
+	soap_reference(soap, *a, SOAP_TYPE_string);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_string(struct soap *soap, const char *tag, int id, char *const*a, const char *type)
+{
+	return soap_outstring(soap, tag, id, a, type, SOAP_TYPE_string);
+}
+
+SOAP_FMAC3 char * * SOAP_FMAC4 soap_in_string(struct soap *soap, const char *tag, char **a, const char *type)
+{	char **p;
+	p = soap_instring(soap, tag, a, type, SOAP_TYPE_string, 1, 0, -1);
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_string(struct soap *soap, char *const*a, const char *tag, const char *type)
+{
+	register int id = soap_embed(soap, (void*)a, NULL, 0, tag, SOAP_TYPE_string);
+	if (soap_out_string(soap, tag?tag:"byte", id, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 char ** SOAP_FMAC4 soap_get_string(struct soap *soap, char **p, const char *tag, const char *type)
+{
+	if ((p = soap_in_string(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+#if defined(__BORLANDC__)
+#pragma option pop
+#pragma option pop
+#endif
+
+/* End of soapC.cpp */

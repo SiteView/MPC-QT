@@ -9,7 +9,7 @@ QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
 
 #DESTDIR = ../../bin
-TARGET = ../../bin/SoftUpdate
+TARGET = ../../bin/MarketPlaceClient
 TEMPLATE = app
 INCLUDEPATH += . \
                ./include\
@@ -32,7 +32,9 @@ SOURCES += main.cpp\
     src/GridlayoutClass.cpp \
     src/CellClass.cpp \
     src/testunloaditem.cpp \
-    src/testunloadlist.cpp
+    src/testunloadlist.cpp \
+    src/ToolButton.cpp
+
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
     ../Common/SytemLog.h \
@@ -49,7 +51,8 @@ HEADERS  += mainwindow.h \
     src/GridlayoutClass.h \
     src/CellClass.h \
     src/testunloaditem.h \
-    src/testunloadlist.h
+    src/testunloadlist.h \
+    src/ToolButton.h
 
 FORMS    += mainwindow.ui
  #   src/informdialog.ui

@@ -39,13 +39,23 @@
         <file>images/down.png</file>
         <file>images/but_minimize.png</file>
         <file>images/but_minimize_hl.png</file>
-        <file>images/95.png</file>
-        <file>images/75.png</file>
-        <file>images/85.png</file>
-        <file>images/88.png</file>
         <file>images/lab_search_p.png</file>
         <file>images/lab_search.png</file>
         <file>images/lab_search_h.png</file>
+        <file>images/litter/audio.png</file>
+        <file>images/litter/development.png</file>
+        <file>images/litter/entertainment.png</file>
+        <file>images/litter/games.png</file>
+        <file>images/litter/internet.png</file>
+        <file>images/litter/office.png</file>
+        <file>images/litter/security.png</file>
+        <file>images/litter/utilities.png</file>
+        <file>images/litter/video.png</file>
+        <file>images/litter/web.png</file>
+        <file>images/litter/imaging.png</file>
+        <file>images/litter/browers.png</file>
+        <file>images/litter/comunication.png</file>
         <file>images/default.png</file>
+        <file>images/caution2.png</file>
     </qresource>
 </RCC>

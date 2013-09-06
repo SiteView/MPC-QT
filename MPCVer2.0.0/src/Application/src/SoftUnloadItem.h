@@ -12,8 +12,13 @@ class SoftUnloadItem : public QWidget
     Q_OBJECT
 public:
     explicit SoftUnloadItem(QWidget *parent = 0);
-    void takeText(QString Qicon,QString Qsoftname,QString Qsoftdetail,QString Qprogress,
-                                  QString Qsize,QString Qsetuptime,QString QuninstallString);
+
+
+    void takeText(QString Qicon,QString Qsoftname,
+                  QString Qsoftdetail,qint64 Qsize,
+                  QString Qsetuptime,QString Qprogress,
+                  QString QuninstallString);
+    QString get_size( qint64 byte );
 
 signals:
 
@@ -27,9 +32,8 @@ protected:
 private:
     bool mouse_press;
     bool mouse_enter;
-    bool uninstall_visible;
 public slots:
-    void on_unload_clicked();
+    bool on_unload_clicked();
     void Unloadfinish(int , QProcess::ExitStatus );
     void Unloaderror(QProcess::ProcessError );
 public:

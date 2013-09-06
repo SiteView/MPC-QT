@@ -10,14 +10,14 @@
 SoftDownloadList::SoftDownloadList(QWidget *parent) :
     QWidget(parent)
 {
-
-}
-
-void SoftDownloadList::selectDifType(int cmd){
+    empty=true;
     DownloadList  = new QListWidget(this);
     DownloadList->setFocusPolicy(Qt::NoFocus);
     DownloadList->resize(760,510);
     DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
+}
+
+void SoftDownloadList::selectDifType(int cmd){
 
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB());
     switch(cmd)
@@ -88,10 +88,16 @@ void SoftDownloadList::selectDifType(int cmd){
             qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
         }
         break;
-
+    case SEARCH:
+        if ( !SQLiteQuery.exec( "select DisplayName,Detailtext,ServerVersion,ResetServerVerSion,Size ,Downloadurl ,Mark from ServerAppInfo where DisplayName like '%"+search_text+"%' ;" ) )
+        {
+            qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
+        }
+        break;
     }
     while ( SQLiteQuery.next() )
     {
+        empty=false;
         QVariant val0 = SQLiteQuery.value(0);
         QVariant val1 = SQLiteQuery.value(1);
         QVariant val2 = SQLiteQuery.value(2);
@@ -104,51 +110,38 @@ void SoftDownloadList::selectDifType(int cmd){
         QString pahtstr1 = val1.toString();
         QString pahtstr2 = val2.toString();
         QString pahtstr3 = val3.toString();
-        QString pahtstr4 = val4.toString();
+        qint64 pahtstr4 = val4.toLongLong();
         QString pahtstr5 = val5.toString();
 
         QString pahtstr6 = val6.toString();
 
-        SoftDownloadItem *ani=new SoftDownloadItem (DownloadList);
-
-        //        ani->but_icon->setText(pahtstr2);
-        ani->but_icon->setStyleSheet("border-image:url(:/images/"+pahtstr6+".png); background:transparent;");
-        ani->but_softname->setText(pahtstr0);
-        //        QString lab_softdetail2;
-        //        if(pahtstr1.count()<35)
-        //        {
-        //            ani->lab_softdetail->setText(pahtstr1+"...");
-        //        }
-        //        else
-        //        {
-        //            for(int k=0;k<35;k++)
-        //            {
-        //                lab_softdetail2+=pahtstr1.at(k);
-        //            }
-        //            ani->lab_softdetail->setText(lab_softdetail2+"...");
-        //        }
-        ani->lab_softdetail->setText(pahtstr1+"...");
-
-        ani->lab_softdetail->setToolTip(pahtstr1);
-        ani->lab_upnum->setText(pahtstr3);
-        ani->lab_upnum_2->setText(pahtstr3);
-        ani->lab_size->setText(pahtstr4);
-        ani->lab_size_2->setText(pahtstr4);
-        ani->download->setText("download");
-        ani->urlprogram=pahtstr5;
-        //        ani->lab_prompt->setText(pahtstr2);
-        QUrl url = QUrl::fromEncoded(pahtstr5.toUtf8());
-        QString path_file = url.toString();
-        QStringList str=path_file.split("/");
-        int i=str.count();
-        ani->exename=str.at(i-1);
-
-        QListWidgetItem *twi = new QListWidgetItem(0);
-        twi->setSizeHint(QSize(400,59));
-        DownloadList->addItem(twi);
-        DownloadList->setItemWidget(twi,ani);
+        list_0<<pahtstr0;
+        list_1<<pahtstr1;
+        list_2<<pahtstr2;
+        list_3<<pahtstr3;
+        list_4<<pahtstr4;
+        list_5<<pahtstr5;
+        list_6<<pahtstr6;
 
     }
     SQLiteQuery.finish();
+
+    item_list =new QList<SoftDownloadItem *>();
+    twi_list =new QList<QListWidgetItem*>();
+    for(int i=0; i<list_0.size(); i++)
+    {
+        SoftDownloadItem *item = new SoftDownloadItem();
+        item_list->push_back(item);
+        item_list->at(i)->takeText(list_0.at(i),list_1.at(i),list_4.at(i),list_2.at(i),
+                                   list_5.at(i));
+        QListWidgetItem *twi = new QListWidgetItem();
+        twi->setSizeHint(QSize(400,59));
+        twi_list->push_back(twi);
+    }
+    for(int k=0; k<list_0.size(); k++)
+    {
+        DownloadList->addItem(twi_list->at(k));
+        DownloadList->setItemWidget(twi_list->at(k),item_list->at(k));
+    }
 
 }

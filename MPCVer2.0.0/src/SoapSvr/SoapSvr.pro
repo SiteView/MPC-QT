@@ -3,10 +3,10 @@
 # ------------------------------------------------------
 
 TEMPLATE = app
-TARGET = SoapSvr
+TARGET = MarketPlaceServer 
 OBJECTS_DIR = obj
 QT += core sql network
-LIBS += -lcurl 
+LIBS += -lcurl  
 #       -lfcgi
 #DEFINES +=WITH_FASTCGI
 INCLUDEPATH += . \
