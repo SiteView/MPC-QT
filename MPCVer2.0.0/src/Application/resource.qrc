@@ -9,19 +9,6 @@
         <file>images/but_scroll_up.png</file>
         <file>images/lightcircle.png</file>
         <file>images/circle.png</file>
-        <file>images/softdownload_press.png</file>
-        <file>images/softunload_h.png</file>
-        <file>images/softunload_no.png</file>
-        <file>images/softunload_press.png</file>
-        <file>images/softupgrade_h.png</file>
-        <file>images/softupgrade_no.png</file>
-        <file>images/softupgrade_press.png</file>
-        <file>images/updateinform_h.png</file>
-        <file>images/updateinform_no.png</file>
-        <file>images/updateinform_press.png</file>
-        <file>images/softdownload_h.png</file>
-        <file>images/softdownload_no.png</file>
-        <file>images/line.png</file>
         <file>styles/Default.qss</file>
         <file>images/360small.png</file>
         <file>images/caution.png</file>
@@ -57,5 +44,8 @@
         <file>images/litter/comunication.png</file>
         <file>images/default.png</file>
         <file>images/caution2.png</file>
+        <file>images/uninstall_no.png</file>
+        <file>images/softdownload_no.png</file>
+        <file>images/softupgrade_no.png</file>
     </qresource>
 </RCC>
