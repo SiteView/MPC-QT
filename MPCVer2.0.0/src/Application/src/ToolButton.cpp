@@ -6,19 +6,10 @@
 ToolButton::ToolButton(QWidget *parent) :
     QToolButton(parent)
 {
-//    this->setImage(QString );
 }
 void ToolButton::setImage(QString pic_name)
 {
-    qDebug()<<"pic_name==="<<pic_name;
-    //设置文本颜色
-    QPalette text_palette = palette();
-    text_palette.setColor(QPalette::ButtonText, QColor(230, 230, 230));
-    setPalette(text_palette);
-        
-    //设置文本粗体
-    QFont &text_font = const_cast<QFont &>(font());
-    text_font.setWeight(QFont::Bold);
+
 
     setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 
@@ -27,7 +18,7 @@ void ToolButton::setImage(QString pic_name)
     setIcon(pixmap);
     setIconSize(pixmap.size());
     //设置大小
-    setFixedSize(100, pixmap.height()+17);
+    setFixedSize(pixmap.width()+25, pixmap.height()+27);
     setAutoRaise(true);
 
     setStyleSheet("background:transparent;");

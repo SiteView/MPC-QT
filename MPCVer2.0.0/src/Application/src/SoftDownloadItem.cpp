@@ -133,7 +133,16 @@ void SoftDownloadItem::takeText(QString Qsoftname,
     but_softname->setText(Qsoftname);
     but_softname->setToolTip(Qsoftname);
     lab_softdetail->setText(Qsoftdetail+"...");
-    lab_softdetail->setToolTip(Qsoftdetail);
+    QString strtooltip;
+    for(int i=0;i<Qsoftdetail.size();i++)
+    {
+        strtooltip.append(Qsoftdetail.at(i));
+        if(i%20==0&&i>19)
+        {
+            strtooltip.append("\n");
+        }
+    }
+    lab_softdetail->setToolTip(strtooltip);
     lab_upnum->setText(Qupnum);
     lab_upnum_2->setText(Qupnum);
     lab_size->setText(get_size( Qsize ));
@@ -280,7 +289,7 @@ QString SoftDownloadItem::get_size( qint64 byte )
 
 void SoftDownloadItem::paintEvent(QPaintEvent *event)//绘制卸载界面
 {
-///*
+    ///*
     //绘制边框
     QPainter painter2(this);
     QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
@@ -303,7 +312,7 @@ void SoftDownloadItem::paintEvent(QPaintEvent *event)//绘制卸载界面
         painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
 
     }
-//    */
+    //    */
 }
 
 void SoftDownloadItem::mousePressEvent(QMouseEvent * event)

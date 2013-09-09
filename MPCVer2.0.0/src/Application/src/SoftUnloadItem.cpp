@@ -94,6 +94,7 @@ void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
     size->setText(get_size(Qsize));
     setuptime->setText(Qsetuptime);
     progress->setText(Qprogress);
+    progress->setToolTip(Qprogress);
     program=QuninstallString;
 
     QString filename = QCoreApplication::applicationDirPath()+QString("/icons/")+Qsoftname.trimmed()+QString(".ico");

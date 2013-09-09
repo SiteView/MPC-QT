@@ -40,57 +40,6 @@ QPushButton#but_search_4:clicked,#but_search_2:clicked,#but_search_3:clicked
 	border-image: url(:/images/lab_search_p.png);
 }
 
-
-/*QPushButton:SoftDownload,SoftUpgrade,SoftUnload,UpdateInfrom*/
-QPushButton#SoftDownload
-{
-	border-image: url(:/images/softdownload_no.png);
-}
-QPushButton#SoftDownload:hover
-{
-	border-image: url(:/images/softdownload_h.png);
-}
-QPushButton#SoftDownload:clicked
-{
-	border-image: url(:/images/softdownload_press.png);
-}
-QPushButton#SoftUpgrade
-{
-	border-image: url(:/images/softupgrade_no.png);
-}
-QPushButton#SoftUpgrade:hover
-{
-	border-image: url(:/images/softupgrade_h.png);
-}
-QPushButton#SoftUpgrade:clicked
-{
-	border-image: url(:/images/softupgrade_press.png);
-}
-QPushButton#SoftUnload
-{
-	border-image: url(:/images/softunload_no.png);
-}
-QPushButton#SoftUnload:hover
-{
-	border-image: url(:/images/softunload_h.png);
-}
-QPushButton#SoftUnload:clicked
-{
-	border-image: url(:/images/softunload_press.png);
-}
-QPushButton#UpdateInform
-{
-	border-image: url(:/images/updateinform_no.png);
-}
-QPushButton#UpdateInform:hover
-{
-	border-image: url(:/images/updateinform_h.png);
-}
-QPushButton#UpdateInform:clicked
-{
-	border-image: url(:/images/updateinform_press.png);
-}
-
 QPushButton#download,#set_up,#unload,#but_upgrade,#use_skin_button,#but_return_2,#but_return
 {
 	border: 1px solid rgb(185,185,185);
@@ -179,10 +128,11 @@ QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_t
 
 
 /*LABELS*/
-QLabel#label_SoftDownload,#label_SoftUpgrade,#label_SoftUnload,#label_UpdateInform
+#label_SoftUnload,#label_UpdateInform,#Download,#Upgrade,#Uninstall
 {
 	color:rgb(250,250,250);
-	font: 75 12px "Arial" bold;	
+	font: 75 12px "Arial" ;
+	font-weight:bold;	
 }
 QLabel#label,#softdetail,#progress,#size,#setuptime,#num,#lab_softdetail,#lab_upnum,#lab_size,#softdetaile,#old_versions,#new_versions
 {

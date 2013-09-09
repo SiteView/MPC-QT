@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_return_2->hide();
     ui->lab_softnum->hide();
 
-//        TitlePage();
+    TitlePage();
 }
 
 MainWindow::~MainWindow()
@@ -54,35 +54,33 @@ MainWindow::~MainWindow()
 }
 void MainWindow::TitlePage()
 {
-
     QStringList string_list;
-    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/updateinform_no.png";
-
+    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/uninstall_no.png";
     QHBoxLayout *button_layout = new QHBoxLayout();
-
     QSignalMapper *signal_mapper = new QSignalMapper(this);
-
     for(int i=0; i<string_list.size(); i++)
     {
         ToolButton *tool_button = new ToolButton(this);
         tool_button->setImage(string_list.at(i));
         button_list.append(tool_button);
-        connect(tool_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
-//        connect(too)
+        connect(tool_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));//信号绑定，可以使其停留在选定的item上
         signal_mapper->setMapping(tool_button, QString::number(i, 10));
-        connect(signal_mapper,SIGNAL(mapped(int)),this,SLOT(changePage(int)));
-
         button_layout->addWidget(tool_button, 0, Qt::AlignBottom);
     }
-    connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(turnPage(QString)));
-
-    QVBoxLayout *main_layout = new QVBoxLayout(ui->title);
+    connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(turnPage(QString)));//绑定改变item的信号
+    QVBoxLayout *main_layout = new QVBoxLayout();
     main_layout->addLayout(button_layout);
     main_layout->setSpacing(0);
     main_layout->setContentsMargins(0, 0, 0, 0);
-    button_list.at(0)->setText(tr("power"));
-    button_list.at(1)->setText(tr("mummy"));
-    button_list.at(2)->setText(tr("hole"));
+    button_list.at(0)->setObjectName(QString::fromUtf8("Download"));
+    button_list.at(1)->setObjectName(QString::fromUtf8("Upgrade"));
+    button_list.at(2)->setObjectName(QString::fromUtf8("Uninstall"));
+
+    button_list.at(0)->setText("Download");
+    button_list.at(1)->setText("Upgrade");
+    button_list.at(2)->setText("Uninstall");
+
+    ui->title_page->setLayout(main_layout);
 }
 
 void MainWindow::turnPage(QString current_page)
@@ -102,11 +100,20 @@ void MainWindow::turnPage(QString current_page)
             tool_button->setMousePress(false);
         }
     }
+    if(current_page=="0")
+    {
+        ui->stackedWidget->setCurrentWidget(ui->page_SoftDownload);
+    }
+    else if(current_page=="1")
+    {
+        ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
+    }
+    else if(current_page=="2")
+    {
+        ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
+    }
 }
-void MainWindow::changePage(int i)
-{
-    qDebug()<<"===i==="<<i;
-}
+
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 {
     //    QPainter painter2(this);
@@ -171,21 +178,21 @@ void MainWindow::changeCurrentItem()//显示不同分类的软件
     }
 }
 
-void MainWindow::on_SoftDownload_clicked()//显示软件下载页
-{
-    ui->stackedWidget->setCurrentWidget(ui->page_SoftDownload);
-}
+//void MainWindow::on_SoftDownload_clicked()//显示软件下载页
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->page_SoftDownload);
+//}
 
-void MainWindow::on_SoftUpgrade_clicked()//显示软件更新页
-{
-    ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
+//void MainWindow::on_SoftUpgrade_clicked()//显示软件更新页
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
 
-}
+//}
 
-void MainWindow::on_SoftUnload_clicked()//显示软件卸载页
-{
-    ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
-}
+//void MainWindow::on_SoftUnload_clicked()//显示软件卸载页
+//{
+//    ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
+//}
 
 
 

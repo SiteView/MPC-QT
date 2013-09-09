@@ -57,11 +57,11 @@ public:
     void TitlePage();
 
 private slots:
-    void on_SoftDownload_clicked();
+//    void on_SoftDownload_clicked();
 
-    void on_SoftUpgrade_clicked();
+//    void on_SoftUpgrade_clicked();
 
-    void on_SoftUnload_clicked();
+//    void on_SoftUnload_clicked();
 
 //    void on_UpdateInform_clicked();
     void on_but_close_clicked();
@@ -94,7 +94,6 @@ private slots:
 
 public slots:
     void turnPage(QString current_page);
-    void changePage(int);
 
 protected:
     void mousePressEvent(QMouseEvent *e);
