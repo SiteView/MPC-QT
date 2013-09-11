@@ -15,6 +15,7 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
     DownloadList->setFocusPolicy(Qt::NoFocus);
     DownloadList->resize(760,510);
     DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
+
 }
 
 void SoftDownloadList::selectDifType(int cmd){

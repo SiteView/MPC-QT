@@ -8,7 +8,8 @@
 #include <QStringList>
 #include <QPainter>
 #include <QListWidget>
-
+#include <QGraphicsBlurEffect>
+#include <QGraphicsDropShadowEffect>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "src/ToolButton.h"
@@ -17,8 +18,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),flag(true)
 {
     ui->setupUi(this);
-    this->setWindowFlags(Qt::FramelessWindowHint);
-    this->setWindowTitle("MarketPlace");
+    this->setWindowOpacity(1);//设置窗体透明度
+    this->setWindowFlags(Qt::FramelessWindowHint);//去除边框
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    this->setWindowTitle("MarketPlace");//给窗体命名
+
     this->createUnloadtableMenu();
     this->createUpgradeMenu();
     this->createDownloadMenu();
@@ -26,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     inform        = new InformDialog;
     item_allkind  = new SoftAllKindItem();
 
-    ui->lineEdit_s_4->setFrame(false);//**
+    ui->lineEdit_s_4->setFrame(false);//搜索栏设为不可见
     ui->lineEdit_s_2->setFrame(false);
     ui->lineEdit_s_3->setFrame(false);
     ui->lineEdit_s_2->setMaxLength(50);
@@ -44,6 +48,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_return->hide();
     ui->but_return_2->hide();
     ui->lab_softnum->hide();
+
+    QGraphicsBlurEffect *effect = new QGraphicsBlurEffect(this);//给对象设阴影效果
+    effect->setBlurRadius(1.5);
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);
+    shadowEffect->setBlurRadius(5);
+    shadowEffect->setXOffset(2);
+    shadowEffect->setYOffset(2);
+    ui->stackedWidget->setGraphicsEffect(shadowEffect);
+    ui->label->setGraphicsEffect(shadowEffect);
+    ui->centralWidget->setGraphicsEffect(shadowEffect);
 
     TitlePage();
 }
@@ -124,11 +138,13 @@ void MainWindow::paintEvent(QPaintEvent *)//画界面边框
     QPen pen(Qt::gray);
     painter.setPen(pen);
     painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 0, 0);
-
 }
+
 void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
-    list_upgrade = new SoftUpgradeList(ui->widget_6);
+    //    list_upgrade = new SoftUpgradeList(ui->widget_6);
+    testclass=new TestUnloadList(ui->widget_6);
+    //    pageshow=new PageShow(ui->widget_6);
 }
 void MainWindow::createDownloadMenu()//创建软件下载部分
 {
@@ -155,14 +171,12 @@ void MainWindow::changeCurrentItem()//显示不同分类的软件
     if(current_row==0)
     {
         ui->stack_download->setCurrentWidget(ui->page_all);
-
     }
     if(current_row==1)
     {
         list_download1     = new SoftDownloadList(ui->page_type2);
         list_download1->selectDifType(TWO);
         ui->stack_download->setCurrentWidget(ui->page_type2);
-
     }
     if(current_row==2)
     {

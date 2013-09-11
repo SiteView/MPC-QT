@@ -19,6 +19,7 @@ public:
     explicit TestUnloadList(QWidget *parent = 0);
     void initCenter();
     void initBottom();
+    void additem();
 
 protected:
     void mousePressEvent(QMouseEvent *event);

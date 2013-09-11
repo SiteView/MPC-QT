@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -102,6 +103,9 @@ public:
     QWidget *page_UpdateInform;
     QListWidget *list_Inform;
     QLabel *label;
+    QFrame *line_left;
+    QFrame *line_bottom;
+    QFrame *line_right;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -164,7 +168,7 @@ public:
         widget_4->setGeometry(QRect(0, 0, 160, 560));
         stack_download = new QStackedWidget(page_SoftDownload);
         stack_download->setObjectName(QStringLiteral("stack_download"));
-        stack_download->setGeometry(QRect(160, 50, 760, 510));
+        stack_download->setGeometry(QRect(160, 50, 780, 510));
         page_all = new QWidget();
         page_all->setObjectName(QStringLiteral("page_all"));
         stack_download->addWidget(page_all);
@@ -373,6 +377,21 @@ public:
         label = new QLabel(widget_body);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(8, 560, 191, 21));
+        line_left = new QFrame(centralWidget);
+        line_left->setObjectName(QStringLiteral("line_left"));
+        line_left->setGeometry(QRect(-1, 100, 4, 580));
+        line_left->setFrameShape(QFrame::VLine);
+        line_left->setFrameShadow(QFrame::Sunken);
+        line_bottom = new QFrame(centralWidget);
+        line_bottom->setObjectName(QStringLiteral("line_bottom"));
+        line_bottom->setGeometry(QRect(0, 678, 920, 4));
+        line_bottom->setFrameShape(QFrame::HLine);
+        line_bottom->setFrameShadow(QFrame::Sunken);
+        line_right = new QFrame(centralWidget);
+        line_right->setObjectName(QStringLiteral("line_right"));
+        line_right->setGeometry(QRect(918, 100, 4, 580));
+        line_right->setFrameShape(QFrame::VLine);
+        line_right->setFrameShadow(QFrame::Sunken);
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);

@@ -15,7 +15,7 @@
 #include "src/SoftUpgradeList.h"
 #include "src/testunloadlist.h"
 #include "src/ToolButton.h"
-
+#include "src/PageShow.h"
 namespace Ui {
 class MainWindow;
 }
@@ -141,6 +141,7 @@ public:
     TestUnloadItem *layout_widget; //显示皮肤界面
     TestUnloadList *testclass;
     GridlayoutClass *grid;
+    PageShow *pageshow;
     bool flag;
     QList<ToolButton *> button_list;
 

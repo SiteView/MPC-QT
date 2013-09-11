@@ -6,13 +6,17 @@
 TestUnloadList::TestUnloadList(QWidget *parent) :
     QWidget(parent)
 {
+    center_layout = new QVBoxLayout();
+
     current_page = 1;
     mouse_press = false;
     WidgetContents=new QWidget();
     WidgetContents->setObjectName(QStringLiteral("WidgetContents"));
-    WidgetContents->setStyleSheet("background:rgb(255,255,255);");
+    //    WidgetContents->setStyleSheet("background:transparent;;");
     initCenter();
     initBottom();
+    this->showPage(QString::number(current_page, 10));
+
     area=new QScrollArea(this);
     area->setFixedSize(920,520);
     area->setObjectName(QStringLiteral("scrollArea"));
@@ -26,10 +30,9 @@ TestUnloadList::TestUnloadList(QWidget *parent) :
     main_layout->setContentsMargins(0, 0, 0, 0);
     WidgetContents->setLayout(main_layout);
     area->setWidget(WidgetContents);
-    this->showPage(QString::number(current_page, 10));
-
 }
-void TestUnloadList::initCenter()
+
+void TestUnloadList::initCenter()//初始化中心界面
 {
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor;" ) )
@@ -62,14 +65,15 @@ void TestUnloadList::initCenter()
         progress_list<<pahtstr5;
         uninstallString_list<<pahtstr6;
     }
-    SQLiteQuery.finish();
+    SQLiteQuery.finish();// 数据查询完毕
 
     center_layout = new QVBoxLayout();
 
     item_list =new QList<SoftUnloadItem *>();
+
     for(int i=0; i<10; i++)
     {
-        SoftUnloadItem *item = new SoftUnloadItem(WidgetContents);
+        SoftUnloadItem *item = new SoftUnloadItem();
         center_layout->addWidget(item);
         item_list->push_back(item);
     }
@@ -81,9 +85,14 @@ void TestUnloadList::initCenter()
     {
         page_count = page_count + 1;
     }
+}
+void TestUnloadList::additem()
+{
+
 
 }
-void TestUnloadList::initBottom()
+
+void TestUnloadList::initBottom()//初始化底部界面
 {
     QSignalMapper *signal_mapper = new QSignalMapper(this);
     QList<QPushButton *> *button_list = new QList<QPushButton *>();
@@ -111,15 +120,19 @@ void TestUnloadList::initBottom()
     previous_page_button->setCursor(Qt::PointingHandCursor);
     next_page_button->setCursor(Qt::PointingHandCursor);
     last_page_button->setCursor(Qt::PointingHandCursor);
-    first_page_button->setStyleSheet("color:rgb(0, 120, 230); background:lightblue;");
-    previous_page_button->setStyleSheet("color:rgb(0, 120, 230); background:lightblue;");
-    next_page_button->setStyleSheet("color:rgb(0, 120, 230); background:lightblue;");
-    last_page_button->setStyleSheet("color:rgb(0, 120, 230); background:lightblue;");
+    first_page_button->setStyleSheet("color:rgb(0, 120, 230); ");
+    previous_page_button->setStyleSheet("color:rgb(0, 120, 230); ");
+    next_page_button->setStyleSheet("color:rgb(0, 120, 230); ");
+    last_page_button->setStyleSheet("color:rgb(0, 120, 230); ");
 
     first_page_button->setText(tr("first"));
     previous_page_button->setText(tr("previous"));
     next_page_button->setText(tr("next"));
     last_page_button->setText(tr("last"));
+    first_page_button->setObjectName(QString::fromUtf8("first_page_button"));
+    previous_page_button->setObjectName(QString::fromUtf8("previous_page_button"));
+    next_page_button->setObjectName(QString::fromUtf8("next_page_button"));
+    last_page_button->setObjectName(QString::fromUtf8("last_page_button"));
 
     connect(first_page_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
     connect(previous_page_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));
@@ -148,8 +161,12 @@ void TestUnloadList::initBottom()
 }
 
 
-void TestUnloadList::showPage(QString current_skin)
+void TestUnloadList::showPage(QString current_skin)//页码的切换
 {
+    for(int i=0;i<90;i++)
+    {
+        center_layout->destroyed(item_list->at(i));
+    }
     if(current_skin == "first")
     {
         current_page = 1;
@@ -204,13 +221,13 @@ void TestUnloadList::showPage(QString current_skin)
         last_page_button->hide();
     }
 
-
     //第一页为0-7 显示至previous_total_page个
     int tip_index = (current_page - 1)*10;
     if(current_page<page_count)
     {
         for(int i=0;i<10;i++)
         {
+//            item_list->clear();
             item_list->at(i)->takeText(icon_list.at(tip_index++),
                                        softname_list.at(tip_index-1),
                                        softdetail_list.at(tip_index-1) ,
@@ -218,12 +235,16 @@ void TestUnloadList::showPage(QString current_skin)
                                        setuptime_list.at(tip_index-1),
                                        progress_list.at(tip_index-1),
                                        uninstallString_list.at(tip_index-1));
+            item_list->at(i)->unload->show();
+            item_list->at(i)->uninstall->hide();
         }
     }
     else
     {
         for(int i=0;i<page_count_point;i++)
         {
+//            item_list->clear();
+
             item_list->at(i)->takeText(icon_list.at(tip_index++),
                                        softname_list.at(tip_index-1),
                                        softdetail_list.at(tip_index-1) ,
@@ -231,8 +252,11 @@ void TestUnloadList::showPage(QString current_skin)
                                        setuptime_list.at(tip_index-1),
                                        progress_list.at(tip_index-1),
                                        uninstallString_list.at(tip_index-1));
+            item_list->at(i)->unload->show();
+            item_list->at(i)->uninstall->hide();
         }
     }
+
 }
 
 void TestUnloadList::paintEvent(QPaintEvent *)

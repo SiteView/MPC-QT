@@ -13,6 +13,7 @@ SoftUnloadList::SoftUnloadList(QWidget *parent) :
     UnloadList->setFocusPolicy(Qt::NoFocus);
     bottom=new QWidget();
 
+
 //    initBottom();
 //    this->showPage(QString::number(current_page, 10));
 }
