@@ -17,7 +17,6 @@
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
-
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     but_icon = new QPushButton();
@@ -181,7 +180,6 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
         cell->changeText("Download","is exists","close");
         cell->show();
         stackedWidget->setCurrentWidget(page_3);
-
     }
     else
     {
@@ -196,6 +194,7 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
             stackedWidget->setCurrentWidget(page_2);
             connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
             connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
+
             DownloadThread();
         }
     }

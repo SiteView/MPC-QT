@@ -64,8 +64,7 @@ public slots:
     bool suspendProgress_setup();
     void Downloadresult(int);
 
-protected:
-//    bool event(QEvent *event);
+
 protected:
 
     void mousePressEvent(QMouseEvent *event);

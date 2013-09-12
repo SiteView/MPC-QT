@@ -15,8 +15,6 @@
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    //    this->resize(920,75);
-
     mouse_press = false;
     mouse_enter = false;
     icon       =new QLabel(this);
@@ -144,8 +142,8 @@ bool SoftUnloadItem::on_unload_clicked()//触发卸载事件
 {
     QProcess *unloader=new QProcess();
     unloader->start(program,QStringList());
-    qDebug()<<program<<"cliked.....";
     uninstall->show();
+    uninstall->setText("finish");
     unload->hide();
     connect(unloader,SIGNAL(finished(int,QProcess::ExitStatus)),this,SLOT(Unloadfinish(int , QProcess::ExitStatus )));
     connect(unloader,SIGNAL(error(QProcess::ProcessError )),this,SLOT(unloaderror(QProcess::ProcessError )));
@@ -153,18 +151,11 @@ bool SoftUnloadItem::on_unload_clicked()//触发卸载事件
     {
         unload->hide();
         uninstall->setText("failed");
-
-        //        CellClass *cell=new CellClass();
-        //        cell->changeText("Uninstall","is fail","close");
-        //        cell->show();
         return false;
     }
     if (!unloader->waitForFinished()) // 检查是否可结束
     {
         uninstall->show();
-        //        CellClass *cell=new CellClass();
-        //        cell->changeText("Uninstall","finish fail","close");
-        //        cell->show();
         return false;
     }
 }

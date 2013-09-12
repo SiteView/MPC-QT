@@ -6,33 +6,38 @@
 TestUnloadList::TestUnloadList(QWidget *parent) :
     QWidget(parent)
 {
+    //    this->resize(920,520);
     center_layout = new QVBoxLayout();
-
+    bottom_layout = new QHBoxLayout();
+    item_list =new QList<SoftUnloadItem *>();
     current_page = 1;
     mouse_press = false;
+
     WidgetContents=new QWidget();
     WidgetContents->setObjectName(QStringLiteral("WidgetContents"));
-    //    WidgetContents->setStyleSheet("background:transparent;;");
-    initCenter();
-    initBottom();
-    this->showPage(QString::number(current_page, 10));
+    WidgetContents->setGeometry(QRect(0, 0, 920, 520));
+    stackedWidget = new QStackedWidget(WidgetContents);
 
     area=new QScrollArea(this);
     area->setFixedSize(920,520);
     area->setObjectName(QStringLiteral("scrollArea"));
     area->setWidgetResizable(true);
+    area->setWidget(WidgetContents);
 
     QVBoxLayout *main_layout = new QVBoxLayout(WidgetContents);
-    main_layout->addLayout(center_layout);
-    main_layout->addLayout(bottom_layout);
+    main_layout->addWidget(stackedWidget);//加载分页
+    main_layout->addLayout(bottom_layout);//加载按钮
     main_layout->addStretch();
     main_layout->setSpacing(0);
     main_layout->setContentsMargins(0, 0, 0, 0);
     WidgetContents->setLayout(main_layout);
-    area->setWidget(WidgetContents);
+
+    initCenter();//加载数据
+    initBottom();//初始化界面底部
+    this->showPage(QString::number(current_page, 10));
 }
 
-void TestUnloadList::initCenter()//初始化中心界面
+void TestUnloadList::initCenter()//加载数据
 {
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
     if ( !SQLiteQuery.exec( "select DisplayIcon,DisplayName,DisplayVersion,EstimatedSize,SetupTime,InstallLocation,UninstallString from LocalAppInfor;" ) )
@@ -67,30 +72,63 @@ void TestUnloadList::initCenter()//初始化中心界面
     }
     SQLiteQuery.finish();// 数据查询完毕
 
-    center_layout = new QVBoxLayout();
-
-    item_list =new QList<SoftUnloadItem *>();
-
-    for(int i=0; i<10; i++)
-    {
-        SoftUnloadItem *item = new SoftUnloadItem();
-        center_layout->addWidget(item);
-        item_list->push_back(item);
-    }
-
-    int skin_list_count = icon_list.size();
+    int skin_list_count = icon_list.size();//数据总数
     page_count = skin_list_count / 10;
-    page_count_point = skin_list_count % 10;
+    page_count_point = skin_list_count % 10;//余数
     if(page_count_point > 0)
     {
-        page_count = page_count + 1;
+        page_count = page_count + 1;//页数
+    }
+
+    item_list =new QList<SoftUnloadItem *>();//构造出数据对应的item
+    for(int i=0;i<icon_list.size();i++)
+    {
+        SoftUnloadItem *item = new SoftUnloadItem();
+        item->setFixedSize(902,65);
+        item->takeText(icon_list.at(i),
+                          softname_list.at(i),
+                          softdetail_list.at(i) ,
+                          size_list.at(i),
+                          setuptime_list.at(i),
+                          progress_list.at(i),
+                          uninstallString_list.at(i));
+        item_list->append(item);
+    }
+
+    QList<QWidget *> *page_list = new QList<QWidget *>();//构造对应的page
+    for(int i=0; i<page_count; i++)
+    {
+        QWidget *stack_page = new QWidget();//构造十个页面
+        stackedWidget->addWidget(stack_page);
+        page_list->push_back(stack_page);
+        QVBoxLayout *vlayout=new QVBoxLayout(stack_page);
+        vlayout->setSpacing(0);
+        vlayout->setContentsMargins(0, 0, 0, 0);
+        QSpacerItem *verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+        if (i==page_count-1)
+        {
+            cyc_condition=page_count_point;
+            for(int j=0;j<cyc_condition;j++)
+            {
+                vlayout->addWidget(item_list->at(i*10+j));
+            }
+            vlayout->addItem(verticalSpacer);
+
+        }
+        else
+        {
+            cyc_condition=10;
+            for(int j=0;j<cyc_condition;j++)
+            {
+                vlayout->addWidget(item_list->at(i*10+j));
+            }
+        }
+
+
     }
 }
-void TestUnloadList::additem()
-{
 
-
-}
 
 void TestUnloadList::initBottom()//初始化底部界面
 {
@@ -107,7 +145,6 @@ void TestUnloadList::initBottom()//初始化底部界面
         signal_mapper->setMapping(page_button, page_button->text());
         button_list->push_back(page_button);
     }
-
     first_page_button = new QPushButton(WidgetContents);
     previous_page_button = new QPushButton(WidgetContents);
     next_page_button = new QPushButton(WidgetContents);
@@ -143,8 +180,6 @@ void TestUnloadList::initBottom()//初始化底部界面
     signal_mapper->setMapping(next_page_button, "next");
     signal_mapper->setMapping(last_page_button, "last");
     connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(showPage(QString)));
-
-    bottom_layout = new QHBoxLayout();
     bottom_layout->addStretch();
     bottom_layout->addWidget(first_page_button, 0, Qt::AlignVCenter);
     bottom_layout->addWidget(previous_page_button, 0, Qt::AlignVCenter);
@@ -158,15 +193,13 @@ void TestUnloadList::initBottom()//初始化底部界面
     bottom_layout->addStretch();
     bottom_layout->setSpacing(2);
     bottom_layout->setContentsMargins(0, 10, 0, 0);
+
 }
 
 
 void TestUnloadList::showPage(QString current_skin)//页码的切换
 {
-    for(int i=0;i<90;i++)
-    {
-        center_layout->destroyed(item_list->at(i));
-    }
+    qDebug()<<current_skin<<"-----------";
     if(current_skin == "first")
     {
         current_page = 1;
@@ -220,14 +253,15 @@ void TestUnloadList::showPage(QString current_skin)//页码的切换
         next_page_button->show();
         last_page_button->hide();
     }
-
+    stackedWidget->setCurrentIndex(current_page-1);
+/*
     //第一页为0-7 显示至previous_total_page个
     int tip_index = (current_page - 1)*10;
     if(current_page<page_count)
     {
         for(int i=0;i<10;i++)
         {
-//            item_list->clear();
+            //            item_list->clear();
             item_list->at(i)->takeText(icon_list.at(tip_index++),
                                        softname_list.at(tip_index-1),
                                        softdetail_list.at(tip_index-1) ,
@@ -243,8 +277,6 @@ void TestUnloadList::showPage(QString current_skin)//页码的切换
     {
         for(int i=0;i<page_count_point;i++)
         {
-//            item_list->clear();
-
             item_list->at(i)->takeText(icon_list.at(tip_index++),
                                        softname_list.at(tip_index-1),
                                        softdetail_list.at(tip_index-1) ,
@@ -256,6 +288,8 @@ void TestUnloadList::showPage(QString current_skin)//页码的切换
             item_list->at(i)->uninstall->hide();
         }
     }
+    qDebug()<<"current_page==="<<current_page;
+*/
 
 }
 

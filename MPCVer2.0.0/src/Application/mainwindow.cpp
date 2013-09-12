@@ -49,15 +49,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_return_2->hide();
     ui->lab_softnum->hide();
 
-    QGraphicsBlurEffect *effect = new QGraphicsBlurEffect(this);//给对象设阴影效果
+    QGraphicsBlurEffect *effect = new QGraphicsBlurEffect(this);//模糊效果
     effect->setBlurRadius(1.5);
-    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);//给对象设阴影效果
     shadowEffect->setBlurRadius(5);
     shadowEffect->setXOffset(2);
     shadowEffect->setYOffset(2);
-    ui->stackedWidget->setGraphicsEffect(shadowEffect);
+//    ui->stackedWidget->setGraphicsEffect(shadowEffect);
     ui->label->setGraphicsEffect(shadowEffect);
-    ui->centralWidget->setGraphicsEffect(shadowEffect);
+//    ui->centralWidget->setGraphicsEffect(shadowEffect);
 
     TitlePage();
 }
@@ -142,9 +142,9 @@ void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 
 void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
-    //    list_upgrade = new SoftUpgradeList(ui->widget_6);
-    testclass=new TestUnloadList(ui->widget_6);
-    //    pageshow=new PageShow(ui->widget_6);
+        list_upgrade = new SoftUpgradeList(ui->widget_6);
+//    testclass=new TestUnloadList();
+//        pageshow=new PageShow(ui->widget_6);
 }
 void MainWindow::createDownloadMenu()//创建软件下载部分
 {
