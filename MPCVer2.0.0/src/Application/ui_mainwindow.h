@@ -18,7 +18,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
@@ -101,7 +100,7 @@ public:
     QPushButton *but_search_2;
     QPushButton *but_return_2;
     QWidget *page_UpdateInform;
-    QListWidget *list_Inform;
+    QWidget *widget_7;
     QLabel *label;
     QFrame *line_left;
     QFrame *line_bottom;
@@ -126,7 +125,7 @@ public:
         but_minimize->setGeometry(QRect(870, 0, 25, 21));
         title_page = new QWidget(title);
         title_page->setObjectName(QStringLiteral("title_page"));
-        title_page->setGeometry(QRect(0, 0, 320, 100));
+        title_page->setGeometry(QRect(0, 0, 400, 101));
         widget_body = new QWidget(centralWidget);
         widget_body->setObjectName(QStringLiteral("widget_body"));
         widget_body->setGeometry(QRect(0, 100, 920, 580));
@@ -370,9 +369,9 @@ public:
         stackedWidget->addWidget(page_SoftUnload);
         page_UpdateInform = new QWidget();
         page_UpdateInform->setObjectName(QStringLiteral("page_UpdateInform"));
-        list_Inform = new QListWidget(page_UpdateInform);
-        list_Inform->setObjectName(QStringLiteral("list_Inform"));
-        list_Inform->setGeometry(QRect(0, 30, 920, 530));
+        widget_7 = new QWidget(page_UpdateInform);
+        widget_7->setObjectName(QStringLiteral("widget_7"));
+        widget_7->setGeometry(QRect(0, 35, 920, 525));
         stackedWidget->addWidget(page_UpdateInform);
         label = new QLabel(widget_body);
         label->setObjectName(QStringLiteral("label"));

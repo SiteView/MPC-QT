@@ -254,42 +254,6 @@ void TestUnloadList::showPage(QString current_skin)//页码的切换
         last_page_button->hide();
     }
     stackedWidget->setCurrentIndex(current_page-1);
-/*
-    //第一页为0-7 显示至previous_total_page个
-    int tip_index = (current_page - 1)*10;
-    if(current_page<page_count)
-    {
-        for(int i=0;i<10;i++)
-        {
-            //            item_list->clear();
-            item_list->at(i)->takeText(icon_list.at(tip_index++),
-                                       softname_list.at(tip_index-1),
-                                       softdetail_list.at(tip_index-1) ,
-                                       size_list.at(tip_index-1),
-                                       setuptime_list.at(tip_index-1),
-                                       progress_list.at(tip_index-1),
-                                       uninstallString_list.at(tip_index-1));
-            item_list->at(i)->unload->show();
-            item_list->at(i)->uninstall->hide();
-        }
-    }
-    else
-    {
-        for(int i=0;i<page_count_point;i++)
-        {
-            item_list->at(i)->takeText(icon_list.at(tip_index++),
-                                       softname_list.at(tip_index-1),
-                                       softdetail_list.at(tip_index-1) ,
-                                       size_list.at(tip_index-1),
-                                       setuptime_list.at(tip_index-1),
-                                       progress_list.at(tip_index-1),
-                                       uninstallString_list.at(tip_index-1));
-            item_list->at(i)->unload->show();
-            item_list->at(i)->uninstall->hide();
-        }
-    }
-    qDebug()<<"current_page==="<<current_page;
-*/
 
 }
 

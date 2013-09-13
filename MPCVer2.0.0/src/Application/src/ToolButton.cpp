@@ -59,7 +59,7 @@ void ToolButton::paintEvent(QPaintEvent *event)
     if(mouse_over)
     {
         //绘制鼠标移到按钮上的按钮效果
-        painterInfo(0, 100, 150);
+        painterInfo(0, 50, 100);
     }
     else
     {

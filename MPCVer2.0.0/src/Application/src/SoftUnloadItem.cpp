@@ -15,6 +15,7 @@
 SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
     QWidget(parent)
 {
+    this->resize(902,65);
     mouse_press = false;
     mouse_enter = false;
     icon       =new QLabel(this);

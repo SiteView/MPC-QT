@@ -47,5 +47,6 @@
         <file>images/uninstall_no.png</file>
         <file>images/softdownload_no.png</file>
         <file>images/softupgrade_no.png</file>
+        <file>images/manage_no.png</file>
     </qresource>
 </RCC>

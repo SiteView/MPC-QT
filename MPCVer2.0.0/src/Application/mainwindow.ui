@@ -60,8 +60,8 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>320</width>
-       <height>100</height>
+       <width>400</width>
+       <height>101</height>
       </rect>
      </property>
     </widget>
@@ -633,13 +633,13 @@
       </widget>
      </widget>
      <widget class="QWidget" name="page_UpdateInform">
-      <widget class="QListWidget" name="list_Inform">
+      <widget class="QWidget" name="widget_7" native="true">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>30</y>
+         <y>35</y>
          <width>920</width>
-         <height>530</height>
+         <height>525</height>
         </rect>
        </property>
       </widget>

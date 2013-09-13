@@ -13,6 +13,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "src/ToolButton.h"
+#include "curldownloadmanager.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),flag(true)
@@ -27,13 +28,14 @@ MainWindow::MainWindow(QWidget *parent) :
     this->createUpgradeMenu();
     this->createDownloadMenu();
     this->AddSoftSortMenu();
+    downthread =new CURLDownloadManager(this);//构造一个下载对象
     inform        = new InformDialog;
     item_allkind  = new SoftAllKindItem();
 
     ui->lineEdit_s_4->setFrame(false);//搜索栏设为不可见
     ui->lineEdit_s_2->setFrame(false);
     ui->lineEdit_s_3->setFrame(false);
-    ui->lineEdit_s_2->setMaxLength(50);
+    ui->lineEdit_s_2->setMaxLength(50);//设置搜索栏的宽度
     ui->lineEdit_s_3->setMaxLength(50);
     ui->lineEdit_s_4->setMaxLength(50);
 
@@ -55,10 +57,9 @@ MainWindow::MainWindow(QWidget *parent) :
     shadowEffect->setBlurRadius(5);
     shadowEffect->setXOffset(2);
     shadowEffect->setYOffset(2);
-//    ui->stackedWidget->setGraphicsEffect(shadowEffect);
+    //    ui->stackedWidget->setGraphicsEffect(shadowEffect);
     ui->label->setGraphicsEffect(shadowEffect);
-//    ui->centralWidget->setGraphicsEffect(shadowEffect);
-
+    //    ui->centralWidget->setGraphicsEffect(shadowEffect);
     TitlePage();
 }
 
@@ -66,10 +67,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::TitlePage()
+void MainWindow::TitlePage()//加载标题图片
 {
     QStringList string_list;
-    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/uninstall_no.png";
+    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/uninstall_no.png"<<":/images/manage_no.png";
     QHBoxLayout *button_layout = new QHBoxLayout();
     QSignalMapper *signal_mapper = new QSignalMapper(this);
     for(int i=0; i<string_list.size(); i++)
@@ -89,11 +90,12 @@ void MainWindow::TitlePage()
     button_list.at(0)->setObjectName(QString::fromUtf8("Download"));
     button_list.at(1)->setObjectName(QString::fromUtf8("Upgrade"));
     button_list.at(2)->setObjectName(QString::fromUtf8("Uninstall"));
+    button_list.at(3)->setObjectName(QString::fromUtf8("Manage"));
 
     button_list.at(0)->setText("Download");
     button_list.at(1)->setText("Upgrade");
     button_list.at(2)->setText("Uninstall");
-
+    button_list.at(3)->setText("Manage");
     ui->title_page->setLayout(main_layout);
 }
 
@@ -126,6 +128,10 @@ void MainWindow::turnPage(QString current_page)
     {
         ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
     }
+    else if(current_page=="3")
+    {
+        ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
+    }
 }
 
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
@@ -142,9 +148,10 @@ void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 
 void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
-        list_upgrade = new SoftUpgradeList(ui->widget_6);
-//    testclass=new TestUnloadList();
-//        pageshow=new PageShow(ui->widget_6);
+    list_upgrade = new SoftUpgradeList(ui->widget_6);
+    list_upgrade->selectDifType();
+        testclass=new TestUnloadList(ui->widget_7);
+    //        pageshow=new PageShow(ui->widget_6);
 }
 void MainWindow::createDownloadMenu()//创建软件下载部分
 {
@@ -191,24 +198,6 @@ void MainWindow::changeCurrentItem()//显示不同分类的软件
         ui->stack_download->setCurrentWidget(ui->page_type8);
     }
 }
-
-//void MainWindow::on_SoftDownload_clicked()//显示软件下载页
-//{
-//    ui->stackedWidget->setCurrentWidget(ui->page_SoftDownload);
-//}
-
-//void MainWindow::on_SoftUpgrade_clicked()//显示软件更新页
-//{
-//    ui->stackedWidget->setCurrentWidget(ui->page_SoftUpgrade);
-
-//}
-
-//void MainWindow::on_SoftUnload_clicked()//显示软件卸载页
-//{
-//    ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
-//}
-
-
 
 void MainWindow::on_but_close_clicked()//关闭窗口
 {
@@ -326,16 +315,7 @@ void MainWindow::on_but_sel_path_clicked()//卸载页以软件安装路径排序
 
 void MainWindow::on_but_sel_operate_clicked()
 {
-    //    if(flag)
-    //    {
-    //        ui->but_sel_operate->setIcon(QIcon(":/images/down.png"));
-    //        flag=false;
-    //    }
-    //    else
-    //    {
-    //        ui->but_sel_operate->setIcon(QIcon(":/images/up.png"));
-    //        flag=true;
-    //    }
+
 }
 
 void MainWindow::on_but_clear_4_clicked()//软件下载页清除按钮
@@ -392,7 +372,6 @@ void MainWindow::on_but_search_2_clicked()//软件卸载页搜索按钮
         ui->lab_text_unload->setText(str);
         ui->stackedWidget_2->setCurrentWidget(ui->page_null_unload);
         ui->widget_5->hide();
-
     }
     else
     {

@@ -16,6 +16,7 @@
 #include "src/testunloadlist.h"
 #include "src/ToolButton.h"
 #include "src/PageShow.h"
+class CURLDownloadManager;
 namespace Ui {
 class MainWindow;
 }
@@ -144,6 +145,8 @@ public:
     PageShow *pageshow;
     bool flag;
     QList<ToolButton *> button_list;
+
+    CURLDownloadManager *downthread;
 
 private:
     Ui::MainWindow *ui;

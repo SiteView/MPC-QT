@@ -113,7 +113,6 @@ void SoftDownloadList::selectDifType(int cmd){
         QString pahtstr3 = val3.toString();
         qint64 pahtstr4 = val4.toLongLong();
         QString pahtstr5 = val5.toString();
-
         QString pahtstr6 = val6.toString();
 
         list_0<<pahtstr0;

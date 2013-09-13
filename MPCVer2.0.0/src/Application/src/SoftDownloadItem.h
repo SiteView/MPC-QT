@@ -7,7 +7,6 @@
 #include <QString>
 #include <QProgressBar>
 #include <QStackedWidget>
-class  CURLDownloadManager;
 
 class SoftDownloadItem : public QWidget
 {
@@ -15,9 +14,7 @@ class SoftDownloadItem : public QWidget
 public:
     explicit SoftDownloadItem(QWidget *parent = 0);
     void DownloadThread();
-    void takeText(QString Qsoftname,
-                   QString Qsoftdetail,qint64 Qsize,
-                   QString Qupnum,QString Qurl);
+    void takeText(QString ,QString ,qint64 ,QString ,QString );
     QString get_size( qint64 byte );
 
 public:
@@ -66,7 +63,6 @@ public slots:
 
 
 protected:
-
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void enterEvent(QEvent *event);

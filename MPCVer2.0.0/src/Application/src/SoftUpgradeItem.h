@@ -1,5 +1,5 @@
-#ifndef SOFTALLKINDITEM_H
-#define SOFTALLKINDITEM_H
+#ifndef SOFTUPGRADEITEM_H
+#define SOFTUPGRADEITEM_H
 
 #include <QWidget>
 #include <QLabel>
@@ -7,31 +7,17 @@
 #include <QString>
 #include <QProgressBar>
 #include <QStackedWidget>
-class  CURLDownloadManager;
 
 class SoftUpgradeItem : public QWidget
 {
     Q_OBJECT
 public:
     explicit SoftUpgradeItem(QWidget *parent = 0);
+    void DownloadThread();
+    void takeText(QString,QString,QString,QString,QString,qint64,QString);
     QString get_size( qint64 byte );
 
-signals:
-
-public slots:
-   void on_but_upgrade_clicked();
-
-   void startProgress(int);
-   void changevalued(int);
-   void cancelProgress_download();
-   void suspendProgress_download();
-   void cancelProgress_setup();
-   bool suspendProgress_setup();
-   void Downloadresult(int);
 public:
-
-
-//   QFrame *frame_1 ;
    QPushButton *icon ;
    QLabel *softname;
    QLabel *softdetaile;
@@ -63,9 +49,19 @@ public:
    QString urlprogram;
    QString exename;
    QString runPath;
-   CURLDownloadManager *downloader;
-public:
-    void DownloadThread();
+
+signals:
+
+public slots:
+   void on_but_upgrade_clicked();
+
+   void startProgress(int);
+   void changevalued(int);
+   void cancelProgress_download();
+   void suspendProgress_download();
+   void cancelProgress_setup();
+   bool suspendProgress_setup();
+   void Downloadresult(int);
 
 protected:
 
@@ -80,4 +76,4 @@ private:
 
 };
 
-#endif // SOFTALLKINDITEM_H
+#endif // SOFTUPGRADEITEM_H

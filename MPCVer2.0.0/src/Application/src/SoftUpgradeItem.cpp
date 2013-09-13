@@ -9,15 +9,13 @@
 #include <QCoreApplication>
 #include <QPainter>
 #include <QMouseEvent>
-
+#include "CellClass.h"
 #include "SoftUpgradeItem.h"
 #include "curldownloadmanager.h"
-#include "CellClass.h"
 
 SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     QWidget(parent)
 {
-    downloader=new CURLDownloadManager(this);
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
     icon = new QPushButton();//图片
     icon->setObjectName(QString::fromUtf8("icon"));
@@ -146,7 +144,49 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     connect(setup,SIGNAL(clicked()),this,SLOT(suspendProgress_setup()));
 
 }
+void SoftUpgradeItem::takeText(QString Qicon,QString Qsoftname,
+                               QString Qdetail,QString Qversion,
+                               QString Qreversion,qint64 Qsize,
+                               QString Qurl )//加载文字到界面
+{
+    QString filename = QCoreApplication::applicationDirPath()+QString("/icons/")+Qsoftname+QString(".ico");
+    QFileInfo iconfile(filename);
+    if(iconfile.exists())
+    {
 
+        icon->setStyleSheet("border-image:url("+filename+")");
+    }
+    else
+    {
+        icon->setStyleSheet("border-image:url(:/images/default.png)");
+    }
+    softname->setText(Qsoftname);
+    softname->setToolTip(Qsoftname);
+    softdetaile->setText(Qdetail);
+    QString strtooltip;
+    for(int i=0;i<Qdetail.size();i++)
+    {
+        strtooltip.append(Qdetail.at(i));
+        if(i%20==0&&i>19)
+        {
+            strtooltip.append("\n");
+        }
+    }
+    softdetaile->setToolTip(strtooltip);
+    but_more->setText("more");
+    but_more->setStyleSheet("color:lightblue;background:transparent;");
+    old_versions->setText(Qreversion);
+    new_versions->setText(Qversion);
+    lab_size->setText(get_size(Qsize));
+    but_upgrade->setText("upgrade");
+    urlprogram=Qurl;
+    QUrl url = QUrl::fromEncoded(Qurl.toUtf8());
+    QString path_file = url.toString();
+    QStringList str=path_file.split("/");
+    int i=str.count();
+    exename=str.at(i-1);
+
+}
 void SoftUpgradeItem::on_but_upgrade_clicked()//点击更新按钮
 {
     runPath=QCoreApplication::applicationDirPath();
@@ -161,7 +201,6 @@ void SoftUpgradeItem::on_but_upgrade_clicked()//点击更新按钮
     }
     else
     {
-
         if(CURLDownloadManager::getThis()->isBusy())
         {
             CellClass *cell=new CellClass();
@@ -184,15 +223,13 @@ void SoftUpgradeItem::DownloadThread()//下载进程
     CURLDownloadManager::getThis()->setUrl(urlprogram);
     CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
     CURLDownloadManager::getThis()->ready(true);
-
 }
 
 void SoftUpgradeItem::startProgress(int i)//给进度条传值
 {
-
     progressBar->setValue(i);
-
 }
+
 void SoftUpgradeItem::changevalued(int i)//判断下载是否完成
 {
     if(i==100)
@@ -266,7 +303,7 @@ QString SoftUpgradeItem::get_size( qint64 byte )//转换软件大小的单位
 
 void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
 {
-///*
+    ///*
     //绘制边框
     QPainter painter2(this);
     QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
@@ -289,7 +326,7 @@ void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
         painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
 
     }
-//    */
+    //    */
 }
 
 void SoftUpgradeItem::mousePressEvent(QMouseEvent * event)
