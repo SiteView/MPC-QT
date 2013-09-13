@@ -9,19 +9,6 @@
         <file>images/but_scroll_up.png</file>
         <file>images/lightcircle.png</file>
         <file>images/circle.png</file>
-        <file>images/softdownload_press.png</file>
-        <file>images/softunload_h.png</file>
-        <file>images/softunload_no.png</file>
-        <file>images/softunload_press.png</file>
-        <file>images/softupgrade_h.png</file>
-        <file>images/softupgrade_no.png</file>
-        <file>images/softupgrade_press.png</file>
-        <file>images/updateinform_h.png</file>
-        <file>images/updateinform_no.png</file>
-        <file>images/updateinform_press.png</file>
-        <file>images/softdownload_h.png</file>
-        <file>images/softdownload_no.png</file>
-        <file>images/line.png</file>
         <file>styles/Default.qss</file>
         <file>images/360small.png</file>
         <file>images/caution.png</file>
@@ -39,13 +26,26 @@
         <file>images/down.png</file>
         <file>images/but_minimize.png</file>
         <file>images/but_minimize_hl.png</file>
-        <file>images/95.png</file>
-        <file>images/75.png</file>
-        <file>images/85.png</file>
-        <file>images/88.png</file>
         <file>images/lab_search_p.png</file>
         <file>images/lab_search.png</file>
         <file>images/lab_search_h.png</file>
+        <file>images/litter/audio.png</file>
+        <file>images/litter/development.png</file>
+        <file>images/litter/entertainment.png</file>
+        <file>images/litter/games.png</file>
+        <file>images/litter/internet.png</file>
+        <file>images/litter/office.png</file>
+        <file>images/litter/security.png</file>
+        <file>images/litter/utilities.png</file>
+        <file>images/litter/video.png</file>
+        <file>images/litter/web.png</file>
+        <file>images/litter/imaging.png</file>
+        <file>images/litter/browers.png</file>
+        <file>images/litter/comunication.png</file>
         <file>images/default.png</file>
+        <file>images/caution2.png</file>
+        <file>images/uninstall_no.png</file>
+        <file>images/softdownload_no.png</file>
+        <file>images/softupgrade_no.png</file>
     </qresource>
 </RCC>

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/defaulticons/MsiExec.ico</file>
+    </qresource>
+</RCC>

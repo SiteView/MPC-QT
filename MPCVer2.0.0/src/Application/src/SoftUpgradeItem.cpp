@@ -1,69 +1,59 @@
 #include <QMessageBox>
 #include <QHBoxLayout>
 #include <QSpacerItem>
-#include <QtUiTools/QUiLoader>
 #include <QFile>
-
 #include <QVBoxLayout>
 #include <QProcess>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QCoreApplication>
+#include <QPainter>
+#include <QMouseEvent>
 
 #include "SoftUpgradeItem.h"
 #include "curldownloadmanager.h"
+#include "CellClass.h"
 
 SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     QWidget(parent)
 {
     downloader=new CURLDownloadManager(this);
-
-    QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
-    horizontalLayout_3->setSpacing(6);
-    horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
-    horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-    horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-
-    frame_1 = new QFrame();
-    frame_1->setObjectName(QString::fromUtf8("frame_1"));
-    frame_1->setFixedSize(QSize(520, 60));
-
-    icon = new QPushButton(frame_1);//图片
+    QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+    icon = new QPushButton();//图片
     icon->setObjectName(QString::fromUtf8("icon"));
-    icon->setGeometry(QRect(10, 10, 50, 50));
+    icon->setGeometry(QRect(10, 0, 50, 50));
     icon->setFixedSize(QSize(50, 50));
 
-    QVBoxLayout *verticalLayout = new QVBoxLayout();
     softname = new QLabel();
     softname->setObjectName(QString::fromUtf8("softname"));
     softname->setFixedSize(QSize(180, 30));
-    verticalLayout->addWidget(softname);
     softdetaile = new QLabel();
     softdetaile->setObjectName(QString::fromUtf8("softdetaile"));
     softdetaile->setFixedSize(QSize(300, 20));
+    QVBoxLayout *verticalLayout = new QVBoxLayout();
+    verticalLayout->addWidget(softname);
     verticalLayout->addWidget(softdetaile);
 
-    but_more = new QPushButton(frame_1);//更多
+    but_more = new QPushButton();//更多
     but_more->setObjectName(QString::fromUtf8("but_more"));
     but_more->setGeometry(QRect(470, 25, 40,20));
     but_more->setMaximumSize(QSize(40, 20));
 
-    QVBoxLayout *verticalLayout_2 = new QVBoxLayout();//新老版本
-    verticalLayout_2->setGeometry(QRect(500,10,150,20));
     old_versions = new QLabel();
     old_versions->setObjectName(QString::fromUtf8("old_versions"));
     old_versions->setMaximumSize(QSize(150, 20));
-    verticalLayout_2->addWidget(old_versions);
     new_versions = new QLabel();
     new_versions->setObjectName(QString::fromUtf8("new_versions"));
     new_versions->setMaximumSize(QSize(150, 20));
+    QVBoxLayout *verticalLayout_2 = new QVBoxLayout();//新老版本
+    verticalLayout_2->addWidget(old_versions);
     verticalLayout_2->addWidget(new_versions);
-    horizontalLayout_3->addWidget(frame_1);
 
-    QHBoxLayout *horizontal = new QHBoxLayout(frame_1);
-    horizontal->addWidget(icon ,0, Qt::AlignHCenter);
+    QHBoxLayout *horizontal = new QHBoxLayout();
+    horizontal->addItem(horizontalSpacer);
+    horizontal->addWidget(icon );
     horizontal->addLayout(verticalLayout);
-    horizontal->addWidget(but_more , 0, Qt::AlignHCenter);
+    horizontal->addWidget(but_more);
     horizontal->addLayout(verticalLayout_2);
 
     widget = new QWidget();//分页显示
@@ -93,7 +83,7 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     lab_size->setFixedSize(QSize(50, 20));
     but_upgrade = new QPushButton(frame_2);
     but_upgrade->setObjectName(QString::fromUtf8("download"));
-    but_upgrade->setGeometry(QRect(280, 20, 80, 25));
+    but_upgrade->setGeometry(QRect(280, 18, 80, 25));
     but_upgrade->setFixedSize(QSize(80, 25));
     stackedWidget->addWidget(page);
     page_2 = new QWidget();
@@ -134,10 +124,18 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     lab_size_2->setFixedSize(QSize(50, 20));
     setup = new QPushButton(frame_4);
     setup->setObjectName(QString::fromUtf8("set_up"));
-    setup->setGeometry(QRect(280, 20, 80, 25));
+    setup->setGeometry(QRect(280, 18, 80, 25));
     setup->setFixedSize(QSize(80, 25));
     setup->setText("setup");
     stackedWidget->addWidget(page_3);
+
+    QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
+    horizontalLayout_3->setSpacing(6);
+    horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+    horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+    horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+
+    horizontalLayout_3->addLayout(horizontal);
     horizontalLayout_3->addWidget(widget);
     this->setLayout(horizontalLayout_3);
 
@@ -149,28 +147,43 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
 
 }
 
-void SoftUpgradeItem::on_but_upgrade_clicked()
+void SoftUpgradeItem::on_but_upgrade_clicked()//点击更新按钮
 {
-    if(CURLDownloadManager::getThis()->isBusy())
+    runPath=QCoreApplication::applicationDirPath();
+    QString filename =runPath +QString("/tmp/")+exename;
+    QFileInfo iconfile(filename);
+    if(iconfile.exists())
     {
-        QMessageBox::about(this,tr("inform"),tr("is busy"));
+        CellClass *cell=new CellClass();
+        cell->changeText("Download","is exists","close");
+        cell->show();
+        stackedWidget->setCurrentWidget(page_3);
     }
     else
     {
-        stackedWidget->setCurrentWidget(page_2);
-        connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
-        connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
-        DownloadThread();
+
+        if(CURLDownloadManager::getThis()->isBusy())
+        {
+            CellClass *cell=new CellClass();
+            cell->changeText("Upgrade","is busy","close");
+            cell->show();
+        }
+        else
+        {
+            stackedWidget->setCurrentWidget(page_2);
+            connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
+            connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
+            DownloadThread();
+        }
     }
 }
 
-void SoftUpgradeItem::DownloadThread()
+void SoftUpgradeItem::DownloadThread()//下载进程
 {
-    runPath = QCoreApplication::applicationDirPath();
-    downloader->start();
-    downloader->setUrl(urlprogram);
-    downloader->setSavefileName(runPath+"/tmp/"+exename);
-    downloader->ready(true);
+    CURLDownloadManager::getThis()->start();
+    CURLDownloadManager::getThis()->setUrl(urlprogram);
+    CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
+    CURLDownloadManager::getThis()->ready(true);
 
 }
 
@@ -203,11 +216,25 @@ void SoftUpgradeItem::cancelProgress_setup()//取消安装
     stackedWidget->setCurrentWidget(page);
 
 }
-void SoftUpgradeItem::suspendProgress_setup()//暂停安装
+bool SoftUpgradeItem::suspendProgress_setup()//暂停安装
 {
     QString program=runPath+"/tmp/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
+    if (!setup->waitForStarted()) // 检查是否可执行
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
+    if (!setup->waitForFinished()) // 检查是否可结束
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
 }
 
 void SoftUpgradeItem::Downloadresult(int i)//获得下载返回值
@@ -215,11 +242,11 @@ void SoftUpgradeItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        QMessageBox::about(this,tr("inform"),tr("download fail  "));
+
     }
 }
 
-QString SoftUpgradeItem::get_size( qint64 byte )
+QString SoftUpgradeItem::get_size( qint64 byte )//转换软件大小的单位
 {
     double kb=0,mb=0,gb=0;
     QString size;
@@ -234,3 +261,59 @@ QString SoftUpgradeItem::get_size( qint64 byte )
     return size;
 }
 
+
+
+
+void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
+{
+///*
+    //绘制边框
+    QPainter painter2(this);
+    QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+    linear2.setColorAt(0, Qt::white);
+    linear2.setColorAt(0.5, Qt::white);
+    linear2.setColorAt(1,  Qt::white);
+    painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
+    painter2.setBrush(linear2);
+    painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+    if(mouse_enter)
+    {
+        //绘制边框
+        QPainter painter2(this);
+        QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+        linear2.setColorAt(0, QColor(247,247,247));
+        linear2.setColorAt(0.5, QColor(247,247,247));
+        linear2.setColorAt(1,  QColor(247,247,247));
+        painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
+        painter2.setBrush(linear2);
+        painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+
+    }
+//    */
+}
+
+void SoftUpgradeItem::mousePressEvent(QMouseEvent * event)
+{
+    //只能是鼠标左键移动和改变大小
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+}
+
+void SoftUpgradeItem::mouseReleaseEvent(QMouseEvent *event)
+{
+    mouse_press = false;
+}
+
+void SoftUpgradeItem::enterEvent(QEvent *event)
+{
+    mouse_enter = true;
+    update();
+}
+
+void SoftUpgradeItem::leaveEvent(QEvent *event)
+{
+    mouse_enter = false;
+    update();
+}

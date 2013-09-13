@@ -22,7 +22,7 @@ void SynServerThread::run()
     struct soap mpcsoap;
     soap_init(&mpcsoap);
     //soap_set_namespaces(&addsoap, namespaces);
-    //soap_set_mode(&addsoap, SOAP_C_UTFSTRING);
+    //soap_set_mode(&mpcsoap, SOAP_C_UTFSTRING);
 
     // control timeout
     mpcsoap.connect_timeout = 5;  // units are seconds
@@ -38,7 +38,6 @@ void SynServerThread::run()
         if (!query.exec("SELECT DisplayName, DisplayVersion, URLInfoAbout, Publisher FROM LocalAppInfor ORDER BY RANDOM() LIMIT 1")) {
             qDebug(query.lastError().text().toLocal8Bit().data());
         }
-
         while (query.next()) {
             inputdata.DisplayName = query.value(0).toString().toStdString();
             inputdata.ResetServerVersion = query.value(1).toString().toStdString();
@@ -48,9 +47,9 @@ void SynServerThread::run()
 
         query.finish();
         m_SQLiteDb.getDB()->commit();
-	
 
-        int ret = soap_call_MPC__npRequest(&mpcsoap,"192.168.9.2:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089*/
+
+        int ret = soap_call_MPC__npRequest(&mpcsoap,"192.168.9.2:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089  192.168.9.2:8089*/
 
         if (ret == SOAP_OK) {
             updateLocRecord(outdata);
@@ -70,9 +69,6 @@ void SynServerThread::run()
 
         msleep(10000);
     }
-
-    // disconnect the database
-    CSQLiteDb::DisConnectionDB();
 }
 
 int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)
@@ -90,16 +86,17 @@ int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)
         return 0;
     }
 
+    bool bHaveNext = updateLocQuery.next();
     // the response AppID exist in local database
-    if (updateLocQuery.next()) {
+    if (bHaveNext) {
         updateLocQuery.prepare("UPDATE ServerAppInfo SET AppName = ?, DisplayName = ?, Detailtext = ?, Mark = ?, Type = ?, ServerVersion = ?, ResetServerVersion = ?, Size = ?, OrderNumber = ?, AllDownload= ?, FewDownload = ?, DownloadURL = ?, OS = ? WHERE AppID = ?");
     }
     // the response AppId not exist in local database
     else {
         updateLocQuery.prepare("INSERT INTO ServerAppInfo (AppID, AppName, DisplayName, Detailtext, Mark, Type, ServerVersion, ResetServerVersion, Size, OrderNumber, AllDownload, FewDownload, DownloadURL, OS)"
-                      "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		updateLocQuery.addBindValue(QVariant((QString::fromStdString(responseData.AppID)).toLongLong()));
-    }    
+                               "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        updateLocQuery.addBindValue(QVariant((QString::fromStdString(responseData.AppID)).toLongLong()));
+    }
     updateLocQuery.addBindValue(QVariant(QString::fromStdString(responseData.AppName)));
     updateLocQuery.addBindValue(QVariant(QString::fromStdString(responseData.DisplayName)));
     updateLocQuery.addBindValue(QVariant(QString::fromStdString(responseData.Detailtext)));
@@ -114,9 +111,9 @@ int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)
     updateLocQuery.addBindValue(QVariant(QString::fromStdString(responseData.DownloadURL)));
     updateLocQuery.addBindValue(QVariant((QString::fromStdString(responseData.OS)).toInt()));
 
-	if (updateLocQuery.next()) {
-		updateLocQuery.addBindValue(serverAppID);
-	}
+    if (bHaveNext) {
+        updateLocQuery.addBindValue(serverAppID);
+    }
 
     if (!updateLocQuery.exec()) {
         qDebug(updateLocQuery.lastError().text().toLocal8Bit().data());
@@ -129,6 +126,21 @@ int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)
     return 1;
 }
 
+//CP_ACP,CP_UTF8
+wchar_t* MulityByteToWideChar(UINT CodePage, char *str)
+{
+    DWORD dwNum = MultiByteToWideChar(CodePage, 0, str, -1, 0, 0);
+    wchar_t *pwText = new wchar_t[dwNum];
+    MultiByteToWideChar(CodePage, 0, str, -1, pwText, dwNum);
+    return pwText;
+}
 
+char* WideCharToMulityByte(UINT CodePage, wchar_t *str)
+{
+    int len = WideCharToMultiByte(CodePage, 0, str, -1, 0, 0, 0, 0);
+    char* output = new char[len + 2];
+    WideCharToMultiByte(CodePage, 0, str, -1, output, len + 1, 0, 0);
+    return output;
+}
 
 

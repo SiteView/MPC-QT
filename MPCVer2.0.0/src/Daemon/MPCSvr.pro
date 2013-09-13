@@ -8,7 +8,7 @@ DESTDIR = ../../bin
 QT += core sql network gui widgets
 CONFIG += testlib console
 
-EFINES += _CONSOLE _CONSOLE QT_DLL QT_NETWORK_LIB QT_SQL_LIB QT_TESTLIB_LIB QT_OPENGL_ES_2 QT_OPENGL_ES_2_ANGLE
+DEFINES += _CONSOLE _CONSOLE QT_DLL QT_NETWORK_LIB QT_SQL_LIB QT_TESTLIB_LIB QT_OPENGL_ES_2 QT_OPENGL_ES_2_ANGLE
 INCLUDEPATH += . \
     ./GeneratedFiles/Debug \
     ./GeneratedFiles/debug \
@@ -23,7 +23,9 @@ LIBS += -llibEGLd \
     -lqtmaind \
     -ladvapi32
 
-DEFINES += _UNICODE
+DEFINES += _UNICODE \
+    WIN32_LEAN_AND_MEAN
+
 
 DEPENDPATH += .
 
@@ -40,25 +42,26 @@ HEADERS += ../Common/SqliteDb.h \
     synserverthread.h \
     regflashclass.h \
     MPCDaemon.h \
-    winservice/ThreadPool.h \
-    winservice/ServiceInstaller.h \
-    winservice/ServiceBase.h \
-    winservice/SampleService.h \
     gsoap/stdsoap2.h \
     gsoap/soapStub.h \
     gsoap/soapH.h \
-    gsoap/PMPC.nsmap
+    gsoap/PMPC.nsmap \
+    winservice/svc_win32.h \
+    winservice/daemon.h \
+    monitorregistry.h
 
 SOURCES += \
     synserverthread.cpp \
     regflashclass.cpp \
-    winservice/ServiceInstaller.cpp \
-    winservice/ServiceBase.cpp \
-    winservice/SampleService.cpp \
-    winservice/MPCDaemonService.cpp \
     gsoap/soapClient.cpp \
     gsoap/soapC.cpp \
     main.cpp \
     gsoap/stdsoap2.cpp \
-    ../Common/ExtractIcon.cpp
+    ../Common/ExtractIcon.cpp \
+    winservice/daemon.cpp \
+    winservice/svc_win32.cpp \
+    monitorregistry.cpp
+
+RESOURCES += \
+    res.qrc
 

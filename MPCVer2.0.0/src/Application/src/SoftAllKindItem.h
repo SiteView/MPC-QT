@@ -20,6 +20,8 @@ public:
 public:
     void retranslateUi();
     QString get_text();
+protected:
+
 };
 
 #endif // SOFTALLKINDITEM_H

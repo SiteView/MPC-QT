@@ -67,10 +67,10 @@ bool HavePath (QString InputStr,QString &path )
 
 bool checkInDb (QString InputStr ,QSqlDatabase db)
 {
-    QSqlQuery SQLiteQuery( db );
+	QSqlQuery SQLiteQuery( db );
     bool ret = false;
     db.transaction();
-    SQLiteQuery.prepare("select DisplayName from LocalAppInfor where DisplayName = ? ;");
+    SQLiteQuery.prepare("select DisplayName from LocalAppInfor where DisplayName = ?");
     SQLiteQuery.addBindValue(InputStr);
     if ( !SQLiteQuery.exec() )
     {
@@ -80,7 +80,23 @@ bool checkInDb (QString InputStr ,QSqlDatabase db)
     {
         ret = true;
     }
+	SQLiteQuery.finish();
     return ret;
+}
+
+QString get_size( qint64 byte )
+{
+    double kb=0,mb=0,gb=0;
+    QString size;
+    if ( byte > 1024 ) kb= byte/1024;
+    if ( kb > 1024 ) mb=kb/1024;
+    if ( mb > 1024 ) gb=mb/1024;
+    size=QObject::tr("%1B").arg(byte);
+    if ( kb != 0 ) size=QObject::tr("%1KB").arg(kb,0,'f',2);
+    if ( mb != 0 ) size=QObject::tr("%1MB").arg(mb,0,'f',2);
+    if ( gb != 0 ) size=QObject::tr("%1GB").arg(gb,0,'f',2);
+
+    return size;
 }
 
 /* add by shu-yuan
@@ -138,15 +154,31 @@ QString unifyPathFormat(QString &pathStr)
     return pathStr;
 }
 
+bool getIconQt(QString &filePath, QString &fileName)
+{
+    filePath.replace(" ", "\040");
+    QFileInfo fileInfo(filePath);
+    QFileIconProvider seekIcon;
+    QIcon icon = seekIcon.icon(fileInfo);
+    QPixmap pixmap=icon.pixmap(QSize(32,32));  // the size can smaller, but never larger.
+
+    QString iconPath = QString("./icons/%1.ico").arg(fileName);
+    if(!pixmap.save(iconPath, "ico")) {
+        qDebug() << "GetIcon" << "Save Icon Fail";
+        return false;
+    }
+    return true;
+}
+
 // get icon from app's path
-QString getIcon(QString &filePath, QString &fileName)
+bool getIcon(QString &filePath, QString &fileName, int iconIndex)
 {
     LPCWSTR lstrFilePath = LPCWSTR(filePath.utf16());
     HICON* pIcons = (HICON*)LocalAlloc( LPTR, 100*sizeof(HICON) );
 
     int cIcons;
     if( pIcons != NULL ) {
-        cIcons = (int)ExtractIcons::Get( lstrFilePath, 0, 128, 128, pIcons, NULL, 100, LR_COLOR );
+        cIcons = (int)ExtractIcons::Get( lstrFilePath, iconIndex, 128, 128, pIcons, NULL, 100, LR_COLOR );
     }
 
     if (!QDir("./icons").exists()) {
@@ -163,7 +195,19 @@ QString getIcon(QString &filePath, QString &fileName)
 
     GlobalFree(pIcons);
 
-    return QString::fromStdWString(lstrSavePath);
+    bool ret;
+    QFileInfo fileInfo(savePath);
+    if (fileInfo.exists()) {
+        ret = true;
+    } else {
+        // get icon false, use qt get again.
+        if (getIconQt(filePath, fileName))
+            ret = true;
+        else
+            ret = false;
+    }
+
+    return ret;
 }
 
 // Helper functions
@@ -186,7 +230,7 @@ int versionCompareStd(QString &verFirst, QString &verSecond)
     int countFirst = intVectorFisrt.count();
     int countSecond = intVectorSecond.count();
 
-   // qDebug() << countFirst << countSecond;
+    // qDebug() << countFirst << countSecond;
     int iCount = countFirst < countSecond ? countFirst : countSecond;
 
     if (countFirst == countSecond) {

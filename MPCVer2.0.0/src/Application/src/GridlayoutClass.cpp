@@ -242,6 +242,7 @@ void GridlayoutClass::paintEvent(QPaintEvent *)
     painter3.setPen(Qt::gray);
     static const QPointF points[4] = {QPointF(0, 0), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, this->height()-1)};
     painter3.drawPolyline(points, 4);
+
 }
 
 

@@ -7,43 +7,36 @@
 #include <QUrl>
 #include <QMessageBox>
 #include <QCoreApplication>
+#include <QPainter>
+#include <QMouseEvent>
 
 #include "SoftDownloadItem.h"
 #include "SoftDownloadList.h"
 #include "curldownloadmanager.h"
-
+#include "CellClass.h"
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    downloader= new CURLDownloadManager(this);
-    qDebug()<<"==downloader=="<<downloader;
-    QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
-    horizontalLayout_3->setSpacing(6);
-    horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
-    horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-    horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-    frame_1 = new QFrame();
-    frame_1->setObjectName(QString::fromUtf8("frame_1"));
-    frame_1->setFixedSize(QSize(450, 60));
+    QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Maximum);
 
-    but_icon = new QPushButton(frame_1);
+    but_icon = new QPushButton();
     but_icon->setObjectName(QString::fromUtf8("but_icon"));
-    but_icon->setGeometry(QRect(10, 10, 50, 50));
     but_icon->setFixedSize(QSize(50, 50));
 
-    layoutWidget = new QWidget(frame_1);
-    layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-    layoutWidget->setGeometry(QRect(70, 0, 440, 60));
-    QVBoxLayout *verticalLayout = new QVBoxLayout(layoutWidget);
-    but_softname = new QLabel(layoutWidget);
+    QVBoxLayout *verticalLayout = new QVBoxLayout();
+    but_softname = new QLabel();
     but_softname->setObjectName(QString::fromUtf8("but_softname"));
     but_softname->setFixedSize(QSize(180, 30));
     verticalLayout->addWidget(but_softname);
-    lab_softdetail = new QLabel(layoutWidget);
+    lab_softdetail = new QLabel();
     lab_softdetail->setObjectName(QString::fromUtf8("lab_softdetail"));
-    lab_softdetail->setFixedSize(QSize(400, 20));
+    lab_softdetail->setFixedSize(QSize(360, 20));
     verticalLayout->addWidget(lab_softdetail);
-    horizontalLayout_3->addWidget(frame_1);
+    QHBoxLayout *horizontalLayout_1=new QHBoxLayout();
+    horizontalLayout_1->addItem(horizontalSpacer);
+    horizontalLayout_1->addWidget(but_icon);
+    horizontalLayout_1->addLayout(verticalLayout);
+
     widget = new QWidget();
     widget->setObjectName(QString::fromUtf8("widget"));
     widget->setFixedSize(QSize(310, 60));
@@ -69,7 +62,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     lab_size->setFixedSize(QSize(50, 20));
     download = new QPushButton(frame_2);
     download->setObjectName(QString::fromUtf8("download"));
-    download->setGeometry(QRect(220, 20, 80, 25));
+    download->setGeometry(QRect(220, 18, 80, 25));
     download->setFixedSize(QSize(80, 25));
     stackedWidget->addWidget(page);
     page_2 = new QWidget();
@@ -110,11 +103,17 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     lab_size_2->setFixedSize(QSize(50, 20));
     setup = new QPushButton(frame_4);
     setup->setObjectName(QString::fromUtf8("set_up"));
-    setup->setGeometry(QRect(220, 20, 80, 25));
+    setup->setGeometry(QRect(220, 18, 80, 25));
     setup->setFixedSize(QSize(80, 25));
     setup->setText("setup");
     stackedWidget->addWidget(page_3);
 
+    QHBoxLayout *horizontalLayout_3 = new QHBoxLayout();
+    horizontalLayout_3->setSpacing(6);
+    horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+    horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+    horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+    horizontalLayout_3->addLayout(horizontalLayout_1);
     horizontalLayout_3->addWidget(widget);
     this->setLayout(horizontalLayout_3);
 
@@ -127,45 +126,78 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
 
 }
 void SoftDownloadItem::takeText(QString Qsoftname,
-                              QString Qsoftdetail,QString Qsize,
-                              QString Qupnum,QString Qurl )
+                                QString Qsoftdetail,qint64 Qsize,
+                                QString Qupnum,QString Qurl )//加载文字到界面
 {
-
-    but_icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
     but_softname->setText(Qsoftname);
-
+    but_softname->setToolTip(Qsoftname);
     lab_softdetail->setText(Qsoftdetail+"...");
-
-    lab_softdetail->setToolTip(Qsoftdetail);
+    QString strtooltip;
+    for(int i=0;i<Qsoftdetail.size();i++)
+    {
+        strtooltip.append(Qsoftdetail.at(i));
+        if(i%20==0&&i>19)
+        {
+            strtooltip.append("\n");
+        }
+    }
+    lab_softdetail->setToolTip(strtooltip);
     lab_upnum->setText(Qupnum);
     lab_upnum_2->setText(Qupnum);
-    lab_size->setText(Qsize);
-    lab_size_2->setText(Qsize);
+    lab_size->setText(get_size( Qsize ));
+    lab_size_2->setText(get_size( Qsize ));
     download->setText("download");
     urlprogram=Qurl;
-    //        ani->lab_prompt->setText(pahtstr2);
-    QUrl url = QUrl::fromEncoded(Qurl.toUtf8());
+    QUrl url = QUrl::fromEncoded(Qurl.toUtf8());//处理下载地址，截取有效段做为软件名称
     QString path_file = url.toString();
     QStringList str=path_file.split("/");
     int i=str.count();
     exename=str.at(i-1);
 
-
-}
-void SoftDownloadItem::on_download_clicked()//触发下载按钮
-{
-    if(CURLDownloadManager::getThis()->isBusy())
+    QString filename = QCoreApplication::applicationDirPath()+QString("/icons/")+Qsoftname.trimmed()+QString(".ico");
+    QFileInfo iconfile(filename);
+    if(iconfile.exists())
     {
-        QMessageBox::about(this,tr("inform"),tr("is busy"));
+
+        but_icon->setStyleSheet("border-image:url("+filename+")");
     }
     else
     {
-    stackedWidget->setCurrentWidget(page_2);
-    connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
-    connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
-    DownloadThread();
+        but_icon->setStyleSheet("border-image:url(:/images/default.png)");
+
     }
 
+}
+
+void SoftDownloadItem::on_download_clicked()//触发下载按钮
+{
+    runPath=QCoreApplication::applicationDirPath();
+    QString filename =runPath +QString("/tmp/")+exename;
+    QFileInfo iconfile(filename);
+    if(iconfile.exists())
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Download","is exists","close");
+        cell->show();
+        stackedWidget->setCurrentWidget(page_3);
+    }
+    else
+    {
+        if(CURLDownloadManager::getThis()->isBusy())
+        {
+            CellClass *cell=new CellClass();
+            cell->changeText("Download","is busy","close");
+            cell->show();
+        }
+        else
+        {
+            stackedWidget->setCurrentWidget(page_2);
+            connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
+            connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
+
+            DownloadThread();
+        }
+    }
 }
 void SoftDownloadItem::startProgress(int i)//给进度条传值
 {
@@ -193,21 +225,38 @@ void SoftDownloadItem::cancelProgress_setup()//取消安装
     stackedWidget->setCurrentWidget(page);
 
 }
-void SoftDownloadItem::suspendProgress_setup()//暂停安装
+bool SoftDownloadItem::suspendProgress_setup()//暂停安装
 {
     QString program=runPath+"/tmp/"+exename;
     QProcess *setup=new QProcess();
     setup->start(program,QStringList());
+    if (!setup->waitForStarted()) // 检查是否可执行
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
+    if (!setup->waitForFinished()) // 检查是否可结束
+    {
+        CellClass *cell=new CellClass();
+        cell->changeText("Setup","is fial","close");
+        cell->show();
+        return false;
+    }
 }
 
 void SoftDownloadItem::DownloadThread()//下载进程
 {
-    runPath = QCoreApplication::applicationDirPath();
-    qDebug()<<runPath<<"---urlprogram---"<<urlprogram;
     CURLDownloadManager::getThis()->start();
     CURLDownloadManager::getThis()->setUrl(urlprogram);
     CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
     CURLDownloadManager::getThis()->ready(true);
+    //    downloader.start();
+    //    downloader.setUrl(urlprogram);
+    //    downloader.setSavefileName(runPath+"/tmp/"+exename);
+    //    downloader.ready(true);
+
 }
 
 void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
@@ -215,6 +264,78 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        qDebug()<<"Downloadresult->===i==="<<i;
+        CellClass *cell=new CellClass();
+        cell->changeText("Download","is fail","close");
+        cell->show();
     }
+}
+
+QString SoftDownloadItem::get_size( qint64 byte )
+{
+    double kb=0,mb=0,gb=0;
+    QString size;
+    if ( byte > 1024 ) kb= byte/1024;
+    if ( kb > 1024 ) mb=kb/1024;
+    if ( mb > 1024 ) gb=mb/1024;
+    size=tr("%1B").arg(byte);
+    if ( kb != 0 ) size=tr("%1KB").arg(kb,0,'f',2);
+    if ( mb != 0 ) size=tr("%1MB").arg(mb,0,'f',2);
+    if ( gb != 0 ) size=tr("%1GB").arg(gb,0,'f',2);
+
+    return size;
+}
+
+
+void SoftDownloadItem::paintEvent(QPaintEvent *event)//绘制卸载界面
+{
+    ///*
+    //绘制边框
+    QPainter painter2(this);
+    QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+    linear2.setColorAt(0, Qt::white);
+    linear2.setColorAt(0.5, Qt::white);
+    linear2.setColorAt(1,  Qt::white);
+    painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
+    painter2.setBrush(linear2);
+    painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+    if(mouse_enter)
+    {
+        //绘制边框
+        QPainter painter2(this);
+        QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
+        linear2.setColorAt(0, QColor(247,247,247));
+        linear2.setColorAt(0.5, QColor(247,247,247));
+        linear2.setColorAt(1,  QColor(247,247,247));
+        painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
+        painter2.setBrush(linear2);
+        painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
+
+    }
+    //    */
+}
+
+void SoftDownloadItem::mousePressEvent(QMouseEvent * event)
+{
+    //只能是鼠标左键移动和改变大小
+    if(event->button() == Qt::LeftButton)
+    {
+        mouse_press = true;
+    }
+}
+
+void SoftDownloadItem::mouseReleaseEvent(QMouseEvent *event)
+{
+    mouse_press = false;
+}
+
+void SoftDownloadItem::enterEvent(QEvent *event)
+{
+    mouse_enter = true;
+    update();
+}
+
+void SoftDownloadItem::leaveEvent(QEvent *event)
+{
+    mouse_enter = false;
+    update();
 }

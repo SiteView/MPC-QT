@@ -16,11 +16,12 @@ public:
     explicit SoftDownloadItem(QWidget *parent = 0);
     void DownloadThread();
     void takeText(QString Qsoftname,
-                   QString Qsoftdetail,QString Qsize,
+                   QString Qsoftdetail,qint64 Qsize,
                    QString Qupnum,QString Qurl);
+    QString get_size( qint64 byte );
+
 public:
 
-    QFrame *frame_1 ;
     QPushButton *but_icon ;
     QWidget *layoutWidget;
     QLabel *but_softname;
@@ -49,7 +50,7 @@ public:
     QString urlprogram;
     QString exename;
     QString runPath;
-    CURLDownloadManager *downloader;
+//    CURLDownloadManager *downloader;
 
 signals:
 
@@ -60,7 +61,20 @@ public slots:
     void cancelProgress_download();
     void suspendProgress_download();
     void cancelProgress_setup();
-    void suspendProgress_setup();
+    bool suspendProgress_setup();
     void Downloadresult(int);
+
+
+protected:
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
+    void paintEvent(QPaintEvent *event);
+private:
+    bool mouse_press;
+    bool mouse_enter;
+
 };
 #endif // SOFTDOWNLOADITEM_H

@@ -32,9 +32,8 @@ protected:
 private:
     bool mouse_press;
     bool mouse_enter;
-    bool uninstall_visible;
 public slots:
-    void on_unload_clicked();
+    bool on_unload_clicked();
     void Unloadfinish(int , QProcess::ExitStatus );
     void Unloaderror(QProcess::ProcessError );
 public:
