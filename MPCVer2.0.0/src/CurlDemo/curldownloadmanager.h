@@ -7,9 +7,15 @@
 #include <QProgressBar>
 #include <QFileInfo>
 
+#include <string.h>
+
+
+
 #include <curl/curl.h>
 #include <curl/types.h>
 #include <curl/easy.h>
+
+using namespace std;
 
 struct FtpFile
 {
@@ -27,24 +33,76 @@ signals:
     //connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),progressbar*,SLOT(setValue(int)));
 private:
     static CURLDownloadManager *pthis;
+	CURL *curl;
 
 public:
     CURLDownloadManager(QObject *parent);
     ~CURLDownloadManager();
-    static	CURLDownloadManager * getThis()
+static	int progress_func(void* ptr, double rDlTotal, double rDlNow, double rUploadTotal, double rUploadNow)
+	{
+		if(CURLDownloadManager::g_totalSize< 0.0001) // 不续传
+		{
+		    qDebug("%f %f %f %f %f",100.0 * (rDlNow/rDlTotal),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
+		    CURLDownloadManager::progressvalue  = 100.0*rDlNow/rDlTotal;
+		    emit CURLDownloadManager::getThis()->Setvalue(CURLDownloadManager::progressvalue);
+			if(CURLDownloadManager::getThis()->isCancel())
+				return 1;
+			else
+				return 0;
+		}
+		//if(!(rDlTotal < 0.0001))
+		//    qDebug("%f %f %f %f %f",100.0 * ((rDlNow+(CURLDownloadManager::g_totalSize-rDlTotal))/CURLDownloadManager::g_totalSize),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
+		//else
+		//    qDebug("%f %f %f %f",rDlTotal,rDlNow,rUploadTotal,rUploadNow);
+		//return 0;
+	}
+static    CURLDownloadManager * getThis()
     {
         return pthis;
     }
     void setUrl(QString urlstr)
     {
         m_urlStr = urlstr;
+		InitTask();
     }
 
+	/// 初始化curl
+	int InitTask()
+	{ 
+		curl = curl_easy_init();
+		m_haveRelease = false;
+		return 1;
+	}
+	/// 暂停下载
+	int PauseTask()
+	{
+		curl_easy_pause(curl,CURLPAUSE_RECV);
+		return 1;
+	}
+
+	/// 继续下载
+	int ResumeTask()
+	{
+		curl_easy_pause(curl,CURLPAUSE_RECV_CONT);
+		return 1;
+	}
+
+	/// 释放资源
+	int CancelTask()
+	{
+		m_haveRelease = true;
+		return 1;
+	}
     void setSavefileName(QString fileName)
     {
         m_fileName = fileName;
         strcpy(m_fileNameBuffer,m_fileName.toStdString().data());
-    }
+	}
+   
+	bool isCancel()
+	{
+		return m_haveRelease;
+	}
 	bool isBusy()
 	{
 		return m_busy;
@@ -86,6 +144,7 @@ long long  getLocalFileLenth(const char* localPath)
 private:
     bool m_ready;
 	bool m_busy;
+	bool m_haveRelease;
     QString m_urlStr;
     QString m_fileName;
     char m_fileNameBuffer[255];
@@ -100,6 +159,7 @@ static int CurlDebugFunc(CURL *curl, curl_infotype type,
 	qDebug("%s  Len %d",buffer,size);
 	return 0;
 }
+
 static int my_fwrite(void *buffer, size_t size, size_t nmemb, void *stream)
 {
     struct FtpFile *out=(struct FtpFile *)stream;
@@ -116,19 +176,4 @@ static int my_fwrite(void *buffer, size_t size, size_t nmemb, void *stream)
     return fwrite(buffer, size, nmemb, out->stream);
 }
 
-static int progress_func(void* ptr, double rDlTotal, double rDlNow, double rUploadTotal, double rUploadNow)
-{
-    if(CURLDownloadManager::g_totalSize< 0.0001) // 不续传
-    {
-        qDebug("%f %f %f %f %f",100.0 * (rDlNow/rDlTotal),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
-        CURLDownloadManager::progressvalue  = 100.0*rDlNow/rDlTotal;
-        emit CURLDownloadManager::getThis()->Setvalue(CURLDownloadManager::progressvalue);
-        return 0;
-    }
-    if(!(rDlTotal < 0.0001))
-        qDebug("%f %f %f %f %f",100.0 * ((rDlNow+(CURLDownloadManager::g_totalSize-rDlTotal))/CURLDownloadManager::g_totalSize),rDlTotal,rDlNow,rUploadTotal,rUploadNow);
-    else
-        qDebug("%f %f %f %f",rDlTotal,rDlNow,rUploadTotal,rUploadNow);
-    return 0;
-}
 #endif // CURLDOWNLOADMANAGER_H

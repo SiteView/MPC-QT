@@ -19,6 +19,13 @@ int main(int argc, char *argv[])
 	downloader.setUrl("http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/22.0/win32/en-US/Firefox%20Setup%2022.0.exe");
     downloader.setSavefileName("GooglePinyinInstaller.exe");
     downloader.ready(true);
+	Sleep(1000);
+	downloader.PauseTask();
+	Sleep(20000);
+	downloader.ResumeTask();
+	Sleep(10000);	
+	downloader.CancelTask();
+	
 	QObject::connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),&app, SLOT(quit()));
     int ret;
     ret = app.exec();

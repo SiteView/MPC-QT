@@ -36,13 +36,14 @@ void CURLDownloadManager::run()
         m_ready =!m_ready;
 		m_busy = true;
         //getDownloadFileLenth(m_urlStr.toStdString().data());
-        CURL *curl;
+        //CURL *curl;
         CURLcode res;
 
         struct FtpFile ftpfile={
             m_fileNameBuffer, /* name to store the file as if succesful */
             NULL
         };
+		string headerStr;
         //char localFileLenthStr[255] ={0};
         //unsigned long filesize = g_totalSize;
         //sprintf(localFileLenthStr, "%ld", filesize);
@@ -51,13 +52,14 @@ void CURLDownloadManager::run()
         CURLM *multi_handle = NULL;
         multi_handle = curl_multi_init();
 #endif
-        curl = curl_easy_init();
+        //curl = curl_easy_init();
 
         if(curl)
         {
             curl_easy_setopt(curl, CURLOPT_URL, m_urlStr.toStdString().data());
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, my_fwrite);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &ftpfile);
+
 			//curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, CurlDebugFunc);
 			//curl_easy_setopt(curl, CURLOPT_DEBUGDATA, this);
      		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
@@ -66,13 +68,21 @@ void CURLDownloadManager::run()
             //curl的进度条声明
             curl_easy_setopt(curl, CURLOPT_NOPROGRESS, FALSE);
             //回调进度条函数
-            curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, progress_func);
+            curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, &CURLDownloadManager::progress_func);
+			//curl_easy_setopt(curl, CURLOPT_PROGRESSDATA, 1000);
+			
             //curl_easy_setopt(curl, CURLOPT_PROGRESSDATA, localFileLenthStr);
             //curl_easy_setopt(curl, CURLOPT_RESUME_FROM_LARGE, 0);
             //curl_easy_setopt(curl, CURLOPT_RESUME_FROM_LARGE, getLocalFileLenth(ftpfile.filename));
+
+			/// 保存服务器返回的响应消息
+			//curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, writerHeader);
+			//curl_easy_setopt(curl, CURLOPT_WRITEHEADER, &headerStr);/
+
 #if !Mutimode
             res = curl_easy_perform(curl);
- 			curl_easy_cleanup(curl);
+			if(!m_haveRelease)
+ 				curl_easy_cleanup(curl);
             if(CURLE_OK != res)
             {
                 qDebug("curl download error %d", res);
