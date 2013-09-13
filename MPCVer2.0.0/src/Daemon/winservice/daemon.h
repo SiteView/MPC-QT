@@ -5,33 +5,38 @@
 #include <Windows.h>
 #include "../regflashclass.h"
 #include "../synserverthread.h"
+#include "../regmonitor.h"
+
+typedef std::map<CString, CString> inner_map;
+typedef std::map<CString, inner_map> outer_map;
+typedef std::vector<CString> cstr_vector;
 
 class GenieDaemon
 {
 public:
-	RegFlashClass  regScan;
-	SynServerThread  synServer;
 
 	static GenieDaemon *create()
 	{
 		return new GenieDaemon();
 
-	};
-	virtual ~GenieDaemon() {}
-	virtual bool start(){	
-		regScan.start();
-		synServer.start();
-		return true;
-	}
-	virtual void stop(){
-		regScan.terminate();
-		synServer.terminate();
-
-		return;
-	};
+    }
+    virtual ~GenieDaemon(){}
+	virtual bool start();
+	virtual void stop();
 
 protected:
-	GenieDaemon() {}
+	GenieDaemon();
+
+private:
+	HKEY hMainKey_Primary, hMainKey_Assistant;
+	CString lpSubKey_Primary, lpSubKey_Assistant;
+	outer_map mapOld_Primary, mapOld_Assistant;
+
+	RegFlashClass  *regScan;
+	SynServerThread  *synServer;
+	RegMonitor *regMonitor_Primary;
+	RegMonitor *regMonitor_Assistant;
+
 };
 
 class TestCon2

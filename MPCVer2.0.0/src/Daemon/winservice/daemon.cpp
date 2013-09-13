@@ -1,4 +1,3 @@
-
 #include <stddef.h>
 #include <iostream>
 #include <sstream>
@@ -49,6 +48,7 @@ int TestCon2::run()
 	}
 
 	m_daemon->stop();
+	delete m_daemon;
 	return 0;
 }
 
@@ -58,3 +58,36 @@ int console_main(int argc, char **argv)
 	return con.run();
 }
 
+GenieDaemon::GenieDaemon() 
+{
+	hMainKey_Primary = HKEY_LOCAL_MACHINE;
+	lpSubKey_Primary = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+
+	hMainKey_Assistant = HKEY_CURRENT_USER;
+	lpSubKey_Assistant = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+
+	regScan = new RegFlashClass();
+	synServer = new SynServerThread();
+	regMonitor_Primary = new RegMonitor(hMainKey_Primary, lpSubKey_Primary, mapOld_Primary);
+	regMonitor_Assistant = new RegMonitor(hMainKey_Assistant, lpSubKey_Assistant, mapOld_Assistant);
+}
+
+
+bool GenieDaemon::start(){	
+	regScan->start();
+	synServer->start();
+	regMonitor_Primary->start();
+	regMonitor_Assistant->start();
+
+	return true;
+}
+
+
+void GenieDaemon::stop(){
+	regScan->terminate();
+	synServer->terminate();
+	regMonitor_Primary->terminate();
+	regMonitor_Assistant->terminate();
+
+	return;
+}

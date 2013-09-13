@@ -1,5 +1,4 @@
 #include "svc_win32.h"
-//#include "logger.h"
 #include <shlobj.h>
 #include <dbt.h>
 #include <time.h>

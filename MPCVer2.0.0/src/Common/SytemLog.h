@@ -40,8 +40,8 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 		txt = QString("Fatal: %1").arg(msg);
 		abort();
 	}
-
-	QFile outFile("debuglog.txt");
+	
+	QFile outFile(QString(qApp->applicationDirPath() +  "/debuglog.txt" ));
 	outFile.open(QIODevice::WriteOnly | QIODevice::Append);
 	QDateTime dd  = QDateTime::currentDateTime();
 	QTextStream ts(&outFile);

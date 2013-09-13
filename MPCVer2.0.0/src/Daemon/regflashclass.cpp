@@ -14,11 +14,10 @@ Discription:    add a function updateFieldValue, repair EstimatedSize、 Display
 ********************************************************************************************
 */
 #include <QDateTime>
-#include "regflashclass.h"
-#include "utils/tool.h"
 #include <QFile>
 #include <QPixmap>
-
+#include "regflashclass.h"
+#include "utils/tool.h"
 
 RegFlashClass::RegFlashClass(/*QObject *parent*/)
 	: QThread(/*parent*/)
@@ -44,117 +43,162 @@ void RegFlashClass::run()
 	QString val10;
 	QDateTime setupdate;
 
-	/*  forever
-	{ */      
 	QSqlQuery query(*m_SQLiteDb.getDB());
-	m_SQLiteDb.getDB()->transaction();
 
-	static bool flagReg = true;
-	QString regStr;
-	if(flagReg)
-		regStr = QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
-	else
-		regStr = QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
-	flagReg =! flagReg;
-
-	QSettings reg(regStr,QSettings::NativeFormat);
-	QStringList groupsList = reg.childGroups();
-
-	foreach(QString group,groupsList)
+	for (int i = 0; i < 2; ++i)  // TODO: how ensure the scan registry perfectly
 	{
-		reg.beginGroup(group);
-		val1=reg.value("DisplayName").toString();
-		val10=reg.value("SystemComponent").toString();
-		if(!val1.isEmpty()  && (val10.isEmpty() || val10.compare("0") == 0) &&
-			val1.indexOf("Security Update for Microsoft") == -1 &&  val1.indexOf("(KB") == -1 )
-		{
-			;// 空处理
-		}
+		static bool flagReg = true;
+		QString regStr;
+		if(flagReg)
+			regStr = QString("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
 		else
+			regStr = QString("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall");
+		flagReg = !flagReg;
+
+		QSettings reg(regStr, QSettings::NativeFormat);
+		QStringList groupsList = reg.childGroups();
+
+		foreach(QString group, groupsList)
 		{
-			// 安全更新和系统组件不在管理范围
-			reg.endGroup();
-			continue;
-		}
-		if (checkInDb(val1,*m_SQLiteDb.getDB()))
-		{
-			reg.endGroup();
-			continue;
-		}
-		val2=reg.value("UninstallString").toString();
-		val3=reg.value("DisplayIcon").toString();
-		val4=reg.value("DisplayVersion").toString();
-		val5=reg.value("URLInfoAbout").toString();
-		val6=reg.value("Publisher").toString();
-		val7=reg.value("InstallLocation").toString();
-		val8=reg.value("InstallDate").toString();
-		val9=reg.value("EstimatedSize").toString();
-		if(!val8.isEmpty() || val8.compare("") != 0 )
-			setupdate =  QDateTime::fromString(val8,"yyyyMMdd");
-		QString path ;
-		bool rethav = false;
-		if(val7.isEmpty() || val7.compare("") == 0 )
-		{
-			rethav	= HavePath(val2,path); // 使用UninstallString 修补
-			if(!rethav)
-				rethav = HavePath(val3,path); // 使用DisplayIcon 修补
-		}
-		if(!val1.isEmpty()  && (val10.isEmpty() || val10.compare("0") == 0) && val1.indexOf("Security Update for Microsoft") == -1 &&  val1.indexOf("(KB") == -1 )  // fliter the security components
-		{
-			query.prepare("insert into LocalAppInfor (DisplayName,UninstallString,DisplayIcon,DisplayVersion,URLInfoAbout,Publisher,InstallLocation,SetupTime,EstimatedSize) values(?,?,?,?,?,?,?,?,?)");
-			query.addBindValue(val1);
-			query.addBindValue(val2);
-			query.addBindValue(val3);
-			query.addBindValue(val4);
-			query.addBindValue(val5);
-			query.addBindValue(val6);
-			if(rethav)
-				query.addBindValue(path); // 修补安装路径
+			reg.beginGroup(group);
+
+			val1 = reg.value("DisplayName").toString();
+			val10 = reg.value("SystemComponent").toString();
+
+			// clear the record while none name, system components, security component
+			if(!val1.isEmpty()
+				&& (val10.isEmpty() || val10.compare("0") == 0)
+				&& val1.indexOf("Security Update for Microsoft") == -1
+				&& val1.indexOf("(KB") == -1 )
+			{
+				;// 空处理
+			}
 			else
-				query.addBindValue(val7);
-			query.addBindValue(setupdate);
-			query.addBindValue(val9);
+			{
+				// 安全更新和系统组件不在管理范围
+				reg.endGroup();
+				continue;
+			}
+
+
+			// check in db
+			query.prepare("SELECT DisplayName FROM LocalAppInfor WHERE DisplayName = ?");
+			query.addBindValue(val1);
+			if(!query.exec())
+			{
+				qDebug(query.lastError().text().toLocal8Bit().data());
+			}            
+
+			bool found = false;
+			if(query.next())
+			{
+				found = true;
+			}
+			query.finish();
+
+			if(found)
+			{
+				reg.endGroup();
+				continue;
+			}
+
+			val2=reg.value("UninstallString").toString();
+			val3=reg.value("DisplayIcon").toString();
+			val4=reg.value("DisplayVersion").toString();
+			val5=reg.value("URLInfoAbout").toString();
+			val6=reg.value("Publisher").toString();
+			val7=reg.value("InstallLocation").toString();
+			val8=reg.value("InstallDate").toString();
+			val9=reg.value("EstimatedSize").toString();
+
+			if(!val8.isEmpty() || val8.compare("") != 0 )
+				setupdate =  QDateTime::fromString(val8, "yyyyMMdd");
+
+			QString path ;
+			bool rethav = false;
+			if(val7.isEmpty() || val7.compare("") == 0 )
+			{
+				rethav = HavePath(val2, path); // repair by UninstallString
+				if(!rethav)
+					rethav = HavePath(val3, path); // repair by DisplayIcon
+			}
+
+			// filter the system components and security components
+			if(!val1.isEmpty()
+				&& (val10.isEmpty() || val10.compare("0") == 0)
+				&& val1.indexOf("Security Update for Microsoft") == -1
+				&& val1.indexOf("(KB") == -1 )
+			{
+				m_SQLiteDb.getDB()->transaction();
+
+				query.prepare("INSERT INTO LocalAppInfor (DisplayName,UninstallString,DisplayIcon,DisplayVersion,URLInfoAbout,Publisher,InstallLocation,SetupTime,EstimatedSize)"
+					"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				query.addBindValue(val1);
+				query.addBindValue(val2);
+				query.addBindValue(val3);
+				query.addBindValue(val4);
+				query.addBindValue(val5);
+				query.addBindValue(val6);
+				if(rethav)
+					query.addBindValue(path); // repair install path
+				else
+					query.addBindValue(val7);
+				query.addBindValue(setupdate);
+				query.addBindValue(val9);
+
+				if (!query.exec())
+				{
+					qDebug(query.lastError().text().toLocal8Bit().data());
+				}
+
+				m_SQLiteDb.getDB()->commit();
+			}
+
+			reg.endGroup();
 		}
-		if ( !query.exec() )
-		{
-			qDebug(query.lastError().text().toLocal8Bit().data());
-		}
-		reg.endGroup();
+	}
+
+	// update all the information.
+	query.prepare("SELECT DisplayName FROM LocalAppInfor");
+	if (!query.exec())
+	{
+		qDebug(query.lastError().text().toLocal8Bit().data());
+	}
+	while (query.next()) {
+		QVariant DisplayName = query.value(0);
+		UpdateInfo(DisplayName);
 	}
 	query.finish();
-	m_SQLiteDb.getDB()->commit();
-	UpdateInfo();
-	/*  }*/
-
-	sleep( 5 );
 }
 
-void RegFlashClass::UpdateInfo()
+void RegFlashClass::UpdateInfo(QVariant DisplayName)
 {
 	QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
 	QSqlQuery updateQuery( *m_SQLiteDb.getDB() );
 	QSqlQuery serverQuery( *m_SQLiteDb.getDB() );
 	m_SQLiteDb.getDB()->transaction();
 
-	SQLiteQuery.prepare("SELECT DisplayName, InstallLocation, DisplayVersion, SetupTime, DisplayIcon, UninstallString, EstimatedSize FROM LocalAppInfor");
+	SQLiteQuery.prepare("SELECT DisplayName, InstallLocation, DisplayVersion, SetupTime, DisplayIcon, UninstallString, EstimatedSize FROM LocalAppInfor WHERE DisplayName = ?");
+	SQLiteQuery.addBindValue(DisplayName);
 	if (!SQLiteQuery.exec())
 	{
 		qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
-	}
-	while ( SQLiteQuery.next() )
+	}	
+
+	if (SQLiteQuery.next())
 	{
 		QVariant valDisplayName = SQLiteQuery.value(0);
 		QVariant valInstallLocation = SQLiteQuery.value(1);
 		QVariant valDisplayVersion = SQLiteQuery.value(2);
-		QVariant valSetupTime = SQLiteQuery.value(3);
+		//QVariant valSetupTime = SQLiteQuery.value(3);
 		QVariant valDisplayIcon = SQLiteQuery.value(4);
 		QVariant valUninstallString = SQLiteQuery.value(5);
 
 		QString installPathStr = valInstallLocation.toString();
-		QString iconStr = valDisplayIcon.toString();
+		QString iconPath = valDisplayIcon.toString();
 		QString uninstallPathStr = valUninstallString.toString();
 
-		// formate install path ,uninstall path and displayicon path
+		// formate install path ,uninstall path and display icon path
 		if (installPathStr.compare("")) {
 			unifyPathFormat(installPathStr);
 			updateFieldValue(updateQuery, "InstallLocation", installPathStr, valDisplayName);
@@ -163,22 +207,21 @@ void RegFlashClass::UpdateInfo()
 			unifyPathFormat(uninstallPathStr);
 			updateFieldValue(updateQuery, "UninstallString", uninstallPathStr, valDisplayName);
 		}
-		if (iconStr.compare("")) {
-			unifyPathFormat(iconStr);
-			updateFieldValue(updateQuery, "DisplayIcon", iconStr, valDisplayName);
+		if (iconPath.compare("")) {
+			unifyPathFormat(iconPath);
+			updateFieldValue(updateQuery, "DisplayIcon", iconPath, valDisplayName);
 		}
 
-		// 修补安装日期 访问信息
-		if(/*(val4.toString().compare("") == 0) &&*/ installPathStr.compare("") )
+		// repair install time
+		if(installPathStr.compare("") )
 		{
 			QFileInfo pathInfo(installPathStr);
 			updateFieldValue(updateQuery, "SetupTime", pathInfo.created(), valDisplayName);
 		}
 
-		// 修补版本号
+		// repair version
 		if(valDisplayVersion.toString().compare("") == 0)
 		{
-			QStringList liststr =  valDisplayName.toString().split(" ");
 			QString version ;
 			QString displayName = valDisplayName.toString();
 			bool ret = TrimVersion(displayName,version);
@@ -199,17 +242,17 @@ void RegFlashClass::UpdateInfo()
 
 		// repair the icon path
 		int iconIndx = 0;
-		if (iconStr.contains(",")) {
-			int indexFirst = iconStr.lastIndexOf(",");
-			int indexEnd = iconStr.length() - 1;
+		if (iconPath.contains(",")) {
+			int indexFirst = iconPath.lastIndexOf(",");
+			int indexEnd = iconPath.length() - 1;
 
-			iconIndx = iconStr.mid(indexFirst + 1, indexEnd - indexFirst).toInt();
-			iconStr.replace(QString(",%1").arg(QString::number(iconIndx)), "");
+			iconIndx = iconPath.mid(indexFirst + 1, indexEnd - indexFirst).toInt();
+			iconPath.replace(QString(",%1").arg(QString::number(iconIndx)), "");
 
 			//iconStr.replace(",", "");
 		}
 
-		QFileInfo iconInfo(iconStr);
+		QFileInfo iconInfo(iconPath);
 		bool bIconExist = iconInfo.exists();
 
 		QString newIconPath = "./icons/" + valDisplayName.toString() + ".ico";
@@ -218,26 +261,26 @@ void RegFlashClass::UpdateInfo()
 		if (bIconExist) {
 			if (!fileInfo.exists()) {
 				// file is icon
-				if (iconStr.contains(".ico")) {
-					QFile::copy(iconStr, newIconPath);
+				if (iconPath.contains(".ico")) {
+					QFile::copy(iconPath, newIconPath);
 				} else {
 					// get icon path
-					getIcon(iconStr, valDisplayName.toString(), iconIndx);
+					getIcon(iconPath, valDisplayName.toString(), iconIndx);
 				}
-			} 
-		} // true
+			}
+		} // bIconExist is true
 		else {
 			// repair from install location
 			if (installPathStr.compare("")) {
 				QFileInfo fileInfo(installPathStr);
 				QString fileBaseName = fileInfo.baseName();
-				iconStr = installPathStr + "\\" + fileBaseName + ".exe";
+				iconPath = installPathStr + "\\" + fileBaseName + ".exe";
 			}
 
-			QFileInfo fileInfoIcon(iconStr);
+			QFileInfo fileInfoIcon(iconPath);
 			if (fileInfoIcon.exists()) {
-				if (getIcon(iconStr, valDisplayName.toString(), iconIndx)) {
-					updateFieldValue(updateQuery, "DisplayIcon", iconStr, valDisplayName);
+				if (getIcon(iconPath, valDisplayName.toString(), iconIndx)) {
+					updateFieldValue(updateQuery, "DisplayIcon", iconPath, valDisplayName);
 				}
 			} else {
 				// Microsoft WindowsInstaller install
@@ -246,7 +289,7 @@ void RegFlashClass::UpdateInfo()
 					QFile::copy(msIconStr, newIconPath);
 				}
 			}
-		} // false
+		} // bIconExist is false
 
 
 		// delete the unloaded software over 2 days
@@ -261,12 +304,12 @@ void RegFlashClass::UpdateInfo()
 		serverQuery.addBindValue(valDisplayName);
 		if (!serverQuery.exec()) {
 			qDebug(serverQuery.lastError().text().toLocal8Bit().data());
-		}
+		}		
+
 		while (serverQuery.next()) {
 			serverVersion = serverQuery.value(0).toString();
 			QString localVersion = valDisplayVersion.toString();
 
-			//qDebug() << localVersion << serverVersion;
 			bool bHasLetter = ::bHasLetter(localVersion) || ::bHasLetter(serverVersion);
 
 			bool bHaveNewVersion;
@@ -291,18 +334,18 @@ void RegFlashClass::UpdateInfo()
 				}
 			}
 		}
+
+		SQLiteQuery.finish();
+		serverQuery.finish();
 	}
 
-	SQLiteQuery.finish();
-	updateQuery.finish();
-	serverQuery.finish();
 	m_SQLiteDb.getDB()->commit();
 }
 
 bool RegFlashClass::updateFieldValue(QSqlQuery sqlQuery, const QString &fieldName,
 	const QVariant &value, const QVariant &var)
 {
-	sqlQuery.prepare(QString("update LocalAppInfor set %1 = ? where  DisplayName = ?").arg(fieldName));
+	sqlQuery.prepare(QString("UPDATE LocalAppInfor SET %1 = ? WHERE  DisplayName = ?").arg(fieldName));
 	sqlQuery.addBindValue(value);
 	sqlQuery.addBindValue(var);
 	if (!sqlQuery.exec()) {

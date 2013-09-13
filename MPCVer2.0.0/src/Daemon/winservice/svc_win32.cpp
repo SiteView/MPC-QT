@@ -1,5 +1,4 @@
 #include "svc_win32.h"
-//#include "logger.h"
 #include <shlobj.h>
 #include <dbt.h>
 #include <time.h>
@@ -8,7 +7,6 @@
 #include <iostream>
 #include <fstream>
 #include <QFile>
-#include "../MPCDaemon.h"
 #include <QCoreApplication>
 
 static int wrapper_console_main(int argc, char *argv[]);
@@ -155,7 +153,6 @@ bool fork64(const WCHAR *arg1)
 
 int ak_main(int argc, char *argv[])
 {
-	// TODO:
 	if (argc == 2 && strcmp(argv[1], "install") == 0) {
 		qDebug() << (("installing service..."));
 		int retval = GenieDaemonService::install();

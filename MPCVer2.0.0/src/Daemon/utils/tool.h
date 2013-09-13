@@ -25,8 +25,7 @@ Discription:    add function getFolderSize and unifyPathFormat
 #include <QDebug>
 #include <QVector>
 
-
-#include "SqliteDb.h"
+#include "../Common/SqliteDb.h"
 #include "../Common/ExtractIcon.h"
 
 // 去掉或取得软件明尾部的版本号。
@@ -65,25 +64,6 @@ bool HavePath (QString InputStr,QString &path )
     return false;
 }
 
-bool checkInDb (QString InputStr ,QSqlDatabase db)
-{
-	QSqlQuery SQLiteQuery( db );
-    bool ret = false;
-    db.transaction();
-    SQLiteQuery.prepare("select DisplayName from LocalAppInfor where DisplayName = ?");
-    SQLiteQuery.addBindValue(InputStr);
-    if ( !SQLiteQuery.exec() )
-    {
-        qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
-    }
-    while ( SQLiteQuery.next() )
-    {
-        ret = true;
-    }
-	SQLiteQuery.finish();
-    return ret;
-}
-
 QString get_size( qint64 byte )
 {
     double kb=0,mb=0,gb=0;
@@ -99,8 +79,7 @@ QString get_size( qint64 byte )
     return size;
 }
 
-/* add by shu-yuan
- */
+
 // get the folder size by recursion
 long long getFolderSize(const QString &filePath) {
     long long sizeTotal = 0;
@@ -234,7 +213,7 @@ int versionCompareStd(QString &verFirst, QString &verSecond)
     int iCount = countFirst < countSecond ? countFirst : countSecond;
 
     if (countFirst == countSecond) {
-        for (int i = 0; i < iCount; ++i) {
+        for (int i = 0; i < iCount; i++) {
             if (intVectorFisrt.at(i) < intVectorSecond.at(i)) {
                 return 1;
             }
@@ -261,6 +240,6 @@ bool bHasLetter(QString &str)
 
     return false;
 }
-// --end add: shu-yuan
+
 
 

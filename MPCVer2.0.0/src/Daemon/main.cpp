@@ -1,52 +1,42 @@
-﻿#include <QApplication>
+#include <QApplication>
 #include <QIcon>
-
 #include "../Common/SqliteDb.h"
 #include "../Common/SytemLog.h"
-#include "svc_win32.h"
-#include "monitorregistry.h"
-
-// 全局数据库对象0
-QSqlDatabase CSQLiteDb::m_db;
-
+#include "./winservice/svc_win32.h"
+#include "regmonitor.h"
 #include "gsoap/PMPC.nsmap"  // important, only once
 
+// 全局数据库对象
+QSqlDatabase CSQLiteDb::m_db;
+
 int main(int argc, char *argv[])
-{
-	/*QApplication a(argc, argv);
+{   
+    if(argc == 2)
+    {
+        ::ak_main(argc,argv);
+        return 0;
+    }
 
-	qInstallMessageHandler(customMessageHandler);
+    QApplication a(argc, argv);
 
-	MonitorRegistry monitor;
-	monitor.MonitorReg();
+    //注册MsgHandler 可以输出标准日志文件
+    qInstallMessageHandler(customMessageHandler);
 
-	return a.exec();*/
-	if(argc ==2)
-	{
-		::ak_main(argc,argv);
-		return 0;
-	}
+    if (!CSQLiteDb::ConnectionDB(QString(qApp->applicationDirPath() +  "/localedb.db" ) ) )
+    {
+        QString err = QString("database open fail :%1").arg(CSQLiteDb::getDB()->lastError().text());
+        qCritical(err.toLocal8Bit().data());
+        CSQLiteDb::DisConnectionDB();
+        return 0;
+    }
 
-	QApplication a(argc, argv);
+    ::ak_main(argc,argv);
 
-	//注册MsgHandler 可以输出标准日志文件
-	qInstallMessageHandler(customMessageHandler);
+    int ret = 0;
+    ret = a.exec();
 
-	if (!CSQLiteDb::ConnectionDB(QString(qApp->applicationDirPath() +  "/localedb.db" ) ) )
-	{
-		QString err = QString("database open fail :%1").arg(CSQLiteDb::getDB()->lastError().text());
-		qCritical(err.toLocal8Bit().data());
-		CSQLiteDb::DisConnectionDB();
-		return 0;
-	}
+    CSQLiteDb::DisConnectionDB();
 
-	::ak_main(argc,argv);
-
-	int ret = 0;
-	ret = a.exec();
-
-	CSQLiteDb::DisConnectionDB();    
-
-	return ret;
+    return ret;
 }
 

@@ -13,8 +13,10 @@ Version:
 Discription:
 ********************************************************************************************
 */
+#include <winsock2.h>
 #include <Windows.h>
 #include <tchar.h>
+#include <stdlib.h>
 
 #define IMAGE_SIZEOF_NT_OPTIONAL32_HEADER    224
 

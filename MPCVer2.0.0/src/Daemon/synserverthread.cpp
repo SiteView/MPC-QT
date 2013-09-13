@@ -32,8 +32,7 @@ void SynServerThread::run()
     // pull the row data to server database
     for (;;) {
         // Randomly pick up a row from local database
-        QSqlQuery query(*m_SQLiteDb.getDB());
-        m_SQLiteDb.getDB()->transaction();
+        QSqlQuery query(*m_SQLiteDb.getDB());    
 
         if (!query.exec("SELECT DisplayName, DisplayVersion, URLInfoAbout, Publisher FROM LocalAppInfor ORDER BY RANDOM() LIMIT 1")) {
             qDebug(query.lastError().text().toLocal8Bit().data());
@@ -46,7 +45,6 @@ void SynServerThread::run()
         }
 
         query.finish();
-        m_SQLiteDb.getDB()->commit();
 
 
         int ret = soap_call_MPC__npRequest(&mpcsoap,"192.168.9.2:8089","",inputdata, outdata); // TODO /*220.168.30.10:8089  192.168.9.2:8089*/
@@ -83,10 +81,13 @@ int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)
     updateLocQuery.addBindValue(serverAppID);
     if (!updateLocQuery.exec()) {
         qDebug(updateLocQuery.lastError().text().toLocal8Bit().data());
-        return 0;
+		updateLocQuery.finish();
+		return 0;
     }
-
     bool bHaveNext = updateLocQuery.next();
+
+	updateLocQuery.finish();
+
     // the response AppID exist in local database
     if (bHaveNext) {
         updateLocQuery.prepare("UPDATE ServerAppInfo SET AppName = ?, DisplayName = ?, Detailtext = ?, Mark = ?, Type = ?, ServerVersion = ?, ResetServerVersion = ?, Size = ?, OrderNumber = ?, AllDownload= ?, FewDownload = ?, DownloadURL = ?, OS = ? WHERE AppID = ?");
@@ -117,30 +118,13 @@ int SynServerThread::updateLocRecord(_MPC__npRequestResponse responseData)
 
     if (!updateLocQuery.exec()) {
         qDebug(updateLocQuery.lastError().text().toLocal8Bit().data());
+		m_SQLiteDb.getDB()->commit();
         return 0;
     }
 
-    updateLocQuery.finish();
     m_SQLiteDb.getDB()->commit();
 
     return 1;
-}
-
-//CP_ACP,CP_UTF8
-wchar_t* MulityByteToWideChar(UINT CodePage, char *str)
-{
-    DWORD dwNum = MultiByteToWideChar(CodePage, 0, str, -1, 0, 0);
-    wchar_t *pwText = new wchar_t[dwNum];
-    MultiByteToWideChar(CodePage, 0, str, -1, pwText, dwNum);
-    return pwText;
-}
-
-char* WideCharToMulityByte(UINT CodePage, wchar_t *str)
-{
-    int len = WideCharToMultiByte(CodePage, 0, str, -1, 0, 0, 0, 0);
-    char* output = new char[len + 2];
-    WideCharToMultiByte(CodePage, 0, str, -1, output, len + 1, 0, 0);
-    return output;
 }
 
 

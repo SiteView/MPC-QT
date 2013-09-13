@@ -5,6 +5,7 @@
 #include <QThread>
 #include <QDir>
 #include <QStringList>
+#include <QVariant>
 
 #include "../Common/SqliteDb.h"
 
@@ -15,14 +16,12 @@ class RegFlashClass : public QThread
 public:
     RegFlashClass(/*QObject *parent*/);
     virtual void run();
-	void UpdateInfo();
+	void UpdateInfo(QVariant DisplayName);
 	~RegFlashClass();
 
 private:
 	CSQLiteDb m_SQLiteDb;
-    // add by shu-yuan
     bool updateFieldValue(QSqlQuery sqlQuery, const QString &fieldName, const QVariant &value, const QVariant &var);
-    // add end: shu-yuan
 
 };
 
