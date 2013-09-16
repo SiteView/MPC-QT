@@ -16,6 +16,7 @@
 SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     QWidget(parent)
 {
+    contiue =false;
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
     icon = new QPushButton();//图片
     icon->setObjectName(QString::fromUtf8("icon"));
@@ -240,13 +241,23 @@ void SoftUpgradeItem::changevalued(int i)//判断下载是否完成
 
 void SoftUpgradeItem::cancelProgress_download()//取消下载
 {
-    setup->destroyed();
     stackedWidget->setCurrentWidget(page);
+
+    CURLDownloadManager::getThis()->CancelTask();
 
 }
 void SoftUpgradeItem::suspendProgress_download()//暂停下载
 {
-
+    if(contiue)
+    {
+        CURLDownloadManager::getThis()->ResumeTask();
+        contiue=false;
+    }
+    else
+    {
+        CURLDownloadManager::getThis()->PauseTask();
+        contiue=true;
+    }
 }
 void SoftUpgradeItem::cancelProgress_setup()//取消安装
 {
@@ -302,8 +313,7 @@ QString SoftUpgradeItem::get_size( qint64 byte )//转换软件大小的单位
 
 
 void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
-{
-    ///*
+{   
     //绘制边框
     QPainter painter2(this);
     QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
@@ -326,7 +336,6 @@ void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
         painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
 
     }
-    //    */
 }
 
 void SoftUpgradeItem::mousePressEvent(QMouseEvent * event)

@@ -17,6 +17,7 @@
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
+    contiue=false;
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     but_icon = new QPushButton();
@@ -213,11 +214,22 @@ void SoftDownloadItem::changevalued(int i)//判断下载是否完成
 
 void SoftDownloadItem::cancelProgress_download()//取消下载
 {
-    setup->destroyed();
     stackedWidget->setCurrentWidget(page);
+    CURLDownloadManager::getThis()->CancelTask();
+
 }
 void SoftDownloadItem::suspendProgress_download()//暂停下载
 {
+    if(contiue)
+    {
+        CURLDownloadManager::getThis()->ResumeTask();
+        contiue=false;
+    }
+    else
+    {
+        CURLDownloadManager::getThis()->PauseTask();
+        contiue=true;
+    }
 
 }
 void SoftDownloadItem::cancelProgress_setup()//取消安装
@@ -264,9 +276,9 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        CellClass *cell=new CellClass();
-        cell->changeText("Download","is fail","close");
-        cell->show();
+//        CellClass *cell=new CellClass();
+//        cell->changeText("Download","is fail","close");
+//        cell->show();
     }
 }
 

@@ -1,4 +1,3 @@
-
 #include <QSpacerItem>
 #include <QHBoxLayout>
 #include <QProcess>
@@ -81,10 +80,8 @@ SoftUnloadItem::SoftUnloadItem(QWidget *parent) :
 void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
                               QString Qsoftdetail,qint64 Qsize,
                               QString Qsetuptime,QString Qprogress,
-                              QString QuninstallString)//加载文字
+                              QString Quninstall)//加载文字
 {
-
-    //    icon->setStyleSheet("border-image:url(./icons/"+Qsoftname+".ico)");
 
     softname->setText(Qsoftname);
     softname->setToolTip(Qsoftname);
@@ -94,7 +91,7 @@ void SoftUnloadItem::takeText(QString Qicon,QString Qsoftname,
     setuptime->setText(Qsetuptime);
     progress->setText(Qprogress);
     progress->setToolTip(Qprogress);
-    program=QuninstallString;
+    program=Quninstall;
 
     QString filename = QCoreApplication::applicationDirPath()+QString("/icons/")+Qsoftname.trimmed()+QString(".ico");
     QFileInfo iconfile(filename);

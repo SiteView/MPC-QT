@@ -1,4 +1,3 @@
-
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QtUiTools/QUiLoader>
@@ -43,7 +42,6 @@ void SoftAllKindItem::retranslateUi()
 QString SoftAllKindItem::get_text()
 {
     return text->text();
-
 }
 
 

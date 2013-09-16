@@ -31,9 +31,9 @@ SOURCES += main.cpp\
     ./curldownloadmanager.cpp \
     src/GridlayoutClass.cpp \
     src/CellClass.cpp \
-    src/testunloaditem.cpp \
-    src/testunloadlist.cpp \
-    src/ToolButton.cpp
+    src/ToolButton.cpp \
+    src/PageModelList.cpp \
+    src/testunloadlist.cpp
 
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
@@ -50,9 +50,9 @@ HEADERS  += mainwindow.h \
     ./curldownloadmanager.h \
     src/GridlayoutClass.h \
     src/CellClass.h \
-    src/testunloaditem.h \
-    src/testunloadlist.h \
-    src/ToolButton.h
+    src/ToolButton.h \
+    src/PageModelList.h \
+    src/testunloadlist.h
 
 FORMS    += mainwindow.ui
  #   src/informdialog.ui

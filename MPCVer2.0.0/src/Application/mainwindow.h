@@ -13,9 +13,8 @@
 #include "src/GridlayoutClass.h"
 #include "src/CellClass.h"
 #include "src/SoftUpgradeList.h"
-#include "src/testunloadlist.h"
+#include "src/PageModelList.h"
 #include "src/ToolButton.h"
-#include "src/PageShow.h"
 class CURLDownloadManager;
 namespace Ui {
 class MainWindow;
@@ -139,10 +138,9 @@ public:
 
     SoftUpgradeList *list_upgrade;
 //    CURLDownloadManager *downloader;
-    TestUnloadItem *layout_widget; //显示皮肤界面
-    TestUnloadList *testclass;
+//    TestUnloadItem *layout_widget; //显示皮肤界面
+    PageModelList *testclass;
     GridlayoutClass *grid;
-    PageShow *pageshow;
     bool flag;
     QList<ToolButton *> button_list;
 

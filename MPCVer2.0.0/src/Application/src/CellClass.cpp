@@ -2,7 +2,6 @@
 #include <QPainter>
 #include <QPen>
 #include <QMoveEvent>
-#include <QDebug>
 #include "CellClass.h"
 
 CellClass::CellClass(QWidget *parent) :

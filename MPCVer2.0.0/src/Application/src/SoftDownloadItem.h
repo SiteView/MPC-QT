@@ -48,7 +48,7 @@ public:
     QString exename;
     QString runPath;
 //    CURLDownloadManager *downloader;
-
+    bool contiue;
 signals:
 
 public slots:

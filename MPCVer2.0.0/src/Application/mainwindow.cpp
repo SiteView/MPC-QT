@@ -1,10 +1,6 @@
 #include <QMouseEvent>
 #include <windows.h>
-#include <Shellapi.h>
-//#include "ExtractIcon.h"
-#include <tchar.h>
 #include <QTableWidgetItem>
-#include <QtUiTools/QUiLoader>
 #include <QStringList>
 #include <QPainter>
 #include <QListWidget>
@@ -19,16 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),flag(true)
 {
     ui->setupUi(this);
-    this->setWindowOpacity(1);//设置窗体透明度
     this->setWindowFlags(Qt::FramelessWindowHint);//去除边框
-    this->setAttribute(Qt::WA_TranslucentBackground);
     this->setWindowTitle("MarketPlace");//给窗体命名
-
     this->createUnloadtableMenu();
     this->createUpgradeMenu();
     this->createDownloadMenu();
     this->AddSoftSortMenu();
-    downthread =new CURLDownloadManager(this);//构造一个下载对象
+    downthread    = new CURLDownloadManager(this);//构造一个下载对象
     inform        = new InformDialog;
     item_allkind  = new SoftAllKindItem();
 
@@ -49,17 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_operate->setText("operate");
     ui->but_return->hide();
     ui->but_return_2->hide();
-    ui->lab_softnum->hide();
-
-    QGraphicsBlurEffect *effect = new QGraphicsBlurEffect(this);//模糊效果
-    effect->setBlurRadius(1.5);
-    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);//给对象设阴影效果
-    shadowEffect->setBlurRadius(5);
-    shadowEffect->setXOffset(2);
-    shadowEffect->setYOffset(2);
-    //    ui->stackedWidget->setGraphicsEffect(shadowEffect);
-    ui->label->setGraphicsEffect(shadowEffect);
-    //    ui->centralWidget->setGraphicsEffect(shadowEffect);
+    ui->lab_softnum->hide(); 
     TitlePage();
 }
 
@@ -67,10 +50,11 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void MainWindow::TitlePage()//加载标题图片
 {
     QStringList string_list;
-    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/uninstall_no.png"<<":/images/manage_no.png";
+    string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/uninstall_no.png";//<<":/images/manage_no.png";
     QHBoxLayout *button_layout = new QHBoxLayout();
     QSignalMapper *signal_mapper = new QSignalMapper(this);
     for(int i=0; i<string_list.size(); i++)
@@ -90,12 +74,12 @@ void MainWindow::TitlePage()//加载标题图片
     button_list.at(0)->setObjectName(QString::fromUtf8("Download"));
     button_list.at(1)->setObjectName(QString::fromUtf8("Upgrade"));
     button_list.at(2)->setObjectName(QString::fromUtf8("Uninstall"));
-    button_list.at(3)->setObjectName(QString::fromUtf8("Manage"));
+//    button_list.at(3)->setObjectName(QString::fromUtf8("Manage"));
 
     button_list.at(0)->setText("Download");
     button_list.at(1)->setText("Upgrade");
     button_list.at(2)->setText("Uninstall");
-    button_list.at(3)->setText("Manage");
+//    button_list.at(3)->setText("Manage");
     ui->title_page->setLayout(main_layout);
 }
 
@@ -150,7 +134,7 @@ void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
     list_upgrade = new SoftUpgradeList(ui->widget_6);
     list_upgrade->selectDifType();
-        testclass=new TestUnloadList(ui->widget_7);
+//        testclass=new PageModelList(ui->widget_7);
     //        pageshow=new PageShow(ui->widget_6);
 }
 void MainWindow::createDownloadMenu()//创建软件下载部分
@@ -203,7 +187,6 @@ void MainWindow::on_but_close_clicked()//关闭窗口
 {
     this->close();
 }
-
 void MainWindow::on_but_minimize_clicked()//缩小窗口
 {
     this->showMinimized();
@@ -213,7 +196,6 @@ void MainWindow::mousePressEvent(QMouseEvent *e)//点击窗口
     moving = true;
     last = e->globalPos();
 }
-
 void MainWindow::mouseMoveEvent(QMouseEvent *e)//移动窗口
 {
     int dx = e->globalX() - last.x();
@@ -222,6 +204,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent *e)//移动窗口
     last = e->globalPos();
     if ((e->buttons() & Qt::LeftButton) && moving)
         move(x()+dx, y()+dy);
+    this->update();
+
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)//释放窗口
@@ -378,16 +362,13 @@ void MainWindow::on_but_search_2_clicked()//软件卸载页搜索按钮
         ui->stackedWidget_2->setCurrentWidget(ui->page_search_2);
     }
     ui->but_return_2->show();
-
 }
 
 void MainWindow::on_but_return_2_clicked()//软件卸载页返回
 {
-
     ui->but_return_2->hide();
     ui->stackedWidget_2->setCurrentWidget(ui->page_selall);
     ui->widget_5->show();
-
 }
 
 void MainWindow::on_but_return_clicked()//软件下载页返回

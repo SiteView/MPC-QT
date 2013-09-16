@@ -50,6 +50,8 @@ public:
    QString exename;
    QString runPath;
 
+   bool contiue;
+
 signals:
 
 public slots:

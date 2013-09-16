@@ -39,15 +39,13 @@ SoftAllKindList::SoftAllKindList(QWidget *parent) :
                     "}");
         //        list_softallkind->setStyleSheet("QListView::item:selected{background-color:rgb(97,166,66)}");
         list_softallkind->setStyleSheet(tmpStyle);
-
     }
     SQLiteQuery.finish();
     connect(list_softallkind,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
     qDebug()<<list_softallkind->currentRow()<<"==list_softallkind->currentRow()";
-
 }
 
-void SoftAllKindList::changeCurrentItem(){
-    qDebug()<<".CURRENTrow..text";
+void SoftAllKindList::changeCurrentItem()
+{
 
 }
