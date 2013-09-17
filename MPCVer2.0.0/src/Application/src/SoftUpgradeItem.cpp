@@ -16,7 +16,6 @@
 SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     QWidget(parent)
 {
-    contiue =false;
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
     icon = new QPushButton();//图片
     icon->setObjectName(QString::fromUtf8("icon"));
@@ -94,12 +93,16 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     frame_3->setFrameShape(QFrame::StyledPanel);
     frame_3->setFrameShadow(QFrame::Raised);
 
+    but_continue = new QPushButton(frame_3);
+    but_continue->setObjectName(QString::fromUtf8("but_continue"));
+    but_continue->setGeometry(QRect(310, 20, 18, 14));
+    but_continue->hide();
     but_suspend = new QPushButton(frame_3);
     but_suspend->setObjectName(QString::fromUtf8("but_suspend"));
-    but_suspend->setGeometry(QRect(280, 20, 18, 14));
+    but_suspend->setGeometry(QRect(310, 20, 18, 14));
     but_cancel = new QPushButton(frame_3);
     but_cancel->setObjectName(QString::fromUtf8("but_cancel"));
-    but_cancel->setGeometry(QRect(300, 20, 18, 14));
+    but_cancel->setGeometry(QRect(330, 20, 18, 14));
     progressBar = new QProgressBar(frame_3);
     progressBar->setObjectName(QString::fromUtf8("but_progress"));
     progressBar->setGeometry(QRect(20, 20, 200, 15));
@@ -139,12 +142,13 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     this->setLayout(horizontalLayout_3);
 
     connect(but_upgrade,SIGNAL(clicked()),this,SLOT(on_but_upgrade_clicked()));
+    connect(but_continue,SIGNAL(clicked()),this,SLOT(continueProgress_download()));
     connect(but_cancel,SIGNAL(clicked()),this,SLOT(cancelProgress_download()));
     connect(but_suspend,SIGNAL(clicked()),this,SLOT(suspendProgress_download()));
     connect(progressBar,SIGNAL(valueChanged(int)),this,SLOT(changevalued(int)));
     connect(setup,SIGNAL(clicked()),this,SLOT(suspendProgress_setup()));
-
 }
+
 void SoftUpgradeItem::takeText(QString Qicon,QString Qsoftname,
                                QString Qdetail,QString Qversion,
                                QString Qreversion,qint64 Qsize,
@@ -154,7 +158,6 @@ void SoftUpgradeItem::takeText(QString Qicon,QString Qsoftname,
     QFileInfo iconfile(filename);
     if(iconfile.exists())
     {
-
         icon->setStyleSheet("border-image:url("+filename+")");
     }
     else
@@ -242,22 +245,24 @@ void SoftUpgradeItem::changevalued(int i)//判断下载是否完成
 void SoftUpgradeItem::cancelProgress_download()//取消下载
 {
     stackedWidget->setCurrentWidget(page);
-
+    but_continue->hide();
+    but_suspend->show();
     CURLDownloadManager::getThis()->CancelTask();
-
 }
+
 void SoftUpgradeItem::suspendProgress_download()//暂停下载
 {
-    if(contiue)
-    {
-        CURLDownloadManager::getThis()->ResumeTask();
-        contiue=false;
-    }
-    else
-    {
-        CURLDownloadManager::getThis()->PauseTask();
-        contiue=true;
-    }
+    but_continue->show();
+    but_suspend->hide();
+    CURLDownloadManager::getThis()->PauseTask();
+}
+
+void SoftUpgradeItem::continueProgress_download()//继续下载
+{
+    but_continue->hide();
+    but_suspend->show();
+    CURLDownloadManager::getThis()->ResumeTask();
+
 }
 void SoftUpgradeItem::cancelProgress_setup()//取消安装
 {
@@ -308,9 +313,6 @@ QString SoftUpgradeItem::get_size( qint64 byte )//转换软件大小的单位
 
     return size;
 }
-
-
-
 
 void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
 {   

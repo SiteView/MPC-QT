@@ -48,5 +48,7 @@
         <file>images/softdownload_no.png</file>
         <file>images/softupgrade_no.png</file>
         <file>images/manage_no.png</file>
+        <file>images/continue_h.png</file>
+        <file>images/continue.png</file>
     </qresource>
 </RCC>

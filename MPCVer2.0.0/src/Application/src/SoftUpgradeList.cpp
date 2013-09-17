@@ -17,7 +17,7 @@ SoftUpgradeList::SoftUpgradeList(QWidget *parent) :
 void SoftUpgradeList::selectDifType()
 {
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB() );
-    if ( !SQLiteQuery.exec( "select a.[DisplayIcon] ,a.[DisplayName] ,b.[Detailtext] ,b.[ServerVersion] ,b.[ResetServerVerSion] ,b.[Size] ,b.[Downloadurl] from LocalAppInfor a , ServerAppInfo b  where a.[DisplayName] = b.[DisplayName] ;" ) )
+    if ( !SQLiteQuery.exec( "select a.[DisplayIcon] ,a.[DisplayName] ,b.[Detailtext] ,b.[ServerVersion] ,b.[ResetServerVerSion] ,b.[Size] ,b.[Downloadurl] from LocalAppInfor a , ServerAppInfo b  where a.[DisplayName] = b.[DisplayName] and  a.[HaveNew] = 1;" ) )
     {
         qDebug(SQLiteQuery.lastError().text().toLocal8Bit().data());
     }

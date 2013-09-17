@@ -24,14 +24,13 @@ public:
    QPushButton *but_more;
    QLabel *old_versions;
    QLabel *new_versions;
-
    QWidget *widget;
    QStackedWidget *stackedWidget;
    QWidget *page;
    QWidget *page_2;
    QWidget *page_3;
-
    QFrame *frame_3 ;
+   QPushButton *but_continue;
    QPushButton *but_suspend;
    QPushButton *but_cancel ;
    QFrame *frame_2;
@@ -39,18 +38,14 @@ public:
    QLabel *lab_size;
    QPushButton *but_upgrade;
    QFrame *frame_4;
-
    QLabel *lab_upnum_2;
    QLabel *lab_size_2;
    QPushButton *setup;
-
    QProgressBar *progressBar;
 
    QString urlprogram;
    QString exename;
    QString runPath;
-
-   bool contiue;
 
 signals:
 
@@ -59,6 +54,7 @@ public slots:
 
    void startProgress(int);
    void changevalued(int);
+   void continueProgress_download();
    void cancelProgress_download();
    void suspendProgress_download();
    void cancelProgress_setup();
@@ -75,7 +71,6 @@ protected:
 private:
     bool mouse_press;
     bool mouse_enter;
-
 };
 
 #endif // SOFTUPGRADEITEM_H

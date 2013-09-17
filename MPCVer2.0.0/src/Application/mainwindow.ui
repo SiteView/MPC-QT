@@ -64,6 +64,19 @@
        <height>101</height>
       </rect>
      </property>
+     <widget class="QLabel" name="lab_upnum">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>20</y>
+        <width>25</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="widget_body" native="true">
@@ -185,11 +198,9 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="page_all"/>
-       <widget class="QWidget" name="page_type1"/>
-       <widget class="QWidget" name="page_type9"/>
        <widget class="QWidget" name="page_null_default">
         <widget class="QLabel" name="lab_null_caution">
          <property name="geometry">
@@ -218,14 +229,6 @@
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="page_type10"/>
-       <widget class="QWidget" name="page_type4"/>
-       <widget class="QWidget" name="page_type5"/>
-       <widget class="QWidget" name="page_type7"/>
-       <widget class="QWidget" name="page_type6"/>
-       <widget class="QWidget" name="page_type3"/>
-       <widget class="QWidget" name="page_type8"/>
-       <widget class="QWidget" name="page_type2"/>
        <widget class="QWidget" name="page_search"/>
       </widget>
       <widget class="QWidget" name="widget_2" native="true">

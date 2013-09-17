@@ -42,7 +42,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_operate->setText("operate");
     ui->but_return->hide();
     ui->but_return_2->hide();
-    ui->lab_softnum->hide(); 
+    ui->lab_softnum->hide();
+    lab_upnum = new QLabel(title_page);
+    int x=ui->title_page->width()%3*2;
+    lab_upnum->setObjectName(QStringLiteral("lab_upnum"));
+    lab_upnum->setGeometry(QRect(x, 20, 30, 30));
     TitlePage();
 }
 
@@ -74,12 +78,12 @@ void MainWindow::TitlePage()//加载标题图片
     button_list.at(0)->setObjectName(QString::fromUtf8("Download"));
     button_list.at(1)->setObjectName(QString::fromUtf8("Upgrade"));
     button_list.at(2)->setObjectName(QString::fromUtf8("Uninstall"));
-//    button_list.at(3)->setObjectName(QString::fromUtf8("Manage"));
+    //    button_list.at(3)->setObjectName(QString::fromUtf8("Manage"));
 
     button_list.at(0)->setText("Download");
     button_list.at(1)->setText("Upgrade");
     button_list.at(2)->setText("Uninstall");
-//    button_list.at(3)->setText("Manage");
+    //    button_list.at(3)->setText("Manage");
     ui->title_page->setLayout(main_layout);
 }
 
@@ -112,10 +116,10 @@ void MainWindow::turnPage(QString current_page)
     {
         ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
     }
-    else if(current_page=="3")
-    {
-        ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-    }
+    //    else if(current_page=="3")
+    //    {
+    //        ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
+    //    }
 }
 
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
@@ -132,10 +136,8 @@ void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 
 void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
-    list_upgrade = new SoftUpgradeList(ui->widget_6);
+    list_upgrade    = new SoftUpgradeList(ui->widget_6);
     list_upgrade->selectDifType();
-//        testclass=new PageModelList(ui->widget_7);
-    //        pageshow=new PageShow(ui->widget_6);
 }
 void MainWindow::createDownloadMenu()//创建软件下载部分
 {
@@ -153,34 +155,25 @@ void MainWindow::createUnloadtableMenu()//创建软件卸载部分
 void MainWindow::AddSoftSortMenu()//增加软件分类菜单
 {
     list_allkinds   = new SoftAllKindList(ui->widget_4);
-
+    typecount=list_allkinds->type;
+    page_list = new QList<QWidget *>();//构造对应的page
+    download_list =new QList<SoftDownloadList *>();//构造对应的Download对象
+    for(int i=0;i<typecount;i++)
+    {
+        QWidget *page_type = new QWidget();
+        ui->stack_download->addWidget(page_type);
+        page_list->push_back(page_type);
+        SoftDownloadList *download=new SoftDownloadList(page_type);
+        download->selectDifType(i);
+        download_list->push_back(download);
+    }
 }
 
 void MainWindow::changeCurrentItem()//显示不同分类的软件
 {
+    ui->but_return->hide();
     int current_row = list_allkinds->list_softallkind->currentRow();
-    if(current_row==0)
-    {
-        ui->stack_download->setCurrentWidget(ui->page_all);
-    }
-    if(current_row==1)
-    {
-        list_download1     = new SoftDownloadList(ui->page_type2);
-        list_download1->selectDifType(TWO);
-        ui->stack_download->setCurrentWidget(ui->page_type2);
-    }
-    if(current_row==2)
-    {
-        list_download2     = new SoftDownloadList(ui->page_type3);
-        list_download2->selectDifType(THREE);
-        ui->stack_download->setCurrentWidget(ui->page_type3);
-    }
-    if(current_row==3)
-    {
-        list_download3     = new SoftDownloadList(ui->page_type8);
-        list_download3->selectDifType(EIGHT);
-        ui->stack_download->setCurrentWidget(ui->page_type8);
-    }
+    ui->stack_download->setCurrentWidget(page_list->at(current_row));
 }
 
 void MainWindow::on_but_close_clicked()//关闭窗口
@@ -212,7 +205,6 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)//释放窗口
 {
     moving = false;
 }
-
 
 void MainWindow::on_but_sel_name_clicked()//卸载页以软件名称排序
 {

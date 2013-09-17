@@ -33,6 +33,7 @@ public:
     QPushButton *but_close;
     QPushButton *but_minimize;
     QWidget *title_page;
+    QLabel *lab_upnum;
     QWidget *widget_body;
     QStackedWidget *stackedWidget;
     QWidget *page;
@@ -46,19 +47,9 @@ public:
     QWidget *widget_4;
     QStackedWidget *stack_download;
     QWidget *page_all;
-    QWidget *page_type1;
-    QWidget *page_type9;
     QWidget *page_null_default;
     QLabel *lab_null_caution;
     QLabel *lab_null_text;
-    QWidget *page_type10;
-    QWidget *page_type4;
-    QWidget *page_type5;
-    QWidget *page_type7;
-    QWidget *page_type6;
-    QWidget *page_type3;
-    QWidget *page_type8;
-    QWidget *page_type2;
     QWidget *page_search;
     QWidget *widget_2;
     QWidget *horizontalLayoutWidget;
@@ -126,6 +117,9 @@ public:
         title_page = new QWidget(title);
         title_page->setObjectName(QStringLiteral("title_page"));
         title_page->setGeometry(QRect(0, 0, 400, 101));
+        lab_upnum = new QLabel(title_page);
+        lab_upnum->setObjectName(QStringLiteral("lab_upnum"));
+        lab_upnum->setGeometry(QRect(130, 20, 25, 25));
         widget_body = new QWidget(centralWidget);
         widget_body->setObjectName(QStringLiteral("widget_body"));
         widget_body->setGeometry(QRect(0, 100, 920, 580));
@@ -171,12 +165,6 @@ public:
         page_all = new QWidget();
         page_all->setObjectName(QStringLiteral("page_all"));
         stack_download->addWidget(page_all);
-        page_type1 = new QWidget();
-        page_type1->setObjectName(QStringLiteral("page_type1"));
-        stack_download->addWidget(page_type1);
-        page_type9 = new QWidget();
-        page_type9->setObjectName(QStringLiteral("page_type9"));
-        stack_download->addWidget(page_type9);
         page_null_default = new QWidget();
         page_null_default->setObjectName(QStringLiteral("page_null_default"));
         lab_null_caution = new QLabel(page_null_default);
@@ -186,30 +174,6 @@ public:
         lab_null_text->setObjectName(QStringLiteral("lab_null_text"));
         lab_null_text->setGeometry(QRect(220, 180, 450, 24));
         stack_download->addWidget(page_null_default);
-        page_type10 = new QWidget();
-        page_type10->setObjectName(QStringLiteral("page_type10"));
-        stack_download->addWidget(page_type10);
-        page_type4 = new QWidget();
-        page_type4->setObjectName(QStringLiteral("page_type4"));
-        stack_download->addWidget(page_type4);
-        page_type5 = new QWidget();
-        page_type5->setObjectName(QStringLiteral("page_type5"));
-        stack_download->addWidget(page_type5);
-        page_type7 = new QWidget();
-        page_type7->setObjectName(QStringLiteral("page_type7"));
-        stack_download->addWidget(page_type7);
-        page_type6 = new QWidget();
-        page_type6->setObjectName(QStringLiteral("page_type6"));
-        stack_download->addWidget(page_type6);
-        page_type3 = new QWidget();
-        page_type3->setObjectName(QStringLiteral("page_type3"));
-        stack_download->addWidget(page_type3);
-        page_type8 = new QWidget();
-        page_type8->setObjectName(QStringLiteral("page_type8"));
-        stack_download->addWidget(page_type8);
-        page_type2 = new QWidget();
-        page_type2->setObjectName(QStringLiteral("page_type2"));
-        stack_download->addWidget(page_type2);
         page_search = new QWidget();
         page_search->setObjectName(QStringLiteral("page_search"));
         stack_download->addWidget(page_search);
@@ -396,7 +360,7 @@ public:
         retranslateUi(MainWindow);
 
         stackedWidget->setCurrentIndex(1);
-        stack_download->setCurrentIndex(3);
+        stack_download->setCurrentIndex(2);
         stackedWidget_2->setCurrentIndex(5);
 
 
@@ -408,6 +372,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         but_close->setText(QString());
         but_minimize->setText(QString());
+        lab_upnum->setText(QString());
         but_clear_4->setText(QString());
         but_search_4->setText(QString());
         lab_null_caution->setText(QString());

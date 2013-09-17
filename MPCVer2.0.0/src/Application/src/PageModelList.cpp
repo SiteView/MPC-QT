@@ -114,7 +114,6 @@ void PageModelList::initCenter()//加载数据
                 vlayout->addWidget(item_list->at(i*10+j));
             }
             vlayout->addItem(verticalSpacer);
-
         }
         else
         {
@@ -251,7 +250,7 @@ void PageModelList::showPage(QString current_skin)//页码的切换
         next_page_button->show();
         last_page_button->hide();
     }
-    stackedWidget->setCurrentIndex(current_page-1);
+    stackedWidget->setCurrentIndex(current_page-1);//切换页面
 
 }
 

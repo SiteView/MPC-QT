@@ -17,7 +17,7 @@ signals:
     void currentRowChanged();
     
 public slots:
-    void changeCurrentItem();
+
 public:
     QListWidget                   *list_softallkind;
 //    SoftAllKindItem               *allkinditem;

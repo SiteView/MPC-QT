@@ -30,6 +30,7 @@ public:
     QWidget *page_3;
 
     QFrame *frame_3 ;
+    QPushButton *but_continue;
     QPushButton *but_suspend;
     QPushButton *but_cancel ;
     QFrame *frame_2;
@@ -48,13 +49,13 @@ public:
     QString exename;
     QString runPath;
 //    CURLDownloadManager *downloader;
-    bool contiue;
 signals:
 
 public slots:
     void on_download_clicked();
     void startProgress(int);
     void changevalued(int);
+    void continueProgress_download();
     void cancelProgress_download();
     void suspendProgress_download();
     void cancelProgress_setup();

@@ -17,7 +17,6 @@
 SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
-    contiue=false;
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Maximum);
 
     but_icon = new QPushButton();
@@ -59,8 +58,8 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     lab_upnum->setFixedSize(QSize(120, 20));
     lab_size = new QLabel(frame_2);
     lab_size->setObjectName(QString::fromUtf8("lab_size"));
-    lab_size->setGeometry(QRect(10, 20, 50, 20));
-    lab_size->setFixedSize(QSize(50, 20));
+    lab_size->setGeometry(QRect(10, 20, 60, 20));
+    lab_size->setFixedSize(QSize(60, 20));
     download = new QPushButton(frame_2);
     download->setObjectName(QString::fromUtf8("download"));
     download->setGeometry(QRect(220, 18, 80, 25));
@@ -75,6 +74,10 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     frame_3->setFrameShape(QFrame::StyledPanel);
     frame_3->setFrameShadow(QFrame::Raised);
 
+    but_continue = new QPushButton(frame_3);
+    but_continue->setObjectName(QString::fromUtf8("but_continue"));
+    but_continue->setGeometry(QRect(240, 20, 18, 14));
+    but_continue->hide();
     but_suspend = new QPushButton(frame_3);
     but_suspend->setObjectName(QString::fromUtf8("but_suspend"));
     but_suspend->setGeometry(QRect(240, 20, 18, 14));
@@ -100,8 +103,8 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     lab_upnum_2->setFixedSize(QSize(120, 20));
     lab_size_2 = new QLabel(frame_4);
     lab_size_2->setObjectName(QString::fromUtf8("lab_size"));
-    lab_size_2->setGeometry(QRect(10, 20, 50, 20));
-    lab_size_2->setFixedSize(QSize(50, 20));
+    lab_size_2->setGeometry(QRect(10, 20, 60, 20));
+    lab_size_2->setFixedSize(QSize(60, 20));
     setup = new QPushButton(frame_4);
     setup->setObjectName(QString::fromUtf8("set_up"));
     setup->setGeometry(QRect(220, 18, 80, 25));
@@ -119,7 +122,7 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     this->setLayout(horizontalLayout_3);
 
     connect(download,SIGNAL(clicked()),this,SLOT(on_download_clicked()));
-
+    connect(but_continue,SIGNAL(clicked()),this,SLOT(continueProgress_download()));
     connect(but_cancel,SIGNAL(clicked()),this,SLOT(cancelProgress_download()));
     connect(but_suspend,SIGNAL(clicked()),this,SLOT(suspendProgress_download()));
     connect(progressBar,SIGNAL(valueChanged(int)),this,SLOT(changevalued(int)));
@@ -159,15 +162,12 @@ void SoftDownloadItem::takeText(QString Qsoftname,
     QFileInfo iconfile(filename);
     if(iconfile.exists())
     {
-
         but_icon->setStyleSheet("border-image:url("+filename+")");
     }
     else
     {
         but_icon->setStyleSheet("border-image:url(:/images/default.png)");
-
     }
-
 }
 
 void SoftDownloadItem::on_download_clicked()//触发下载按钮
@@ -195,7 +195,6 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
             stackedWidget->setCurrentWidget(page_2);
             connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
             connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
-
             DownloadThread();
         }
     }
@@ -215,28 +214,30 @@ void SoftDownloadItem::changevalued(int i)//判断下载是否完成
 void SoftDownloadItem::cancelProgress_download()//取消下载
 {
     stackedWidget->setCurrentWidget(page);
+    but_continue->hide();
+    but_suspend->show();
     CURLDownloadManager::getThis()->CancelTask();
 
 }
+void SoftDownloadItem::continueProgress_download()//继续下载
+{
+    but_continue->hide();
+    but_suspend->show();
+    CURLDownloadManager::getThis()->ResumeTask();
+}
+
 void SoftDownloadItem::suspendProgress_download()//暂停下载
 {
-    if(contiue)
-    {
-        CURLDownloadManager::getThis()->ResumeTask();
-        contiue=false;
-    }
-    else
-    {
-        CURLDownloadManager::getThis()->PauseTask();
-        contiue=true;
-    }
-
+    but_continue->show();
+    but_suspend->hide();
+    CURLDownloadManager::getThis()->PauseTask();
 }
+
 void SoftDownloadItem::cancelProgress_setup()//取消安装
 {
     stackedWidget->setCurrentWidget(page);
-
 }
+
 bool SoftDownloadItem::suspendProgress_setup()//暂停安装
 {
     QString program=runPath+"/tmp/"+exename;
@@ -276,9 +277,9 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-//        CellClass *cell=new CellClass();
-//        cell->changeText("Download","is fail","close");
-//        cell->show();
+        //        CellClass *cell=new CellClass();
+        //        cell->changeText("Download","is fail","close");
+        //        cell->show();
     }
 }
 
@@ -297,10 +298,8 @@ QString SoftDownloadItem::get_size( qint64 byte )
     return size;
 }
 
-
 void SoftDownloadItem::paintEvent(QPaintEvent *event)//绘制卸载界面
 {
-    ///*
     //绘制边框
     QPainter painter2(this);
     QLinearGradient linear2(rect().topLeft(), rect().bottomLeft());
@@ -321,9 +320,7 @@ void SoftDownloadItem::paintEvent(QPaintEvent *event)//绘制卸载界面
         painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
         painter2.setBrush(linear2);
         painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
-
     }
-    //    */
 }
 
 void SoftDownloadItem::mousePressEvent(QMouseEvent * event)

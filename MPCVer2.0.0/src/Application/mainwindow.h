@@ -34,8 +34,8 @@ enum SIGN
 
 };
 enum TYPE_FLAG{
-    ALL
-    ,ONE
+
+    ONE
     ,TWO
     ,THREE
     ,FOUR
@@ -45,7 +45,10 @@ enum TYPE_FLAG{
     ,EIGHT
     ,NINE
     ,TEN
+    ,ELEVEN
+    ,TWELVE
     ,SEARCH
+    , ALL
 };
 class MainWindow : public QMainWindow
 {
@@ -57,13 +60,6 @@ public:
     void TitlePage();
 
 private slots:
-//    void on_SoftDownload_clicked();
-
-//    void on_SoftUpgrade_clicked();
-
-//    void on_SoftUnload_clicked();
-
-//    void on_UpdateInform_clicked();
     void on_but_close_clicked();
 
     void on_but_minimize_clicked();
@@ -112,7 +108,7 @@ public:
 //    void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
 
 public:
-
+    QLabel *lab_upnum;
     CSQLiteDb m_SQLiteDb;
     InformDialog *inform;
     SoftUnloadList *list_unload;
@@ -128,23 +124,24 @@ public:
 
 
     SoftDownloadList *list_download;
-    SoftDownloadList *list_download1;
-    SoftDownloadList *list_download2;
-    SoftDownloadList *list_download3;
+//    SoftDownloadList *list_download1;
+//    SoftDownloadList *list_download2;
+//    SoftDownloadList *list_download3;
     SoftDownloadList *search_download;
 
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 
     SoftUpgradeList *list_upgrade;
-//    CURLDownloadManager *downloader;
 //    TestUnloadItem *layout_widget; //显示皮肤界面
     PageModelList *testclass;
     GridlayoutClass *grid;
     bool flag;
-    QList<ToolButton *> button_list;
-
-    CURLDownloadManager *downthread;
+    int typecount;//软件分类总数
+    QList<ToolButton *> button_list;//标题图标列表
+    QList<QWidget *> *page_list ;//构造界面列表
+    QList<SoftDownloadList *> *download_list;//构造下载对象列表
+    CURLDownloadManager *downthread;//初始化一个下载对象
 
 private:
     Ui::MainWindow *ui;
