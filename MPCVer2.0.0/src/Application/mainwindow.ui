@@ -64,19 +64,6 @@
        <height>101</height>
       </rect>
      </property>
-     <widget class="QLabel" name="lab_upnum">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>20</y>
-        <width>25</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="widget_body" native="true">

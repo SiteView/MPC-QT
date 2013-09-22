@@ -50,5 +50,6 @@
         <file>images/manage_no.png</file>
         <file>images/continue_h.png</file>
         <file>images/continue.png</file>
+        <file>images/red.png</file>
     </qresource>
 </RCC>

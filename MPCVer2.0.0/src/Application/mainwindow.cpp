@@ -6,6 +6,7 @@
 #include <QListWidget>
 #include <QGraphicsBlurEffect>
 #include <QGraphicsDropShadowEffect>
+#include <QStackedLayout>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "src/ToolButton.h"
@@ -40,14 +41,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_path->setText("setpath");
     ui->but_sel_size->setText("softsize");
     ui->but_sel_operate->setText("operate");
-    ui->but_return->hide();
-    ui->but_return_2->hide();
-    ui->lab_softnum->hide();
-    lab_upnum = new QLabel(title_page);
-    int x=ui->title_page->width()%3*2;
-    lab_upnum->setObjectName(QStringLiteral("lab_upnum"));
-    lab_upnum->setGeometry(QRect(x, 20, 30, 30));
+    ui->but_return->hide();//返回按钮
+    ui->but_return_2->hide();//返回按钮
+    ui->lab_softnum->hide();//软件统计数
+
     TitlePage();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -60,10 +60,25 @@ void MainWindow::TitlePage()//加载标题图片
     QStringList string_list;
     string_list<<":/images/softdownload_no.png"<<":/images/softupgrade_no.png"<<":/images/uninstall_no.png";//<<":/images/manage_no.png";
     QHBoxLayout *button_layout = new QHBoxLayout();
+    button_layout->setSpacing(0);
+    button_layout->setContentsMargins(0,0,0,0);
     QSignalMapper *signal_mapper = new QSignalMapper(this);
     for(int i=0; i<string_list.size(); i++)
     {
-        ToolButton *tool_button = new ToolButton(this);
+        ToolButton *tool_button = new ToolButton();
+        if(i==1){
+            lab_upnum = new QLabel(tool_button);
+            lab_upnum->hide();
+            lab_upnum->setObjectName(QString::fromUtf8("lab_upnum"));
+            lab_upnum->setGeometry(QRect(38, 8, 26, 16));
+            lab_upnum->setAlignment(Qt::AlignCenter|Qt::AlignCenter);
+            lab_upnum->setStyleSheet("border-image:url(:/images/red.png);color:rgb(255,255,255); font: 75 12px 'Arial' ;font-weight:bold;");
+            if(count_upgrade>0)
+            {
+                lab_upnum->setText(QString::number(count_upgrade,10));
+                lab_upnum->show();
+            }
+        }
         tool_button->setImage(string_list.at(i));
         button_list.append(tool_button);
         connect(tool_button, SIGNAL(clicked()), signal_mapper, SLOT(map()));//信号绑定，可以使其停留在选定的item上
@@ -71,10 +86,6 @@ void MainWindow::TitlePage()//加载标题图片
         button_layout->addWidget(tool_button, 0, Qt::AlignBottom);
     }
     connect(signal_mapper, SIGNAL(mapped(QString)), this, SLOT(turnPage(QString)));//绑定改变item的信号
-    QVBoxLayout *main_layout = new QVBoxLayout();
-    main_layout->addLayout(button_layout);
-    main_layout->setSpacing(0);
-    main_layout->setContentsMargins(0, 0, 0, 0);
     button_list.at(0)->setObjectName(QString::fromUtf8("Download"));
     button_list.at(1)->setObjectName(QString::fromUtf8("Upgrade"));
     button_list.at(2)->setObjectName(QString::fromUtf8("Uninstall"));
@@ -84,7 +95,9 @@ void MainWindow::TitlePage()//加载标题图片
     button_list.at(1)->setText("Upgrade");
     button_list.at(2)->setText("Uninstall");
     //    button_list.at(3)->setText("Manage");
-    ui->title_page->setLayout(main_layout);
+    ui->title_page->setLayout(button_layout);
+
+    //    QMetaObject::connectSlotsByName(this);
 }
 
 void MainWindow::turnPage(QString current_page)
@@ -116,10 +129,10 @@ void MainWindow::turnPage(QString current_page)
     {
         ui->stackedWidget->setCurrentWidget(ui->page_SoftUnload);
     }
-    //    else if(current_page=="3")
-    //    {
-    //        ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
-    //    }
+    else if(current_page=="3")
+    {
+        ui->stackedWidget->setCurrentWidget(ui->page_UpdateInform);
+    }
 }
 
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
@@ -138,12 +151,14 @@ void MainWindow::createUpgradeMenu()//创建软件更新部分
 {
     list_upgrade    = new SoftUpgradeList(ui->widget_6);
     list_upgrade->selectDifType();
+    count_upgrade=list_upgrade->list_0.size();//更新的软件数量
 }
 void MainWindow::createDownloadMenu()//创建软件下载部分
 {
     list_download   = new SoftDownloadList(ui->page_all);
     list_download->selectDifType(ALL);
     ui->stack_download->setCurrentWidget(ui->page_all);
+    testclass=new PageModelList(ui->widget_7);
 }
 
 void MainWindow::createUnloadtableMenu()//创建软件卸载部分
@@ -310,15 +325,12 @@ void MainWindow::on_but_search_4_clicked()//软件下载页搜索按钮
         ui->lab_null_caution->setStyleSheet("border-image:url(:/images/caution.png)");
         ui->lab_null_text->setText(str);
         ui->stack_download->setCurrentWidget(ui->page_null_default);
-
     }
     else
     {
         ui->stack_download->setCurrentWidget(ui->page_search);
     }
     ui->but_return->show();
-
-
 }
 
 void MainWindow::on_but_clear_3_clicked()//软件更新页清除按钮

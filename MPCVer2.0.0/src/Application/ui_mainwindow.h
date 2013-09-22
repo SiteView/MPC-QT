@@ -33,7 +33,6 @@ public:
     QPushButton *but_close;
     QPushButton *but_minimize;
     QWidget *title_page;
-    QLabel *lab_upnum;
     QWidget *widget_body;
     QStackedWidget *stackedWidget;
     QWidget *page;
@@ -117,9 +116,6 @@ public:
         title_page = new QWidget(title);
         title_page->setObjectName(QStringLiteral("title_page"));
         title_page->setGeometry(QRect(0, 0, 400, 101));
-        lab_upnum = new QLabel(title_page);
-        lab_upnum->setObjectName(QStringLiteral("lab_upnum"));
-        lab_upnum->setGeometry(QRect(130, 20, 25, 25));
         widget_body = new QWidget(centralWidget);
         widget_body->setObjectName(QStringLiteral("widget_body"));
         widget_body->setGeometry(QRect(0, 100, 920, 580));
@@ -372,7 +368,6 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         but_close->setText(QString());
         but_minimize->setText(QString());
-        lab_upnum->setText(QString());
         but_clear_4->setText(QString());
         but_search_4->setText(QString());
         lab_null_caution->setText(QString());

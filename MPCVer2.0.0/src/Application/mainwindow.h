@@ -138,6 +138,7 @@ public:
     GridlayoutClass *grid;
     bool flag;
     int typecount;//软件分类总数
+    int count_upgrade;//待升级软件数目
     QList<ToolButton *> button_list;//标题图标列表
     QList<QWidget *> *page_list ;//构造界面列表
     QList<SoftDownloadList *> *download_list;//构造下载对象列表
