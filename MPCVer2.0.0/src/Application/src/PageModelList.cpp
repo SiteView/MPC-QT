@@ -4,7 +4,7 @@
 #include "PageModelList.h"
 
 PageModelList::PageModelList(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),core(20)
 {
     //    this->resize(920,520);
     center_layout = new QVBoxLayout();
@@ -12,16 +12,14 @@ PageModelList::PageModelList(QWidget *parent) :
     item_list =new QList<SoftUnloadItem *>();
     current_page = 1;
     mouse_press = false;
-
     WidgetContents=new QWidget();
-    WidgetContents->setObjectName(QStringLiteral("WidgetContents"));
+    //    WidgetContents->setObjectName(QStringLiteral("WidgetContents"));
     WidgetContents->setGeometry(QRect(0, 0, 920, 520));
     stackedWidget = new QStackedWidget(WidgetContents);
-
     area=new QScrollArea(this);
     area->setFixedSize(920,520);
-    area->setObjectName(QStringLiteral("scrollArea"));
-    area->setWidgetResizable(true);
+    //    area->setObjectName(QStringLiteral("scrollArea"));
+//    area->setWidgetResizable(true);
     area->setWidget(WidgetContents);
 
     QVBoxLayout *main_layout = new QVBoxLayout(WidgetContents);
@@ -71,57 +69,64 @@ void PageModelList::initCenter()//加载数据
         uninstallString_list<<pahtstr6;
     }
     SQLiteQuery.finish();// 数据查询完毕
-
     int skin_list_count = icon_list.size();//数据总数
-    page_count = skin_list_count / 10;
-    page_count_point = skin_list_count % 10;//余数
+    page_count = skin_list_count / core;
+    page_count_point = skin_list_count % core;//余数
     if(page_count_point > 0)
     {
         page_count = page_count + 1;//页数
     }
-
     item_list =new QList<SoftUnloadItem *>();//构造出数据对应的item
     for(int i=0;i<icon_list.size();i++)
     {
         SoftUnloadItem *item = new SoftUnloadItem();
-        item->setFixedSize(902,65);
+        item->setFixedSize(920,65);
         item->takeText(icon_list.at(i),
-                          softname_list.at(i),
-                          softdetail_list.at(i) ,
-                          size_list.at(i),
-                          setuptime_list.at(i),
-                          progress_list.at(i),
-                          uninstallString_list.at(i));
+                       softname_list.at(i),
+                       softdetail_list.at(i) ,
+                       size_list.at(i),
+                       setuptime_list.at(i),
+                       progress_list.at(i),
+                       uninstallString_list.at(i));
         item_list->append(item);
     }
-
     QList<QWidget *> *page_list = new QList<QWidget *>();//构造对应的page
     for(int i=0; i<page_count; i++)
     {
         QWidget *stack_page = new QWidget();//构造十个页面
         stackedWidget->addWidget(stack_page);
+        //        stackedWidget->resize(902,65*13);
+        //        stack_page->resize(902,65*12);
         page_list->push_back(stack_page);
         QVBoxLayout *vlayout=new QVBoxLayout(stack_page);
         vlayout->setSpacing(0);
         vlayout->setContentsMargins(0, 0, 0, 0);
         QSpacerItem *verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-
         if (i==page_count-1)
         {
             cyc_condition=page_count_point;
             for(int j=0;j<cyc_condition;j++)
             {
-                vlayout->addWidget(item_list->at(i*10+j));
+                vlayout->addWidget(item_list->at(i*core+j));
             }
-            vlayout->addItem(verticalSpacer);
+            vlayout->addItem(verticalSpacer);//最后一页加QSpacerItem来进行排版
+            WidgetContents->resize(920,65*cyc_condition);
+            stackedWidget->resize(920,65*cyc_condition);
+            stack_page->resize(920,65*cyc_condition);
+            qDebug()<<stackedWidget->size()<<"------111---------"<<stack_page->size();
         }
         else
         {
-            cyc_condition=10;
+            cyc_condition=core;
             for(int j=0;j<cyc_condition;j++)
             {
-                vlayout->addWidget(item_list->at(i*10+j));
+                vlayout->addWidget(item_list->at(i*core+j));
             }
+            WidgetContents->resize(920,65*cyc_condition);
+            stackedWidget->resize(920,65*cyc_condition);
+            stack_page->resize(920,65*cyc_condition);
+            qDebug()<<stackedWidget->size()<<"------222---------"<<stack_page->size();
+
         }
     }
 }

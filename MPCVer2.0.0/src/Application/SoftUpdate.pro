@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     src/CellClass.cpp \
     src/ToolButton.cpp \
     src/PageModelList.cpp \
-    src/testunloadlist.cpp
+    src/testunloadlist.cpp \
+    src/SettingMenu.cpp
 
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
@@ -52,7 +53,8 @@ HEADERS  += mainwindow.h \
     src/CellClass.h \
     src/ToolButton.h \
     src/PageModelList.h \
-    src/testunloadlist.h
+    src/testunloadlist.h \
+    src/SettingMenu.h
 
 FORMS    += mainwindow.ui
  #   src/informdialog.ui

@@ -65,6 +65,19 @@
       </rect>
      </property>
     </widget>
+    <widget class="QPushButton" name="but_setting">
+     <property name="geometry">
+      <rect>
+       <x>845</x>
+       <y>0</y>
+       <width>25</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="widget_body" native="true">
     <property name="geometry">

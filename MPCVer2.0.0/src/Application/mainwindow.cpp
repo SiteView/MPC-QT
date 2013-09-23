@@ -9,7 +9,6 @@
 #include <QStackedLayout>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "src/ToolButton.h"
 #include "curldownloadmanager.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     downthread    = new CURLDownloadManager(this);//构造一个下载对象
     inform        = new InformDialog;
     item_allkind  = new SoftAllKindItem();
+    setting_menu  = new SettingMenu ();
 
     ui->lineEdit_s_4->setFrame(false);//搜索栏设为不可见
     ui->lineEdit_s_2->setFrame(false);
@@ -46,8 +46,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lab_softnum->hide();//软件统计数
 
     TitlePage();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -96,15 +94,13 @@ void MainWindow::TitlePage()//加载标题图片
     button_list.at(2)->setText("Uninstall");
     //    button_list.at(3)->setText("Manage");
     ui->title_page->setLayout(button_layout);
-
-    //    QMetaObject::connectSlotsByName(this);
+    button_list.at(0)->mouse_press=true;
 }
 
 void MainWindow::turnPage(QString current_page)
 {
     bool ok;
     int current_index = current_page.toInt(&ok, 10);
-
     for(int i=0; i<button_list.count(); i++)
     {
         ToolButton *tool_button = button_list.at(i);
@@ -230,7 +226,6 @@ void MainWindow::on_but_sel_name_clicked()//卸载页以软件名称排序
         ui->stackedWidget_2->setCurrentWidget(ui->page_up);
         ui->but_sel_name->setIcon(QIcon(":/images/down.png"));
         flag=false;
-
     }
     else
     {
@@ -239,7 +234,6 @@ void MainWindow::on_but_sel_name_clicked()//卸载页以软件名称排序
         ui->stackedWidget_2->setCurrentWidget(ui->page_down);
         ui->but_sel_name->setIcon(QIcon(":/images/up.png"));
         flag=true;
-
     }
 }
 
@@ -281,7 +275,6 @@ void MainWindow::on_but_sel_time_clicked()//卸载页以软件安装时间排序
         ui->but_sel_time->setIcon(QIcon(":/images/up.png"));
         flag=true;
     }
-
 }
 
 void MainWindow::on_but_sel_path_clicked()//卸载页以软件安装路径排序
@@ -378,5 +371,14 @@ void MainWindow::on_but_return_2_clicked()//软件卸载页返回
 void MainWindow::on_but_return_clicked()//软件下载页返回
 {
     ui->but_return->hide();
-    ui->stack_download->setCurrentWidget(ui->page_all);
+    //    ui->stack_download->setCurrentWidget(ui->page_all);
+    changeCurrentItem();
+}
+
+void MainWindow::on_but_setting_clicked()
+{
+    QPoint p = rect().topRight();
+    p.setX(p.x() - 200);
+    p.setY(p.y() + 15);
+    setting_menu->exec(this->mapToGlobal(p));
 }

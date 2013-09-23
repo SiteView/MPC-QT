@@ -9,6 +9,7 @@
 #include <QCoreApplication>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QDir>
 #include "CellClass.h"
 #include "SoftUpgradeItem.h"
 #include "curldownloadmanager.h"
@@ -141,6 +142,8 @@ SoftUpgradeItem::SoftUpgradeItem(QWidget *parent) :
     horizontalLayout_3->addWidget(widget);
     this->setLayout(horizontalLayout_3);
 
+    connect(icon,SIGNAL(clicked()),this,SLOT(on_icon_clicked()));
+    connect(but_more,SIGNAL(clicked()),this,SLOT(on_but_more_clicked()));
     connect(but_upgrade,SIGNAL(clicked()),this,SLOT(on_but_upgrade_clicked()));
     connect(but_continue,SIGNAL(clicked()),this,SLOT(continueProgress_download()));
     connect(but_cancel,SIGNAL(clicked()),this,SLOT(cancelProgress_download()));
@@ -194,6 +197,19 @@ void SoftUpgradeItem::takeText(QString Qicon,QString Qsoftname,
 void SoftUpgradeItem::on_but_upgrade_clicked()//点击更新按钮
 {
     runPath=QCoreApplication::applicationDirPath();
+    QString filetmp=runPath+QString("/tmp");//判断是否存在文件夹tmp，不存在即创建
+    QDir *temp = new QDir;
+    bool exist = temp->exists(filetmp);
+    if(!exist)
+    {
+        bool ok = temp->mkdir(filetmp);
+        if(!ok)
+        {
+            CellClass *cell=new CellClass();
+            cell->changeText("creat files tmp","is fail","close");
+            cell->show();
+        }
+    }
     QString filename =runPath +QString("/tmp/")+exename;
     QFileInfo iconfile(filename);
     if(iconfile.exists())
@@ -295,7 +311,6 @@ void SoftUpgradeItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-
     }
 }
 
@@ -310,8 +325,17 @@ QString SoftUpgradeItem::get_size( qint64 byte )//转换软件大小的单位
     if ( kb != 0 ) size=tr("%1KB").arg(kb,0,'f',2);
     if ( mb != 0 ) size=tr("%1MB").arg(mb,0,'f',2);
     if ( gb != 0 ) size=tr("%1GB").arg(gb,0,'f',2);
-
     return size;
+}
+
+void SoftUpgradeItem::on_icon_clicked()//点击图片button
+{
+
+}
+
+void SoftUpgradeItem::on_but_more_clicked()
+{
+
 }
 
 void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
@@ -336,7 +360,6 @@ void SoftUpgradeItem::paintEvent(QPaintEvent *event)//绘制卸载界面
         painter2.setPen(QColor(228,228,228)); //设定画笔颜色，到时侯就是边框颜色
         painter2.setBrush(linear2);
         painter2.drawRect(QRect(0.5, 0.5, this->width()-1, this->height()-1));
-
     }
 }
 

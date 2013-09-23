@@ -22,7 +22,6 @@ void ToolButton::setImage(QString pic_name)
     setAutoRaise(true);
 
     setStyleSheet("background:transparent;");
-
     mouse_over = false;
     mouse_press = false;
 

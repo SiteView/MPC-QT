@@ -9,7 +9,7 @@
 #include <QCoreApplication>
 #include <QPainter>
 #include <QMouseEvent>
-
+#include <QDir>
 #include "SoftDownloadItem.h"
 #include "SoftDownloadList.h"
 #include "curldownloadmanager.h"
@@ -173,7 +173,20 @@ void SoftDownloadItem::takeText(QString Qsoftname,
 void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
     runPath=QCoreApplication::applicationDirPath();
-    QString filename =runPath +QString("/tmp/")+exename;
+    QString filetmp=runPath+QString("/tmp");//判断是否存在文件夹tmp，不存在即创建
+    QDir *temp = new QDir;
+    bool exist = temp->exists(filetmp);
+    if(!exist)
+    {
+        bool ok = temp->mkdir(filetmp);
+        if(!ok)
+        {
+            CellClass *cell=new CellClass();
+            cell->changeText("creat files tmp","is fail","close");
+            cell->show();
+        }
+    }
+    QString filename =runPath +QString("/tmp/")+exename;//判断软件是否已经下载
     QFileInfo iconfile(filename);
     if(iconfile.exists())
     {
@@ -184,7 +197,7 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
     }
     else
     {
-        if(CURLDownloadManager::getThis()->isBusy())
+        if(CURLDownloadManager::getThis()->isBusy())//判断下载线程是否被占用
         {
             CellClass *cell=new CellClass();
             cell->changeText("Download","is busy","close");
@@ -217,8 +230,8 @@ void SoftDownloadItem::cancelProgress_download()//取消下载
     but_continue->hide();
     but_suspend->show();
     CURLDownloadManager::getThis()->CancelTask();
-
 }
+
 void SoftDownloadItem::continueProgress_download()//继续下载
 {
     but_continue->hide();
@@ -261,6 +274,7 @@ bool SoftDownloadItem::suspendProgress_setup()//暂停安装
 
 void SoftDownloadItem::DownloadThread()//下载进程
 {
+
     CURLDownloadManager::getThis()->start();
     CURLDownloadManager::getThis()->setUrl(urlprogram);
     CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);

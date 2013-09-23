@@ -51,7 +51,8 @@ signals:
 
 public slots:
    void on_but_upgrade_clicked();
-
+   void on_icon_clicked();
+   void on_but_more_clicked();
    void startProgress(int);
    void changevalued(int);
    void continueProgress_download();

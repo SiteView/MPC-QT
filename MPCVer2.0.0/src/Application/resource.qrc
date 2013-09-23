@@ -51,5 +51,6 @@
         <file>images/continue_h.png</file>
         <file>images/continue.png</file>
         <file>images/red.png</file>
+        <file>images/setting.png</file>
     </qresource>
 </RCC>

@@ -15,6 +15,8 @@
 #include "src/SoftUpgradeList.h"
 #include "src/PageModelList.h"
 #include "src/ToolButton.h"
+#include "src/SettingMenu.h"
+
 class CURLDownloadManager;
 namespace Ui {
 class MainWindow;
@@ -88,6 +90,8 @@ private slots:
 
     void on_but_return_clicked();
 
+    void on_but_setting_clicked();
+
 public slots:
     void turnPage(QString current_page);
 
@@ -143,6 +147,7 @@ public:
     QList<QWidget *> *page_list ;//构造界面列表
     QList<SoftDownloadList *> *download_list;//构造下载对象列表
     CURLDownloadManager *downthread;//初始化一个下载对象
+    SettingMenu *setting_menu;//设置菜单
 
 private:
     Ui::MainWindow *ui;

@@ -47,10 +47,12 @@ public:
     QStringList setuptime_list;
     QStringList progress_list;
     QStringList uninstallString_list;
+    int core;//被除数
     int page_count; //总页数
     int page_count_point; //最后一页的显示个数
     int current_page; //当前为第几页
     int cyc_condition;//给一个循环条件
+
 
     CSQLiteDb m_SQLiteDb;
     QWidget *WidgetContents;
