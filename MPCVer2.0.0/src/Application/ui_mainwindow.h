@@ -20,6 +20,8 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QWidget>
 
@@ -34,6 +36,7 @@ public:
     QPushButton *but_minimize;
     QWidget *title_page;
     QPushButton *but_setting;
+    QLabel *label_logo;
     QWidget *widget_body;
     QStackedWidget *stackedWidget;
     QWidget *page;
@@ -44,18 +47,25 @@ public:
     QLineEdit *lineEdit_s_4;
     QPushButton *but_clear_4;
     QPushButton *but_search_4;
-    QWidget *widget_4;
     QStackedWidget *stack_download;
     QWidget *page_all;
     QWidget *page_null_default;
     QLabel *lab_null_caution;
     QLabel *lab_null_text;
     QWidget *page_search;
+    QScrollArea *scrollArea;
+    QWidget *scrollWidget;
     QWidget *widget_2;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *but_return;
-    QLabel *lab_softnum;
+    QWidget *wdg_text;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *lab_sortname;
+    QLabel *lab_sortnum;
+    QLabel *lab_sortunit;
+    QSpacerItem *horizontalSpacer;
     QWidget *page_SoftUpgrade;
     QLabel *label_3;
     QWidget *widget_s_3;
@@ -92,6 +102,7 @@ public:
     QPushButton *but_return_2;
     QWidget *page_UpdateInform;
     QWidget *widget_7;
+    QWidget *widget_bottom;
     QLabel *label;
     QFrame *line_left;
     QFrame *line_bottom;
@@ -120,12 +131,15 @@ public:
         but_setting = new QPushButton(title);
         but_setting->setObjectName(QStringLiteral("but_setting"));
         but_setting->setGeometry(QRect(845, 0, 25, 21));
+        label_logo = new QLabel(title);
+        label_logo->setObjectName(QStringLiteral("label_logo"));
+        label_logo->setGeometry(QRect(676, 28, 244, 71));
         widget_body = new QWidget(centralWidget);
         widget_body->setObjectName(QStringLiteral("widget_body"));
         widget_body->setGeometry(QRect(0, 100, 920, 580));
         stackedWidget = new QStackedWidget(widget_body);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
-        stackedWidget->setGeometry(QRect(0, 0, 920, 560));
+        stackedWidget->setGeometry(QRect(0, 0, 920, 552));
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
         stackedWidget->addWidget(page);
@@ -156,12 +170,9 @@ public:
 
         horizontalLayout_2->addWidget(widget_s_4);
 
-        widget_4 = new QWidget(page_SoftDownload);
-        widget_4->setObjectName(QStringLiteral("widget_4"));
-        widget_4->setGeometry(QRect(0, 0, 160, 560));
         stack_download = new QStackedWidget(page_SoftDownload);
         stack_download->setObjectName(QStringLiteral("stack_download"));
-        stack_download->setGeometry(QRect(160, 50, 780, 510));
+        stack_download->setGeometry(QRect(160, 50, 780, 502));
         page_all = new QWidget();
         page_all->setObjectName(QStringLiteral("page_all"));
         stack_download->addWidget(page_all);
@@ -177,13 +188,20 @@ public:
         page_search = new QWidget();
         page_search->setObjectName(QStringLiteral("page_search"));
         stack_download->addWidget(page_search);
+        scrollArea = new QScrollArea(page_SoftDownload);
+        scrollArea->setObjectName(QStringLiteral("scrollArea"));
+        scrollArea->setGeometry(QRect(0, -1, 162, 554));
+        scrollArea->setWidgetResizable(true);
+        scrollWidget = new QWidget();
+        scrollWidget->setObjectName(QStringLiteral("scrollWidget"));
+        scrollWidget->setGeometry(QRect(0, 0, 160, 552));
+        scrollArea->setWidget(scrollWidget);
         widget_2 = new QWidget(page_SoftDownload);
         widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setGeometry(QRect(175, 8, 150, 41));
-        widget_2->setMaximumSize(QSize(150, 50));
+        widget_2->setGeometry(QRect(160, 0, 361, 51));
         horizontalLayoutWidget = new QWidget(widget_2);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(0, 0, 151, 41));
+        horizontalLayoutWidget->setGeometry(QRect(10, 10, 351, 41));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(0);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -203,13 +221,48 @@ public:
 
         horizontalLayout->addWidget(but_return);
 
-        lab_softnum = new QLabel(horizontalLayoutWidget);
-        lab_softnum->setObjectName(QStringLiteral("lab_softnum"));
-        lab_softnum->setMaximumSize(QSize(130, 30));
-        lab_softnum->setContextMenuPolicy(Qt::DefaultContextMenu);
-        lab_softnum->setAlignment(Qt::AlignCenter);
+        wdg_text = new QWidget(horizontalLayoutWidget);
+        wdg_text->setObjectName(QStringLiteral("wdg_text"));
+        wdg_text->setMaximumSize(QSize(250, 35));
+        horizontalLayoutWidget_2 = new QWidget(wdg_text);
+        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(0, 0, 251, 31));
+        horizontalLayout_3 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        lab_sortname = new QLabel(horizontalLayoutWidget_2);
+        lab_sortname->setObjectName(QStringLiteral("lab_sortname"));
+        lab_sortname->setMaximumSize(QSize(100, 35));
+        lab_sortname->setContextMenuPolicy(Qt::DefaultContextMenu);
+        lab_sortname->setMidLineWidth(1);
+        lab_sortname->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout->addWidget(lab_softnum);
+        horizontalLayout_3->addWidget(lab_sortname);
+
+        lab_sortnum = new QLabel(horizontalLayoutWidget_2);
+        lab_sortnum->setObjectName(QStringLiteral("lab_sortnum"));
+        lab_sortnum->setMaximumSize(QSize(100, 35));
+        lab_sortnum->setContextMenuPolicy(Qt::DefaultContextMenu);
+        lab_sortnum->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_3->addWidget(lab_sortnum);
+
+        lab_sortunit = new QLabel(horizontalLayoutWidget_2);
+        lab_sortunit->setObjectName(QStringLiteral("lab_sortunit"));
+        lab_sortunit->setMaximumSize(QSize(50, 35));
+        lab_sortunit->setContextMenuPolicy(Qt::DefaultContextMenu);
+        lab_sortunit->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        horizontalLayout_3->addWidget(lab_sortunit);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer);
+
+
+        horizontalLayout->addWidget(wdg_text);
 
         stackedWidget->addWidget(page_SoftDownload);
         page_SoftUpgrade = new QWidget();
@@ -337,9 +390,12 @@ public:
         widget_7->setObjectName(QStringLiteral("widget_7"));
         widget_7->setGeometry(QRect(0, 35, 920, 525));
         stackedWidget->addWidget(page_UpdateInform);
-        label = new QLabel(widget_body);
+        widget_bottom = new QWidget(widget_body);
+        widget_bottom->setObjectName(QStringLiteral("widget_bottom"));
+        widget_bottom->setGeometry(QRect(0, 552, 920, 28));
+        label = new QLabel(widget_bottom);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(8, 560, 191, 21));
+        label->setGeometry(QRect(12, 4, 191, 21));
         line_left = new QFrame(centralWidget);
         line_left->setObjectName(QStringLiteral("line_left"));
         line_left->setGeometry(QRect(-1, 100, 4, 580));
@@ -373,12 +429,15 @@ public:
         but_close->setText(QString());
         but_minimize->setText(QString());
         but_setting->setText(QString());
+        label_logo->setText(QString());
         but_clear_4->setText(QString());
         but_search_4->setText(QString());
         lab_null_caution->setText(QString());
         lab_null_text->setText(QString());
         but_return->setText(QApplication::translate("MainWindow", "return", 0));
-        lab_softnum->setText(QString());
+        lab_sortname->setText(QApplication::translate("MainWindow", "allsoftware", 0));
+        lab_sortnum->setText(QApplication::translate("MainWindow", "123903", 0));
+        lab_sortunit->setText(QApplication::translate("MainWindow", "kinds", 0));
         label_3->setText(QString());
         but_clear_3->setText(QString());
         but_search_3->setText(QString());
