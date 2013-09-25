@@ -142,7 +142,7 @@ void SoftDownloadList::selectDifType(int cmd)
     {
         SoftDownloadItem *item = new SoftDownloadItem();
         item_list->push_back(item);
-        item_list->at(i)->takeText(list_0.at(i),list_1.at(i),list_4.at(i),list_2.at(i),
+        item->takeText(list_0.at(i),list_1.at(i),list_4.at(i),list_2.at(i),
                                    list_5.at(i));
         QListWidgetItem *twi = new QListWidgetItem();
         twi->setSizeHint(QSize(400,59));

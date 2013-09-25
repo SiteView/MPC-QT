@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->createDownloadMenu();
     this->AddSoftSortMenu();
     downthread    = new CURLDownloadManager(this);//构造一个下载对象
-    inform        = new InformDialog;
+//    inform        = new InformDialog;
     item_allkind  = new SoftAllKindItem();
     setting_menu  = new SettingMenu ();
 
@@ -206,11 +206,11 @@ void MainWindow::AddSoftSortMenu()//增加软件分类菜单
 void MainWindow::changeCurrentItem()//显示不同分类的软件
 {
     ui->but_return->hide();
-//    ui->wdg_text->show();
+    ui->wdg_text->show();
     int current_row = list_allkinds->list_classify->currentRow();
 
-//    ui->lab_sortname->setText(list_allkinds->list_name.at(current_row));
-//    ui->lab_sortnum->setText(list_allkinds->list_number.at(current_row));
+    ui->lab_sortname->setText(list_allkinds->list_name.at(current_row));
+    ui->lab_sortnum->setText(list_allkinds->list_number.at(current_row));
     ui->stack_download->setCurrentWidget(page_list->at(current_row));
     qDebug()<<current_row<<"----current_row----";
 }
@@ -352,7 +352,7 @@ void MainWindow::on_but_search_4_clicked()//软件下载页搜索按钮
         ui->stack_download->setCurrentWidget(ui->page_search);
     }
     ui->but_return->show();
-//    ui->wdg_text->hide();
+    ui->wdg_text->hide();
 }
 
 void MainWindow::on_but_clear_3_clicked()//软件更新页清除按钮
@@ -400,8 +400,7 @@ void MainWindow::on_but_return_2_clicked()//软件卸载页返回
 void MainWindow::on_but_return_clicked()//软件下载页返回
 {
     ui->but_return->hide();
-//    ui->wdg_text->show();
-    //    ui->stack_download->setCurrentWidget(ui->page_all);
+    ui->wdg_text->show();
     changeCurrentItem();
 }
 

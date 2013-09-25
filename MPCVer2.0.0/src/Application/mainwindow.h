@@ -5,7 +5,6 @@
 #include <QSignalMapper>
 #include "QListWidget"
 #include "../Common/SqliteDb.h"
-#include "src/informdialog.h"
 #include "src/SoftUnloadList.h"
 #include "src/SoftDownloadList.h"
 #include "src/SoftAllKindList.h"
@@ -115,7 +114,7 @@ public:
 public:
     QLabel *lab_upnum;
     CSQLiteDb m_SQLiteDb;
-    InformDialog *inform;
+//    InformDialog *inform;
     SoftUnloadList *list_unload;
     SoftUnloadList *list_unload1;
     SoftUnloadList *list_unload2;

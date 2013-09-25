@@ -18,7 +18,8 @@ void SoftAllKindList::add_tree_data()
     twi_list->clear();
 
     icon<<"HotApps"<<"Popular";
-    text<<""<<"";
+    text<<" "<<" ";
+    num<<1<<2;
     Fill_Item_List(icon,text,num);
     count_handpick=icon.size();
 //    list_handpick  = new QListWidget(this);

@@ -10,6 +10,8 @@ public:
     explicit SoftSortItem(QWidget *parent = 0);
     void takeText(QString ,QString);
 
+    void paintEvent(QPaintEvent *event);
+
 signals:
     
 public slots:

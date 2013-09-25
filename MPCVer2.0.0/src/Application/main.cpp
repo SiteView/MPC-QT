@@ -1,4 +1,3 @@
-
 #include <QApplication>
 #include <QFile>
 #include <QDebug>
@@ -6,7 +5,6 @@
 #include "../Common/SqliteDb.h"
 #include "../Common/SytemLog.h"
 #include "src/informdialog.h"
-
 #include "src/SoftDownloadItem.h"
 // 全局数据库对象
 QSqlDatabase CSQLiteDb::m_db;
