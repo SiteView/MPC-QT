@@ -16,10 +16,12 @@ public:
     QLabel *ico;
     QLabel *text;
     QLabel *num;
-    QFrame *line;
+
 public:
     void retranslateUi();
     QString get_text();
+
+    void takeText(QString ,QString ,int);
 protected:
 
 };

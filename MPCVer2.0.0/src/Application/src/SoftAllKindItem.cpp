@@ -8,19 +8,20 @@
 SoftAllKindItem::SoftAllKindItem(QWidget *parent) :
     QWidget(parent)
 {
+    this->setFixedSize(160,30);
     ico = new QLabel();
     ico->setObjectName(QString::fromUtf8("ico"));
-    ico->setGeometry(QRect(15,25,16,16));
     ico->setFixedSize(QSize(16, 16));
+    ico->setStyleSheet("background:transparent");
     text = new QLabel();
     text->setObjectName(QString::fromUtf8("text"));
-    text->setGeometry(QRect(30,25,100,20));
     text->setFixedSize(100,20);
+    text->setStyleSheet("background:transparent");
 
     num = new QLabel();
     num->setObjectName(QString::fromUtf8("num"));
-    num->setGeometry(QRect(150,25,20,20));
     num->setFixedSize(20,20);
+    num->setStyleSheet("background:transparent");
 
     QHBoxLayout *horizontalLayout_2 = new QHBoxLayout();
     horizontalLayout_2->setSpacing(6);
@@ -36,12 +37,17 @@ SoftAllKindItem::SoftAllKindItem(QWidget *parent) :
 void SoftAllKindItem::retranslateUi()
 {
 
-
 }
 
 QString SoftAllKindItem::get_text()
 {
     return text->text();
+}
+void SoftAllKindItem::takeText(QString Qtype_name,QString Qorder_number,int Qnum)
+{
+    ico->setStyleSheet("border-image:url(:/images/litter/"+Qtype_name+".png)");
+    text->setText(Qtype_name);
+    num->setText(Qorder_number);
 }
 
 

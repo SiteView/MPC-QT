@@ -16,6 +16,7 @@
 #include "src/PageModelList.h"
 #include "src/ToolButton.h"
 #include "src/SettingMenu.h"
+#include "src/SoftSortItem.h"
 
 class CURLDownloadManager;
 namespace Ui {
@@ -36,8 +37,8 @@ enum SIGN
 
 };
 enum TYPE_FLAG{
-
-    ONE
+    ALL
+    ,ONE
     ,TWO
     ,THREE
     ,FOUR
@@ -50,7 +51,7 @@ enum TYPE_FLAG{
     ,ELEVEN
     ,TWELVE
     ,SEARCH
-    , ALL
+
 };
 class MainWindow : public QMainWindow
 {
@@ -109,7 +110,7 @@ public:
     void createUnloadtableMenu();
     void createDownloadMenu();
     void AddSoftSortMenu();
-//    void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
+    //    void add_networkitem(const QString &icon,const QString &soft_name,const QString &detail,const QString &comment);
 
 public:
     QLabel *lab_upnum;
@@ -128,16 +129,16 @@ public:
 
 
     SoftDownloadList *list_download;
-//    SoftDownloadList *list_download1;
-//    SoftDownloadList *list_download2;
-//    SoftDownloadList *list_download3;
+    //    SoftDownloadList *list_download1;
+    //    SoftDownloadList *list_download2;
+    //    SoftDownloadList *list_download3;
     SoftDownloadList *search_download;
 
     SoftAllKindList *list_allkinds;
     SoftAllKindItem *item_allkind;
 
     SoftUpgradeList *list_upgrade;
-//    TestUnloadItem *layout_widget; //显示皮肤界面
+    //    TestUnloadItem *layout_widget; //显示皮肤界面
     PageModelList *testclass;
     GridlayoutClass *grid;
     bool flag;

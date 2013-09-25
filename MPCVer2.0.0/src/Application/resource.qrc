@@ -51,6 +51,13 @@
         <file>images/continue_h.png</file>
         <file>images/continue.png</file>
         <file>images/red.png</file>
-        <file>images/setting.png</file>
+        <file>images/litter/down_manager.png</file>
+        <file>images/litter/litter_icon.png</file>
+        <file>images/litter/all.png</file>
+        <file>images/but_setting.png</file>
+        <file>images/but_setting_h.png</file>
+        <file>images/litter/Popular.png</file>
+        <file>images/litter/HotApps.png</file>
+        <file>images/logo.png</file>
     </qresource>
 </RCC>

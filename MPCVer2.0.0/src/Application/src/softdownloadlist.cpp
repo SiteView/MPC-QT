@@ -15,11 +15,10 @@ SoftDownloadList::SoftDownloadList(QWidget *parent) :
     DownloadList->setFocusPolicy(Qt::NoFocus);
     DownloadList->resize(760,510);
     DownloadList->setStyleSheet("QListView::item:selected{background-color:rgb(106,189,246)}");
-
 }
 
-void SoftDownloadList::selectDifType(int cmd){
-
+void SoftDownloadList::selectDifType(int cmd)
+{
     QSqlQuery SQLiteQuery( *m_SQLiteDb.getDB());
     switch(cmd)
     {
@@ -134,7 +133,6 @@ void SoftDownloadList::selectDifType(int cmd){
         list_4<<pahtstr4;
         list_5<<pahtstr5;
         list_6<<pahtstr6;
-
     }
     SQLiteQuery.finish();
 
@@ -155,5 +153,4 @@ void SoftDownloadList::selectDifType(int cmd){
         DownloadList->addItem(twi_list->at(k));
         DownloadList->setItemWidget(twi_list->at(k),item_list->at(k));
     }
-
 }

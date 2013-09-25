@@ -9,8 +9,12 @@
 QWidget#title {
 	border-image: url(:/images/title.png);
 }
-QWidget#widget_body,#widget_4 ,#widget_download,#widget_3{
+QWidget#widget_body,#widget_body,#widget_4 ,#widget_download,#widget_3{
 	background-color:rgb(245,245,245);
+}
+QWidget#widget_bottom
+{
+	background-color:#d0e5f8;
 }
 
 QWidget#widget_s_4,#widget_s_2,#widget_s_3
@@ -116,11 +120,11 @@ QPushButton#but_minimize:hover
 /*HEAD BUTTONS SETTING*/
 QPushButton#but_setting
 {
-    border-image: url(:/images/setting.png);
+    border-image: url(:/images/but_setting.png);
 }
 QPushButton#but_setting:hover
 {
-    border-image: url(:/images/setting.png);
+    border-image: url(:/images/but_setting_h.png);
 }
 /*HEAD BUTTONS SEARCH*/
 QPushButton#but_search
@@ -145,6 +149,7 @@ QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_t
 
 
 /*LABELS*/
+
 #label_SoftUnload,#label_UpdateInform,#Download,#Upgrade,#lab_upnum,#Uninstall,#Manage
 {
 	color:rgb(255,255,255);
@@ -165,19 +170,11 @@ QLabel#softname,#but_softname,#skin_label,#lab_null_text,#lab_text_unload
 
 }
 
+QLabel#label_logo
+{
+	border-image: url(:/images/logo.png);
+}
 
-QLabel#lab_logo
-{
-	border-image: url(:/images/360small.png);
-}
-QLabel#lab_update
-{
-	border-image: url(:/images/refresh.png);
-}
-QLabel#lab_notice
-{
-	border-image: url(:/images/caution.png);
-}
 
 /*TableWidget for APList*/
 QTableWidget QHeaderView::section

@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_s_3->setMaxLength(50);
     ui->lineEdit_s_4->setMaxLength(50);
 
-    connect(list_allkinds->list_softallkind,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
+    connect(list_allkinds->list_classify,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
 
     ui->but_sel_name->setStyleSheet("QPushButton{text-align:left;}");
     ui->but_sel_name->setText("softname");
@@ -43,8 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_operate->setText("operate");
     ui->but_return->hide();//返回按钮
     ui->but_return_2->hide();//返回按钮
-    ui->lab_softnum->hide();//软件统计数
-
+//    ui->wdg_text->show();
     TitlePage();
 }
 
@@ -165,8 +164,17 @@ void MainWindow::createUnloadtableMenu()//创建软件卸载部分
 }
 void MainWindow::AddSoftSortMenu()//增加软件分类菜单
 {
-    list_allkinds   = new SoftAllKindList(ui->widget_4);
-    typecount=list_allkinds->type;
+    SoftSortItem *soft_pick=new SoftSortItem();
+    SoftSortItem *soft_sort=new SoftSortItem();
+    soft_pick->takeText("litter_icon","handpick Software");
+    soft_sort->takeText("litter_icon","Software classify");
+
+
+    list_allkinds   = new SoftAllKindList();
+    list_allkinds->add_tree_data();
+    list_allkinds->add_branch_data();
+
+    typecount=list_allkinds->count_classify;
     page_list = new QList<QWidget *>();//构造对应的page
     download_list =new QList<SoftDownloadList *>();//构造对应的Download对象
     for(int i=0;i<typecount;i++)
@@ -177,14 +185,34 @@ void MainWindow::AddSoftSortMenu()//增加软件分类菜单
         SoftDownloadList *download=new SoftDownloadList(page_type);
         download->selectDifType(i);
         download_list->push_back(download);
+        qDebug()<<typecount<<"iii===="<<i;
     }
+
+    QVBoxLayout *v_layout=new QVBoxLayout();
+    v_layout->setSpacing(0);
+    v_layout->setContentsMargins(11, 11, 11, 11);
+    v_layout->setObjectName(QString::fromUtf8("v_layout"));
+    v_layout->setContentsMargins(0, 0, 0, 0);
+    v_layout->addWidget(soft_pick);
+    v_layout->addWidget(list_allkinds->list_handpick);
+    v_layout->addWidget(soft_sort);
+    v_layout->addWidget(list_allkinds->list_classify);
+
+    ui->scrollWidget->setLayout(v_layout);
+    ui->scrollArea->setStyleSheet("background-color:#f5f5f5;");
+
 }
 
 void MainWindow::changeCurrentItem()//显示不同分类的软件
 {
     ui->but_return->hide();
-    int current_row = list_allkinds->list_softallkind->currentRow();
+//    ui->wdg_text->show();
+    int current_row = list_allkinds->list_classify->currentRow();
+
+//    ui->lab_sortname->setText(list_allkinds->list_name.at(current_row));
+//    ui->lab_sortnum->setText(list_allkinds->list_number.at(current_row));
     ui->stack_download->setCurrentWidget(page_list->at(current_row));
+    qDebug()<<current_row<<"----current_row----";
 }
 
 void MainWindow::on_but_close_clicked()//关闭窗口
@@ -324,6 +352,7 @@ void MainWindow::on_but_search_4_clicked()//软件下载页搜索按钮
         ui->stack_download->setCurrentWidget(ui->page_search);
     }
     ui->but_return->show();
+//    ui->wdg_text->hide();
 }
 
 void MainWindow::on_but_clear_3_clicked()//软件更新页清除按钮
@@ -371,6 +400,7 @@ void MainWindow::on_but_return_2_clicked()//软件卸载页返回
 void MainWindow::on_but_return_clicked()//软件下载页返回
 {
     ui->but_return->hide();
+//    ui->wdg_text->show();
     //    ui->stack_download->setCurrentWidget(ui->page_all);
     changeCurrentItem();
 }
