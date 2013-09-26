@@ -25,7 +25,7 @@ void SoftAllKindList::add_tree_data()
 //    list_handpick  = new QListWidget(this);
     list_handpick->setFixedSize(160,30*count_handpick);
     list_handpick->setFocusPolicy(Qt::NoFocus);
-    list_handpick->setStyleSheet("QListView::item:selected{background-color:rgb(101,205,113)}");
+    list_handpick->setStyleSheet("QListView::item:selected{background-color:lightblue;}");
 
     for(int k=0; k<count_handpick; k++)
     {
@@ -69,7 +69,7 @@ void SoftAllKindList::add_branch_data()
 //    list_classify  = new QListWidget(this);
     list_classify->setFixedSize(160,30*count_classify);
     list_classify->setFocusPolicy(Qt::NoFocus);
-    list_classify->setStyleSheet("QListView::item:selected{background-color:rgb(101,205,113)}");
+    list_classify->setStyleSheet("QListView::item:selected{background-color:lightblue}");
 
     for(int k=0; k<count_classify; k++)
     {

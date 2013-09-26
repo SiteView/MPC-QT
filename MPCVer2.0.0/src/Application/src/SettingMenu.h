@@ -15,6 +15,7 @@ signals:
     void showSettingDialog();
     void showNewCharacter();
     void showAboutUs();
+
 public slots:
 
 private:

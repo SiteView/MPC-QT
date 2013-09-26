@@ -137,14 +137,20 @@ QPushButton#but_search:hover
 border-image: url(:/images/search_press.png);
 
 }
-
+QPushButton#but_dm
+{
+	color:rgb(136,136,136);
+}
+QPushButton#but_dm:hover
+{
+	color:rgb(3,112,218);
+}
 QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_time
 {
 	background:rgb(225,236,255);
 	border-style:solid;
 	border-width:0px;
-	border-radius: 0px;
-	
+	border-radius: 0px;	
 }
 
 
@@ -169,10 +175,19 @@ QLabel#softname,#but_softname,#skin_label,#lab_null_text,#lab_text_unload
 	font-weight:bold;
 
 }
-
+QLabel#lab_sortnum
+{
+	color:midnightblue;
+	font: 75 12px "Arial" ;
+	font-weight:bold;	
+}
 QLabel#label_logo
 {
 	border-image: url(:/images/logo.png);
+}
+QLabel#lab_dm
+{
+	border-image:url(:/images/litter/down_manager.png);
 }
 
 

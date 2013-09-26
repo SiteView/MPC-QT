@@ -16,7 +16,8 @@
 #include "src/ToolButton.h"
 #include "src/SettingMenu.h"
 #include "src/SoftSortItem.h"
-
+#include "src/SettingDialog.h"
+#include "src/informdialog.h"
 class CURLDownloadManager;
 namespace Ui {
 class MainWindow;
@@ -92,6 +93,10 @@ private slots:
 
     void on_but_setting_clicked();
 
+    void showAboutUs();
+    void showNewCharacter();
+    void showSettingDialog();
+
 public slots:
     void turnPage(QString current_page);
 
@@ -148,6 +153,8 @@ public:
     QList<SoftDownloadList *> *download_list;//构造下载对象列表
     CURLDownloadManager *downthread;//初始化一个下载对象
     SettingMenu *setting_menu;//设置菜单
+    SettingDialog *setting_dialog;//设置界面
+
 
 private:
     Ui::MainWindow *ui;

@@ -22,16 +22,21 @@ MainWindow::MainWindow(QWidget *parent) :
     this->createDownloadMenu();
     this->AddSoftSortMenu();
     downthread    = new CURLDownloadManager(this);//构造一个下载对象
-//    inform        = new InformDialog;
     item_allkind  = new SoftAllKindItem();
     setting_menu  = new SettingMenu ();
-
+//    character_widget = new CharacterWidget();
+//    about_us_dialog = new AboutUsDialog(this);
+    setting_dialog = new SettingDialog(this);
     ui->lineEdit_s_4->setFrame(false);//搜索栏设为不可见
     ui->lineEdit_s_2->setFrame(false);
     ui->lineEdit_s_3->setFrame(false);
     ui->lineEdit_s_2->setMaxLength(50);//设置搜索栏的宽度
     ui->lineEdit_s_3->setMaxLength(50);
     ui->lineEdit_s_4->setMaxLength(50);
+//    ui->lineEdit_s_4->displayText("360");
+    connect(setting_menu, SIGNAL(showSettingDialog()), this, SLOT(showSettingDialog()));
+    connect(setting_menu, SIGNAL(showNewCharacter()), this, SLOT(showNewCharacter()));
+    connect(setting_menu, SIGNAL(showAboutUs()), this, SLOT(showAboutUs()));
 
     connect(list_allkinds->list_classify,SIGNAL(itemSelectionChanged()),this,SLOT(changeCurrentItem()));
 
@@ -41,9 +46,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->but_sel_path->setText("setpath");
     ui->but_sel_size->setText("softsize");
     ui->but_sel_operate->setText("operate");
+    ui->but_dm->setStyleSheet("background:transparent");
+    ui->but_dm->setCursor(Qt::PointingHandCursor);
+    ui->but_dm->setText("management");
+    ui->label_logo->setCursor(Qt::PointingHandCursor);
     ui->but_return->hide();//返回按钮
     ui->but_return_2->hide();//返回按钮
-//    ui->wdg_text->show();
     TitlePage();
 }
 
@@ -132,14 +140,10 @@ void MainWindow::turnPage(QString current_page)
 
 void MainWindow::paintEvent(QPaintEvent *)//画界面边框
 {
-    //    QPainter painter2(this);
-    //    painter2.setPen(Qt::gray);
-    //    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
-    //    painter2.drawPolyline(points, 4);
-    QPainter painter(this);
-    QPen pen(Qt::gray);
-    painter.setPen(pen);
-    painter.drawRoundRect(0,0,this->width()-1, this->height()-1, 0, 0);
+    QPainter painter3(this);
+    painter3.setPen(Qt::gray);
+    static const QPointF points[4] = {QPointF(0, 100), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 100)};
+    painter3.drawPolyline(points, 4);
 }
 
 void MainWindow::createUpgradeMenu()//创建软件更新部分
@@ -207,12 +211,16 @@ void MainWindow::changeCurrentItem()//显示不同分类的软件
 {
     ui->but_return->hide();
     ui->wdg_text->show();
-    int current_row = list_allkinds->list_classify->currentRow();
-
-    ui->lab_sortname->setText(list_allkinds->list_name.at(current_row));
-    ui->lab_sortnum->setText(list_allkinds->list_number.at(current_row));
-    ui->stack_download->setCurrentWidget(page_list->at(current_row));
-    qDebug()<<current_row<<"----current_row----";
+    ui->lab_sortname->clear();
+    ui->lab_sortnum->clear();
+    int c_row = list_allkinds->list_classify->currentRow();
+    if (c_row<0)
+    {
+        c_row=0;
+    }
+    ui->stack_download->setCurrentWidget(page_list->at(c_row));
+    ui->lab_sortname->setText(list_allkinds->list_name.at(c_row));
+    ui->lab_sortnum->setText(list_allkinds->list_number.at(c_row));
 }
 
 void MainWindow::on_but_close_clicked()//关闭窗口
@@ -410,4 +418,22 @@ void MainWindow::on_but_setting_clicked()
     p.setX(p.x() - 200);
     p.setY(p.y() + 15);
     setting_menu->exec(this->mapToGlobal(p));
+}
+
+void MainWindow::showAboutUs()
+{
+//    about_us_dialog->exec();
+}
+
+void MainWindow::showNewCharacter()
+{
+//    character_widget->show();
+}
+
+void MainWindow::showSettingDialog()
+{
+    setting_dialog->exec();
+//    inform = new InformDialog;
+//    inform->exec();
+
 }

@@ -154,6 +154,9 @@
              <height>23</height>
             </size>
            </property>
+           <property name="text">
+            <string>360</string>
+           </property>
           </widget>
           <widget class="QPushButton" name="but_clear_4">
            <property name="geometry">
@@ -260,7 +263,7 @@
       <widget class="QWidget" name="widget_4" native="true">
        <property name="geometry">
         <rect>
-         <x>165</x>
+         <x>168</x>
          <y>0</y>
          <width>360</width>
          <height>50</height>
@@ -771,6 +774,32 @@
       </property>
       <property name="text">
        <string>Versions：2.0.1.7</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lab_dm">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>10</y>
+        <width>12</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="but_dm">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>5</y>
+        <width>85</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>

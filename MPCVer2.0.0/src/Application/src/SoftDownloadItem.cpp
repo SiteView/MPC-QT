@@ -18,15 +18,15 @@ SoftDownloadItem::SoftDownloadItem(QWidget *parent) :
     QWidget(parent)
 {
     QSpacerItem *horizontalSpacer = new QSpacerItem(15, 20, QSizePolicy::Maximum, QSizePolicy::Maximum);
-
     but_icon = new QPushButton();
     but_icon->setObjectName(QString::fromUtf8("but_icon"));
     but_icon->setFixedSize(QSize(50, 50));
-
+    but_icon->setCursor(Qt::PointingHandCursor);
     QVBoxLayout *verticalLayout = new QVBoxLayout();
     but_softname = new QLabel();
     but_softname->setObjectName(QString::fromUtf8("but_softname"));
     but_softname->setFixedSize(QSize(180, 30));
+    but_softname->setCursor(Qt::PointingHandCursor);
     verticalLayout->addWidget(but_softname);
     lab_softdetail = new QLabel();
     lab_softdetail->setObjectName(QString::fromUtf8("lab_softdetail"));

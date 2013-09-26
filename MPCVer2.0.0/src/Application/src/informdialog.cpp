@@ -1,10 +1,7 @@
-
 #include <QTimer>
 #include <QMouseEvent>
-
 #include <QtUiTools/QUiLoader>
 #include <QFile>
-
 #include "informdialog.h"
 #include "ui_informdialog.h"
 #include "softdownloadlist.h"
@@ -104,8 +101,6 @@ void InformDialog::mouseReleaseEvent(QMouseEvent *e)
 
 void InformDialog::additemlist()
 {
-
-
 
 }
 

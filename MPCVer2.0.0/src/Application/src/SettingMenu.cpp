@@ -30,6 +30,10 @@ void SettingMenu::createActions()
     this->addAction(action_login_home);
     this->addAction(action_protect);
     this->addAction(action_about_us);
+    action_about_us->setIcon(QIcon(":/images/mainMenu/about.png"));
+    action_help_online->setIcon(QIcon(":/images/mainMenu/help.png"));
+    action_check_update->setIcon(QIcon(":/images/mainMenu/update.png"));
+    action_setting->setIcon(QIcon(":/images/mainMenu/setting.png"));
     //设置信号连接
     QObject::connect(action_setting, SIGNAL(triggered()), this, SIGNAL(showSettingDialog()));
     QObject::connect(action_new_character, SIGNAL(triggered()), this, SIGNAL(showNewCharacter()));

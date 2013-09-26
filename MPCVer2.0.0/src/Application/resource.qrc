@@ -59,5 +59,13 @@
         <file>images/litter/Popular.png</file>
         <file>images/litter/HotApps.png</file>
         <file>images/logo.png</file>
+        <file>images/mainMenu/about.png</file>
+        <file>images/mainMenu/help.png</file>
+        <file>images/mainMenu/home.png</file>
+        <file>images/mainMenu/open.png</file>
+        <file>images/mainMenu/quit.png</file>
+        <file>images/mainMenu/setting.png</file>
+        <file>images/mainMenu/update.png</file>
+        <file>images/logo.48.png</file>
     </qresource>
 </RCC>
