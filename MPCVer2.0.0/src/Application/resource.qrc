@@ -67,5 +67,7 @@
         <file>images/mainMenu/setting.png</file>
         <file>images/mainMenu/update.png</file>
         <file>images/logo.48.png</file>
+        <file>images/lab_frame.png</file>
+        <file>images/lab_red_frame.png</file>
     </qresource>
 </RCC>

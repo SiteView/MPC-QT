@@ -12,6 +12,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QFont>
+#include <QToolButton>
 
 class SettingDialog : public QDialog
 {
@@ -19,6 +20,8 @@ class SettingDialog : public QDialog
 public:
     explicit SettingDialog(QWidget *parent = 0);
 //    ~SettingDialog();
+    void translation();
+    quint64  getDiskFreeSpace(QString );
 
 protected:
 
@@ -54,14 +57,31 @@ private:
 
     QWidget *tab1; //升级方式
     QGroupBox *tab1_group_box;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *v_Layout;
+    QHBoxLayout *Layout_1;
+    QLabel *lab_soft_dir;
+    QPushButton *but_open_dir;
+    QLabel *lab_disc;
+    QLabel *lab_disc_size;
+    QSpacerItem *Spacer;
+    QHBoxLayout *Layout_2;
+    QLabel *lab_show_dir;
+    QPushButton *but_chos_dir;
+    QPushButton *but_recover_dir;
+    QHBoxLayout *Layout_3;
+    QLabel *lab_apply_dir;
+    QPushButton *but_open_dir_2;
+    QLabel *lab_disc_2;
+    QLabel *lab_disc_size_2;
+    QSpacerItem *Spacer_2;
+    QHBoxLayout *Layout_4;
+    QLabel *lab_show_dir_2;
+    QPushButton *but_chos_dir_2;
+    QPushButton *but_recover_dir_2;
     QGroupBox *tab1_group_box2;
-    QRadioButton *auto_rise_button; //自动升级
-    QRadioButton *not_auto_rise_button; //不自动升级
-    QCheckBox *rise_mummy_check_box; //不升级但备用木马库
-    QCheckBox *game_check_box; //游戏时不升级
-    QCheckBox *g3_check_box; //3G上网时不升级
-    QCheckBox *p2p_check_box; //使用p2p/p2s技术为升级程序加速
-    QCheckBox *mummy_check_box; //备用木马库升级完成后右下角提示
+    QLabel *lab_down_inform;
+    QToolButton *but_on_off;
 
     QWidget *tab2; //高级设置
     QGroupBox *tab2_group_box1;
@@ -91,10 +111,20 @@ private:
     QCheckBox *new_character_check_box; //有新特权时显示通知窗口
     QCheckBox *rise_remind_check_box; //升级提醒通知窗口
 
+public:
+    QString direc_soft;
+    QString direc_apply;
 
 signals:
     
 public slots:
+    void on_but_chos_dir_clicked();
+    void on_but_chos_dir2_clicked();
+    void on_but_open_dir_clicked();
+    void on_but_open_dir2_clicked();
+    void on_but_recover_dir_clicked();
+    void on_but_recover_dir2_clicked();
+
     
 };
 

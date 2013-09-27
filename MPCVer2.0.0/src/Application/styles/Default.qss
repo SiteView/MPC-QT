@@ -96,14 +96,17 @@ QPushButton#but_continue:hover
 {
 	border-image: url(:/images/continue_h.png);
 }
-
+QPushButton#but_open_dir,#but_open_dir_2,#but_recover_dir,#but_recover_dir_2
+{
+	color:rgb(90,175,235);
+}
 
 /*HEAD BUTTONS ABOUT*/
-QPushButton#but_close,#close_button,#but_minimize
+QPushButton#but_close,#close_button,#c_but
 {
     border-image: url(:/images/but_close.png);
 }
-QPushButton#but_close:hover,#close_button:hover,#but_minimize:hover
+QPushButton#but_close:hover,#close_button:hover,#c_but:hover
 {
     border-image: url(:/images/but_close_hover.png);
 }
@@ -152,6 +155,17 @@ QPushButton#but_sel_name,#but_sel_operate,#but_sel_path,#but_sel_size,#but_sel_t
 	border-width:0px;
 	border-radius: 0px;	
 }
+QPushButton#but_chos_dir_2,#but_chos_dir,#cancel_button,#ok_button
+{
+	border: 1px solid rgb(185,185,185);
+	border-radius: 2px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255,255,255), stop:1 rgb(240,240,240));
+}
+QPushButton#but_chos_dir_2:hover,#but_chos_dir:hover,#cancel_button:hover,#ok_button:hover
+{
+	border-color:rgb(69,184,240); 
+	background:transparent;
+}
 
 
 /*LABELS*/
@@ -181,6 +195,10 @@ QLabel#lab_sortnum
 	font: 75 12px "Arial" ;
 	font-weight:bold;	
 }
+QLabel#lab_disc_size_2,#lab_disc_size
+{
+	color:green;
+}
 QLabel#label_logo
 {
 	border-image: url(:/images/logo.png);
@@ -190,6 +208,12 @@ QLabel#lab_dm
 	border-image:url(:/images/litter/down_manager.png);
 }
 
+QLabel#lab_show_dir_2,#lab_show_dir
+{
+	border-image:url(:/images/lab_frame.png);
+	color:rgb(136,136,136);
+	font: 75 12px "Arial";	
+}
 
 /*TableWidget for APList*/
 QTableWidget QHeaderView::section

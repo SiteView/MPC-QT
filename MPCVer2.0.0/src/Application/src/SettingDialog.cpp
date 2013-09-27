@@ -1,9 +1,14 @@
+#include <QDesktopServices>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QCoreApplication>
 #include "SettingDialog.h"
+#include <QtDebug>
 
 SettingDialog::SettingDialog(QWidget *parent) :
     QDialog(parent)
 {
-    this->resize(560, 400);
+    this->resize(560, 460);
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     this->initTitle();
     this->initCenter();
@@ -21,16 +26,17 @@ SettingDialog::SettingDialog(QWidget *parent) :
     main_layout->setContentsMargins(0, 0, 0, 0);
     setLayout(main_layout);
     mouse_press = false;
+    translation();
 }
-
 
 void SettingDialog::initTitle()
 {
     title_label = new QLabel();
     title_icon_label = new QLabel();
     close_button = new QPushButton();
+    close_button->setFixedSize(27,20);
+    close_button->setObjectName(QString::fromUtf8("c_but"));
     close_button->setIcon(QIcon(":/images/but_close.png"));
-
     title_label->setStyleSheet("color:white;");
     QPixmap pixmap(":/images/logo.48.png");
     title_icon_label->setPixmap(pixmap);
@@ -44,22 +50,21 @@ void SettingDialog::initTitle()
     title_layout->addWidget(close_button, 0, Qt::AlignTop);
     title_layout->setSpacing(5);
     title_layout->setContentsMargins(10, 0, 5, 10);
-//    setStyleSheet("background-color:lightblue");
-
     connect(close_button, SIGNAL(clicked()), this, SLOT(hide()));
-
 }
 
 void SettingDialog::initCenter()
 {
     tab_widget = new QTabWidget();
     tab_widget->setFixedSize(this->width(), this->height()-80);
+//    tab_widget->setGeometry(QRect(50, 80, this->width()-10,  this->height()-30));
+
     tab1 = new QWidget();
     tab2 = new QWidget();
     tab3 = new QWidget();
     tab4 = new QWidget();
-    tab_widget->setStyleSheet("QTabWidget::pane{border: 0px;}"
-        "QTabWidget::tab-bar{alignment:center;}"
+    tab_widget->setStyleSheet("QTabWidget::pane{border: 5px;}"
+        "QTabWidget::tab-bar{alignment:center ;}"
         "QTabBar::tab{background:transparent; color:white; min-width:30ex; min-height:10ex;}"
         "QTabBar::tab:hover{background:rgb(255, 255, 255, 100);}"
         "QTabBar::tab:selected{border-color: white;background:white;color:green;}");
@@ -72,13 +77,11 @@ void SettingDialog::initBottom()
 {
     ok_button = new QPushButton();
     cancel_button = new QPushButton();
+    ok_button->setObjectName(QStringLiteral("ok_button"));
+    cancel_button->setObjectName(QStringLiteral("ok_button"));
 
     ok_button->setFixedSize(75, 25);
     cancel_button->setFixedSize(75, 25);
-    ok_button->setStyleSheet("QPushButton{border:1px solid lightgray; background:rgb(230,230,230);}"
-        "QPushButton:hover{border-color:green; background:transparent;}");
-    cancel_button->setStyleSheet("QPushButton{border:1px solid lightgray; background:rgb(230,230,230);}"
-        "QPushButton:hover{border-color:green; background:transparent;}");
 
     bottom_layout = new QHBoxLayout();
     bottom_layout->addStretch();
@@ -86,53 +89,167 @@ void SettingDialog::initBottom()
     bottom_layout->addWidget(cancel_button);
     bottom_layout->setSpacing(20);
     bottom_layout->setContentsMargins(0, 10, 20, 0);
-
     connect(cancel_button, SIGNAL(clicked()), this, SLOT(hide()));
 }
 void SettingDialog::initTab1()
 {
     tab1_group_box = new QGroupBox();
-    tab1_group_box2 = new QGroupBox();
-
-    auto_rise_button = new QRadioButton();
-    not_auto_rise_button = new QRadioButton();
-    rise_mummy_check_box = new QCheckBox();
-    game_check_box = new QCheckBox();
-    g3_check_box = new QCheckBox();
-    p2p_check_box = new QCheckBox();
-    mummy_check_box = new QCheckBox();
-
     tab1_group_box->setTitle("Download Setting");
-    tab1_group_box2->setTitle("Download Inform");
     tab1_group_box->setStyleSheet("QGroupBox::title{color:green;}");
-    QFont group_box_font = tab1_group_box->font();
-    group_box_font.setBold(true);
-    tab1_group_box->setFont(group_box_font);
-    tab1_group_box->setFixedSize(480, 250);
+    tab1_group_box->setObjectName(QStringLiteral("tab1_group_box"));
+    tab1_group_box->setGeometry(QRect(70, 20, 500, 160));
+    tab1_group_box->setFixedSize(500,160);
+    v_Layout = new QVBoxLayout(tab1_group_box);
+    v_Layout->setSpacing(2);
+    v_Layout->setObjectName(QStringLiteral("v_Layout"));
+    v_Layout->setContentsMargins(25, 0, 25, 15);
 
-    QHBoxLayout *rise_mummy_layout = new QHBoxLayout();
-    rise_mummy_layout->addWidget(rise_mummy_check_box);
-    rise_mummy_layout->setSpacing(0);
-    rise_mummy_layout->setContentsMargins(20, 0, 0, 0);
+    Layout_1 = new QHBoxLayout();
+    Layout_1->setSpacing(6);
+    Layout_1->setObjectName(QStringLiteral("Layout_1"));
+    lab_soft_dir = new QLabel(tab1_group_box);
+    lab_soft_dir->setObjectName(QStringLiteral("lab_soft_dir"));
 
-    QVBoxLayout *group_layout = new QVBoxLayout();
-    group_layout->addWidget(auto_rise_button);
-    group_layout->addWidget(not_auto_rise_button);
-    group_layout->addLayout(rise_mummy_layout);
-    group_layout->addWidget(game_check_box);
-    group_layout->addWidget(g3_check_box);
-    group_layout->addWidget(p2p_check_box);
-    group_layout->addWidget(mummy_check_box);
-    group_layout->setSpacing(0);
-    group_layout->setContentsMargins(30, 0, 0, 0);
-    tab1_group_box->setLayout(group_layout);
+    Layout_1->addWidget(lab_soft_dir);
 
-    QHBoxLayout *tab1_layout = new QHBoxLayout();
-    tab1_layout->addWidget(tab1_group_box);
-    tab1_layout->setSpacing(0);
-    tab1_layout->setContentsMargins(0, 0, 0, 0);
+    but_open_dir = new QPushButton(tab1_group_box);
+    but_open_dir->setObjectName(QStringLiteral("but_open_dir"));
+    but_open_dir->setStyleSheet("background:transparent;");
+    but_open_dir->setCursor(Qt::PointingHandCursor);
+
+    Layout_1->addWidget(but_open_dir);
+
+    lab_disc = new QLabel(tab1_group_box);
+    lab_disc->setObjectName(QStringLiteral("lab_disc"));
+
+    Layout_1->addWidget(lab_disc);
+
+    lab_disc_size = new QLabel(tab1_group_box);
+    lab_disc_size->setObjectName(QStringLiteral("lab_disc_size"));
+
+    Layout_1->addWidget(lab_disc_size);
+
+    Spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+    Layout_1->addItem(Spacer);
+
+
+    v_Layout->addLayout(Layout_1);
+
+    Layout_2 = new QHBoxLayout();
+    Layout_2->setSpacing(6);
+    Layout_2->setObjectName(QStringLiteral("Layout_2"));
+    lab_show_dir = new QLabel(tab1_group_box);
+    lab_show_dir->setObjectName(QStringLiteral("lab_show_dir"));
+    lab_show_dir->setMaximumSize(QSize(275, 20));
+
+    Layout_2->addWidget(lab_show_dir);
+
+    but_chos_dir = new QPushButton(tab1_group_box);
+    but_chos_dir->setObjectName(QStringLiteral("but_chos_dir"));
+    but_chos_dir->setMaximumSize(QSize(72, 22));
+
+    Layout_2->addWidget(but_chos_dir);
+
+    but_recover_dir = new QPushButton(tab1_group_box);
+    but_recover_dir->setObjectName(QStringLiteral("but_recover_dir"));
+    but_recover_dir->setMaximumSize(QSize(88, 22));
+    but_recover_dir->setStyleSheet("background:transparent;");
+    but_recover_dir->setCursor(Qt::PointingHandCursor);
+
+    Layout_2->addWidget(but_recover_dir);
+
+
+    v_Layout->addLayout(Layout_2);
+
+    Layout_3 = new QHBoxLayout();
+    Layout_3->setSpacing(6);
+    Layout_3->setObjectName(QStringLiteral("Layout_3"));
+    lab_apply_dir = new QLabel(tab1_group_box);
+    lab_apply_dir->setObjectName(QStringLiteral("lab_apply_dir"));
+
+    Layout_3->addWidget(lab_apply_dir);
+
+    but_open_dir_2 = new QPushButton(tab1_group_box);
+    but_open_dir_2->setObjectName(QStringLiteral("but_open_dir_2"));
+    but_open_dir_2->setStyleSheet("background:transparent;");
+    but_open_dir_2->setCursor(Qt::PointingHandCursor);
+    Layout_3->addWidget(but_open_dir_2);
+
+    lab_disc_2 = new QLabel(tab1_group_box);
+    lab_disc_2->setObjectName(QStringLiteral("lab_disc_2"));
+
+    Layout_3->addWidget(lab_disc_2);
+
+    lab_disc_size_2 = new QLabel(tab1_group_box);
+    lab_disc_size_2->setObjectName(QStringLiteral("lab_disc_size_2"));
+
+    Layout_3->addWidget(lab_disc_size_2);
+
+    Spacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+    Layout_3->addItem(Spacer_2);
+
+
+    v_Layout->addLayout(Layout_3);
+
+    Layout_4 = new QHBoxLayout();
+    Layout_4->setSpacing(6);
+    Layout_4->setObjectName(QStringLiteral("Layout_4"));
+    lab_show_dir_2 = new QLabel(tab1_group_box);
+    lab_show_dir_2->setObjectName(QStringLiteral("lab_show_dir_2"));
+    lab_show_dir_2->setMaximumSize(QSize(275, 20));
+
+    Layout_4->addWidget(lab_show_dir_2);
+
+    but_chos_dir_2 = new QPushButton(tab1_group_box);
+    but_chos_dir_2->setObjectName(QStringLiteral("but_chos_dir_2"));
+    but_chos_dir_2->setMaximumSize(QSize(72, 22));
+
+    Layout_4->addWidget(but_chos_dir_2);
+
+    but_recover_dir_2 = new QPushButton(tab1_group_box);
+    but_recover_dir_2->setObjectName(QStringLiteral("but_recover_dir_2"));
+    but_recover_dir_2->setMaximumSize(QSize(88, 22));
+    but_recover_dir_2->setStyleSheet("background:transparent;");
+    but_recover_dir_2->setCursor(Qt::PointingHandCursor);
+    Layout_4->addWidget(but_recover_dir_2);
+
+
+    v_Layout->addLayout(Layout_4);
+
+    tab1_group_box2 = new QGroupBox();
+    tab1_group_box2->setTitle("Download Inform");
+    tab1_group_box2->setStyleSheet("QGroupBox::title{color:green;}");
+    tab1_group_box2->setObjectName(QStringLiteral("tab1_group_box2"));
+    tab1_group_box2->setGeometry(QRect(70, 200, 500, 72));
+    tab1_group_box2->setFixedSize(500,72);
+
+    lab_down_inform = new QLabel(tab1_group_box2);
+    lab_down_inform->setObjectName(QStringLiteral("lab_down_inform"));
+    lab_down_inform->setGeometry(QRect(30, 30, 281, 16));
+    but_on_off = new QToolButton(tab1_group_box2);
+    but_on_off->setObjectName(QStringLiteral("but_on_off"));
+    but_on_off->setGeometry(QRect(360, 30, 91, 18));
+
+
+    QVBoxLayout *tab1_layout = new QVBoxLayout();
+    tab1_layout->addWidget(tab1_group_box, 0, Qt::AlignCenter);
+    tab1_layout->addWidget(tab1_group_box2, 0, Qt::AlignCenter);
+
+    tab1_layout->setSpacing(10);
+    tab1_layout->setContentsMargins(0, 20, 0, 0);
     tab1->setLayout(tab1_layout);
+
+    connect(but_chos_dir,SIGNAL(clicked()),this,SLOT(on_but_chos_dir_clicked()));
+    connect(but_chos_dir_2,SIGNAL(clicked()),this,SLOT(on_but_chos_dir2_clicked()));
+    connect(but_open_dir,SIGNAL(clicked()),this,SLOT(on_but_open_dir_clicked()));
+    connect(but_open_dir_2,SIGNAL(clicked()),this,SLOT(on_but_open_dir2_clicked()));
+    connect(but_recover_dir,SIGNAL(clicked()),this,SLOT(on_but_recover_dir_clicked()));
+    connect(but_recover_dir_2,SIGNAL(clicked()),this,SLOT(on_but_recover_dir2_clicked()));
+
 }
+
 void SettingDialog::initTab2()
 {
     tab2_group_box1 = new QGroupBox();
@@ -316,4 +433,94 @@ void SettingDialog::paintEvent(QPaintEvent *)
     painter3.setPen(Qt::gray);
     static const QPointF points[4] = {QPointF(0, 60), QPointF(0, this->height()-1), QPointF(this->width()-1, this->height()-1), QPointF(this->width()-1, 60)};
     painter3.drawPolyline(points, 4);
+}
+void SettingDialog::translation()
+{
+    lab_soft_dir->setText(tr("Download directory ("));
+    but_open_dir->setText(tr("open dir"));
+    lab_disc->setText(tr(") | ffee disk:"));
+    lab_disc_size->setText(tr("size:"));
+    lab_show_dir->setText(QCoreApplication::applicationDirPath());
+    but_chos_dir->setText(tr("choose dir"));
+    but_recover_dir->setText(tr("default directory"));
+    lab_apply_dir->setText(tr("Apply directory ("));
+    but_open_dir_2->setText(tr("open dir"));
+    lab_disc_2->setText(tr(") | ffee disk:"));
+    lab_disc_size_2->setText(tr("size:"));
+    lab_show_dir_2->setText(QCoreApplication::applicationDirPath());
+    but_chos_dir_2->setText(tr("choose dir"));
+    but_recover_dir_2->setText(tr("default directory"));
+    lab_down_inform->setText(tr("Information such as tips before download software whether charges"));
+    but_on_off->setText(tr("onoroff"));
+
+}
+void SettingDialog::on_but_chos_dir_clicked()
+{
+    direc_soft = QFileDialog::getExistingDirectory(
+                                    this,
+                                    "Select one folder to send",
+                                    "",
+                                    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if(direc_soft!=NULL)
+    {
+        lab_show_dir->setText(direc_soft);
+    }
+}
+
+void SettingDialog::on_but_chos_dir2_clicked()
+{
+    direc_apply = QFileDialog::getExistingDirectory(
+                                    this,
+                                    "Select one folder to send",
+                                    "/home",
+                                    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if(direc_apply!=NULL)
+    {
+        lab_show_dir_2->setText(direc_apply);
+    }
+}
+
+void SettingDialog::on_but_open_dir_clicked()
+{
+    QString Qurl=lab_show_dir->text();
+    QDesktopServices::openUrl(QUrl("file:/"+Qurl, QUrl::TolerantMode));
+
+}
+
+void SettingDialog::on_but_open_dir2_clicked()
+{
+    QString Qurl=lab_show_dir_2->text();
+    QDesktopServices::openUrl(QUrl("file:/"+Qurl, QUrl::TolerantMode));
+}
+
+void SettingDialog::on_but_recover_dir_clicked()
+{
+    lab_show_dir->setText(QCoreApplication::applicationDirPath());
+}
+
+void SettingDialog::on_but_recover_dir2_clicked()
+{
+    lab_show_dir_2->setText(QCoreApplication::applicationDirPath());
+}
+
+quint64 SettingDialog::getDiskFreeSpace(QString driver)
+{
+//    driversList = QDir::drives();
+//     qDebug()<<driversList.at(0).absoluteDir().absolutePath();
+
+//     quint64 freeSpace = DiskTools::DiskTools().getDiskFreeSpace(QString("C:/"));
+//     qDebug() << "剩余空间 " << freeSpace<< "GB";
+
+//    LPCWSTR lpcwstrDriver=(LPCWSTR)driver.utf16();
+
+//    ULARGE_INTEGER liFreeBytesAvailable, liTotalBytes, liTotalFreeBytes;
+
+//    if( !GetDiskFreeSpaceEx( lpcwstrDriver, &liFreeBytesAvailable, &liTotalBytes, &liTotalFreeBytes) )
+//    {
+//        qDebug() << "ERROR: Call to GetDiskFreeSpaceEx() failed.";
+//        return 0;
+//    }
+//    return (quint64) liTotalFreeBytes.QuadPart/1024/1024/1024;
+    quint64 i;
+    return i;
 }
