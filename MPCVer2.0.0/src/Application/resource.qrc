@@ -69,5 +69,11 @@
         <file>images/logo.48.png</file>
         <file>images/lab_frame.png</file>
         <file>images/lab_red_frame.png</file>
+        <file>images/button/btn_on_normal.png</file>
+        <file>images/button/btn_off_normal.png</file>
+        <file>images/button/btn_on_hover.png</file>
+        <file>images/button/btn_off_hover.png</file>
+        <file>images/button/btn_off_press.png</file>
+        <file>images/button/btn_on_press.png</file>
     </qresource>
 </RCC>

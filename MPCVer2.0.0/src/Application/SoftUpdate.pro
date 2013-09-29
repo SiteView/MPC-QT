@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     src/testunloadlist.cpp \
     src/SettingMenu.cpp \
     src/SoftSortItem.cpp \
-    src/SettingDialog.cpp
+    src/SettingDialog.cpp \
+    src/SwitchMenu.cpp
 
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     src/testunloadlist.h \
     src/SettingMenu.h \
     src/SoftSortItem.h \
-    src/SettingDialog.h
+    src/SettingDialog.h \
+    src/SwitchMenu.h
 
 FORMS    += mainwindow.ui
  #   src/informdialog.ui

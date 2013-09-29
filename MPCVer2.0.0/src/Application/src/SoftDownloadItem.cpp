@@ -172,7 +172,12 @@ void SoftDownloadItem::takeText(QString Qsoftname,
 
 void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
-    runPath=QCoreApplication::applicationDirPath();
+    SettingDialog setdia;
+    setdia.update();
+    runPath = setdia.on_but_ok_clicked();
+
+//    runPath=QCoreApplication::applicationDirPath();
+    qDebug()<<runPath<<"---runPath---";
     QString filetmp=runPath+QString("/tmp");//判断是否存在文件夹tmp，不存在即创建
     QDir *temp = new QDir;
     bool exist = temp->exists(filetmp);

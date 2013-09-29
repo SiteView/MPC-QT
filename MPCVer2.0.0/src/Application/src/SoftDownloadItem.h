@@ -7,6 +7,7 @@
 #include <QString>
 #include <QProgressBar>
 #include <QStackedWidget>
+#include "SettingDialog.h"
 
 class SoftDownloadItem : public QWidget
 {

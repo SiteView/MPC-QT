@@ -13,7 +13,7 @@
 #include <QPainter>
 #include <QFont>
 #include <QToolButton>
-
+#include "SwitchMenu.h"
 class SettingDialog : public QDialog
 {
     Q_OBJECT
@@ -21,7 +21,7 @@ public:
     explicit SettingDialog(QWidget *parent = 0);
 //    ~SettingDialog();
     void translation();
-    quint64  getDiskFreeSpace(QString );
+    quint64 getDiskFreeSpace(QString );
 
 protected:
 
@@ -40,7 +40,7 @@ private:
     void initTab3();
     void initTab4();
 
-private:
+public:
 
     QPoint move_point; //移动的距离
     bool mouse_press; //按下鼠标左键
@@ -81,7 +81,8 @@ private:
     QPushButton *but_recover_dir_2;
     QGroupBox *tab1_group_box2;
     QLabel *lab_down_inform;
-    QToolButton *but_on_off;
+//    QToolButton *but_on_off;
+    QLabel *but_on_off;
 
     QWidget *tab2; //高级设置
     QGroupBox *tab2_group_box1;
@@ -114,6 +115,9 @@ private:
 public:
     QString direc_soft;
     QString direc_apply;
+    QString filepath;
+
+    SwitchMenu *switchMenu;
 
 signals:
     
@@ -124,6 +128,7 @@ public slots:
     void on_but_open_dir2_clicked();
     void on_but_recover_dir_clicked();
     void on_but_recover_dir2_clicked();
+    QString on_but_ok_clicked();
 
     
 };
