@@ -75,5 +75,8 @@
         <file>images/button/btn_off_hover.png</file>
         <file>images/button/btn_off_press.png</file>
         <file>images/button/btn_on_press.png</file>
+        <file>images/button/niu.png</file>
+        <file>images/button/off_bg.png</file>
+        <file>images/button/on_bg.png</file>
     </qresource>
 </RCC>

@@ -17,37 +17,74 @@ void SwitchMenu::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.drawPixmap(QPoint(0,0), m_pixmapBk);
     QPoint ptFore;
-    if (m_bOn) {
-        ptFore = this->rect().topLeft();
-        painter.drawPixmap(ptFore, m_pixmapBk);
-        QRect rcOn;
-        rcOn.setTopLeft(rect().topLeft());
-        rcOn.setBottomRight(QPoint(m_pixmapBk.width(), m_pixmapBk.height()));
+
+    ptFore = this->rect().topLeft();
+    painter.drawPixmap(ptFore, m_pixmapBk);
+    QRect rcOn;
+    rcOn.setTopLeft(rect().topLeft());
+    rcOn.setBottomRight(QPoint(m_pixmapBk.width(), m_pixmapBk.height()));
+
+//    ptFore = QPoint(this->width() - m_pixmapFore.width(),
+//                    this->rect().top());
+//    painter.drawPixmap(ptFore, m_pixmapFore);
+//    QRect rcOff;
+//    rcOff.setTopLeft(QPoint(rect().width() - m_pixmapFore.width(), rect().top()));
+//    rcOff.setBottomRight(rect().bottomRight());
+
+    if (m_bOn)
+    {
+        if(mouse_enter)
+        {
+            if(m_bLBtnDown)
+            {
+                m_pixmapBk.load(":/images/button/btn_on_press.png");
+            }
+            else
+            {
+                m_pixmapBk.load(":/images/button/btn_on_hover.png");
+            }
+        }
+        else
+        {
+            m_pixmapBk.load(":/images/button/btn_on_normal.png");
+        }
     }
     else
     {
-        ptFore = QPoint(this->width() - m_pixmapFore.width(),
-                        this->rect().top());
-        painter.drawPixmap(ptFore, m_pixmapFore);
-        QRect rcOff;
-        rcOff.setTopLeft(QPoint(rect().width() - m_pixmapFore.width(), rect().top()));
-        rcOff.setBottomRight(rect().bottomRight());
+        if(mouse_enter)
+        {
+            if(m_bLBtnDown)
+            {
+                m_pixmapBk.load(":/images/button/btn_off_press.png");
+            }
+            else
+            {
+                m_pixmapBk.load(":/images/button/btn_off_hover.png");
+            }
+        }
+        else
+        {
+            m_pixmapBk.load(":/images/button/btn_off_normal.png");
+        }
     }
 }
 
 void SwitchMenu::mousePressEvent(QMouseEvent *)
 {
     m_bLBtnDown = true;
+    update();
 }
 
 void SwitchMenu::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (m_bLBtnDown) {
+    if (m_bLBtnDown)
+    {
         m_bOn = !m_bOn;
         m_bLBtnDown = false;
+        update();
     }
-    update();
 }
+
 void SwitchMenu::enterEvent(QEvent *event)
 {
     mouse_enter = true;

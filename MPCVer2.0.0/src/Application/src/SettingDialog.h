@@ -14,6 +14,7 @@
 #include <QFont>
 #include <QToolButton>
 #include "SwitchMenu.h"
+#include "OnOffButton.h"
 class SettingDialog : public QDialog
 {
     Q_OBJECT
@@ -117,7 +118,11 @@ public:
     QString direc_apply;
     QString filepath;
 
-    SwitchMenu *switchMenu;
+    QString dp_soft;
+    QString dp_apply;
+
+//    SwitchMenu *switchMenu;
+//    OnOffButton *on_off;
 
 signals:
     

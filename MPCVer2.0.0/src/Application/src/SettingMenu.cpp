@@ -6,9 +6,9 @@ SettingMenu::SettingMenu(QWidget *parent) :
     this->createActions();
     this->translateActions();
 }
+
 void SettingMenu::createActions()
 {
-
     //创建菜单项
     action_setting = new QAction(this);
     action_new_character = new QAction(this);
@@ -38,7 +38,6 @@ void SettingMenu::createActions()
     QObject::connect(action_setting, SIGNAL(triggered()), this, SIGNAL(showSettingDialog()));
     QObject::connect(action_new_character, SIGNAL(triggered()), this, SIGNAL(showNewCharacter()));
     QObject::connect(action_about_us, SIGNAL(triggered()), this, SIGNAL(showAboutUs()));
-
 }
 
 void SettingMenu::translateActions()

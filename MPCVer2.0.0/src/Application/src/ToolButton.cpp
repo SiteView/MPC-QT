@@ -9,10 +9,7 @@ ToolButton::ToolButton(QWidget *parent) :
 }
 void ToolButton::setImage(QString pic_name)
 {
-
-
     setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-
     //设置图标
     QPixmap pixmap(pic_name);
     setIcon(pixmap);
@@ -24,10 +21,7 @@ void ToolButton::setImage(QString pic_name)
     setStyleSheet("background:transparent;");
     mouse_over = false;
     mouse_press = false;
-
 }
-
-
 
 void ToolButton::enterEvent(QEvent *)
 {
@@ -37,7 +31,6 @@ void ToolButton::leaveEvent(QEvent *)
 {
     mouse_over = false;
 }
-
 
 void ToolButton::mousePressEvent(QMouseEvent * event)
 {

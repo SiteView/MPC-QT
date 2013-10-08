@@ -37,7 +37,9 @@ SOURCES += main.cpp\
     src/SettingMenu.cpp \
     src/SoftSortItem.cpp \
     src/SettingDialog.cpp \
-    src/SwitchMenu.cpp
+    src/SwitchMenu.cpp \
+    src/mouselabel.cpp \
+    src/myslider.cpp
 
 HEADERS  += mainwindow.h \
 	../Common/SqliteDb.h \
@@ -60,7 +62,9 @@ HEADERS  += mainwindow.h \
     src/SettingMenu.h \
     src/SoftSortItem.h \
     src/SettingDialog.h \
-    src/SwitchMenu.h
+    src/SwitchMenu.h \
+    src/mouselabel.h \
+    src/myslider.h
 
 FORMS    += mainwindow.ui
  #   src/informdialog.ui

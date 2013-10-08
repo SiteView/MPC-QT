@@ -5,6 +5,7 @@
 #include <QtDebug>
 #include <Windows.h>
 #include "SettingDialog.h"
+#include "myslider.h"
 
 SettingDialog::SettingDialog(QWidget *parent) :
     QDialog(parent)
@@ -18,6 +19,9 @@ SettingDialog::SettingDialog(QWidget *parent) :
     this->initTab3();
     this->initTab4();
     this->initBottom();
+    filepath=QCoreApplication::applicationDirPath();
+    dp_soft=filepath;
+    dp_apply=filepath;
     QVBoxLayout *main_layout = new QVBoxLayout();
     main_layout->addLayout(title_layout);
     main_layout->addWidget(tab_widget);
@@ -28,6 +32,7 @@ SettingDialog::SettingDialog(QWidget *parent) :
     setLayout(main_layout);
     mouse_press = false;
     translation();
+
 //    SwitchMenu switchMenu;
 
 //    switchMenu.initialize(":/images/button/btn_on_normal.png", ":/images/button/btn_off_normal.png");
@@ -93,7 +98,6 @@ void SettingDialog::initBottom()
     bottom_layout->setContentsMargins(0, 10, 20, 0);
     connect(cancel_button, SIGNAL(clicked()), this, SLOT(hide()));
     connect(ok_button, SIGNAL(clicked()), this, SLOT(on_but_ok_clicked()));
-
 }
 void SettingDialog::initTab1()
 {
@@ -194,9 +198,16 @@ void SettingDialog::initTab1()
     lab_down_inform->setGeometry(QRect(30, 30, 281, 16));
     but_on_off = new QLabel(tab1_group_box2);
     but_on_off->setObjectName(QStringLiteral("but_on_off"));
-    but_on_off->setGeometry(QRect(360, 30, 69, 17));
-    switchMenu = new SwitchMenu(but_on_off);
-    switchMenu->initialize(":/images/button/btn_off_normal.png", ":/images/button/btn_on_normal.png");
+    but_on_off->setGeometry(QRect(360, 30, 68, 17));
+//    switchMenu = new SwitchMenu(but_on_off);
+//    switchMenu->initialize(":/images/but_about.png", ":/images/red.png");
+    int nX = 0;//位置坐标
+    int nY = 0;
+    QString defImagePath = ":/images/button/on_bg.png";//背景及开关图片
+    QString actImagePath = ":/images/button/niu.png";
+    QString defImagePath_off = ":/images/button/off_bg.png";//背景及开关图片
+
+    MySliderMenu *pMySlider = new MySliderMenu(but_on_off,nX,nY,defImagePath,defImagePath_off,actImagePath,0);
 
     QVBoxLayout *tab1_layout = new QVBoxLayout();
     tab1_layout->addWidget(tab1_group_box, 0, Qt::AlignCenter);
@@ -204,8 +215,6 @@ void SettingDialog::initTab1()
     tab1_layout->setSpacing(10);
     tab1_layout->setContentsMargins(0, 20, 0, 0);
     tab1->setLayout(tab1_layout);
-
-
 
     connect(but_chos_dir,SIGNAL(clicked()),this,SLOT(on_but_chos_dir_clicked()));
     connect(but_chos_dir_2,SIGNAL(clicked()),this,SLOT(on_but_chos_dir2_clicked()));
@@ -386,7 +395,6 @@ void SettingDialog::paintEvent(QPaintEvent *)
 }
 void SettingDialog::translation()
 {
-    filepath=QCoreApplication::applicationDirPath();
     lab_soft_dir->setText(tr("Download directory ("));
     but_open_dir->setText(tr("open dir"));
     lab_disc->setText(tr(") | ffee disk:"));
@@ -418,7 +426,7 @@ void SettingDialog::on_but_chos_dir_clicked()
     {
         lab_show_dir->setText(direc_soft);
         qDebug()<<lab_show_dir->text()<<"---lab_show_dir---";
-
+        dp_soft=direc_soft;
         quint64 freeSpace =getDiskFreeSpace(QString(direc_soft));
         lab_disc_size->setText(QString::number(freeSpace,10)+"GB");
     }
@@ -435,7 +443,7 @@ void SettingDialog::on_but_chos_dir2_clicked()
     {
         lab_show_dir_2->setText(direc_apply);
         qDebug()<<lab_show_dir_2->text()<<"---lab_show_dir_2---";
-
+        dp_apply=direc_apply;
         quint64 freeSpace =getDiskFreeSpace(QString(direc_apply));
         lab_disc_size_2->setText(QString::number(freeSpace,10)+"GB");
     }
@@ -456,8 +464,7 @@ void SettingDialog::on_but_open_dir2_clicked()
 void SettingDialog::on_but_recover_dir_clicked()
 {
     lab_show_dir->setText(filepath);
-    qDebug()<<lab_show_dir->text()<<"---lab_show_dir---";
-
+    dp_soft=filepath;
     quint64 freeSpace =getDiskFreeSpace(QString(filepath));
     lab_disc_size->setText(QString::number(freeSpace,10)+"GB");
 }
@@ -465,8 +472,7 @@ void SettingDialog::on_but_recover_dir_clicked()
 void SettingDialog::on_but_recover_dir2_clicked()
 {
     lab_show_dir_2->setText(filepath);
-    qDebug()<<lab_show_dir_2->text()<<"---lab_show_dir_2---";
-
+    dp_apply=filepath;
     quint64 freeSpace =getDiskFreeSpace(QString(filepath));
     lab_disc_size_2->setText(QString::number(freeSpace,10)+"GB");
 }
