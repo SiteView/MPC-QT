@@ -82,6 +82,7 @@ void SettingDialog::initCenter()
     tab_widget->addTab(tab3, tr("physical setting"));
     tab_widget->addTab(tab4, tr("user setting"));
 }
+
 void SettingDialog::initBottom()
 {
     ok_button = new QPushButton();
@@ -99,6 +100,7 @@ void SettingDialog::initBottom()
     connect(cancel_button, SIGNAL(clicked()), this, SLOT(hide()));
     connect(ok_button, SIGNAL(clicked()), this, SLOT(on_but_ok_clicked()));
 }
+
 void SettingDialog::initTab1()
 {
     tab1_group_box = new QGroupBox();
@@ -311,6 +313,20 @@ void SettingDialog::initTab3()
     group_layout->setSpacing(10);
     group_layout->setContentsMargins(0, 20, 0, 0);
     tab3->setLayout(group_layout);
+
+    if(auto_check_button->isChecked())
+    {
+
+    }
+    else if(first_check_button->isChecked())
+    {
+
+    }
+    else if(hand_check_button->isChecked())
+    {
+
+    }
+
 }
 
 void SettingDialog::initTab4()
@@ -413,6 +429,15 @@ void SettingDialog::translation()
     lab_disc_size_2->setText(QString::number(freeSpace,10)+"GB");
     ok_button->setText(tr("ok"));
     cancel_button->setText(tr("cancel"));
+
+    tab3_group_box1->setTitle(tr("Clean package"));
+    tab3_group_box2->setTitle(tr("Close when download"));
+    auto_check_button->setText(tr(""));
+    first_check_button->setText(tr(""));
+    hand_check_button->setText(tr(""));
+    select_quit_button->setText(tr(""));
+    backstage_mode_button->setText(tr(""));
+    immediacy_close_button->setText(tr(" "));
 }
 
 void SettingDialog::on_but_chos_dir_clicked()

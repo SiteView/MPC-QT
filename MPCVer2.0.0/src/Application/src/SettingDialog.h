@@ -14,7 +14,6 @@
 #include <QFont>
 #include <QToolButton>
 #include "SwitchMenu.h"
-#include "OnOffButton.h"
 class SettingDialog : public QDialog
 {
     Q_OBJECT
@@ -53,7 +52,6 @@ public:
     QHBoxLayout *bottom_layout; //底部布局
     QPushButton *ok_button; //确定按钮
     QPushButton *cancel_button; //取消按钮
-
     QTabWidget *tab_widget;
 
     QWidget *tab1; //升级方式

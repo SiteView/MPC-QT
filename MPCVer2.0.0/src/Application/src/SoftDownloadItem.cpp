@@ -174,10 +174,10 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
 {
     SettingDialog setdia;
     setdia.update();
-    runPath = setdia.on_but_ok_clicked();
+    runPath = setdia.on_but_ok_clicked();//从下载设置处获取相应的路径
 
-//    runPath=QCoreApplication::applicationDirPath();
-    qDebug()<<runPath<<"---runPath---";
+    //    runPath=QCoreApplication::applicationDirPath();
+    qDebug()<<"---runPath---"<<runPath;
     QString filetmp=runPath+QString("/tmp");//判断是否存在文件夹tmp，不存在即创建
     QDir *temp = new QDir;
     bool exist = temp->exists(filetmp);
@@ -205,18 +205,29 @@ void SoftDownloadItem::on_download_clicked()//触发下载按钮
         if(CURLDownloadManager::getThis()->isBusy())//判断下载线程是否被占用
         {
             CellClass *cell=new CellClass();
-            cell->changeText("Download","is busy","close");
+            cell->changeText("Download","Enter the queue","close");
             cell->show();
+            emit DownisBusy(urlprogram);
         }
         else
         {
-            stackedWidget->setCurrentWidget(page_2);
-            connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
-            connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
-            DownloadThread();
+            DownloadThread(urlprogram);
         }
     }
 }
+
+void SoftDownloadItem::DownloadThread(QString Qurl)//下载进程
+{
+    stackedWidget->setCurrentWidget(page_2);
+    connect(CURLDownloadManager::getThis(),SIGNAL(Setvalue(int)),this,SLOT(startProgress(int)));
+    connect(CURLDownloadManager::getThis(),SIGNAL(DownloadFinish(int)),this,SLOT(Downloadresult(int)));
+
+    CURLDownloadManager::getThis()->start();
+    CURLDownloadManager::getThis()->setUrl(Qurl);
+    CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
+    CURLDownloadManager::getThis()->ready(true);
+}
+
 void SoftDownloadItem::startProgress(int i)//给进度条传值
 {
     progressBar->setValue(i);
@@ -226,6 +237,7 @@ void SoftDownloadItem::changevalued(int i)//判断下载是否完成
     if(i==100)
     {
         stackedWidget->setCurrentWidget(page_3);
+        emit DownFinished();
     }
 }
 
@@ -266,6 +278,7 @@ bool SoftDownloadItem::suspendProgress_setup()//暂停安装
         CellClass *cell=new CellClass();
         cell->changeText("Setup","is fial","close");
         cell->show();
+        stackedWidget->setCurrentWidget(page);
         return false;
     }
     if (!setup->waitForFinished()) // 检查是否可结束
@@ -273,22 +286,9 @@ bool SoftDownloadItem::suspendProgress_setup()//暂停安装
         CellClass *cell=new CellClass();
         cell->changeText("Setup","is fial","close");
         cell->show();
+        stackedWidget->setCurrentWidget(page);
         return false;
     }
-}
-
-void SoftDownloadItem::DownloadThread()//下载进程
-{
-
-    CURLDownloadManager::getThis()->start();
-    CURLDownloadManager::getThis()->setUrl(urlprogram);
-    CURLDownloadManager::getThis()->setSavefileName(runPath+"/tmp/"+exename);
-    CURLDownloadManager::getThis()->ready(true);
-    //    downloader.start();
-    //    downloader.setUrl(urlprogram);
-    //    downloader.setSavefileName(runPath+"/tmp/"+exename);
-    //    downloader.ready(true);
-
 }
 
 void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
@@ -296,9 +296,11 @@ void SoftDownloadItem::Downloadresult(int i)//获得下载返回值
     if (i!=0)
     {
         stackedWidget->setCurrentWidget(page);
-        //        CellClass *cell=new CellClass();
-        //        cell->changeText("Download","is fail","close");
-        //        cell->show();
+//        CellClass *cell=new CellClass();
+//        cell->changeText("Download","is fail","close");
+//        cell->show();
+        qDebug()<<i<<"========iiiiiiiiiii==========";
+
     }
 }
 

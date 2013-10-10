@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QStringList>
+#include <QQueue>
 #include "SoftDownloadItem.h"
 #include "../Common/SqliteDb.h"
 
@@ -14,9 +15,12 @@ class SoftDownloadList : public QWidget
 public:
     explicit SoftDownloadList(QWidget *parent = 0);
     void selectDifType(int);
-signals:
 
+signals:
+    void Filled(bool);
 public slots:
+    void FillQueue(QString);
+    void AddItemQueue();
 
 public:
     CSQLiteDb m_SQLiteDb;
@@ -34,10 +38,13 @@ public:
 
     QList<SoftDownloadItem *> *item_list ;
     QList<QListWidgetItem*> *twi_list;
+    QList<SoftDownloadItem *> *item_qlist ;
+    QQueue<QString> queue;
 
     QString search_text;
     bool empty;
-
+    bool filled;
+    int num;
 
 };
 

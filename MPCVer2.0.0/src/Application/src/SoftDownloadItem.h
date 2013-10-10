@@ -14,7 +14,7 @@ class SoftDownloadItem : public QWidget
     Q_OBJECT
 public:
     explicit SoftDownloadItem(QWidget *parent = 0);
-    void DownloadThread();
+    void DownloadThread(QString);
     void takeText(QString ,QString ,qint64 ,QString ,QString );
     QString get_size( qint64 byte );
 
@@ -46,11 +46,13 @@ public:
     QProgressBar *progressBar;
     QProgressBar *progressBar_2;
 
-    QString urlprogram;
-    QString exename;
-    QString runPath;
+    QString urlprogram;//软件下载路径
+    QString exename;//软件保存名称
+    QString runPath;//软件保存目录
 //    CURLDownloadManager *downloader;
 signals:
+    void DownisBusy(QString);
+    void DownFinished();
 
 public slots:
     void on_download_clicked();
